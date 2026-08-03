@@ -1,9 +1,12 @@
 ---
 name: scene-builder
-category: core
-version: 1.0.0
-depends_on: [writing-constitution, chapter-architect]
-outputs: [scenes-redigees, fiches-de-scene]
+description: Construit des scènes fortes : objectif du personnage, conflit en escalade, issue coûteuse, réaction, dilemme, décision. Ancrage spatial, sous-texte, rythme, irréversibilité. À utiliser pour écrire une scène, réparer une scène plate, ou vérifier qu'une scène change l'état du récit.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution, chapter-architect]
+  outputs: [scenes-redigees, fiches-de-scene]
 ---
 
 # Scene Builder

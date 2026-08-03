@@ -1,9 +1,12 @@
 ---
 name: political-fiction
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, research-director, character-psychologist]
-outputs: [cartographie-des-forces, plan-politique]
+description: Écrit un roman politique : principe de la double échelle, mécanique du pouvoir, documentation institutionnelle, personnages non réductibles à leur fonction, réunions traitées comme des scènes de conflit. À utiliser pour un récit d'institutions, de campagne ou de décision publique.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, research-director, character-psychologist]
+  outputs: [cartographie-des-forces, plan-politique]
 ---
 
 # Political Fiction

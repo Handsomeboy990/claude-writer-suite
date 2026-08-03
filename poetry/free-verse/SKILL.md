@@ -1,9 +1,12 @@
 ---
 name: free-verse
-category: poetry
-version: 1.0.0
-depends_on: [writing-constitution, poet]
-outputs: [poemes-en-vers-libres]
+description: Écrit en vers libres avec rigueur : le vers comme unité de souffle, motivation de chaque coupe, contrainte inventée pour chaque poème, rythme mesuré. À utiliser pour un poème en vers libres, ou pour éviter la prose simplement découpée en lignes.
+license: MIT
+metadata:
+  category: poetry
+  version: 1.0.0
+  depends_on: [writing-constitution, poet]
+  outputs: [poemes-en-vers-libres]
 ---
 
 # Free Verse

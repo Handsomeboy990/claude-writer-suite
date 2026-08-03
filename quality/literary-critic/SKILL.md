@@ -1,9 +1,12 @@
 ---
 name: literary-critic
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [rapport-critique, verdict-editorial]
+description: Rend un jugement éditorial sévère : grille pondérée sur dix critères, barème de décision, cinq lectures, rapport avec citations, verdict et recommandation unique. À utiliser pour savoir si un manuscrit est publiable et ce qu'il faut corriger en priorité.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [rapport-critique, verdict-editorial]
 ---
 
 # Literary Critic

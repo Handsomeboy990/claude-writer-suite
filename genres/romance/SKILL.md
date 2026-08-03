@@ -1,9 +1,12 @@
 ---
 name: romance
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, character-psychologist, scene-builder]
-outputs: [arc-relationnel, plan-romance]
+description: Écrit une romance : obstacle interne avant l'obstacle externe, sept paliers d'intimité, tension par désir contrarié, scènes d'intimité conséquentes, contrats de sous-genre. À utiliser pour une histoire d'amour, une comédie romantique ou un slow burn.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, character-psychologist, scene-builder]
+  outputs: [arc-relationnel, plan-romance]
 ---
 
 # Romance

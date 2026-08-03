@@ -1,9 +1,12 @@
 ---
 name: poet
-category: poetry
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [poemes, note-prosodique]
+description: Écrit de la poésie en français : prosodie (mètres, césure, rimes, enjambement), travail de l'image et du son, procédure de composition en sept étapes, interdits et seuils relevés. À utiliser pour composer ou réviser un poème, ou vérifier un compte de syllabes.
+license: MIT
+metadata:
+  category: poetry
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [poemes, note-prosodique]
 ---
 
 # Poet

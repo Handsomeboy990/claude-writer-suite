@@ -1,9 +1,12 @@
 ---
 name: mystery
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, novel-architect, timeline-manager]
-outputs: [plan-du-mystere, table-des-indices]
+description: Construit un mystère équitable : récit réel des faits contre récit de la découverte, règles d'équité, typologie et dissimulation des indices, fausses pistes honnêtes, structure de la révélation. À utiliser pour une énigme, un whodunit ou un récit à révélation finale.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, novel-architect, timeline-manager]
+  outputs: [plan-du-mystere, table-des-indices]
 ---
 
 # Mystery

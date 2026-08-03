@@ -1,9 +1,12 @@
 ---
 name: science-fiction
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, world-builder, research-director]
-outputs: [novum, bible-technologique, plan-sf]
+description: Écrit de la science-fiction rigoureuse : formulation du novum, méthode des quatre niveaux de conséquences, exigences par sous-genre, infrastructure et panne, exposition sans didactisme. À utiliser pour de la hard SF, de l'anticipation, du space opera ou une uchronie.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, world-builder, research-director]
+  outputs: [novum, bible-technologique, plan-sf]
 ---
 
 # Science Fiction

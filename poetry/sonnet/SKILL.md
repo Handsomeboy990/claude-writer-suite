@@ -1,9 +1,12 @@
 ---
 name: sonnet
-category: poetry
-version: 1.0.0
-depends_on: [writing-constitution, poet]
-outputs: [sonnets]
+description: Écrit un sonnet français, italien ou anglais : dispositions de rimes, place de la volte, économie strophique, contraintes techniques, composition à partir du vers de bascule. À utiliser pour écrire ou corriger un sonnet ou une forme fixe en quatorze vers.
+license: MIT
+metadata:
+  category: poetry
+  version: 1.0.0
+  depends_on: [writing-constitution, poet]
+  outputs: [sonnets]
 ---
 
 # Sonnet

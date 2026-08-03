@@ -1,9 +1,12 @@
 ---
 name: writing-constitution
-category: core
-version: 1.0.0
-depends_on: []
-outputs: [regles-appliquees, rapport-de-conformite]
+description: Règles d'écriture non négociables de Claude Writer Suite : interdiction des emoji et du tiret cadratin, typographie des dialogues français, flashbacks en italique, titres de chapitre, clichés, représentation des cultures, seuils d'auto-critique. À charger avant toute écriture de fiction ou de poésie, et pour vérifier la conformité d'un texte.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: []
+  outputs: [regles-appliquees, rapport-de-conformite]
 ---
 
 # Writing Constitution

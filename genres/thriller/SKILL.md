@@ -1,9 +1,12 @@
 ---
 name: thriller
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, novel-architect, scene-builder]
-outputs: [plan-thriller, scenes-de-tension]
+description: Écrit un thriller : enjeu vital, échéance visible, antagoniste compétent, coût croissant, mécaniques de tension, chapitres courts, crédibilité procédurale. À utiliser pour construire ou réviser un thriller, un récit à compte à rebours ou une course contre la montre.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, novel-architect, scene-builder]
+  outputs: [plan-thriller, scenes-de-tension]
 ---
 
 # Thriller

@@ -38,14 +38,21 @@ for category in $CATEGORIES; do
     if [ -f "$skill/SKILL.md" ]; then
       head -n 1 "$skill/SKILL.md" | grep -q '^---$' \
         || fail "$category/$name : bloc de métadonnées absent"
-      for key in name category version depends_on outputs; do
+      for key in name description license metadata; do
         grep -q "^$key:" "$skill/SKILL.md" \
           || fail "$category/$name : clé de métadonnée manquante ($key)"
       done
+      for key in category version depends_on outputs; do
+        grep -q "^  $key:" "$skill/SKILL.md" \
+          || fail "$category/$name : clé de metadata manquante ($key)"
+      done
       grep -q "^name: $name$" "$skill/SKILL.md" \
         || fail "$category/$name : le champ name ne correspond pas au dossier"
-      grep -q "^category: $category$" "$skill/SKILL.md" \
+      grep -q "^  category: $category$" "$skill/SKILL.md" \
         || fail "$category/$name : le champ category ne correspond pas au dossier"
+      desc="$(grep -m1 '^description:' "$skill/SKILL.md" | cut -c14-)"
+      [ "${#desc}" -ge 40 ] \
+        || fail "$category/$name : description trop courte pour être découverte"
       grep -qi '^## .*[Aa]uto-critique' "$skill/SKILL.md" \
         || fail "$category/$name : section Auto-critique absente"
     fi

@@ -1,9 +1,12 @@
 ---
 name: world-builder
-category: core
-version: 1.0.0
-depends_on: [writing-constitution, research-director]
-outputs: [bible-du-monde, regles-internes, cartographie, lexique]
+description: Construit des univers cohérents à partir de la contrainte matérielle : géographie, économie, pouvoir, croyances, technique, langue, systèmes de magie ou de technologie. À utiliser pour créer un monde, vérifier sa cohérence en cascade, ou définir les règles d'un système d'impossible.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution, research-director]
+  outputs: [bible-du-monde, regles-internes, cartographie, lexique]
 ---
 
 # World Builder

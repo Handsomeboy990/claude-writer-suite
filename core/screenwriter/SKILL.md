@@ -1,9 +1,12 @@
 ---
 name: screenwriter
-category: core
-version: 1.0.0
-depends_on: [writing-constitution, scene-builder, dialogue-master]
-outputs: [traitement, sequencier, continuite-dialoguee]
+description: Écrit un scénario : pitch, synopsis, traitement, séquencier, continuité dialoguée, format standard, structure long métrage et série, adaptation d'un roman. À utiliser pour écrire ou adapter un scénario, ou convertir de l'intériorité romanesque en action visible.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution, scene-builder, dialogue-master]
+  outputs: [traitement, sequencier, continuite-dialoguee]
 ---
 
 # Screenwriter

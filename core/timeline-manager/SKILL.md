@@ -1,9 +1,12 @@
 ---
 name: timeline-manager
-category: core
-version: 1.0.0
-depends_on: [writing-constitution, novel-architect]
-outputs: [chronologie-maitresse, chronologie-lecteur, table-des-flashbacks]
+description: Gère les temporalités : chronologie réelle et chronologie du lecteur, repères, ellipses, flashbacks en italique avec déclencheur et clôture, récits à lignes multiples, durée ressentie. À utiliser pour placer un flashback, vérifier des dates, ou clarifier une chronologie confuse.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution, novel-architect]
+  outputs: [chronologie-maitresse, chronologie-lecteur, table-des-flashbacks]
 ---
 
 # Timeline Manager

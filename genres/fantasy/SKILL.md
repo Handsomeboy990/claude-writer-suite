@@ -1,9 +1,12 @@
 ---
 name: fantasy
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, world-builder, novel-architect]
-outputs: [bible-de-fantasy, plan-de-quete]
+description: Écrit de la fantasy exigeante : test de nécessité du fantastique, régimes de magie et coût, structure de quête doublée, peuples non monolithiques, économie de l'émerveillement. À utiliser pour un roman de fantasy, un système de magie ou un monde secondaire.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, world-builder, novel-architect]
+  outputs: [bible-de-fantasy, plan-de-quete]
 ---
 
 # Fantasy

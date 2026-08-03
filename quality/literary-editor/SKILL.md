@@ -1,9 +1,12 @@
 ---
 name: literary-editor
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution, self-critique-protocol]
-outputs: [texte-edite, note-editoriale, journal-des-coupes]
+description: Améliore le style en six passes : paragraphes, verbes, adverbes et adjectifs, rythme, images, conformité. Table des corrections fréquentes, note éditoriale, journal des coupes. À utiliser pour resserrer un texte correct mais fade, sans détruire la voix de l'auteur.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution, self-critique-protocol]
+  outputs: [texte-edite, note-editoriale, journal-des-coupes]
 ---
 
 # Literary Editor

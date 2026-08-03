@@ -1,9 +1,12 @@
 ---
 name: proofreader
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [texte-corrige, releve-de-corrections]
+description: Corrige l'orthographe, la grammaire et la typographie française en cinq passes spécialisées : accords, temps, ponctuation, homogénéité, lecture inversée. Relevé de corrections et signalement des cas douteux. À utiliser en dernière relecture, sans toucher au style.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [texte-corrige, releve-de-corrections]
 ---
 
 # Proofreader

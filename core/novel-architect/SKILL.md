@@ -1,9 +1,12 @@
 ---
 name: novel-architect
-category: core
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [bible-du-roman, plan-general, arc-des-personnages, calendrier-des-revelations]
+description: Construit l'architecture globale d'un roman : prémisse, question dramatique, promesses de lecture, structure et points de bascule, arcs des personnages, sous-intrigues, calendrier des révélations, plan chapitre par chapitre. À utiliser au démarrage d'un roman, ou quand un manuscrit en cours perd sa direction.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [bible-du-roman, plan-general, arc-des-personnages, calendrier-des-revelations]
 ---
 
 # Novel Architect

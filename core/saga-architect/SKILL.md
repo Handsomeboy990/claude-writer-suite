@@ -1,9 +1,12 @@
 ---
 name: saga-architect
-category: core
-version: 1.0.0
-depends_on: [writing-constitution, novel-architect, continuity-manager]
-outputs: [bible-de-saga, plan-multi-tomes, registre-inter-tomes]
+description: Conduit une oeuvre en plusieurs tomes : question de tome et question de saga, formes de série, courbe d'ensemble, registre inter-tomes, dettes narratives, rappels au lecteur, mortalité et relève. À utiliser pour planifier une saga ou lancer un tome suivant.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution, novel-architect, continuity-manager]
+  outputs: [bible-de-saga, plan-multi-tomes, registre-inter-tomes]
 ---
 
 # Saga Architect

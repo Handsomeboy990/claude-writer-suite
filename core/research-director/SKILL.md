@@ -1,9 +1,12 @@
 ---
 name: research-director
-category: core
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [dossier-documentaire, fiches-sources, notes-de-verification]
+description: Dirige la documentation d'un projet : identification des besoins par chapitre, trois niveaux de profondeur, hiérarchie des sources, vérification croisée, traduction en matière narrative, contrôle des anachronismes, sujets sensibles. À utiliser avant d'écrire sur un métier, une époque ou un lieu réel.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [dossier-documentaire, fiches-sources, notes-de-verification]
 ---
 
 # Research Director

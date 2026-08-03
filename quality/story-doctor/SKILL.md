@@ -1,9 +1,12 @@
 ---
 name: story-doctor
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution, self-critique-protocol]
-outputs: [diagnostic-structurel, plan-de-reparation]
+description: Diagnostique un récit qui ne fonctionne pas : table symptôme vers cause, dix contrôles structurels, test de causalité, test du protagoniste passif, test de l'enjeu, prescriptions et plan de réparation. À utiliser quand le milieu est mou, la fin déçoit, ou le lecteur décroche.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution, self-critique-protocol]
+  outputs: [diagnostic-structurel, plan-de-reparation]
 ---
 
 # Story Doctor

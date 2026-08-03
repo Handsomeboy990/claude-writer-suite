@@ -1,9 +1,12 @@
 ---
 name: adventure
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, scene-builder, immersion-director]
-outputs: [itineraire, plan-d-aventure]
+description: Écrit un roman d'aventure : itinéraire comme structure, comptabilité des ressources et attrition, compétence démontrée, territoire contraignant, rythme déplacement et halte, retour obligatoire. À utiliser pour un récit de voyage, d'expédition ou de survie.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, scene-builder, immersion-director]
+  outputs: [itineraire, plan-d-aventure]
 ---
 
 # Adventure

@@ -1,9 +1,12 @@
 ---
 name: dystopian
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, science-fiction, world-builder]
-outputs: [systeme-de-controle, plan-dystopique]
+description: Écrit une dystopie crédible : loi du fonctionnement, quatre leviers de contrôle dont l'intime, langue du pouvoir, personnage lucide qui paye sa lucidité, fins possibles. À utiliser pour un récit de régime totalitaire, de surveillance ou de société contrôlée.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, science-fiction, world-builder]
+  outputs: [systeme-de-controle, plan-dystopique]
 ---
 
 # Dystopian

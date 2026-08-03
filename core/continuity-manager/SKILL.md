@@ -1,9 +1,12 @@
 ---
 name: continuity-manager
-category: core
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [registre-de-continuite, rapport-d-incoherences]
+description: Tient la mémoire externe d'un projet long : huit registres (personnages, savoir, objets, lieux, temps, corps, règles, langue), mise à jour par chapitre, audit en huit passages, classement des incohérences. À utiliser quand on ne sait plus qui sait quoi, ou avant toute livraison.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [registre-de-continuite, rapport-d-incoherences]
 ---
 
 # Continuity Manager

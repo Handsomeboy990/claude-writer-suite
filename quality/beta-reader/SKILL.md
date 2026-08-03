@@ -1,9 +1,12 @@
 ---
 name: beta-reader
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [rapport-de-lecture, carte-d-engagement]
+description: Simule une lecture réelle sur plusieurs profils : carte d'engagement, points de décrochage localisés, confusions, prédictions, attachement, mémoire à froid. Collecte des symptômes sans prescrire. À utiliser pour savoir où un lecteur décroche et pourquoi.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [rapport-de-lecture, carte-d-engagement]
 ---
 
 # Beta Reader

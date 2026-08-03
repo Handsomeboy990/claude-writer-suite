@@ -1,9 +1,12 @@
 ---
 name: character-psychologist
-category: core
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [fiches-personnages, arcs, cartographie-relationnelle]
+description: Crée des personnages complexes : désir conscient, besoin inconscient, blessure, mensonge, défense, contradiction, couches d'accès, traduction comportementale, arcs, cartographie relationnelle. À utiliser pour construire un protagoniste, un antagoniste crédible, ou réparer un personnage fade ou incohérent.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [fiches-personnages, arcs, cartographie-relationnelle]
 ---
 
 # Character Psychologist

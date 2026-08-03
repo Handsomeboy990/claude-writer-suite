@@ -47,12 +47,21 @@ Chaque `SKILL.md` s'ouvre par un bloc YAML :
 ```yaml
 ---
 name: nom-du-skill
-category: core | genres | poetry | quality
-version: 1.0.0
-depends_on: [liste des skills requis]
-outputs: [artefacts produits]
+description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
+  doivent le déclencher.
+license: MIT
+metadata:
+  category: core | genres | poetry | quality
+  version: 1.0.0
+  depends_on: [liste des skills requis]
+  outputs: [artefacts produits]
 ---
 ```
+
+Les champs `name` et `description` sont au premier niveau : ils sont requis
+pour que le skill soit découvert et chargé par un agent. Le champ `name` doit
+être identique au nom du dossier. Les métadonnées propres au projet sont
+regroupées sous `metadata`, où elles n'interfèrent pas avec le chargement.
 
 ## Catégories
 

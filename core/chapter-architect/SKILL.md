@@ -1,9 +1,12 @@
 ---
 name: chapter-architect
-category: core
-version: 1.0.0
-depends_on: [writing-constitution, novel-architect]
-outputs: [decoupage-en-chapitres, fiche-chapitre, titres-de-chapitre]
+description: Découpe un roman en chapitres : fonction dramatique, valeurs d'entrée et de sortie, ouvertures et clôtures, longueur, alternance des points de vue, titres travaillés. À utiliser pour organiser des chapitres, décider où couper, ou trouver des titres qui ne soient pas génériques.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution, novel-architect]
+  outputs: [decoupage-en-chapitres, fiche-chapitre, titres-de-chapitre]
 ---
 
 # Chapter Architect

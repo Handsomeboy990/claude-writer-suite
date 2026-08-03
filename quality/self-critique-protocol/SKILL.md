@@ -1,9 +1,12 @@
 ---
 name: self-critique-protocol
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [grille-notee, liste-de-corrections, version-revisee]
+description: Protocole d'auto-évaluation obligatoire en cinq passes : lecture froide, notation de onze axes avec preuves citées, diagnostic des causes, correction, réévaluation. Seuils chiffrés et règles anti-complaisance. À exécuter sur tout texte produit avant de le considérer comme terminé.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [grille-notee, liste-de-corrections, version-revisee]
 ---
 
 # Self Critique Protocol

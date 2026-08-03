@@ -1,9 +1,12 @@
 ---
 name: publication-review
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution, continuity-manager, proofreader]
-outputs: [rapport-de-validation, decision-de-publication]
+description: Valide un manuscrit avant publication : sept contrôles (conformité, continuité, promesses, documentation, représentation, correction, appareil du livre), contrôles techniques de fichier, décision écrite et dossier de publication. À utiliser en toute fin de processus.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution, continuity-manager, proofreader]
+  outputs: [rapport-de-validation, decision-de-publication]
 ---
 
 # Publication Review

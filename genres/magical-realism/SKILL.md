@@ -1,9 +1,12 @@
 ---
 name: magical-realism
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, immersion-director, narrator]
-outputs: [charte-du-merveilleux, plan-realiste-magique]
+description: Écrit du réalisme magique : règle du non-étonnement, ancrage social et matériel, formulation ordinaire de l'extraordinaire, conséquences pratiques, voix de conteur, sens laissé ouvert. À utiliser pour un récit où le merveilleux est traité comme un fait banal.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, immersion-director, narrator]
+  outputs: [charte-du-merveilleux, plan-realiste-magique]
 ---
 
 # Magical Realism

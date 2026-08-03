@@ -1,9 +1,12 @@
 ---
 name: haiku
-category: poetry
-version: 1.0.0
-depends_on: [writing-constitution, poet]
-outputs: [haikus, serie-saisonniere]
+description: Écrit des haikus en français : compte souple, marqueur de saison local, technique de la coupure et de l'écart entre deux images, interdits, composition en séries. À utiliser pour une forme brève, une notation ou un recueil saisonnier.
+license: MIT
+metadata:
+  category: poetry
+  version: 1.0.0
+  depends_on: [writing-constitution, poet]
+  outputs: [haikus, serie-saisonniere]
 ---
 
 # Haiku

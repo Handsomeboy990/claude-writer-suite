@@ -17,12 +17,19 @@
 ```yaml
 ---
 name: nom-du-skill
-category: core | genres | poetry | quality
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [artefacts produits]
+description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
+  doivent le déclencher. Quarante caractères minimum.
+license: MIT
+metadata:
+  category: core | genres | poetry | quality
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [artefacts produits]
 ---
 ```
+
+`name` et `description` restent au premier niveau : ils conditionnent la
+découverte du skill par un agent. Tout le reste passe sous `metadata`.
 
 4. Structurer le contenu : rôle, entrées, protocole numéroté, livrables,
    erreurs fréquentes, section Auto-critique, interfaces.

@@ -1,9 +1,12 @@
 ---
 name: historical-fiction
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, research-director, immersion-director]
-outputs: [dossier-historique, plan-historique, note-de-l-auteur]
+description: Écrit un roman historique : règle du présent, reconstitution des mentalités, documentation de niveau 3, traitement de la langue sans pastiche, personnages réels, note de l'auteur. À utiliser pour tout récit situé dans le passé et pour traquer les anachronismes.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, research-director, immersion-director]
+  outputs: [dossier-historique, plan-historique, note-de-l-auteur]
 ---
 
 # Historical Fiction

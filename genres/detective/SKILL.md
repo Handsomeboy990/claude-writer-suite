@@ -1,9 +1,12 @@
 ---
 name: detective
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, mystery, character-psychologist]
-outputs: [dossier-d-enquete, procedure]
+description: Écrit un roman d'enquête : choix de l'école, construction de l'enquêteur, progression en neuf étapes, vérité de métier et procédure, technique de l'interrogatoire. À utiliser pour un polar, un procédural ou un roman noir.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, mystery, character-psychologist]
+  outputs: [dossier-d-enquete, procedure]
 ---
 
 # Detective

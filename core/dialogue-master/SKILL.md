@@ -1,9 +1,12 @@
 ---
 name: dialogue-master
-category: core
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [dialogues-conformes, rapport-de-voix]
+description: Écrit et valide les dialogues aux standards de l'édition française : guillemets, tirets demi-cadratin, incises, attribution par l'action, conflit d'objectifs, sous-texte, différenciation des voix. À utiliser pour écrire un dialogue, corriger sa typographie, ou quand tous les personnages parlent pareil.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [dialogues-conformes, rapport-de-voix]
 ---
 
 # Dialogue Master

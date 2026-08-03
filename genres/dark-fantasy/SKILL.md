@@ -1,9 +1,12 @@
 ---
 name: dark-fantasy
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, fantasy, horror]
-outputs: [bible-de-dark-fantasy, echelle-morale]
+description: Écrit de la dark fantasy : monde qui ne récompense pas la vertu, échelle morale interne, compromission progressive, dignité résiduelle, interdits de complaisance. À utiliser pour un récit sombre, un antihéros ou un univers de fantasy brutal.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, fantasy, horror]
+  outputs: [bible-de-dark-fantasy, echelle-morale]
 ---
 
 # Dark Fantasy

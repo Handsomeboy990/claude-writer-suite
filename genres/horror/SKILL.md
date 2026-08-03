@@ -1,9 +1,12 @@
 ---
 name: horror
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, scene-builder, immersion-director]
-outputs: [plan-de-terreur, scenes-d-horreur]
+description: Écrit de l'horreur : les trois peurs, construction de la menace en sept temps, économie de la monstration, rythme des décharges et des répits, rationalité des personnages. À utiliser pour une histoire d'épouvante, un récit surnaturel ou une scène de terreur.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, scene-builder, immersion-director]
+  outputs: [plan-de-terreur, scenes-d-horreur]
 ---
 
 # Horror

@@ -1,9 +1,12 @@
 ---
 name: narrator
-category: core
-version: 1.0.0
-depends_on: [writing-constitution]
-outputs: [charte-de-narration, voix-narrative]
+description: Gère l'instance narrative : personne, focalisation, temps, distance narrative, discours indirect libre, contrat de connaissance, narrateur non fiable, tenue de la voix. À utiliser pour choisir un point de vue, corriger un glissement de focalisation, ou stabiliser une voix sur la longueur.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution]
+  outputs: [charte-de-narration, voix-narrative]
 ---
 
 # Narrator

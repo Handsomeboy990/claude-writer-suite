@@ -1,9 +1,12 @@
 ---
 name: immersion-director
-category: core
-version: 1.0.0
-depends_on: [writing-constitution, world-builder, research-director]
-outputs: [dossier-sensoriel, passages-immersifs]
+description: Crée l'immersion culturelle et sensorielle : lieux, cultures, langues, climats, paysages, traditions, gastronomie, sons, odeurs. Dosage par type de scène et contrôle anti-exotisme. À utiliser pour rendre un lieu vivant, ou quand une description sonne comme un dépliant touristique.
+license: MIT
+metadata:
+  category: core
+  version: 1.0.0
+  depends_on: [writing-constitution, world-builder, research-director]
+  outputs: [dossier-sensoriel, passages-immersifs]
 ---
 
 # Immersion Director

@@ -1,9 +1,12 @@
 ---
 name: prose-poetry
-category: poetry
-version: 1.0.0
-depends_on: [writing-constitution, poet]
-outputs: [proses-poetiques]
+description: Écrit un poème en prose : bloc compact, quatre forces de cohésion (rythme, champ lexical, progression sensorielle, clôture), familles de formes, pièges du lyrisme et de la chute explicative. À utiliser pour une prose poétique, une notation ou un fragment.
+license: MIT
+metadata:
+  category: poetry
+  version: 1.0.0
+  depends_on: [writing-constitution, poet]
+  outputs: [proses-poetiques]
 ---
 
 # Prose Poetry

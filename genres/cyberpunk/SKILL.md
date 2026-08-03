@@ -1,9 +1,12 @@
 ---
 name: cyberpunk
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, science-fiction]
-outputs: [bible-cyberpunk, cartographie-des-pouvoirs]
+description: Écrit du cyberpunk matérialiste : corps augmenté et dette d'entretien, économie de l'information, pouvoirs concurrents, économie informelle, style dense, critique par le détail. À utiliser pour un récit d'anticipation urbaine, de hackers ou de corporations.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, science-fiction]
+  outputs: [bible-cyberpunk, cartographie-des-pouvoirs]
 ---
 
 # Cyberpunk

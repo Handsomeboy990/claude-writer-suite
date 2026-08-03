@@ -1,9 +1,12 @@
 ---
 name: espionage
-category: genres
-version: 1.0.0
-depends_on: [writing-constitution, thriller, research-director]
-outputs: [dossier-d-operation, arbre-des-loyautes]
+description: Écrit un roman d'espionnage : métier documenté, tension d'exposition, scènes de surveillance et de contre-surveillance, arbre des loyautés, trahison rétrospectivement cohérente, fin ambiguë. À utiliser pour un récit d'agents, de sources ou de services secrets.
+license: MIT
+metadata:
+  category: genres
+  version: 1.0.0
+  depends_on: [writing-constitution, thriller, research-director]
+  outputs: [dossier-d-operation, arbre-des-loyautes]
 ---
 
 # Espionage

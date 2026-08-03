@@ -1,9 +1,12 @@
 ---
 name: rewriting-engine
-category: quality
-version: 1.0.0
-depends_on: [writing-constitution, self-critique-protocol]
-outputs: [version-reecrite, journal-de-reecriture]
+description: Réécrit méthodiquement un texte existant : décision corriger ou réécrire, six modes (fonction, point de vue, contraction, expansion, registre, suppression), règles de récupération, signes d'une réécriture ratée. À utiliser quand la correction ne suffit plus.
+license: MIT
+metadata:
+  category: quality
+  version: 1.0.0
+  depends_on: [writing-constitution, self-critique-protocol]
+  outputs: [version-reecrite, journal-de-reecriture]
 ---
 
 # Rewriting Engine
