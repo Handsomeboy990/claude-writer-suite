@@ -142,7 +142,20 @@ Trois règles pour éviter l'auto-validation :
   et doit être recontrôlée par `quality/literary-critic`.
 - Le protocole cherche ce qui ne va pas. Il ne rédige pas d'éloge.
 
-## 8. Interfaces
+## 8. Auto-critique du protocole
+
+Le protocole s'applique à lui-même. Après chaque usage, contrôler :
+
+- chaque note est-elle adossée à une citation du texte ;
+- le diagnostic remonte-t-il à une cause ou reste-t-il au symptôme ;
+- une correction a-t-elle dégradé un autre axe sans être détectée ;
+- la moyenne du premier cycle dépasse-t-elle 4,5, ce qui signale une
+  complaisance ;
+- le nombre de cycles est-il resté inférieur ou égal à trois.
+
+Un protocole exécuté sans preuve citée est nul et doit être recommencé.
+
+## 9. Interfaces
 
 - Amont : tous les skills de production.
 - Aval : `story-doctor`, `literary-editor`, `literary-critic`.
