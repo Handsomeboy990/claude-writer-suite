@@ -51,7 +51,19 @@ bash tests/validate-structure.sh
 bash tests/validate-rules.sh
 ```
 
-Pour un usage avec un agent, placer le repository dans le répertoire de
+### Installer les skills pour un agent
+
+```
+bash install.sh          # copie les 42 skills dans ~/.claude/skills
+bash install.sh --zip    # construit aussi une archive par skill dans dist/
+bash install.sh --remove # désinstalle
+```
+
+Le répertoire cible est configurable par la variable `CLAUDE_SKILLS_DIR`.
+Les archives de `dist/` servent à un import manuel dans une interface qui
+attend un fichier zip par skill.
+
+Pour un usage sans installation, placer le repository dans le répertoire de
 travail et faire lire `CLAUDE.md` en premier, puis
 `core/writing-constitution/SKILL.md`.
 
