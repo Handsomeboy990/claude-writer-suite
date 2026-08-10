@@ -74,7 +74,7 @@ types are a defect that surfaces months later.
 5. **Client data layer**: the typed call, cache keys, invalidation.
 6. **UI**: the five states, following `frontend-engineering`.
 7. **Journey test**: the browser path, following `playwright-automation`.
-8. **Cross layer review**, section 5.
+8. **Cross layer review**, sections 4 and 5.
 
 Building the UI first against an imagined response is the most common way a
 feature ends up with two contracts.
