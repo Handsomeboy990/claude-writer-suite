@@ -46,7 +46,7 @@ plan: project-exploration -> architecture-design -> backend-engineering -> input
 ## FULLSTACK
 
 category: FULLSTACK
-plan: project-exploration -> architecture-design -> fullstack-engineering -> backend-engineering -> frontend-engineering -> input-validation -> security-audit -> testing-quality -> playwright-automation -> ui-ux-engineering -> performance-engineering -> code-review-protocol -> technical-documentation -> project-continuity -> git-workflow -> release-readiness
+plan: project-exploration -> architecture-design -> fullstack-engineering -> backend-engineering -> ui-ux-engineering -> frontend-engineering -> input-validation -> security-audit -> testing-quality -> playwright-automation -> performance-engineering -> code-review-protocol -> technical-documentation -> project-continuity -> git-workflow -> release-readiness
 
 The widest plan. `release-readiness` runs only when the request is to ship.
 
@@ -132,12 +132,15 @@ why the review step stays.
 ## GIT
 
 category: GIT
-plan: project-exploration -> git-workflow -> project-continuity
+plan: project-exploration -> project-continuity -> git-workflow
+
+The continuity note is a tracked file, so it is written before the commit that
+carries it, not after.
 
 ## RELEASE
 
 category: RELEASE
-plan: project-exploration -> testing-quality -> security-audit -> performance-engineering -> code-review-protocol -> technical-documentation -> project-continuity -> release-readiness -> git-workflow
+plan: project-exploration -> testing-quality -> security-audit -> performance-engineering -> code-review-protocol -> technical-documentation -> project-continuity -> git-workflow -> release-readiness
 
 ## REFACTORING
 

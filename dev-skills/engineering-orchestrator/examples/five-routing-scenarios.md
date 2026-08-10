@@ -118,12 +118,12 @@ Plan:
   2 architecture-design, invitation lifecycle, token model, expiry
   3 fullstack-engineering, owns the contract across layers
   4 backend-engineering, endpoints, service, migration
-  5 frontend-engineering, invite form, pending list, accept page
-  6 input-validation, email, role, token, both boundaries
-  7 security-audit, token entropy, single use, role escalation, enumeration
-  8 testing-quality, unit, integration, negative and boundary cases
-  9 playwright-automation, invite then accept journey
-  10 ui-ux-engineering, states and accessibility of the two new screens
+  5 ui-ux-engineering, states and accessibility of the two new screens
+  6 frontend-engineering, invite form, pending list, accept page
+  7 input-validation, email, role, token, both boundaries
+  8 security-audit, token entropy, single use, role escalation, enumeration
+  9 testing-quality, unit, integration, negative and boundary cases
+  10 playwright-automation, invite then accept journey
   11 performance-engineering, list query and index
   12 code-review-protocol
   13 technical-documentation
