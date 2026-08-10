@@ -74,7 +74,7 @@ Ask how it got there and fix that, not the instance.
 Leaked:        which credential, which environment
 Exposed:       from when, to when, where
 Granted:       what the credential allowed
-Evidence:      access log findings, or "no evidence, log covered N days"
+Evidence:      access log findings, or: no evidence, log covered N days
 Rotated:       when, by whom
 Revoked:       when
 Removed:       where from, and where it remains public
@@ -82,9 +82,10 @@ Prevention:    what changed so this class does not recur
 Uncertain:     what is not known, stated plainly
 ```
 
-The `Uncertain` line matters. "No evidence of use, but the provider's log only
-covers seven days and the exposure was three months" is the honest statement,
-and it is what a client needs in order to decide whether to notify anyone.
+The `Uncertain` line matters. The honest statement reads: no evidence of use,
+but the provider log covers only seven days and the exposure lasted three
+months. That is what a client needs in order to decide whether to notify
+anyone.
 
 ## Severity, for deciding how fast
 
@@ -97,7 +98,7 @@ and it is what a client needs in order to decide whether to notify anyone.
 | test or sandbox credential, public | rotate this week; still a credential |
 | a credential in a message to a colleague | rotate at the next convenient point, and fix the sharing practice |
 
-There is no row for "leave it". A credential that is not worth rotating was
+There is no row for `leave it`. A credential that is not worth rotating was
 not worth treating as a secret.
 
 ## What not to do
@@ -106,6 +107,6 @@ not worth treating as a secret.
 - Do not decide the exposure was probably harmless without checking the access
   log.
 - Do not rewrite public history and report the leak as resolved.
-- Do not skip rotation because the credential is "only" for staging.
+- Do not skip rotation because the credential is only for staging.
 - Do not tell a client the secret was removed when what they need to know is
   whether it was rotated.

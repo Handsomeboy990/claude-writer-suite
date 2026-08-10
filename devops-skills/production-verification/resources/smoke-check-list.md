@@ -165,5 +165,5 @@ verified with notes passed, with an observation recorded
 rolled back         a check failed, the rollback was executed and verified
 ```
 
-There is no verdict meaning "probably fine". A check that could not be run is
+There is no verdict meaning `probably fine`. A check that could not be run is
 reported as not run, with the reason.
