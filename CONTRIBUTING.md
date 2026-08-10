@@ -3,13 +3,16 @@
 ## Avant toute modification
 
 1. Lire `CLAUDE.md`.
-2. Lire `core/writing-constitution/SKILL.md`.
-3. Vérifier la cohérence avec `documentation/architecture.md`.
+2. Lire la constitution du système concerné :
+   `core/writing-constitution/SKILL.md` pour un skill d'écriture,
+   `dev-skills/engineering-core/SKILL.md` pour un skill d'ingénierie.
+3. Vérifier la cohérence avec `documentation/architecture.md`, et avec
+   `documentation/engineering-system.md` pour `dev-skills`.
 
 ## Ajouter un skill
 
 1. Créer le dossier dans la catégorie appropriée : `core`, `genres`,
-   `poetry` ou `quality`.
+   `poetry`, `quality` ou `dev-skills`.
 2. Créer les quatre éléments obligatoires : `SKILL.md`, `README.md`,
    `examples/`, `resources/`. Les deux dossiers ne peuvent pas rester vides.
 3. Ouvrir `SKILL.md` par le bloc de métadonnées :
@@ -21,7 +24,7 @@ description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
   doivent le déclencher. Quarante caractères minimum.
 license: MIT
 metadata:
-  category: core | genres | poetry | quality
+  category: core | genres | poetry | quality | dev-skills
   version: 1.0.0
   depends_on: [writing-constitution]
   outputs: [artefacts produits]
@@ -31,18 +34,31 @@ metadata:
 `name` et `description` restent au premier niveau : ils conditionnent la
 découverte du skill par un agent. Tout le reste passe sous `metadata`.
 
-4. Structurer le contenu : rôle, entrées, protocole numéroté, livrables,
+4. Structurer le contenu : rôle, entrées, procédure numérotée, livrables,
    erreurs fréquentes, section Auto-critique, interfaces.
 5. Renvoyer à la constitution, ne jamais la recopier.
 6. Ajouter au moins un exemple appliqué et une grille ou checklist.
 7. Mettre à jour `documentation/skills-guide.md` et
    `documentation/architecture.md`.
-8. Exécuter les deux scripts de validation.
+8. Exécuter les trois scripts de validation.
+
+Un skill de `dev-skills` ajoute quatre exigences propres :
+
+- la procédure porte le titre `Protocol` et une section `Interfaces` est
+  obligatoire, toutes deux vérifiées par `tests/validate-structure.sh` ;
+- le contenu est rédigé en anglais, pour la raison exposée dans
+  `documentation/engineering-system.md` section 2 ;
+- le skill figure dans au moins un plan de
+  `dev-skills/engineering-orchestrator/resources/execution-plans.md`, faute de
+  quoi `tests/validate-orchestration.sh` le signale comme orphelin ;
+- il est ajouté à `dev-skills/README.md` et à
+  `documentation/engineering-system.md`.
 
 ## Exigences de contenu
 
-- Rédaction en français, noms de fichiers et de dossiers en anglais, en
-  kebab-case.
+- Rédaction en français pour les skills d'écriture, en anglais pour
+  `dev-skills`. Noms de fichiers et de dossiers en anglais, en kebab-case
+  partout.
 - Aucun emoji, aucun tiret cadratin, y compris dans les tableaux.
 - Tout protocole est numéroté et exécutable, sans formulation vague.
 - Toute règle énoncée est vérifiable par une procédure ou une grille.
@@ -53,9 +69,10 @@ découverte du skill par un agent. Tout le reste passe sous `metadata`.
 ```
 bash tests/validate-structure.sh
 bash tests/validate-rules.sh
+bash tests/validate-orchestration.sh
 ```
 
-Les deux scripts doivent passer sans erreur avant tout commit.
+Les trois scripts doivent passer sans erreur avant tout commit.
 
 ## Git
 
@@ -81,11 +98,23 @@ Interdits absolus dans les messages de commit et les métadonnées :
 assistance par intelligence artificielle. L'auteur visible reste
 `Handsomeboy990 <lauretchacha@gmail.com>`.
 
-## Modifier la constitution
+Ne jamais versionner : `.env` et ses variantes, clés privées, certificats,
+informations d'identification, configuration locale d'un agent. Lire le diff
+indexé en entier avant chaque commit. Un secret déjà poussé se révoque, il ne
+se supprime pas.
+
+## Modifier une constitution
 
 Toute modification de `core/writing-constitution/SKILL.md` impose :
 
 1. la vérification des skills qui s'y réfèrent ;
 2. la mise à jour de `documentation/writing-rules.md` ;
 3. la mise à jour de la grille de conformité ;
+4. une entrée dans `CHANGELOG.md`.
+
+Toute modification de `dev-skills/engineering-core/SKILL.md` impose :
+
+1. la vérification des vingt skills qui en héritent ;
+2. la mise à jour de `documentation/engineering-system.md` ;
+3. l'exécution de `tests/validate-orchestration.sh` ;
 4. une entrée dans `CHANGELOG.md`.
