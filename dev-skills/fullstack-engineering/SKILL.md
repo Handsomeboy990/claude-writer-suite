@@ -62,7 +62,7 @@ Where the stack generates types from a schema, generate them. Where it does
 not, define the shape once and import it on both sides. Hand written duplicate
 types are a defect that surfaces months later.
 
-## 3. Order of work
+## 3. Protocol, the order of work
 
 1. **Contract**, section 2.
 2. **Data layer**: schema and migration, since everything above depends on

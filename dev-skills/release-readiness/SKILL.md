@@ -31,7 +31,18 @@ The irreversible parts drive the rigour. A migration that drops a column and
 an email that goes to every customer are the two things a rollback does not
 fix.
 
-## 2. The nine gates
+## 2. Protocol
+
+1. Identify the exact revision and read the diff since the last release.
+2. Run the nine gates of section 3, in order, recording evidence per gate.
+3. Classify every failure as a blocker or a note, section 4.
+4. Write the deployment notes, section 5.
+5. Write the rollback plan, section 6, before any deploy happens.
+6. Issue the verdict, section 7, with the evidence attached.
+7. On a no go, name what unblocks each blocker and re-run only the affected
+   gates once it is resolved.
+
+## 3. The nine gates
 
 Each is `pass`, `fail` with the blocker, or `not applicable` with the reason.
 
@@ -74,7 +85,7 @@ rollback restores and what it does not is stated. Time to roll back is known.
 context, an error surface, and a metric or a query that answers whether it is
 working, named explicitly.
 
-## 3. Blockers versus notes
+## 4. Blockers versus notes
 
 | Kind | Definition |
 |---|---|
@@ -84,7 +95,7 @@ working, named explicitly.
 Any `fail` on gates 1, 2, 3, 5 or 8 is a blocker by default. Downgrading one
 requires a written reason and a named person accepting it.
 
-## 4. Deployment notes
+## 5. Deployment notes
 
 Produced for whoever performs the deploy, in order:
 
@@ -98,7 +109,7 @@ Rollback      the exact steps, and what they do not restore
 Inform        who needs to know, and when
 ```
 
-## 5. Rollback plan
+## 6. Rollback plan
 
 Written before the deploy, always, even when it is one line.
 
@@ -116,7 +127,7 @@ The side effects line is the one that changes decisions. A release that sends
 mail is not reversible, whatever the code does, and that fact belongs in the
 verdict rather than in the incident review.
 
-## 6. The verdict
+## 7. The verdict
 
 ```
 Go              all applicable gates pass, evidence attached
@@ -127,7 +138,7 @@ No go           one or more blockers, each named with what unblocks it
 There is no `probably fine`. A gate that could not be checked is reported as
 unchecked with the missing input, and the verdict accounts for it explicitly.
 
-## 7. Report format
+## 8. Report format
 
 ```
 Release        v2.4.0, revision a91f0c2
@@ -156,7 +167,7 @@ Notes
   Documented; no known external client uses it.
 ```
 
-## 8. Prohibitions
+## 9. Prohibitions
 
 - Never issue a verdict without running the checks.
 - Never declare a system secure or bug free.
@@ -165,7 +176,7 @@ Notes
 - Never deploy without a rollback plan, including for a small change.
 - Never assume an environment variable is set because it exists locally.
 
-## 9. Auto-critique
+## 10. Auto-critique
 
 Score from 0 to 5: gates actually executed, evidence attached, blockers
 correctly classified, migration and rollback realism, configuration verified
@@ -174,7 +185,7 @@ rather than assumed, side effects acknowledged, verdict honesty.
 Threshold: no axis below 3, average at least 4. A `Go` issued without
 executing gate 2 is an automatic failure of the whole review.
 
-## 10. Interfaces
+## 11. Interfaces
 
 - Upstream: `testing-quality`, `security-audit`,
   `performance-engineering`, `technical-documentation`,
