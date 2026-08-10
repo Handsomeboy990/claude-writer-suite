@@ -3,6 +3,33 @@
 Toutes les modifications notables du projet sont consignées ici.
 Le format suit une numérotation sémantique.
 
+## 1.3.0
+
+Réorganisation du repository en deux arbres séparés. Aucun skill n'est modifié
+dans son contenu ; seuls les chemins changent.
+
+### Modifié
+
+- Arborescence : les quatre catégories d'écriture, `resources/` et
+  `examples/` passent sous `writing/` ; les trois catégories d'ingénierie et
+  `agents/` passent sous `engineering/`. Les 392 fichiers déplacés sont des
+  renommages purs, l'historique Git est préservé.
+- `README.md` : réécrit. Présente les deux arbres, leurs catégories, les
+  chaînes minimales, les règles communes et la table de la documentation.
+- `tests/validate-structure.sh` : résout les catégories par arbre, et exige
+  désormais un `README.md` pour chaque arbre et chaque catégorie.
+- `tests/validate-orchestration.sh` et `install.sh` : chemins adaptés.
+- `CLAUDE.md`, `CONTRIBUTING.md`, `CONTINUITY.md`, `documentation/*`,
+  `tests/README.md` : chemins préfixés par l'arbre.
+
+### Ajouté
+
+- `writing/README.md` et `engineering/README.md` : index des deux arbres.
+- `writing/core/README.md`, `writing/genres/README.md`,
+  `writing/poetry/README.md`, `writing/quality/README.md` : index de
+  catégorie, avec ordre d'usage et table de choix par situation. Les quatre
+  catégories d'ingénierie possédaient déjà le leur.
+
 ## 1.2.0
 
 Extension du système d'ingénierie en système complet de livraison de projet.
