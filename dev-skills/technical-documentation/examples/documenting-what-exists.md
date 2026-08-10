@@ -58,7 +58,7 @@ Findings against the documentation:
 
 ## What ships
 
-```markdown
+````markdown
 ### GET /api/invoices
 
 Returns the authenticated user's invoices, newest first. Invoices are always
@@ -111,7 +111,7 @@ curl "https://api.example.com/api/invoices?limit=5" \
 
 Filtering by customer or date range. Both were considered and are tracked as
 follow up work.
-```
+````
 
 ## The `Not supported` section
 

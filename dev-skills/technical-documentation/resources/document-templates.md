@@ -2,7 +2,7 @@
 
 ## API endpoint reference
 
-```markdown
+````markdown
 ### POST /api/teams/:teamId/invitations
 
 Invites a member to a team. Requires an authenticated administrator of the
@@ -57,7 +57,7 @@ curl -X POST https://api.example.com/api/teams/$TEAM_ID/invitations \
   -H "Cookie: sid=$SESSION" \
   -d '{"email":"ada@example.com","role":"member"}'
 ```
-```
+````
 
 ## Runbook entry
 
@@ -125,7 +125,7 @@ step, and never a paraphrased commit log.
 
 ## Setup guide section
 
-```markdown
+````markdown
 ## Environment variables
 
 | Name | Required | Purpose | Where to obtain |
@@ -149,4 +149,4 @@ pnpm dev
 The last command serves the application on port 3000. Opening it shows the
 sign in page. If the database is unreachable, the process exits with
 `DATABASE_URL is not reachable` rather than starting in a broken state.
-```
+````
