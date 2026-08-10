@@ -4,7 +4,7 @@
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-CATEGORIES="core genres poetry quality"
+CATEGORIES="core genres poetry quality dev-skills"
 ERRORS=0
 SKILLS=0
 
@@ -55,6 +55,15 @@ for category in $CATEGORIES; do
         || fail "$category/$name : description trop courte pour être découverte"
       grep -qi '^## .*[Aa]uto-critique' "$skill/SKILL.md" \
         || fail "$category/$name : section Auto-critique absente"
+      # Les skills d'ingénierie imposent en plus une section Protocol
+      # numérotée et une section Interfaces. Les skills d'écriture nomment
+      # leur procédure de façons variées, héritées de leur domaine.
+      if [ "$category" = "dev-skills" ]; then
+        grep -qE '^## [0-9]+\. Protocol' "$skill/SKILL.md" \
+          || fail "$category/$name : section Protocol numérotée absente"
+        grep -qE '^## [0-9]+\. Interfaces' "$skill/SKILL.md" \
+          || fail "$category/$name : section Interfaces absente"
+      fi
     fi
   done
 done
