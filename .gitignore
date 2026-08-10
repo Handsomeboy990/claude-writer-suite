@@ -9,3 +9,18 @@ node_modules/
 drafts-prives/
 
 dist/
+
+# Configuration locale d'un agent, propre à une machine.
+# CLAUDE.md reste versionné : c'est la mémoire publique du projet, exigée par
+# tests/validate-structure.sh, et elle ne contient aucun secret.
+.claude/
+.claude.json
+*.local
+
+# Secrets et informations d'identification, jamais versionnés.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
