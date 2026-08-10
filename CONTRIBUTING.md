@@ -4,19 +4,20 @@
 
 1. Lire `CLAUDE.md`.
 2. Lire la constitution du système concerné :
-   `core/writing-constitution/SKILL.md` pour un skill d'écriture,
-   `dev-skills/engineering-core/SKILL.md` pour un skill d'ingénierie,
-   `devops-skills/devops-core/SKILL.md` en plus pour un skill
+   `writing/core/writing-constitution/SKILL.md` pour un skill d'écriture,
+   `engineering/dev-skills/engineering-core/SKILL.md` pour un skill d'ingénierie,
+   `engineering/devops-skills/devops-core/SKILL.md` en plus pour un skill
    d'exploitation.
 3. Vérifier la cohérence avec `documentation/architecture.md`, avec
-   `documentation/engineering-system.md` pour `dev-skills`, et avec
-   `documentation/delivery-system.md` pour `delivery-skills`,
-   `devops-skills` et `agents`.
+   `documentation/engineering-system.md` pour `engineering/dev-skills`, et avec
+   `documentation/delivery-system.md` pour `engineering/delivery-skills`,
+   `engineering/devops-skills` et `agents`.
 
 ## Ajouter un skill
 
-1. Créer le dossier dans la catégorie appropriée : `core`, `genres`,
-   `poetry`, `quality`, `dev-skills`, `delivery-skills` ou `devops-skills`.
+1. Créer le dossier dans la catégorie appropriée : sous `writing/`, l'une de
+   `core`, `genres`, `poetry`, `quality` ; sous `engineering/`, l'une de
+   `dev-skills`, `delivery-skills`, `devops-skills`.
 2. Créer les quatre éléments obligatoires : `SKILL.md`, `README.md`,
    `examples/`, `resources/`. Les deux dossiers ne peuvent pas rester vides.
 3. Ouvrir `SKILL.md` par le bloc de métadonnées :
@@ -28,7 +29,8 @@ description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
   doivent le déclencher. Quarante caractères minimum.
 license: MIT
 metadata:
-  category: core | genres | poetry | quality | dev-skills | delivery-skills | devops-skills
+  category: core | genres | poetry | quality
+            | dev-skills | delivery-skills | devops-skills
   version: 1.0.0
   depends_on: [writing-constitution]
   outputs: [artefacts produits]
@@ -53,31 +55,31 @@ Un skill d'une catégorie d'ingénierie ajoute quatre exigences propres :
 - le contenu est rédigé en anglais, pour la raison exposée dans
   `documentation/engineering-system.md` section 2 ;
 - le skill figure dans au moins un plan de
-  `dev-skills/engineering-orchestrator/resources/execution-plans.md` ou dans
-  une phase de
-  `delivery-skills/delivery-orchestrator/resources/delivery-phases.md`, faute
-  de quoi `tests/validate-orchestration.sh` le signale comme orphelin ;
+  `engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md`
+  ou dans une phase de
+  `engineering/delivery-skills/delivery-orchestrator/resources/delivery-phases.md`,
+  faute de quoi `tests/validate-orchestration.sh` le signale comme orphelin ;
 - il est ajouté à l'index de sa catégorie et à la documentation
   correspondante.
 
 ## Ajouter un agent
 
-1. Créer le fichier dans `agents/`, nommé d'après l'agent.
+1. Créer le fichier dans `engineering/agents/`, nommé d'après l'agent.
 2. Ouvrir par un bloc de métadonnées avec `name` identique au nom du fichier
    et une `description` d'au moins quarante caractères.
 3. Inclure les huit sections obligatoires : `Role`, `Mission`,
    `Responsibilities`, `Inputs`, `Outputs`, `Boundaries`, `Verification`,
    `Handoff`. Une section `Skills` cite les skills utilisés.
 4. Ne jamais recopier le contenu d'un skill : le citer.
-5. Ajouter une ligne dans `agents/README.md`.
+5. Ajouter une ligne dans `engineering/agents/README.md`.
 6. Ajouter le nom à la liste attendue de `tests/validate-orchestration.sh`.
 7. Exécuter les trois scripts de validation.
 
 ## Exigences de contenu
 
-- Rédaction en français pour les skills d'écriture, en anglais pour
-  `dev-skills`, `delivery-skills`, `devops-skills` et `agents`. Noms de
-  fichiers et de dossiers en anglais, en kebab-case partout.
+- Rédaction en français pour l'arbre `writing/`, en anglais pour l'arbre
+  `engineering/`, agents compris. Noms de fichiers et de dossiers en anglais,
+  en kebab-case partout.
 - Aucun emoji, aucun tiret cadratin, y compris dans les tableaux.
 - Tout protocole est numéroté et exécutable, sans formulation vague.
 - Toute règle énoncée est vérifiable par une procédure ou une grille.
@@ -124,21 +126,21 @@ se supprime pas.
 
 ## Modifier une constitution
 
-Toute modification de `core/writing-constitution/SKILL.md` impose :
+Toute modification de `writing/core/writing-constitution/SKILL.md` impose :
 
 1. la vérification des skills qui s'y réfèrent ;
 2. la mise à jour de `documentation/writing-rules.md` ;
 3. la mise à jour de la grille de conformité ;
 4. une entrée dans `CHANGELOG.md`.
 
-Toute modification de `dev-skills/engineering-core/SKILL.md` impose :
+Toute modification de `engineering/dev-skills/engineering-core/SKILL.md` impose :
 
 1. la vérification des quarante et un skills qui en héritent ;
 2. la mise à jour de `documentation/engineering-system.md` ;
 3. l'exécution de `tests/validate-orchestration.sh` ;
 4. une entrée dans `CHANGELOG.md`.
 
-Toute modification de `devops-skills/devops-core/SKILL.md` impose :
+Toute modification de `engineering/devops-skills/devops-core/SKILL.md` impose :
 
 1. la vérification des dix skills d'exploitation qui en héritent ;
 2. la mise à jour de `documentation/delivery-system.md` ;

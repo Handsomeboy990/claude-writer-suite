@@ -1,6 +1,7 @@
 # Système de livraison de projet
 
-Documentation technique de `delivery-skills`, `devops-skills` et `agents`.
+Documentation technique de `engineering/delivery-skills`,
+`engineering/devops-skills` et `engineering/agents`.
 
 ## 1. Objet
 
@@ -8,11 +9,11 @@ Prendre un cahier des charges, une spécification, un PRD, une liste de
 fonctionnalités ou une demande client, et livrer un système implémenté, testé,
 documenté, déployé et vérifié en production.
 
-Le système d'ingénierie précédent, `dev-skills`, répond à la question : comment
-une modification est-elle faite correctement. Ce système répond à trois autres
-questions : quoi construire, dans quel ordre et avec quelle approbation ;
-comment le système tourne, se déploie et se restaure ; et qui possède chaque
-partie du travail.
+Le système d'ingénierie précédent, `engineering/dev-skills`, répond à la
+question : comment une modification est-elle faite correctement. Ce système
+répond à trois autres questions : quoi construire, dans quel ordre et avec
+quelle approbation ; comment le système tourne, se déploie et se restaure ; et
+qui possède chaque partie du travail.
 
 ## 2. Les trois couches
 
@@ -30,8 +31,8 @@ tâche opérationnelle à `devops-core`.
 ## 3. Les quatorze phases
 
 Définies dans
-`delivery-skills/delivery-orchestrator/resources/delivery-phases.md`, dans un
-format lisible par machine.
+`engineering/delivery-skills/delivery-orchestrator/resources/delivery-phases.md`,
+dans un format lisible par machine.
 
 | # | Phase | Porte |
 |---|---|---|
@@ -60,8 +61,8 @@ occurrences : clarification, validation de l'architecture, premier
 déploiement, mise en production. Plus toute action irréversible.
 
 **Vérification.** Aucun humain requis, la porte s'ouvre sur des preuves :
-intégration exercée, audit de sécurité passé, suite de tests exécutée, système
-déployé ayant répondu à une requête réelle.
+intégration exercée, audit de sécurité passé, suite de tests exécutée,
+système déployé ayant répondu à une requête réelle.
 
 **Qualité.** Déléguées à la suite d'ingénierie : `code-review-protocol`,
 `testing-quality`, `performance-engineering`, `ui-ux-engineering`.
@@ -111,9 +112,9 @@ précisément pour éviter.
 
 ## 8. Les agents
 
-Quatorze rôles, définis dans `agents/`. Un agent est mince par construction :
-l'expertise réside dans les skills, l'agent décide lesquels s'appliquent,
-exécute dans sa frontière, et transmet par un artefact durable.
+Quatorze rôles, définis dans `engineering/agents/`. Un agent est mince par
+construction : l'expertise réside dans les skills, l'agent décide lesquels
+s'appliquent, exécute dans sa frontière, et transmet par un artefact durable.
 
 ```
                        delivery-orchestrator
@@ -158,14 +159,15 @@ security-engineer   -> qa-engineer, pour les tests encodant chaque correction
 
 ### Transmission
 
-Chaque agent termine par le bloc de `agents/handoff-protocol.md` : Completed,
-Changed, Decisions, Verified, Known issues, Next action, For. Rien
-d'important ne circule uniquement par le contexte conversationnel, car l'agent
-suivant peut démarrer sans aucun contexte.
+Chaque agent termine par le bloc de
+`engineering/agents/handoff-protocol.md` : Completed, Changed, Decisions,
+Verified, Known issues, Next action, For. Rien d'important ne circule
+uniquement par le contexte conversationnel, car l'agent suivant peut démarrer
+sans aucun contexte.
 
 ### Emplacement et installation
 
-Les définitions vivent dans `agents/` à la racine du repository, et non dans
+Les définitions vivent dans `engineering/agents/`, versionnées, et non dans
 `.claude/agents/`, parce que `.claude/` est une configuration locale de machine
 qui n'est jamais versionnée. L'installeur les copie à l'emplacement attendu
 par le runtime.
@@ -225,8 +227,8 @@ Le troisième script couvre désormais :
 
 Ajouter un skill de livraison ou d'exploitation suppose :
 
-1. créer le dossier dans `delivery-skills/` ou `devops-skills/` avec ses
-   quatre éléments obligatoires ;
+1. créer le dossier dans `engineering/delivery-skills/` ou
+   `engineering/devops-skills/` avec ses quatre éléments obligatoires ;
 2. déclarer la catégorie correspondante dans les métadonnées ;
 3. renvoyer à sa constitution sans la recopier : `engineering-core` pour tous,
    `devops-core` en plus pour l'exploitation ;
@@ -237,6 +239,7 @@ Ajouter un skill de livraison ou d'exploitation suppose :
 6. mettre à jour l'index de sa catégorie et ce fichier ;
 7. exécuter les trois scripts de validation.
 
-Ajouter un agent suppose : le fichier dans `agents/`, les huit sections
-obligatoires, une entrée dans `agents/README.md`, et l'ajout de son nom à la
-liste attendue de `tests/validate-orchestration.sh`.
+Ajouter un agent suppose : le fichier dans `engineering/agents/`, les huit
+sections obligatoires, une entrée dans `engineering/agents/README.md`, et
+l'ajout de son nom à la liste attendue de
+`tests/validate-orchestration.sh`.

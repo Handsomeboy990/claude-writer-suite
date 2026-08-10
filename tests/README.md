@@ -11,8 +11,9 @@ bash tests/validate-orchestration.sh
 
 ## validate-structure.sh
 
-Vérifie, pour chacun des 83 skills des sept catégories `core`, `genres`,
-`poetry`, `quality`, `dev-skills`, `delivery-skills` et `devops-skills` :
+Vérifie, pour chacun des 83 skills des sept catégories, réparties en deux
+arbres, `writing/` pour `core`, `genres`, `poetry` et `quality`, puis
+`engineering/` pour `dev-skills`, `delivery-skills` et `devops-skills` :
 
 - présence de `SKILL.md` et `README.md` ;
 - présence et contenu des dossiers `examples/` et `resources/` ;
@@ -73,7 +74,7 @@ Propre aux trois catégories d'ingénierie et aux agents. Douze contrôles :
 10. le titre du README de chaque skill correspond au nom du dossier ;
 11. les quatorze agents existent, avec un bloc de métadonnées, un `name`
     conforme au fichier, une description suffisante et les huit sections
-    obligatoires, et chacun figure dans `agents/README.md` ;
+    obligatoires, et chacun figure dans `engineering/agents/README.md` ;
 12. chaque skill cité par la section `Skills` d'un agent existe.
 
 Code de sortie 1 en cas d'erreur.

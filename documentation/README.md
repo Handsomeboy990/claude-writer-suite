@@ -7,10 +7,10 @@
 - `writing-rules.md` : version opérationnelle des règles communes d'écriture.
 - `workflow.md` : enchaînement en onze phases, cadence, règles de non
   régression.
-- `engineering-system.md` : documentation technique de `dev-skills`, chaîne
+- `engineering-system.md` : documentation technique de `engineering/dev-skills`, chaîne
   d'exécution, portes obligatoires, catégories de tâches, validation.
-- `delivery-system.md` : documentation technique de `delivery-skills`,
-  `devops-skills` et `agents` : quatorze phases, portes d'approbation,
+- `delivery-system.md` : documentation technique de `engineering/delivery-skills`,
+  `engineering/devops-skills` et `agents` : quatorze phases, portes d'approbation,
   parallélisation, transmission entre agents.
 
 Pour la mémoire du projet et les règles Git, voir `CLAUDE.md` à la racine.

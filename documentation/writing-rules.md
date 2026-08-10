@@ -1,6 +1,6 @@
 # Règles d'écriture
 
-Version opérationnelle de `core/writing-constitution/SKILL.md`. En cas de
+Version opérationnelle de `writing/core/writing-constitution/SKILL.md`. En cas de
 divergence, la constitution fait foi.
 
 ## 1. Interdits absolus
@@ -72,7 +72,7 @@ résolutions par hasard favorable. La liste de référence figure dans
 - Langues étrangères compréhensibles par le contexte, sans traduction entre
   parenthèses.
 - Nourriture, musique, vêtement et rite traités comme des faits sociaux.
-- Sources documentées via `core/research-director`.
+- Sources documentées via `writing/core/research-director`.
 
 ## 9. Émotion
 

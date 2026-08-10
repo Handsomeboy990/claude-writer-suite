@@ -1,11 +1,12 @@
 # Système de skills d'ingénierie
 
-Documentation technique de `dev-skills`, la couche de pratique du code.
+Documentation technique de `engineering/dev-skills`, la couche de pratique du
+code.
 
 Deux couches la complètent, documentées dans `delivery-system.md` :
-`delivery-skills` conduit un projet de la spécification à la livraison, et
-`devops-skills` gouverne l'exécution du système. Ce document couvre la
-question : comment une modification est-elle faite correctement.
+`engineering/delivery-skills` conduit un projet de la spécification à la
+livraison, et `engineering/devops-skills` gouverne l'exécution du système. Ce
+document couvre la question : comment une modification est faite correctement.
 
 ## 1. Objet
 
@@ -19,9 +20,10 @@ arborescence. Chaque skill lit le projet qu'on lui confie.
 
 ## 2. Langue
 
-Le contenu de `dev-skills` est rédigé en anglais, contrairement au reste du
-repository. Ces skills produisent du code, des messages de commit, des noms de
-branche, des pull requests et de la documentation technique, tous en anglais
+Le contenu de `engineering/dev-skills` est rédigé en anglais, contrairement au
+reste du repository. Ces skills produisent du code, des messages de commit,
+des noms de branche, des pull requests et de la documentation technique, en
+anglais
 par la règle 6 de `engineering-core`. Rédiger les instructions dans la langue
 de leur production supprime une traduction permanente et une source d'erreurs.
 
@@ -115,7 +117,7 @@ satisfait la porte de test.
 ## 6. Catégories de tâches
 
 Vingt catégories de classification, chacune dotée d'un plan canonique dans
-`dev-skills/engineering-orchestrator/resources/execution-plans.md` :
+`engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md` :
 
 EXPLORATION, ARCHITECTURE, FRONTEND, BACKEND, FULLSTACK, DATABASE, API,
 AUTHENTICATION, SECURITY, VALIDATION, DEBUGGING, PERFORMANCE, UI_UX, TESTING,
@@ -171,8 +173,9 @@ bash tests/validate-orchestration.sh  plans, références et scénarios
 ```
 
 Le troisième script couvre les trois catégories d'ingénierie et les agents. Il
-vérifie que chaque catégorie de tâche possède un plan, que chaque étape désigne
-un skill existant, que les portes obligatoires figurent là où elles sont
+vérifie que chaque catégorie de tâche possède un plan, que chaque étape
+désigne un skill existant, que les portes obligatoires figurent là où elles
+sont
 exigées, que l'ordre interne des plans est cohérent, qu'aucun skill n'est
 orphelin, que les `depends_on` et les références croisées existent, et que les
 cinq scénarios de routage de référence sont respectés.
@@ -195,12 +198,13 @@ Ces scénarios sont :
 
 Ajouter un skill d'ingénierie suppose :
 
-1. créer le dossier dans `dev-skills/` avec ses quatre éléments obligatoires ;
+1. créer le dossier dans `engineering/dev-skills/` avec ses quatre éléments
+   obligatoires ;
 2. déclarer `category: dev-skills` dans le bloc de métadonnées ;
 3. renvoyer à `engineering-core` sans le recopier ;
 4. inclure une section `Protocol` numérotée, une section `Auto-critique` et
    une section `Interfaces` ;
 5. l'ajouter au moins à un plan d'exécution, faute de quoi il est signalé
    comme orphelin ;
-6. mettre à jour `dev-skills/README.md` et ce fichier ;
+6. mettre à jour `engineering/dev-skills/README.md` et ce fichier ;
 7. exécuter les trois scripts de validation.

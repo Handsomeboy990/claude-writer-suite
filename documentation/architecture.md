@@ -61,7 +61,8 @@ description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
   doivent le déclencher.
 license: MIT
 metadata:
-  category: core | genres | poetry | quality | dev-skills | delivery-skills | devops-skills
+  category: core | genres | poetry | quality
+            | dev-skills | delivery-skills | devops-skills
   version: 1.0.0
   depends_on: [liste des skills requis]
   outputs: [artefacts produits]
@@ -147,8 +148,8 @@ backup-recovery, production-verification, release-engineering.
 
 Hors catégories de skills : un agent n'a ni `SKILL.md` ni dossiers
 `examples/` et `resources/`. Un agent est un rôle mince qui cite des skills et
-transmet par le bloc de `agents/handoff-protocol.md`. Le détail figure dans
-`delivery-system.md` section 8.
+transmet par le bloc de `engineering/agents/handoff-protocol.md`. Le détail
+figure dans `delivery-system.md` section 8.
 
 ## Graphe de dépendances
 
@@ -190,8 +191,8 @@ y renvoie, il n'en recopie jamais le contenu.
 
 - `validate-structure.sh` vérifie la présence des fichiers et dossiers
   obligatoires de chaque skill, ainsi que le bloc de métadonnées. Pour
-  `dev-skills`, il exige en plus une section `Protocol` numérotée et une
-  section `Interfaces`.
+  les catégories d'ingénierie, il exige en plus une section `Protocol`
+  numérotée et une section `Interfaces`.
 - `validate-rules.sh` vérifie les interdits de la constitution sur tout le
   repository : emoji, tiret cadratin, guillemets droits hors blocs de code,
   exclamations multiples.
@@ -213,6 +214,7 @@ section 11 : titre de procédure `Protocol`, section `Interfaces`,
 appartenance à au moins un plan d'exécution ou une phase de livraison, et mise
 à jour de l'index de catégorie.
 
-Ajouter un agent suppose : le fichier dans `agents/`, les huit sections
-obligatoires, une entrée dans `agents/README.md`, et l'ajout de son nom à la
-liste attendue de `tests/validate-orchestration.sh`.
+Ajouter un agent suppose : le fichier dans `engineering/agents/`, les huit
+sections obligatoires, une entrée dans `engineering/agents/README.md`, et
+l'ajout de son nom à la liste attendue de
+`tests/validate-orchestration.sh`.
