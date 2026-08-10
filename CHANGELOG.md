@@ -3,6 +3,57 @@
 Toutes les modifications notables du projet sont consignées ici.
 Le format suit une numérotation sémantique.
 
+## 1.2.0
+
+Extension du système d'ingénierie en système complet de livraison de projet.
+La suite d'écriture est inchangée.
+
+### Ajouté
+
+- `delivery-skills/` : 10 skills de conduite de projet, de la spécification à
+  la livraison, rédigés en anglais.
+  - `delivery-orchestrator` : quatorze phases, portes d'approbation et de
+    vérification, parallélisation, checklist de livraison, verdict.
+  - `requirements-analysis`, `clarification-gate` : compréhension.
+  - `technology-selection`, `architecture-proposal`, `validation-gate` :
+    décision et approbation.
+  - `delivery-planning`, `implementation-integrity`,
+    `scope-and-change-control` : exécution.
+  - `client-handover` : dossier de reprise.
+- `devops-skills/` : 11 skills d'exploitation, agnostiques de la plateforme.
+  - `devops-core`, `environment-management`, `secrets-management` : fondation.
+  - `containerization`, `ci-cd-pipelines`, `deployment-engineering`,
+    `database-operations` : construction et mise en service.
+  - `observability`, `backup-recovery`, `production-verification`,
+    `release-engineering` : exploitation.
+- `agents/` : 14 définitions d'agents spécialisés et le protocole de
+  transmission. Un agent cite des skills, il n'en recopie aucun.
+- `delivery-skills/delivery-orchestrator/resources/delivery-phases.md` : les
+  quatorze phases dans un format lisible par machine, avec leurs portes.
+- `documentation/delivery-system.md` : documentation technique des trois
+  nouveaux ensembles.
+- Index de catégorie : `delivery-skills/README.md`, `devops-skills/README.md`,
+  `agents/README.md`.
+
+### Modifié
+
+- `tests/validate-structure.sh` : couvre les sept catégories, 83 skills, et
+  exige `Protocol` et `Interfaces` dans les trois catégories d'ingénierie.
+- `tests/validate-orchestration.sh` : passe de neuf à douze contrôles. Ajoute
+  la validation des quatorze phases de livraison, des portes d'approbation aux
+  phases 02, 05, 10 et 14, des quatorze définitions d'agents avec leurs huit
+  sections obligatoires, et des skills cités par les agents. La résolution des
+  skills traverse désormais les trois catégories.
+- `install.sh` : installe aussi les agents dans `~/.claude/agents`, avec les
+  options `--agents` et `--no-agents`, et `CLAUDE_AGENTS_DIR` comme cible
+  configurable. Six modes vérifiés.
+- `CLAUDE.md` : trois orchestrateurs et leurs portées, workflow de livraison,
+  langue des nouvelles catégories.
+- `README.md`, `CONTRIBUTING.md`, `documentation/architecture.md`,
+  `documentation/skills-guide.md`, `documentation/README.md`,
+  `documentation/engineering-system.md`, `tests/README.md`, `CONTINUITY.md` :
+  prise en compte des trois nouveaux ensembles.
+
 ## 1.1.0
 
 Ajout d'un second système de skills, dédié à l'ingénierie logicielle. La suite
