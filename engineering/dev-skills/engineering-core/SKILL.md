@@ -186,5 +186,5 @@ work is corrected before reporting, not annotated with excuses.
 
 - Upstream: none. This skill loads first.
 - Downstream: every skill in `dev-skills`.
-- Related writing rules: `core/writing-constitution` governs prose produced
-  for human readers in this repository.
+- Related writing rules: `writing/core/writing-constitution` governs prose
+  produced for human readers in this repository.
