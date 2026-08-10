@@ -187,7 +187,8 @@ a silent production default is an automatic failure.
 ## 12. Interfaces
 
 - Upstream: `engineering-core`, `technology-selection`,
-  `architecture-proposal` section 9.
+  the DevOps section of the architecture document, produced by
+  `architecture-proposal`.
 - Downstream: every skill in `devops-skills`.
 - Lateral: `backend-engineering` for the application side of configuration
   and logging.

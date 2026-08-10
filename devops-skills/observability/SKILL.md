@@ -196,7 +196,8 @@ alert with no written response, is an automatic failure.
 ## 11. Interfaces
 
 - Upstream: `devops-core`, `backend-engineering`,
-  `architecture-proposal` section 9.
+  the DevOps section of the architecture document, produced by
+  `architecture-proposal`.
 - Lateral: `deployment-engineering` for health gating,
   `security-audit` point 18 for logging privacy.
 - Downstream: `production-verification`, `backup-recovery`,

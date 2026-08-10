@@ -179,7 +179,8 @@ an automatic failure.
 ## 11. Interfaces
 
 - Upstream: `devops-core`, `backend-engineering`,
-  `architecture-proposal` section 5.
+  the database section of the architecture document, produced by
+  `architecture-proposal`.
 - Lateral: `deployment-engineering` for ordering, `performance-engineering`
   for index decisions.
 - Downstream: `backup-recovery`, `production-verification`,

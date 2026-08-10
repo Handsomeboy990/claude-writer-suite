@@ -173,7 +173,8 @@ an automatic failure.
 ## 10. Interfaces
 
 - Upstream: `devops-core`, `database-operations`,
-  `architecture-proposal` section 9.
+  the DevOps section of the architecture document, produced by
+  `architecture-proposal`.
 - Lateral: `secrets-management` for the backup credentials and encryption
   key, `observability` for backup job monitoring.
 - Downstream: `release-readiness` gate 5, `client-handover` for the restore
