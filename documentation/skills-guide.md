@@ -1,8 +1,8 @@
 # Guide des skills
 
-Répertoire complet des 62 skills, avec entrées, sorties et usage recommandé.
-Les quatre premières sections couvrent la suite d'écriture, la cinquième le
-système d'ingénierie logicielle.
+Répertoire complet des 83 skills, avec entrées, sorties et usage recommandé.
+Les quatre premières sections couvrent la suite d'écriture, les trois
+suivantes le système d'ingénierie et de livraison.
 
 ## core
 
@@ -94,6 +94,42 @@ anglais. Détail complet dans `engineering-system.md`.
 | git-workflow | identité, commits, historique | l'arbre de travail | commits, branches, pull request |
 | release-readiness | porte finale avant livraison | la révision, le diff de version | rapport, verdict, plan de retour arrière |
 
+## delivery-skills
+
+Conduite d'un projet, de la spécification à la livraison. Contenu en anglais.
+Détail complet dans `delivery-system.md`.
+
+| Skill | Ce qu'il fait | Entrées | Sorties |
+|---|---|---|---|
+| delivery-orchestrator | phases, portes, parallélisation, verdict | une spécification ou une demande client | plan de phases, checklist, verdict |
+| requirements-analysis | entrée brute vers spécification | cahier des charges, PRD, maquettes | spécification, hypothèses, inconnues |
+| clarification-gate | ce qui doit être demandé | registre des inconnues | lot de questions, hypothèses par défaut |
+| technology-selection | la pile, justifiée | spécification, contraintes | décisions, alternatives rejetées, coût |
+| architecture-proposal | le contrat technique | spécification, décisions de pile | document d'architecture, risques |
+| validation-gate | l'arrêt ferme avant implémentation | la proposition | dossier d'approbation, décision consignée |
+| delivery-planning | jalons et tâches atomiques | architecture approuvée | plan, dépendances, carte de parallélisation |
+| implementation-integrity | aucune fonctionnalité factice | le diff, l'application qui tourne | scan d'intégrité, registre des stubs |
+| scope-and-change-control | ni dérive de périmètre ni dérive d'architecture | découvertes en cours de route | décisions, suites, demandes de changement |
+| client-handover | le dossier de reprise | le système livré | dossier de livraison, guide d'exploitation |
+
+## devops-skills
+
+Exploitation, agnostique de la plateforme. Contenu en anglais.
+
+| Skill | Ce qu'il fait | Entrées | Sorties |
+|---|---|---|---|
+| devops-core | règles communes d'exploitation | le projet, ses environnements | modèle d'environnements, rayon d'impact |
+| environment-management | inventaire des variables | les lectures de configuration | inventaire, fichier d'exemple, dérive |
+| secrets-management | cycle de vie des identifiants | l'inventaire, la plateforme | inventaire, rotations, réponse à fuite |
+| containerization | pertinence et construction d'une image | le projet, la plateforme | images, fichiers compose, audit |
+| ci-cd-pipelines | un pipeline qui bloque | la plateforme, la suite de tests | définition du pipeline, portes |
+| deployment-engineering | mise en service d'un artefact | l'artefact, la cible | procédure, plan de retour arrière |
+| database-operations | opérations sur données vivantes | schéma, migrations, volumétrie | plan de migration, verrous, journal |
+| observability | rendre les pannes visibles | l'application, la plateforme | journaux, santé, métriques, alertes |
+| backup-recovery | prouver la restauration | objectifs RPO et RTO | politique, procédure, répétition |
+| production-verification | prouver que le déployé fonctionne | le déploiement terminé | rapport de vérification, décision |
+| release-engineering | comment la version part | la révision approuvée | version, étiquette, changelog, journal |
+
 ## Choisir un skill
 
 | Situation | Skill à ouvrir |
@@ -118,3 +154,20 @@ anglais. Détail complet dans `engineering-system.md`.
 | Je viens d'écrire du code | code-review-protocol |
 | Je m'apprête à livrer | release-readiness |
 | Je termine une session | project-continuity |
+| On me remet un cahier des charges | delivery-orchestrator, puis requirements-analysis |
+| Je ne sais pas quoi demander au client | clarification-gate |
+| Je dois choisir une pile technique | technology-selection |
+| Je dois faire valider une architecture | architecture-proposal, puis validation-gate |
+| Je découpe le travail | delivery-planning |
+| Je soupçonne du code factice | implementation-integrity |
+| On me demande une chose hors périmètre | scope-and-change-control |
+| Je livre au client | client-handover |
+| Je configure des environnements | environment-management |
+| Une clé a fuité | secrets-management, rotation d'abord |
+| Je monte un pipeline | ci-cd-pipelines |
+| Je dois déployer | deployment-engineering |
+| Je dois migrer une base vivante | database-operations |
+| Une panne est passée inaperçue | observability |
+| On me dit que les sauvegardes existent | backup-recovery, répétition de restauration |
+| Le déploiement a réussi, et après | production-verification |
+| Je prépare une version | release-engineering |

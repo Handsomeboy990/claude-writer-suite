@@ -1,6 +1,11 @@
 # Système de skills d'ingénierie
 
-Documentation technique de `dev-skills`, le second système du repository.
+Documentation technique de `dev-skills`, la couche de pratique du code.
+
+Deux couches la complètent, documentées dans `delivery-system.md` :
+`delivery-skills` conduit un projet de la spécification à la livraison, et
+`devops-skills` gouverne l'exécution du système. Ce document couvre la
+question : comment une modification est-elle faite correctement.
 
 ## 1. Objet
 
@@ -160,17 +165,21 @@ engineering-core
 ## 8. Validation
 
 ```
-bash tests/validate-structure.sh      structure et métadonnées des 62 skills
+bash tests/validate-structure.sh      structure et métadonnées des 83 skills
 bash tests/validate-rules.sh          règles de la constitution
 bash tests/validate-orchestration.sh  plans, références et scénarios
 ```
 
-Le troisième script est propre à ce système. Il vérifie que chaque catégorie
-possède un plan, que chaque étape désigne un skill existant, que les portes
-obligatoires figurent là où elles sont exigées, que l'ordre interne des plans
-est cohérent, qu'aucun skill n'est orphelin, que les `depends_on` et les
-références croisées existent, et que les cinq scénarios de routage de
-référence sont respectés.
+Le troisième script couvre les trois catégories d'ingénierie et les agents. Il
+vérifie que chaque catégorie de tâche possède un plan, que chaque étape désigne
+un skill existant, que les portes obligatoires figurent là où elles sont
+exigées, que l'ordre interne des plans est cohérent, qu'aucun skill n'est
+orphelin, que les `depends_on` et les références croisées existent, et que les
+cinq scénarios de routage de référence sont respectés.
+
+Il couvre également les quatorze phases de livraison et les quatorze
+définitions d'agents. Le détail des douze contrôles figure dans
+`delivery-system.md` section 10.
 
 Ces scénarios sont :
 

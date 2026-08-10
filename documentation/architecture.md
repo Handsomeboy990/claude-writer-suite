@@ -2,15 +2,15 @@
 
 ## Vue d'ensemble
 
-Claude Writer Suite est une bibliothèque de 62 skills organisée en cinq
-catégories, plus les ressources partagées, la documentation, un projet de
-démonstration et des tests de validation.
+Claude Writer Suite est une bibliothèque de 83 skills organisée en sept
+catégories, plus quatorze agents, les ressources partagées, la documentation,
+un projet de démonstration et des tests de validation.
 
-Les quatre premières catégories forment la suite d'écriture. La cinquième,
-`dev-skills`, forme un système d'ingénierie logicielle indépendant, documenté
-dans `engineering-system.md`. Les deux systèmes partagent la structure de
-skill, les tests et les règles Git, et ne se croisent pas : aucun skill de
-l'un ne dépend d'un skill de l'autre.
+Les quatre premières catégories forment la suite d'écriture. Les trois
+suivantes forment le système d'ingénierie et de livraison, documenté dans
+`engineering-system.md` et `delivery-system.md`. Les deux systèmes partagent
+la structure de skill, les tests et les règles Git, et ne se croisent pas :
+aucun skill de l'un ne dépend d'un skill de l'autre.
 
 ```
 claude-writer-suite/
@@ -24,6 +24,9 @@ claude-writer-suite/
 ├── poetry/         5 skills
 ├── quality/        8 skills
 ├── dev-skills/    20 skills
+├── delivery-skills/ 10 skills
+├── devops-skills/  11 skills
+├── agents/         14 agents
 ├── resources/
 ├── examples/
 ├── documentation/
@@ -58,7 +61,7 @@ description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
   doivent le déclencher.
 license: MIT
 metadata:
-  category: core | genres | poetry | quality | dev-skills
+  category: core | genres | poetry | quality | dev-skills | delivery-skills | devops-skills
   version: 1.0.0
   depends_on: [liste des skills requis]
   outputs: [artefacts produits]
@@ -121,6 +124,32 @@ Le graphe de dépendances de cette catégorie figure dans
 `engineering-system.md` section 7, avec les portes obligatoires et les
 catégories de tâches.
 
+### delivery-skills, 10 skills
+
+Conduite d'un projet de la spécification à la livraison.
+`delivery-orchestrator` tient les quatorze phases et leurs portes
+d'approbation.
+
+delivery-orchestrator, requirements-analysis, clarification-gate,
+technology-selection, architecture-proposal, validation-gate,
+delivery-planning, implementation-integrity, scope-and-change-control,
+client-handover.
+
+### devops-skills, 11 skills
+
+Exploitation, agnostique de la plateforme. `devops-core` domine la famille.
+
+devops-core, environment-management, secrets-management, containerization,
+ci-cd-pipelines, deployment-engineering, database-operations, observability,
+backup-recovery, production-verification, release-engineering.
+
+### agents, 14 rôles
+
+Hors catégories de skills : un agent n'a ni `SKILL.md` ni dossiers
+`examples/` et `resources/`. Un agent est un rôle mince qui cite des skills et
+transmet par le bloc de `agents/handoff-protocol.md`. Le détail figure dans
+`delivery-system.md` section 8.
+
 ## Graphe de dépendances
 
 ```
@@ -166,9 +195,10 @@ y renvoie, il n'en recopie jamais le contenu.
 - `validate-rules.sh` vérifie les interdits de la constitution sur tout le
   repository : emoji, tiret cadratin, guillemets droits hors blocs de code,
   exclamations multiples.
-- `validate-orchestration.sh` vérifie la cohérence interne de `dev-skills` :
-  plans d'exécution, portes obligatoires, références croisées, scénarios de
-  routage.
+- `validate-orchestration.sh` vérifie la cohérence interne des trois
+  catégories d'ingénierie et des agents : plans d'exécution, phases de
+  livraison, portes obligatoires, références croisées, scénarios de routage,
+  définitions d'agents.
 
 ## Extension
 
@@ -177,7 +207,12 @@ les métadonnées, renvoyer à la constitution sans la recopier, ajouter au moin
 un exemple et une ressource, mettre à jour `documentation/skills-guide.md`,
 puis exécuter les trois scripts de test.
 
-Pour un skill de `dev-skills`, quatre exigences supplémentaires figurent dans
-`engineering-system.md` section 9 : titre de procédure `Protocol`, section
-`Interfaces`, appartenance à au moins un plan d'exécution, et mise à jour de
-`dev-skills/README.md`.
+Pour un skill d'une catégorie d'ingénierie, quatre exigences supplémentaires
+figurent dans `engineering-system.md` section 9 et `delivery-system.md`
+section 11 : titre de procédure `Protocol`, section `Interfaces`,
+appartenance à au moins un plan d'exécution ou une phase de livraison, et mise
+à jour de l'index de catégorie.
+
+Ajouter un agent suppose : le fichier dans `agents/`, les huit sections
+obligatoires, une entrée dans `agents/README.md`, et l'ajout de son nom à la
+liste attendue de `tests/validate-orchestration.sh`.
