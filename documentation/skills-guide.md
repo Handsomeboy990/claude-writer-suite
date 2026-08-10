@@ -1,6 +1,8 @@
 # Guide des skills
 
-Répertoire complet, avec entrées, sorties et usage recommandé.
+Répertoire complet des 62 skills, avec entrées, sorties et usage recommandé.
+Les quatre premières sections couvrent la suite d'écriture, la cinquième le
+système d'ingénierie logicielle.
 
 ## core
 
@@ -64,6 +66,34 @@ Répertoire complet, avec entrées, sorties et usage recommandé.
 | literary-critic | jugement éditorial sévère | avant décision |
 | publication-review | validation finale | en dernier |
 
+## dev-skills
+
+Système d'ingénierie logicielle, agnostique de la pile technique. Contenu en
+anglais. Détail complet dans `engineering-system.md`.
+
+| Skill | Ce qu'il fait | Entrées | Sorties |
+|---|---|---|---|
+| engineering-core | règles communes non négociables | aucune | règles appliquées, rapport de conformité |
+| project-exploration | cartographie d'un repository inconnu | le repository, la tâche | carte du projet, conventions, traces de flux |
+| engineering-orchestrator | classification et plan d'exécution | la requête | classification, plan, portes, verdict |
+| architecture-design | la plus petite architecture viable | carte du projet, contraintes | décision, contrats, modèle de panne |
+| ui-ux-engineering | spécification de l'expérience rendue | design system existant | décisions, inventaire d'états, cibles d'accessibilité |
+| dependency-selection | ajouter, remplacer ou refuser une bibliothèque | le besoin, l'arbre installé | décision, grille d'évaluation |
+| frontend-engineering | implémentation client | spécification, conventions | composants, états, notes d'accessibilité |
+| backend-engineering | implémentation serveur | architecture, contrat validé | handlers, services, migrations, contrat d'erreur |
+| fullstack-engineering | la tranche verticale complète | la fonctionnalité demandée | contrat, matrice de complétude, vérification bout en bout |
+| input-validation | validation à la frontière de confiance | le changement, la carte des frontières | schémas, rapport de frontières, tests |
+| security-audit | balayage en vingt-quatre points | le diff ou le repository | constats, corrections, actions manuelles |
+| debugging | cause racine d'un défaut | le rapport de défaut | cause, reproduction, correction, test de régression |
+| testing-quality | stratégie et écriture des tests | le changement | plan de test, tests, lacunes, journal d'exécution |
+| playwright-automation | vérification navigateur | la fonctionnalité implémentée | parcours, captures, rapport responsive |
+| performance-engineering | mesure et optimisation | un symptôme ou une mesure | référence, analyse, écart mesuré |
+| code-review-protocol | revue en cinq passes puis correction | un diff | constats, corrections appliquées, journal de vérification |
+| technical-documentation | documentation conforme au code | le changement | readme, référence API, runbook, changelog |
+| project-continuity | passation exploitable | les commits de la session | notes de continuité, liste de suites |
+| git-workflow | identité, commits, historique | l'arbre de travail | commits, branches, pull request |
+| release-readiness | porte finale avant livraison | la révision, le diff de version | rapport, verdict, plan de retour arrière |
+
 ## Choisir un skill
 
 | Situation | Skill à ouvrir |
@@ -77,3 +107,14 @@ Répertoire complet, avec entrées, sorties et usage recommandé.
 | Je ne sais plus qui sait quoi | continuity-manager |
 | Mon texte est correct mais fade | literary-editor, puis rewriting-engine |
 | Je veux savoir si c'est publiable | literary-critic, puis publication-review |
+| Je découvre une base de code | project-exploration |
+| Je ne sais pas par quels skills passer | engineering-orchestrator |
+| Une API renvoie une erreur inexpliquée | debugging |
+| Je dois ajouter un endpoint | backend-engineering, puis input-validation |
+| Je dois créer une page | ui-ux-engineering, puis frontend-engineering |
+| Je me demande si c'est sûr | security-audit |
+| C'est lent | performance-engineering, jamais sans mesure |
+| Je veux ajouter une bibliothèque | dependency-selection |
+| Je viens d'écrire du code | code-review-protocol |
+| Je m'apprête à livrer | release-readiness |
+| Je termine une session | project-continuity |

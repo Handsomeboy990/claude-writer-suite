@@ -2,9 +2,15 @@
 
 ## Vue d'ensemble
 
-Claude Writer Suite est une bibliothèque de 42 skills organisée en quatre
+Claude Writer Suite est une bibliothèque de 62 skills organisée en cinq
 catégories, plus les ressources partagées, la documentation, un projet de
 démonstration et des tests de validation.
+
+Les quatre premières catégories forment la suite d'écriture. La cinquième,
+`dev-skills`, forme un système d'ingénierie logicielle indépendant, documenté
+dans `engineering-system.md`. Les deux systèmes partagent la structure de
+skill, les tests et les règles Git, et ne se croisent pas : aucun skill de
+l'un ne dépend d'un skill de l'autre.
 
 ```
 claude-writer-suite/
@@ -17,6 +23,7 @@ claude-writer-suite/
 ├── genres/        15 skills
 ├── poetry/         5 skills
 ├── quality/        8 skills
+├── dev-skills/    20 skills
 ├── resources/
 ├── examples/
 ├── documentation/
@@ -51,7 +58,7 @@ description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
   doivent le déclencher.
 license: MIT
 metadata:
-  category: core | genres | poetry | quality
+  category: core | genres | poetry | quality | dev-skills
   version: 1.0.0
   depends_on: [liste des skills requis]
   outputs: [artefacts produits]
@@ -97,6 +104,23 @@ tout skill de production.
 self-critique-protocol, story-doctor, literary-editor, literary-critic,
 proofreader, beta-reader, rewriting-engine, publication-review.
 
+### dev-skills, 20 skills
+
+Ingénierie logicielle, agnostique de la pile technique. `engineering-core`
+domine le système, `engineering-orchestrator` le route. Contenu rédigé en
+anglais, pour les raisons exposées dans `engineering-system.md` section 2.
+
+engineering-core, project-exploration, engineering-orchestrator,
+architecture-design, ui-ux-engineering, dependency-selection,
+frontend-engineering, backend-engineering, fullstack-engineering,
+input-validation, security-audit, debugging, testing-quality,
+playwright-automation, performance-engineering, code-review-protocol,
+technical-documentation, project-continuity, git-workflow, release-readiness.
+
+Le graphe de dépendances de cette catégorie figure dans
+`engineering-system.md` section 7, avec les portes obligatoires et les
+catégories de tâches.
+
 ## Graphe de dépendances
 
 ```
@@ -133,17 +157,27 @@ y renvoie, il n'en recopie jamais le contenu.
 
 ## Tests
 
-`tests/` contient deux scripts sans dépendance externe :
+`tests/` contient trois scripts sans dépendance externe :
 
 - `validate-structure.sh` vérifie la présence des fichiers et dossiers
-  obligatoires de chaque skill, ainsi que le bloc de métadonnées.
+  obligatoires de chaque skill, ainsi que le bloc de métadonnées. Pour
+  `dev-skills`, il exige en plus une section `Protocol` numérotée et une
+  section `Interfaces`.
 - `validate-rules.sh` vérifie les interdits de la constitution sur tout le
-  repository : emoji, tiret cadratin, guillemets droits, majuscules
-  d'emphase.
+  repository : emoji, tiret cadratin, guillemets droits hors blocs de code,
+  exclamations multiples.
+- `validate-orchestration.sh` vérifie la cohérence interne de `dev-skills` :
+  plans d'exécution, portes obligatoires, références croisées, scénarios de
+  routage.
 
 ## Extension
 
 Ajouter un skill suppose : créer le dossier avec ses quatre éléments, déclarer
 les métadonnées, renvoyer à la constitution sans la recopier, ajouter au moins
 un exemple et une ressource, mettre à jour `documentation/skills-guide.md`,
-puis exécuter les deux scripts de test.
+puis exécuter les trois scripts de test.
+
+Pour un skill de `dev-skills`, quatre exigences supplémentaires figurent dans
+`engineering-system.md` section 9 : titre de procédure `Protocol`, section
+`Interfaces`, appartenance à au moins un plan d'exécution, et mise à jour de
+`dev-skills/README.md`.
