@@ -4,7 +4,8 @@
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-CATEGORIES="core genres poetry quality dev-skills delivery-skills devops-skills"
+WRITING_CATEGORIES="core genres poetry quality"
+ENGINEERING_CATEGORIES="dev-skills delivery-skills devops-skills"
 ERRORS=0
 SKILLS=0
 
@@ -13,12 +14,22 @@ fail() {
   ERRORS=$((ERRORS + 1))
 }
 
-for category in $CATEGORIES; do
-  if [ ! -d "$ROOT/$category" ]; then
-    fail "catégorie manquante : $category"
+# Le repository sépare deux arbres. Le nom de catégorie reste celui du dossier
+# de skills ; l'arbre n'est qu'un préfixe de chemin.
+tree_of() {
+  case "$1" in
+    core|genres|poetry|quality) printf 'writing' ;;
+    *) printf 'engineering' ;;
+  esac
+}
+
+for category in $WRITING_CATEGORIES $ENGINEERING_CATEGORIES; do
+  tree="$(tree_of "$category")"
+  if [ ! -d "$ROOT/$tree/$category" ]; then
+    fail "catégorie manquante : $tree/$category"
     continue
   fi
-  for skill in "$ROOT/$category"/*/; do
+  for skill in "$ROOT/$tree/$category"/*/; do
     [ -d "$skill" ] || continue
     name="$(basename "$skill")"
     SKILLS=$((SKILLS + 1))
@@ -75,8 +86,17 @@ done
 for f in CLAUDE.md README.md CONTRIBUTING.md LICENSE; do
   [ -f "$ROOT/$f" ] || fail "fichier racine manquant : $f"
 done
-for d in resources examples documentation tests; do
-  [ -d "$ROOT/$d" ] || fail "dossier racine manquant : $d"
+for d in writing engineering documentation tests \
+         writing/resources writing/examples engineering/agents; do
+  [ -d "$ROOT/$d" ] || fail "dossier attendu manquant : $d"
+done
+for f in writing/README.md engineering/README.md; do
+  [ -f "$ROOT/$f" ] || fail "index d'arbre manquant : $f"
+done
+for category in $WRITING_CATEGORIES $ENGINEERING_CATEGORIES; do
+  tree="$(tree_of "$category")"
+  [ -f "$ROOT/$tree/$category/README.md" ] \
+    || fail "index de catégorie manquant : $tree/$category/README.md"
 done
 for f in architecture.md skills-guide.md writing-rules.md workflow.md engineering-system.md delivery-system.md; do
   [ -f "$ROOT/documentation/$f" ] || fail "documentation manquante : $f"

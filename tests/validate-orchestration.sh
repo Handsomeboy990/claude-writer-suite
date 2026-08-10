@@ -6,10 +6,11 @@
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-DEV="$ROOT/dev-skills"
-DELIVERY="$ROOT/delivery-skills"
-DEVOPS="$ROOT/devops-skills"
-AGENTS="$ROOT/agents"
+ENG="$ROOT/engineering"
+DEV="$ENG/dev-skills"
+DELIVERY="$ENG/delivery-skills"
+DEVOPS="$ENG/devops-skills"
+AGENTS="$ENG/agents"
 ORCH="$DEV/engineering-orchestrator"
 PLANS="$ORCH/resources/execution-plans.md"
 PHASES="$DELIVERY/delivery-orchestrator/resources/delivery-phases.md"
@@ -33,8 +34,8 @@ fail() {
 # Chemin d'un skill, quelle que soit sa catégorie d'ingénierie.
 skill_dir() {
   for category in $ENGINEERING_CATEGORIES; do
-    if [ -d "$ROOT/$category/$1" ]; then
-      printf '%s\n' "$ROOT/$category/$1"
+    if [ -d "$ENG/$category/$1" ]; then
+      printf '%s\n' "$ENG/$category/$1"
       return 0
     fi
   done
@@ -231,7 +232,7 @@ grep -q '^skills: .*production-verification' "$PHASES" \
 
 printf 'Contrôle 7 : aucun skill orphelin\n'
 for category in $ENGINEERING_CATEGORIES; do
-  for skill in "$ROOT/$category"/*/; do
+  for skill in "$ENG/$category"/*/; do
     name="$(basename "$skill")"
     case "$name" in
       engineering-core|engineering-orchestrator|devops-core|delivery-orchestrator)
@@ -245,7 +246,7 @@ done
 
 printf 'Contrôle 8 : dépendances déclarées existantes\n'
 for category in $ENGINEERING_CATEGORIES; do
-  for skill in "$ROOT/$category"/*/; do
+  for skill in "$ENG/$category"/*/; do
     name="$(basename "$skill")"
     deps="$(grep -m1 '^  depends_on:' "$skill/SKILL.md" \
       | sed 's/^  depends_on: *\[//; s/\]$//; s/,/ /g')"
@@ -258,7 +259,7 @@ done
 
 printf 'Contrôle 9 : références croisées de la section Interfaces\n'
 for category in $ENGINEERING_CATEGORIES; do
-  for skill in "$ROOT/$category"/*/; do
+  for skill in "$ENG/$category"/*/; do
     name="$(basename "$skill")"
     refs="$(awk '/^## [0-9]+\. Interfaces/ { on = 1; next }
                  on && /^## / { on = 0 }
@@ -276,7 +277,7 @@ done
 
 printf 'Contrôle 10 : README de skill présent et cohérent\n'
 for category in $ENGINEERING_CATEGORIES; do
-  for skill in "$ROOT/$category"/*/; do
+  for skill in "$ENG/$category"/*/; do
     name="$(basename "$skill")"
     head -n 1 "$skill/README.md" | grep -q "^# $name$" \
       || fail "$name : le titre du README ne correspond pas au dossier"

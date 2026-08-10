@@ -26,6 +26,14 @@ AGENT_TARGET="${CLAUDE_AGENTS_DIR:-$HOME/.claude/agents}"
 WRITING_CATEGORIES="core genres poetry quality"
 DEV_CATEGORIES="dev-skills delivery-skills devops-skills"
 
+# Le repository sépare deux arbres ; l'arbre est un préfixe de chemin.
+tree_of() {
+  case "$1" in
+    core|genres|poetry|quality) printf 'writing' ;;
+    *) printf 'engineering' ;;
+  esac
+}
+
 MODE="install"
 SCOPE="all"
 WITH_AGENTS="yes"
@@ -54,7 +62,8 @@ esac
 
 skills() {
   for category in $CATEGORIES; do
-    for skill in "$ROOT/$category"/*/; do
+    tree="$(tree_of "$category")"
+    for skill in "$ROOT/$tree/$category"/*/; do
       [ -d "$skill" ] && printf '%s\n' "$skill"
     done
   done
@@ -63,7 +72,7 @@ skills() {
 # Les agents sont des fichiers uniques ; README et protocole ne sont pas des
 # définitions d'agent et ne sont pas installés.
 agents() {
-  for agent in "$ROOT/agents"/*.md; do
+  for agent in "$ROOT/engineering/agents"/*.md; do
     [ -f "$agent" ] || continue
     case "$(basename "$agent")" in
       README.md|handoff-protocol.md) continue ;;
