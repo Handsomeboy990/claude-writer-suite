@@ -39,14 +39,34 @@ while IFS= read -r file; do
   fi
 done < <(files)
 
+# Lignes de prose : hors blocs de code délimités, où les guillemets droits
+# sont une syntaxe et non une faute de typographie.
+prose() {
+  awk '
+    {
+      if (match($0, /^[[:space:]]*`+/)) {
+        marker = substr($0, RSTART, RLENGTH)
+        gsub(/[^`]/, "", marker)
+        n = length(marker)
+        if (n >= 3) {
+          if (!fence) { fence = 1; opened = n; next }
+          else if (n >= opened) { fence = 0; next }
+        }
+      }
+      if (!fence) printf "%d:%s\n", NR, $0
+    }
+  ' "$1" 2>/dev/null
+}
+
 printf 'Contrôle 3 : guillemets droits hors contre-exemples\n'
 while IFS= read -r file; do
   case "$file" in
     *"/examples/"*|*"/tests/"*) continue ;;
   esac
-  hits="$(grep -n '"' "$file" 2>/dev/null | grep -v '^\s*[0-9]*:.*`' | head -n 2)"
+  hits="$(prose "$file" | grep '"' | grep -v '`' | head -n 2)"
   if [ -n "$hits" ]; then
     report_warning "guillemets droits dans ${file#"$ROOT"/}"
+    printf '%s\n' "$hits" | sed 's/^/        /'
   fi
 done < <(files)
 
