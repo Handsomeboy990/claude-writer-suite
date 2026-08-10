@@ -1,74 +1,58 @@
 # Claude Writer Suite
 
-Bibliothèque de 83 skills professionnels et 14 agents spécialisés pour un
-agent Claude, répartis en deux systèmes indépendants.
+Deux systèmes d'expertise pour un agent Claude, dans un seul repository :
+**écrire** et **construire des logiciels**.
 
-- 42 skills d'écriture : romancier, scénariste, directeur littéraire, éditeur,
-  critique, documentaliste, correcteur et bêta-lecteur, de la nouvelle à la
-  saga.
-- 41 skills d'ingénierie et de livraison : 20 pour la pratique du code, 10
-  pour la conduite d'un projet de la spécification à la livraison, 11 pour
-  l'exploitation, du pipeline à la vérification en production.
-- 14 agents : orchestrateur de livraison, analyste, architecte, ingénieurs
-  frontend, backend, base de données, sécurité, QA, Playwright, UI/UX, DevOps,
-  performance, documentation et release.
-
-## Objectif
-
-Fournir des systèmes d'expertise, et non des prompts. Chaque skill contient
-des protocoles numérotés, des critères de décision, des grilles d'évaluation
-et des procédures de révision utilisables du premier chapitre au dernier.
-
-La suite d'écriture couvre : romans, thrillers, science-fiction, fantasy,
-horreur, mystère, roman policier, romance, fiction historique, poésie, analyse
-littéraire, réécriture et correction.
-
-Le système d'ingénierie couvre : exploration d'une base de code inconnue,
-architecture, développement frontend et backend, validation des entrées, audit
-de sécurité, débogage, tests, automatisation navigateur, performance, revue de
-code, choix de dépendances, documentation, continuité de projet, Git et
-préparation de mise en production.
-
-Le système de livraison ajoute le cycle complet : analyse d'un cahier des
-charges, questions bloquantes, choix de pile justifié, proposition
-d'architecture, porte d'approbation, plan de tâches, intégrité
-d'implémentation, contrôle du périmètre et dossier de reprise. Le système
-d'exploitation ajoute environnements, secrets, conteneurs, pipeline,
-déploiement, opérations de base de données, observabilité, sauvegardes,
-vérification en production et gestion des versions.
-
-L'ensemble est agnostique de la pile technique et de la plateforme : il lit le
-projet qu'on lui confie plutôt que d'en présupposer la forme.
-
-## Architecture
+83 skills et 14 agents. Pas des prompts : des protocoles numérotés, des
+critères de décision, des grilles d'évaluation et des procédures de révision.
 
 ```
 claude-writer-suite/
-├── CLAUDE.md          mémoire du projet, règles permanentes, règles Git
-├── core/              14 skills fondamentaux d'écriture
-├── genres/            15 spécialisations de genre
-├── poetry/             5 skills de poésie
-├── quality/            8 skills de contrôle qualité
-├── dev-skills/        20 skills d'ingénierie logicielle
-├── delivery-skills/   10 skills de livraison de projet
-├── devops-skills/     11 skills d'exploitation
-├── agents/            14 agents spécialisés
-├── resources/         typographie, structures, lexiques, gabarits
-├── examples/          projet de démonstration complet
-├── documentation/     architecture, guide, règles, workflow, ingénierie,
-│                      livraison
-└── tests/             validation de structure, de règles et d'orchestration
+├── writing/          42 skills d'écriture professionnelle, en français
+├── engineering/      41 skills d'ingénierie et 14 agents, en anglais
+├── documentation/    documentation technique des deux systèmes
+└── tests/            trois scripts de validation
 ```
 
-Chaque skill est isolé dans son dossier :
+Les deux arbres sont indépendants. Aucun skill de l'un ne dépend d'un skill de
+l'autre. Ils partagent la structure de skill, les tests et les règles Git,
+rien d'autre.
 
-```
-skill-name/
-├── SKILL.md
-├── README.md
-├── examples/
-└── resources/
-```
+## writing
+
+Bibliothèque d'écriture professionnelle. L'agent intervient comme romancier,
+scénariste, directeur littéraire, éditeur, critique, documentaliste,
+correcteur et bêta-lecteur, de la nouvelle à la saga.
+
+| Catégorie | Skills | Objet |
+|---|---|---|
+| [core](writing/core/) | 14 | fondations et production |
+| [genres](writing/genres/) | 15 | thriller, mystère, fantasy, SF, romance, historique |
+| [poetry](writing/poetry/) | 5 | prosodie française et quatre formes |
+| [quality](writing/quality/) | 8 | diagnostic, réécriture, correction, validation |
+
+Plus [resources/](writing/resources/), typographie et lexiques partagés, et
+[examples/](writing/examples/), un projet de démonstration complet.
+
+Index : [writing/README.md](writing/README.md).
+
+## engineering
+
+Système d'ingénierie logicielle et de livraison de projet. L'agent prend un
+cahier des charges et livre un système implémenté, testé, documenté, déployé
+et vérifié en production.
+
+| Catégorie | Skills | Question à laquelle elle répond |
+|---|---|---|
+| [dev-skills](engineering/dev-skills/) | 20 | comment une modification est faite correctement |
+| [delivery-skills](engineering/delivery-skills/) | 10 | quoi construire, dans quel ordre, avec quelle approbation |
+| [devops-skills](engineering/devops-skills/) | 11 | comment le système tourne, se déploie et se restaure |
+| [agents](engineering/agents/) | 14 | qui possède quoi, et ce qui est transmis |
+
+Agnostique de la pile technique et de la plateforme : le système lit le projet
+qu'on lui confie plutôt que d'en présupposer la forme.
+
+Index : [engineering/README.md](engineering/README.md).
 
 ## Installation
 
@@ -82,139 +66,136 @@ bash tests/validate-rules.sh
 bash tests/validate-orchestration.sh
 ```
 
-### Installer les skills pour un agent
+Puis, pour installer dans le répertoire personnel de l'agent :
 
 ```
-bash install.sh             # 83 skills et 14 agents
-bash install.sh --writing   # les 42 skills d'écriture seulement
-bash install.sh --dev       # les 41 skills d'ingénierie seulement
-bash install.sh --agents    # les agents seulement
-bash install.sh --no-agents # les skills sans les agents
-bash install.sh --zip       # construit aussi une archive par skill dans dist/
-bash install.sh --remove    # désinstalle
+bash install.sh              83 skills et 14 agents
+bash install.sh --writing    les 42 skills d'écriture seulement
+bash install.sh --dev        les 41 skills d'ingénierie seulement
+bash install.sh --agents     les 14 agents seulement
+bash install.sh --no-agents  les skills sans les agents
+bash install.sh --zip        construit aussi une archive par skill dans dist/
+bash install.sh --remove     désinstalle
 ```
 
 Les options de portée se combinent avec `--zip` et `--remove`. Les skills vont
 dans `~/.claude/skills`, les agents dans `~/.claude/agents` ; les deux cibles
 sont configurables par `CLAUDE_SKILLS_DIR` et `CLAUDE_AGENTS_DIR`.
 
-Les archives de `dist/` servent à un import manuel dans une interface qui
-attend un fichier zip par skill.
-
 Pour un usage sans installation, placer le repository dans le répertoire de
 travail et faire lire `CLAUDE.md` en premier, puis la constitution du système
-concerné : `core/writing-constitution/SKILL.md` pour l'écriture,
-`dev-skills/engineering-core/SKILL.md` pour l'ingénierie,
-`devops-skills/devops-core/SKILL.md` en plus pour l'exploitation.
+concerné.
 
-## Utilisation
+## Démarrer
 
-1. Remplir `resources/templates/demarrage-de-projet.md`.
-2. Suivre `documentation/workflow.md`, phase par phase.
-3. Ouvrir le skill correspondant à la tâche en cours. La table de choix par
-   situation figure dans `documentation/skills-guide.md`.
-4. Ne jamais livrer un texte sans le protocole
-   `quality/self-critique-protocol`.
+### Écrire
 
-Exemple de chaîne minimale pour un chapitre :
+1. Remplir `writing/resources/templates/demarrage-de-projet.md`.
+2. Charger `writing/core/writing-constitution`, qui porte les règles communes.
+3. Suivre `documentation/workflow.md`, phase par phase.
+4. Ne jamais livrer un texte sans `writing/quality/self-critique-protocol`.
 
 ```
 chapter-architect -> scene-builder -> dialogue-master
     -> self-critique-protocol -> continuity-manager
 ```
 
-Exemple de chaîne minimale pour un endpoint :
+### Construire
+
+1. Charger `engineering/dev-skills/engineering-core`, qui porte les règles
+   communes.
+2. Laisser `engineering/dev-skills/engineering-orchestrator` classer la tâche
+   et composer le plan minimal complet.
+3. Ne rien supposer du projet : `project-exploration` établit les faits avant
+   toute décision.
+4. Ne jamais considérer un changement comme terminé avant
+   `code-review-protocol`, avec un test exécuté et observé.
 
 ```
 project-exploration -> backend-engineering -> input-validation
     -> security-audit -> testing-quality -> code-review-protocol
 ```
 
-Un dossier de démonstration complet, de la bible au rapport de validation,
-figure dans `examples/saga-les-cendres-de-kivu/`.
+### Livrer un projet complet
 
-### Ingénierie logicielle
-
-1. Charger `dev-skills/engineering-core`, qui porte les règles communes.
-2. Laisser `dev-skills/engineering-orchestrator` classer la tâche et composer
-   le plan minimal complet.
-3. Ne rien supposer du projet : `dev-skills/project-exploration` établit les
-   faits avant toute décision.
-4. Ne jamais considérer un changement comme terminé avant
-   `dev-skills/code-review-protocol`, avec un test exécuté et observé.
-
-Le détail figure dans `documentation/engineering-system.md` et
-`dev-skills/README.md`.
-
-### Livraison d'un projet complet
-
-Quand l'entrée est une spécification, un cahier des charges ou une demande
-client plutôt qu'une tâche unique :
-
-1. `delivery-skills/delivery-orchestrator` prend la main sur quatorze phases.
-2. `requirements-analysis` sépare exigences, hypothèses, contraintes et
-   inconnues, sans jamais inventer une exigence.
-3. `clarification-gate` pose en une fois les questions qui changent la
-   conception, et affecte une valeur par défaut au reste.
-4. `architecture-proposal` produit le contrat technique, présenté par
-   `validation-gate`.
-5. Aucun code de production avant cette approbation. Aucune demande
-   d'autorisation après, pour ce qui relève du périmètre approuvé.
-6. `devops-skills` mène du pipeline au déploiement, puis
-   `production-verification` prouve que le système déployé fonctionne.
-
-Le détail figure dans `documentation/delivery-system.md`,
-`delivery-skills/README.md`, `devops-skills/README.md` et `agents/README.md`.
-
-Exemple de chaîne minimale pour un projet :
+Quand l'entrée est une spécification plutôt qu'une tâche,
+`engineering/delivery-skills/delivery-orchestrator` prend la main sur quatorze
+phases, avec quatre portes d'approbation.
 
 ```
 requirements-analysis -> clarification-gate -> technology-selection
     -> architecture-proposal -> validation-gate -> delivery-planning
 ```
 
-## Règles communes
+Deux règles structurantes : aucun code de production avant la porte de
+validation, échafaudage compris ; aucune demande d'autorisation après, pour le
+travail inclus dans le périmètre approuvé.
 
-Deux règles s'appliquent à tous les fichiers du repository, y compris aux
-catégories d'ingénierie et aux agents : aucun emoji, aucun tiret cadratin.
+## Règles communes aux deux arbres
 
-Les autres, définies dans `core/writing-constitution/SKILL.md`, régissent les
-textes de fiction et de poésie : dialogues conformes aux standards des
-romans publiés en français, flashbacks en italique et clairement séparés de la
-ligne principale, chronologie toujours compréhensible, titres de chapitres
-travaillés, personnages cohérents, style naturel, refus des clichés, montrer
-plutôt qu'expliquer, priorité à l'émotion incarnée, respect des cultures
-représentées, aucune incohérence tolérée.
+Deux interdits s'appliquent à tous les fichiers du repository : **aucun
+emoji**, **aucun tiret cadratin**. Ils sont vérifiés par
+`tests/validate-rules.sh`.
 
-Chaque skill de production se termine par une auto-évaluation avec seuil de
-livraison chiffré : onze axes pour l'écriture, des axes propres à chaque
-skill d'ingénierie.
+Le reste diffère par arbre :
 
-Les skills d'ingénierie ajoutent leurs propres règles non négociables, dans
-`dev-skills/engineering-core/SKILL.md` : ne jamais deviner, lire avant
-d'écrire, vérifier avant d'affirmer, traiter toute entrée externe comme
-hostile, ne jamais versionner un secret.
+- `writing/core/writing-constitution` : dialogues aux normes françaises,
+  flashbacks en italique, chronologie compréhensible, titres travaillés,
+  personnages cohérents, refus des clichés, montrer plutôt qu'expliquer,
+  respect des cultures représentées.
+- `engineering/dev-skills/engineering-core` : ne jamais deviner, lire avant
+  d'écrire, vérifier avant d'affirmer, traiter toute entrée externe comme
+  hostile, ne jamais versionner un secret, finir le travail.
+- `engineering/devops-skills/devops-core` : ne rien coder en dur qui varie
+  selon l'environnement, refuser de démarrer sans une variable requise,
+  classer le rayon d'impact avant toute opération, vérifier la cible avant
+  toute action destructrice.
 
-Les skills d'exploitation en ajoutent d'autres, dans
-`devops-skills/devops-core/SKILL.md` : ne rien coder en dur qui varie selon
-l'environnement, refuser de démarrer sans une variable requise, classer le
-rayon d'impact avant toute opération, vérifier la cible avant toute action
-destructrice.
+Chaque skill se termine par une auto-évaluation avec seuil de livraison
+chiffré.
+
+## Documentation
+
+| Fichier | Contenu |
+|---|---|
+| [CLAUDE.md](CLAUDE.md) | mémoire du projet, conventions, règles Git |
+| [documentation/architecture.md](documentation/architecture.md) | organisation, isolation des skills, métadonnées |
+| [documentation/skills-guide.md](documentation/skills-guide.md) | répertoire des 83 skills, table de choix |
+| [documentation/writing-rules.md](documentation/writing-rules.md) | règles d'écriture, version opérationnelle |
+| [documentation/workflow.md](documentation/workflow.md) | workflow d'écriture en onze phases |
+| [documentation/engineering-system.md](documentation/engineering-system.md) | la couche dev-skills en détail |
+| [documentation/delivery-system.md](documentation/delivery-system.md) | livraison, exploitation et agents |
+| [CONTINUITY.md](CONTINUITY.md) | état de reprise du repository |
+| [CHANGELOG.md](CHANGELOG.md) | historique des versions |
+
+## Validation
+
+```
+bash tests/validate-structure.sh      structure et métadonnées des 83 skills
+bash tests/validate-rules.sh          emoji, tiret cadratin, typographie
+bash tests/validate-orchestration.sh  plans, phases, agents, références
+```
+
+Les trois doivent passer sans erreur avant tout commit. Le détail figure dans
+[tests/README.md](tests/README.md).
 
 ## Contribution
 
-Voir `CONTRIBUTING.md`. Toute contribution respecte la constitution, la
-structure de skill imposée, et passe les deux scripts de `tests/`.
+Voir [CONTRIBUTING.md](CONTRIBUTING.md). Toute contribution respecte la
+constitution de son arbre, la structure de skill imposée, et passe les trois
+scripts de `tests/`.
 
 ## Philosophie
 
 - La contrainte produit le style. Les règles éliminent le bruit.
 - Un texte se juge sur l'effet produit, jamais sur l'intention.
-- La cohérence est une forme de respect du lecteur.
-- Un skill doit rester utile au chapitre 3 comme au chapitre 90.
+- Un système se juge sur ce qui a été exécuté, jamais sur ce qui a été prévu.
+- La cohérence est une forme de respect du lecteur, et de l'ingénieur suivant.
+- Un skill doit rester utile au chapitre 3 comme au chapitre 90, au premier
+  commit comme au centième.
 - Toute règle énoncée doit être vérifiable par une procédure explicite.
 - La sévérité critique est un service rendu, pas une posture.
 
 ## Licence
 
-MIT. Voir `LICENSE`.
+MIT. Voir [LICENSE](LICENSE).
