@@ -4,7 +4,7 @@
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-CATEGORIES="core genres poetry quality dev-skills"
+CATEGORIES="core genres poetry quality dev-skills delivery-skills devops-skills"
 ERRORS=0
 SKILLS=0
 
@@ -55,10 +55,14 @@ for category in $CATEGORIES; do
         || fail "$category/$name : description trop courte pour être découverte"
       grep -qi '^## .*[Aa]uto-critique' "$skill/SKILL.md" \
         || fail "$category/$name : section Auto-critique absente"
-      # Les skills d'ingénierie imposent en plus une section Protocol
-      # numérotée et une section Interfaces. Les skills d'écriture nomment
-      # leur procédure de façons variées, héritées de leur domaine.
-      if [ "$category" = "dev-skills" ]; then
+      # Les trois catégories d'ingénierie imposent en plus une section
+      # Protocol numérotée et une section Interfaces. Les skills d'écriture
+      # nomment leur procédure de façons variées, héritées de leur domaine.
+      case "$category" in
+        dev-skills|delivery-skills|devops-skills) engineering=1 ;;
+        *) engineering=0 ;;
+      esac
+      if [ "$engineering" -eq 1 ]; then
         grep -qE '^## [0-9]+\. Protocol' "$skill/SKILL.md" \
           || fail "$category/$name : section Protocol numérotée absente"
         grep -qE '^## [0-9]+\. Interfaces' "$skill/SKILL.md" \
@@ -74,7 +78,7 @@ done
 for d in resources examples documentation tests; do
   [ -d "$ROOT/$d" ] || fail "dossier racine manquant : $d"
 done
-for f in architecture.md skills-guide.md writing-rules.md workflow.md; do
+for f in architecture.md skills-guide.md writing-rules.md workflow.md engineering-system.md delivery-system.md; do
   [ -f "$ROOT/documentation/$f" ] || fail "documentation manquante : $f"
 done
 
