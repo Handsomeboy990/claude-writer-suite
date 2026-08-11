@@ -99,6 +99,11 @@ now require the configuration file instead of embedded defaults.
 - `git-workflow` and its resources embedded a real name and email address in a
   reusable skill, in `SKILL.md`, `README.md`, the pre-commit checklist and the
   worked example.
+- `install.sh` used `GROUPS` as its skill group variable. `GROUPS` is a bash
+  built-in array holding the current user's group ids, so the assignment was
+  silently overwritten and every mode installed zero skills. Found by running
+  the installer rather than by reading it. Renamed to `SKILL_GROUPS`, and all
+  six modes re-verified against a sandbox target.
 
 ## 1.3.0
 

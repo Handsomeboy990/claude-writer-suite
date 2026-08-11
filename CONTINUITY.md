@@ -138,6 +138,10 @@ Looks finished and is not:
 - `bash tests/validate-rules.sh`: 0 errors, 1 pre-existing warning.
 - `bash tests/validate-orchestration.sh`: 0 errors, thirteen checks.
 - `bash -n` on the four shell scripts.
+- `install.sh` exercised against a sandbox target in every mode: full 92
+  skills and 14 agents, `--writing` 44, `--documents` 9, `--dev` 43 plus
+  agents, `--shared` 2, scoped removal keeping the cross domain pair, full
+  removal, and `--zip` producing 92 archives.
 - `install.sh --configure` exercised under a pseudo-terminal: prompts,
   defaults, validation refusals, configuration file and manual task list all
   produced and inspected.
@@ -161,5 +165,10 @@ Looks finished and is not:
 - Helper functions in the validation scripts use their own loop variables. A
   shared name silently rewrites the caller's loop; that bug was introduced and
   fixed during this session in `is_procedural`.
+- Never name a shell variable `GROUPS`. It is a bash built-in array of the
+  current user's group ids, and assigning to it fails silently rather than
+  erroring. That cost the installer every skill it was meant to copy, and the
+  scripts passed `bash -n` throughout. The lesson generalises: these scripts
+  are verified by running them against a sandbox target, not by reading them.
 - After moving any directory, run all three scripts: two of them resolve paths
   and fail cleanly by naming what is missing.
