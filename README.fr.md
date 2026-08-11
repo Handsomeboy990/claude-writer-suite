@@ -335,20 +335,38 @@ Les trois doivent passer avant tout commit. Détail dans
 | [documentation/delivery-system.md](documentation/delivery-system.md) | livraison, exploitation et agents |
 | [documentation/writing-rules.md](documentation/writing-rules.md) | les règles d'écriture, version opérationnelle |
 | [documentation/workflow.md](documentation/workflow.md) | le workflow d'écriture, phase par phase |
+| [documentation/branch-protection.md](documentation/branch-protection.md) | qui peut écrire sur main et dev, et comment |
 | [CONTINUITY.md](CONTINUITY.md) | état du dépôt pour celui qui reprend |
 | [CHANGELOG.md](CHANGELOG.md) | historique des versions |
 
 La documentation technique est rédigée en anglais, langue du système. Ce
 fichier et le README anglais sont les deux points d'entrée équivalents.
 
-## Étendre le système
+## Contribuer
+
+Partir de `dev`. Jamais de `main`.
+
+```bash
+git switch dev && git pull
+git switch -c feat/ma-modification
+git config core.hooksPath .githooks    # une fois par clone
+# travail, commit
+git push -u origin feat/ma-modification  # puis ouvrir une pull request vers dev
+```
+
+`main` est la branche de publication et ne reçoit que des pull requests
+venues de `dev`, ouvertes par un mainteneur. Les deux branches exigent une
+pull request, un `validate` au vert et l'approbation d'un propriétaire listé
+dans [.github/CODEOWNERS](.github/CODEOWNERS).
 
 Ajouter un skill suppose : créer le dossier avec ses quatre éléments, déclarer
 les métadonnées, renvoyer à la constitution de son arbre sans la recopier,
 ajouter au moins un exemple et une ressource, mettre à jour l'index de
 catégorie et `documentation/skills-guide.md`, puis exécuter les trois scripts.
 
-Règles de contribution : [CONTRIBUTING.md](CONTRIBUTING.md).
+Règles complètes : [CONTRIBUTING.md](CONTRIBUTING.md). Règles de branche et
+leur mise en place :
+[documentation/branch-protection.md](documentation/branch-protection.md).
 
 ## Philosophie
 
@@ -363,6 +381,19 @@ Règles de contribution : [CONTRIBUTING.md](CONTRIBUTING.md).
 - Toute règle énoncée doit être vérifiable par une procédure explicite.
 - La sévérité critique est un service rendu, pas une posture.
 
+## Auteur
+
+**Lauret Chacha**
+
+| | |
+|---|---|
+| GitHub | [@Handsomeboy990](https://github.com/Handsomeboy990) |
+| Portfolio | [lauret-chacha.vercel.app](https://lauret-chacha.vercel.app) |
+| LinkedIn | [in/lauret-chacha](https://linkedin.com/in/lauret-chacha) |
+| Courriel | lauretchacha@gmail.com |
+
 ## Licence
 
 MIT. Voir [LICENSE](LICENSE).
+
+Copyright (c) 2026 Lauret Chacha (Handsomeboy990).

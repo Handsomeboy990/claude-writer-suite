@@ -327,17 +327,34 @@ All three must pass before any commit. Detail in
 | [documentation/delivery-system.md](documentation/delivery-system.md) | delivery, operations and agents |
 | [documentation/writing-rules.md](documentation/writing-rules.md) | the writing rules, operational form |
 | [documentation/workflow.md](documentation/workflow.md) | the writing workflow, phase by phase |
+| [documentation/branch-protection.md](documentation/branch-protection.md) | who may write to main and dev, and how |
 | [CONTINUITY.md](CONTINUITY.md) | state of the repository for whoever takes over |
 | [CHANGELOG.md](CHANGELOG.md) | version history |
 
-## Extending it
+## Contributing
+
+Branch from `dev`. Never from `main`.
+
+```bash
+git switch dev && git pull
+git switch -c feat/my-change
+git config core.hooksPath .githooks    # once per clone
+# work, commit
+git push -u origin feat/my-change      # then open a pull request into dev
+```
+
+`main` is the release branch and receives only pull requests from `dev`,
+opened by a maintainer. Both branches require a pull request, a green
+`validate` run and an approval from a code owner listed in
+[.github/CODEOWNERS](.github/CODEOWNERS).
 
 Adding a skill: create the directory with its four elements, declare the
 metadata, refer to the constitution of its tree without restating it, add at
 least one example and one resource, update the category index and
 `documentation/skills-guide.md`, then run the three scripts.
 
-Contribution rules: [CONTRIBUTING.md](CONTRIBUTING.md).
+Full rules: [CONTRIBUTING.md](CONTRIBUTING.md). Branch rules and their setup:
+[documentation/branch-protection.md](documentation/branch-protection.md).
 
 ## Philosophy
 
@@ -350,6 +367,19 @@ Contribution rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 - Every rule stated must be verifiable by an explicit procedure.
 - Critical severity is a service, not a posture.
 
+## Author
+
+**Lauret Chacha**
+
+| | |
+|---|---|
+| GitHub | [@Handsomeboy990](https://github.com/Handsomeboy990) |
+| Portfolio | [lauret-chacha.vercel.app](https://lauret-chacha.vercel.app) |
+| LinkedIn | [in/lauret-chacha](https://linkedin.com/in/lauret-chacha) |
+| Email | lauretchacha@gmail.com |
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+Copyright (c) 2026 Lauret Chacha (Handsomeboy990).
