@@ -1,148 +1,170 @@
-# Contribuer
+# Contributing
 
-## Avant toute modification
+Contributions are welcome. The bar is the same one the skills apply to
+themselves: a rule that cannot be verified by an explicit procedure does not
+belong here.
 
-1. Lire `CLAUDE.md`.
-2. Lire la constitution du système concerné :
-   `writing/core/writing-constitution/SKILL.md` pour un skill d'écriture,
-   `engineering/dev-skills/engineering-core/SKILL.md` pour un skill d'ingénierie,
-   `engineering/devops-skills/devops-core/SKILL.md` en plus pour un skill
-   d'exploitation.
-3. Vérifier la cohérence avec `documentation/architecture.md`, avec
-   `documentation/engineering-system.md` pour `engineering/dev-skills`, et avec
-   `documentation/delivery-system.md` pour `engineering/delivery-skills`,
-   `engineering/devops-skills` et `agents`.
+## Before anything
 
-## Ajouter un skill
+1. Read `README.md`.
+2. Read the constitution of the tree you are touching.
+3. Read `documentation/architecture.md`.
+4. Run the three validation scripts and confirm they pass on a clean
+   checkout.
 
-1. Créer le dossier dans la catégorie appropriée : sous `writing/`, l'une de
-   `core`, `genres`, `poetry`, `quality` ; sous `engineering/`, l'une de
-   `dev-skills`, `delivery-skills`, `devops-skills`.
-2. Créer les quatre éléments obligatoires : `SKILL.md`, `README.md`,
-   `examples/`, `resources/`. Les deux dossiers ne peuvent pas rester vides.
-3. Ouvrir `SKILL.md` par le bloc de métadonnées :
-
-```yaml
----
-name: nom-du-skill
-description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
-  doivent le déclencher. Quarante caractères minimum.
-license: MIT
-metadata:
-  category: core | genres | poetry | quality
-            | dev-skills | delivery-skills | devops-skills
-  version: 1.0.0
-  depends_on: [writing-constitution]
-  outputs: [artefacts produits]
----
-```
-
-`name` et `description` restent au premier niveau : ils conditionnent la
-découverte du skill par un agent. Tout le reste passe sous `metadata`.
-
-4. Structurer le contenu : rôle, entrées, procédure numérotée, livrables,
-   erreurs fréquentes, section Auto-critique, interfaces.
-5. Renvoyer à la constitution, ne jamais la recopier.
-6. Ajouter au moins un exemple appliqué et une grille ou checklist.
-7. Mettre à jour `documentation/skills-guide.md` et
-   `documentation/architecture.md`.
-8. Exécuter les trois scripts de validation.
-
-Un skill d'une catégorie d'ingénierie ajoute quatre exigences propres :
-
-- la procédure porte le titre `Protocol` et une section `Interfaces` est
-  obligatoire, toutes deux vérifiées par `tests/validate-structure.sh` ;
-- le contenu est rédigé en anglais, pour la raison exposée dans
-  `documentation/engineering-system.md` section 2 ;
-- le skill figure dans au moins un plan de
-  `engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md`
-  ou dans une phase de
-  `engineering/delivery-skills/delivery-orchestrator/resources/delivery-phases.md`,
-  faute de quoi `tests/validate-orchestration.sh` le signale comme orphelin ;
-- il est ajouté à l'index de sa catégorie et à la documentation
-  correspondante.
-
-## Ajouter un agent
-
-1. Créer le fichier dans `engineering/agents/`, nommé d'après l'agent.
-2. Ouvrir par un bloc de métadonnées avec `name` identique au nom du fichier
-   et une `description` d'au moins quarante caractères.
-3. Inclure les huit sections obligatoires : `Role`, `Mission`,
-   `Responsibilities`, `Inputs`, `Outputs`, `Boundaries`, `Verification`,
-   `Handoff`. Une section `Skills` cite les skills utilisés.
-4. Ne jamais recopier le contenu d'un skill : le citer.
-5. Ajouter une ligne dans `engineering/agents/README.md`.
-6. Ajouter le nom à la liste attendue de `tests/validate-orchestration.sh`.
-7. Exécuter les trois scripts de validation.
-
-## Exigences de contenu
-
-- Rédaction en français pour l'arbre `writing/`, en anglais pour l'arbre
-  `engineering/`, agents compris. Noms de fichiers et de dossiers en anglais,
-  en kebab-case partout.
-- Aucun emoji, aucun tiret cadratin, y compris dans les tableaux.
-- Tout protocole est numéroté et exécutable, sans formulation vague.
-- Toute règle énoncée est vérifiable par une procédure ou une grille.
-- Les exemples sont concrets et commentés : montrer avant et après.
-
-## Tests
-
-```
+```bash
 bash tests/validate-structure.sh
 bash tests/validate-rules.sh
 bash tests/validate-orchestration.sh
 ```
 
-Les trois scripts doivent passer sans erreur avant tout commit.
+## Language
 
-## Git
+| Layer | Language |
+|---|---|
+| Skills, agents, technical documentation | English |
+| Paths, filenames, identifiers, configuration keys | English, kebab-case |
+| Commit messages, branch names | English |
+| `README.md` and `README.fr.md` | both, kept equivalent |
+| French reference material in `writing/resources/` and the writing skills' `examples/` | French |
 
-Identité obligatoire :
+The last row is not an exception being tolerated. That material is what the
+writing skills produce, not how they are instructed, and it keeps its French
+names for the same reason.
+
+## Adding a skill
+
+A skill is one isolated directory with four mandatory elements:
 
 ```
-git config user.name  "Handsomeboy990"
-git config user.email "lauretchacha@gmail.com"
+skill-name/
+├── SKILL.md      the expertise: procedure, thresholds, refusals
+├── README.md     summary, inputs, outputs, dependencies, configuration
+├── examples/     at least one worked example
+└── resources/    at least one grid, checklist or reference
 ```
 
-Commits en anglais, courts, atomiques, décrivant uniquement le changement
-réalisé. Préfixes admis : `feat:`, `docs:`, `fix:`, `chore:`, `refactor:`,
-`test:`.
+Requirements:
+
+- YAML metadata block with `name`, `description`, `license`, then under
+  `metadata`: `category`, `version`, `depends_on`, `outputs`.
+- `name` identical to the directory. `category` identical to the group
+  basename.
+- A description of at least forty characters, saying what the skill does and
+  when to load it, with the terms that should trigger it.
+- An `Auto-critique` section with a numeric threshold.
+- Outside `writing/`: a numbered `Protocol` section and an `Interfaces`
+  section.
+- A README whose first line is `# skill-name`.
+- A name that collides with no existing skill. Installation is flat.
+- References to the tree's constitution rather than copies of it.
+- An entry in the category index and in `documentation/skills-guide.md`.
+
+For `engineering/`, membership of at least one execution plan or delivery
+phase, or check 7 reports it as an orphan.
+
+For `documents/`, `depends_on: [document-core]`, or check 12 fails.
+
+For `shared/`, `depends_on: []`. A dependency there would make two trees
+depend on a third by transitivity, and check 13 refuses it.
+
+## Adding an agent
+
+An agent is a role, not a copy of a skill. It cites the skills it uses and
+restates none of them.
+
+1. The file in `engineering/agents/`, with its eight mandatory sections: Role,
+   Mission, Responsibilities, Inputs, Outputs, Boundaries, Verification,
+   Handoff, plus a `Skills` section.
+2. A row in `engineering/agents/README.md`.
+3. The name added to `AGENT_NAMES` in `tests/validate-orchestration.sh`.
+
+Step 3 is not optional. Check 10 fails both for a declared agent with no file
+and for a file with no declaration.
+
+## Writing standard
+
+Applies to every file you add.
+
+Never: emoji, em dash, decorative symbols, manufactured enthusiasm, filler,
+throat clearing, the same information in three places, vague intensifiers,
+promises the system does not keep such as `simply` or `easily`.
+
+Always: short paragraphs, tables where the content is comparative, lists where
+it is enumerable, prose where it is an argument, the specific noun, the active
+voice, and a stated threshold for anything claimed to be finished.
+
+Checks 1 and 2 of `validate-rules.sh` enforce the first two prohibitions
+mechanically. The rest is review.
+
+## Configuration
+
+Never hardcode a user specific value: an identity, an organisation, a package
+manager, a platform, a language. Declare the field in `config/README.md`, add
+it to the template and to the installer prompts, and have the skill state what
+happens when it is missing.
+
+Three behaviours, and only three: stop and name the field for identity
+values, apply a documented default, or read it from the project. Never invent
+one.
+
+## Commits
+
+- English, imperative, conventional prefix: `feat:`, `fix:`, `docs:`,
+  `test:`, `refactor:`, `chore:`, `perf:`, `style:`, `build:`, `ci:`.
+- One commit, one logical change. If the message needs the word `and`, it is
+  two commits.
+- No trailing period on the summary, about seventy characters at most.
+
+Forbidden in messages, trailers, author fields and branch names:
+`Co-authored-by` with any tool, `Generated by`, `Created with`, `Assisted by`,
+and any mention of Claude, an AI, an assistant, a bot or a model. A commit
+carrying one is amended before it is pushed.
+
+Set your own identity before committing:
+
+```bash
+git config user.name  "Your Name"
+git config user.email "you@example.org"
+```
+
+The repository does not impose an author. `git-workflow` reads
+`identity.author_name` and `identity.author_email` from the suite
+configuration and stops if either is missing, rather than inventing one.
+
+## Never committed
 
 ```
-feat: add thriller writing skill
-docs: update architecture guide
-fix: improve dialogue validation rules
+.env and .env.*
+private keys, certificates, credential files
+local agent and editor configuration, .claude/, *.local
+build output, dist/
 ```
 
-Interdits absolus dans les messages de commit et les métadonnées :
-`Co-authored-by`, mentions d'un générateur automatique, mentions d'une
-assistance par intelligence artificielle. L'auteur visible reste
-`Handsomeboy990 <lauretchacha@gmail.com>`.
+`.gitignore` covers these. `CLAUDE.md` is the one deliberate exception and it
+records why, in its own last section: it is the public memory of the project
+and contains no secret.
 
-Ne jamais versionner : `.env` et ses variantes, clés privées, certificats,
-informations d'identification, configuration locale d'un agent. Lire le diff
-indexé en entier avant chaque commit. Un secret déjà poussé se révoque, il ne
-se supprime pas.
+A secret already committed is not fixed by deleting it. Report it for
+rotation.
 
-## Modifier une constitution
+## Before opening a pull request
 
-Toute modification de `writing/core/writing-constitution/SKILL.md` impose :
+- [ ] The three validation scripts pass.
+- [ ] The staged diff was read in full.
+- [ ] No secret, no `.env`, no local configuration.
+- [ ] No emoji, no em dash, in any file.
+- [ ] Every new skill has its four elements and its metadata.
+- [ ] Every index and `skills-guide.md` list the new skill.
+- [ ] `README.md` and `README.fr.md` still say the same thing.
+- [ ] Counts are correct wherever they appear: 92 skills, 14 agents.
+- [ ] `CHANGELOG.md` has an entry.
+- [ ] `CONTINUITY.md` reflects the new state if the change is structural.
 
-1. la vérification des skills qui s'y réfèrent ;
-2. la mise à jour de `documentation/writing-rules.md` ;
-3. la mise à jour de la grille de conformité ;
-4. une entrée dans `CHANGELOG.md`.
+## Pull request contents
 
-Toute modification de `engineering/dev-skills/engineering-core/SKILL.md` impose :
+Summary, what changed and why. Implementation, including what was rejected.
+Tests, what was run and observed. Risks, what could break and how it would
+show. Follow up, named, with why it was not done here.
 
-1. la vérification des quarante et un skills qui en héritent ;
-2. la mise à jour de `documentation/engineering-system.md` ;
-3. l'exécution de `tests/validate-orchestration.sh` ;
-4. une entrée dans `CHANGELOG.md`.
-
-Toute modification de `engineering/devops-skills/devops-core/SKILL.md` impose :
-
-1. la vérification des dix skills d'exploitation qui en héritent ;
-2. la mise à jour de `documentation/delivery-system.md` ;
-3. l'exécution de `tests/validate-orchestration.sh` ;
-4. une entrée dans `CHANGELOG.md`.
+Remove the sections that do not apply rather than filling them with none.

@@ -1,137 +1,152 @@
 # engineering
 
-Système d'ingénierie logicielle et de livraison de projet. 41 skills en trois
-catégories, plus 14 agents spécialisés.
+Software engineering and project delivery. 41 skills in three categories, plus
+14 specialised agents.
 
-Langue : anglais, pour la raison exposée dans
-`documentation/engineering-system.md` section 2. Les règles 1 et 2 de la
-constitution d'écriture s'appliquent tout de même : aucun emoji, aucun tiret
-cadratin.
+## Categories
 
-## Catégories
-
-| Catégorie | Skills | Question à laquelle elle répond |
+| Category | Skills | Question it answers |
 |---|---|---|
-| [dev-skills](dev-skills/) | 20 | comment une modification est faite correctement |
-| [delivery-skills](delivery-skills/) | 10 | quoi construire, dans quel ordre, avec quelle approbation |
-| [devops-skills](devops-skills/) | 11 | comment le système tourne, se déploie et se restaure |
-| [agents](agents/) | 14 | qui possède quoi, et ce qui est transmis |
+| [dev-skills](dev-skills/) | 20 | how a change is made correctly |
+| [delivery-skills](delivery-skills/) | 10 | what to build, in what order, with what approval |
+| [devops-skills](devops-skills/) | 11 | how the system runs, deploys and restores |
+| [agents](agents/) | 14 | who owns what, and what is handed on |
 
-Chacune possède son index.
+Each has its own index.
 
-## Les trois constitutions
+## The two constitutions
 
 ```
-dev-skills/engineering-core     les huit lois, la règle de preuve, le
-                                vocabulaire de certitude, la définition du
-                                terminé
-devops-skills/devops-core       l'échelle d'environnements, la configuration,
-                                le rayon d'impact, le protocole destructeur
+dev-skills/engineering-core     the eight laws, the evidence rule, the
+                                certainty vocabulary, the definition of done
+devops-skills/devops-core       the environment ladder, configuration, blast
+                                radius, the destructive action protocol
 ```
 
-Aucun skill ne recopie sa constitution : il y renvoie. Un agent ne recopie
-jamais un skill : il le cite.
+No skill restates its constitution: it refers to it. No agent restates a
+skill: it cites it.
 
-## Trois orchestrateurs, trois portées
+## Three orchestrators, three scopes
 
-| Orchestrateur | Possède | Se charge quand |
+| Orchestrator | Owns | Loads when |
 |---|---|---|
-| `delivery-skills/delivery-orchestrator` | un projet entier | l'entrée est une spécification, un cahier des charges, une demande client |
-| `dev-skills/engineering-orchestrator` | une tâche | l'entrée est une fonctionnalité, un défaut, une revue |
-| `devops-skills/devops-core` | l'exécution du système | toute opération sur un environnement |
+| `delivery-skills/delivery-orchestrator` | a whole project | the input is a specification, a brief, a client request |
+| `dev-skills/engineering-orchestrator` | one task | the input is a feature, a defect, a review |
+| `devops-skills/devops-core` | anything that runs | any operation on an environment |
 
-Le premier délègue au deuxième pour chaque tâche d'implémentation, et au
-troisième pour chaque opération.
+The first delegates to the second for each implementation task, and to the
+third for each operation.
 
-## Chaîne d'une tâche
+## Chain of one task
 
 ```
 engineering-core  ->  engineering-orchestrator  ->  project-exploration
-        ->  skills sélectionnés, dans l'ordre
-        ->  portes obligatoires
-        ->  verdict de complétude
+        ->  the selected skills, in order
+        ->  the mandatory gates
+        ->  completion verdict
 ```
 
-L'orchestrateur compose le plan minimal complet : une correction de faute de
-frappe fait quatre étapes, un endpoint de paiement en fait onze. Les plans
-canoniques sont dans
+The orchestrator composes the smallest complete plan: a typo fix takes four
+steps, a payment endpoint takes eleven. The canonical plans are in
 `dev-skills/engineering-orchestrator/resources/execution-plans.md`.
 
-## Chaîne d'un projet
+## Chain of one project
 
 ```
-requirements-analysis  ->  clarification-gate          APPROBATION
+requirements-analysis  ->  clarification-gate          APPROVAL
         ->  technology-selection  ->  architecture-proposal
-        ->  validation-gate                            APPROBATION, arrêt ferme
+        ->  validation-gate                            APPROVAL, firm stop
         ->  delivery-planning  ->  implementation
         ->  integration-verification  ->  devops
-        ->  deployment                                 APPROBATION
+        ->  deployment                                 APPROVAL
         ->  production-verification  ->  documentation
-        ->  handover  ->  release                      APPROBATION
+        ->  handover  ->  release                      APPROVAL
 ```
 
-Quatorze phases, définies dans
+Fourteen phases, defined in
 `delivery-skills/delivery-orchestrator/resources/delivery-phases.md`.
 
-Deux règles structurantes : aucun code de production avant la porte de
-validation, échafaudage compris ; aucune demande d'autorisation après, pour le
-travail inclus dans le périmètre approuvé.
+Two structural rules: no production code before the validation gate,
+scaffolding included; and no further permission requests after it, for work
+inside the approved scope.
 
-## Portes obligatoires
+## Mandatory gates
 
-Jamais abandonnées pour gagner du temps.
+Never abandoned to save time.
 
-| Porte | S'applique quand |
+| Gate | Applies when |
 |---|---|
-| exploration avant décision | du code non lu est touché |
-| validation avant persistance | une entrée externe atteint le stockage ou un effet |
-| autorisation avant exposition | une route ou une requête renvoie des données d'un utilisateur |
-| revue de sécurité avant fusion | auth, paiements, uploads, contenu utilisateur, permissions, secrets, dépendances |
-| test avant terminé | tout changement de comportement |
-| revue avant livraison | tout code écrit par l'agent |
-| continuité avant passation | toute session ayant modifié le repository |
-| contrôle d'auteur avant commit | chaque commit |
+| exploration before decision | unread code is touched |
+| validation before persistence | an external input reaches storage or an effect |
+| authorization before exposure | a route or a query returns a user's data |
+| security review before merge | auth, payments, uploads, user content, permissions, secrets, dependencies |
+| test before done | any behaviour change |
+| review before delivery | any code written by the agent |
+| continuity before handover | any session that changed the repository |
+| author check before commit | every commit |
 
-## Ce que le système refuse
+## Delegation
 
-Une ligne par catégorie, car ces refus sont ce qui distingue ce système d'un
-assistant de code.
+What the agent does on its own is set by the `delegation` section of the
+configuration: commits, branches, push, pull requests, release tags,
+deployments, database operations, dependency changes.
+
+Anything the user keeps is handed over rather than performed, with its
+command, and listed in `writer-suite-manual-tasks.md` next to the
+configuration file. `git-workflow` section 2 carries the contract.
+
+Two rules are never delegated: a destructive operation is counted and
+confirmed before it runs, and a leaked secret is reported for rotation rather
+than quietly removed.
+
+## What the system refuses
+
+One line per category, because these refusals are what distinguishes this
+system from a code assistant.
 
 ```
-deviner quoi que ce soit que le repository peut établir
-affirmer sans avoir exécuté
-laisser une fonctionnalité factice sur un chemin atteignable
-écrire du code de production avant l'approbation de l'architecture
-affaiblir un test pour obtenir un pipeline vert
-coder en dur une valeur qui varie selon l'environnement
-exécuter une instruction destructrice sans compter les lignes d'abord
-déclarer un déploiement réussi sans avoir exercé un parcours
-annoncer des sauvegardes sans dire si une restauration a été testée
+guessing anything the repository can establish
+asserting without having run it
+leaving fake functionality on a reachable path
+writing production code before the architecture is approved
+weakening a test to obtain a green pipeline
+hardcoding a value that varies by environment
+running a destructive statement without counting the rows first
+declaring a deployment successful without exercising a journey
+announcing backups without saying whether a restore was tested
+attributing a commit to a tool
 ```
 
-## Agnosticisme
+## Agnosticism
 
-Aucun skill ne présuppose un framework, une base de données, un mécanisme
-d'authentification, une arborescence ou une plateforme d'hébergement. Chaque
-skill lit le projet qu'on lui confie.
+No skill assumes a framework, a database, an authentication mechanism, a
+directory layout or a hosting platform. Each reads the project it is given.
 
 ## Installation
 
-```
-bash install.sh --dev         les 41 skills d'ingénierie seulement
-bash install.sh --agents      les 14 agents seulement
-bash install.sh --no-agents   les skills sans les agents
+```bash
+bash install.sh --dev         the 41 engineering skills and the 14 agents
+bash install.sh --agents      the 14 agents only
+bash install.sh --no-agents   skills without agents
 ```
 
-Les skills vont dans `~/.claude/skills`, les agents dans `~/.claude/agents`.
+Skills go to `~/.claude/skills`, agents to `~/.claude/agents`.
 
 ## Documentation
 
-- `documentation/engineering-system.md` : la couche `dev-skills` en détail.
-- `documentation/delivery-system.md` : les couches `delivery-skills`,
-  `devops-skills` et `agents`.
+- `documentation/engineering-system.md`: the `dev-skills` layer in detail.
+- `documentation/delivery-system.md`: `delivery-skills`, `devops-skills` and
+  the agents.
+- `documentation/agents.md`: skill against agent against orchestration.
+- `documentation/configuration.md`: the configuration contract.
 
-## Relation avec l'arbre writing
+## Relation to the other trees
 
-Aucune, hormis les deux interdits typographiques et les règles Git. Aucun
-skill d'ingénierie ne dépend d'un skill d'écriture.
+None, beyond the two typographic prohibitions and the shared Git rules. No
+engineering skill depends on a writing or a documents skill.
+
+The two cross domain skills apply here as everywhere: `shared/project-brief`
+frames a project before `requirements-analysis` deepens it, and
+`shared/self-critique` delegates to `code-review-protocol` and
+`security-audit` while keeping the one check no domain reviewer performs,
+whether the user was actually answered.

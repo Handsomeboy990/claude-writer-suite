@@ -1,253 +1,99 @@
 # CLAUDE.md
 
-Fichier de mémoire du projet. Il doit être lu avant toute modification du repository.
+Entry point for an agent working on this repository. Read it before any
+modification.
 
-## 1. Identité du projet
+This file is deliberately short and holds no duplicated content. It points at
+the canonical documents and states only the rules an agent must know before it
+touches anything.
 
-Nom : Claude Writer Suite
-Nature : bibliothèque de skills d'écriture professionnelle pour un agent Claude
-Langue de travail : français
-Langue des commits : anglais
-Public visé : romanciers, scénaristes, éditeurs, correcteurs, auteurs de sagas
+## What this repository is
 
-Le projet ne fournit pas des prompts. Il fournit des systèmes d'expertise :
-protocoles, critères de décision, grilles d'évaluation, procédures de révision.
+Claude Writer Suite: 92 skills and 14 agents, in four trees.
 
-## 2. Architecture
+| Tree | Contents | Constitution |
+|---|---|---|
+| `shared/` | 2 cross domain skills | none, they depend on nothing |
+| `writing/` | 42 creative writing skills | `writing/core/writing-constitution` |
+| `documents/` | 7 professional document skills | `documents/documentation/document-core` |
+| `engineering/` | 41 software skills, 14 agents | `engineering/dev-skills/engineering-core` and `engineering/devops-skills/devops-core` |
 
-```
-claude-writer-suite/
-├── CLAUDE.md                  mémoire du projet (ce fichier)
-├── README.md                  présentation publique
-├── CONTRIBUTING.md            règles de contribution
-├── LICENSE                    licence MIT
-├── core/                      14 skills fondamentaux
-├── genres/                    15 spécialisations de genre
-├── poetry/                    5 skills de poésie
-├── quality/                   8 skills de contrôle qualité
-├── dev-skills/                20 skills d'ingénierie logicielle
-├── delivery-skills/           10 skills de livraison de projet
-├── devops-skills/             11 skills d'exploitation
-├── agents/                    14 agents spécialisés
-├── resources/                 ressources partagées par tous les skills
-├── examples/                  projet de démonstration complet
-├── documentation/             documentation technique
-└── tests/                     scripts de validation du repository
-```
+Full picture: `README.md`. Architecture: `documentation/architecture.md`.
 
-Le repository contient deux systèmes distincts qui partagent la même
-structure, les mêmes tests et les mêmes règles Git.
+## Routing
 
-- Les quatre premières catégories forment la suite d'écriture, en français,
-  gouvernée par `writing/core/writing-constitution`.
-- `engineering/` regroupe `dev-skills`, `delivery-skills` et `devops-skills`,
-  en anglais, gouvernés par `engineering/dev-skills/engineering-core`. Voir
-  `documentation/engineering-system.md` et
-  `documentation/delivery-system.md`.
-- `engineering/agents/` contient quatorze rôles pour un runtime qui accepte des
-  sous-agents. Un agent est mince : l'expertise reste dans les skills.
+Determine the nature of the request before acting, then load the governing
+skill. Never run a whole chain by reflex: compose the smallest complete plan.
 
-Les deux systèmes ne se croisent pas : aucun skill d'écriture ne dépend d'un
-skill d'ingénierie, et réciproquement.
+| Request | Load first |
+|---|---|
+| Any significant project, or taking one over | `project-brief` |
+| Fiction, poetry, screenplay, text revision | `writing-constitution` |
+| A delivered document, report, letter, manual, PDF | `document-core` |
+| A single coding task: feature, bug, review, refactor | `engineering-orchestrator` |
+| A specification, brief or client request | `delivery-orchestrator` |
+| Environment, pipeline, deployment, production database, secret | `devops-core` |
+| Anything just finished | `self-critique` |
 
-Trois orchestrateurs, trois portées :
+`engineering-orchestrator` loads `engineering-core` then selects the rest.
+`delivery-orchestrator` holds the approval gates of the fourteen phases.
 
-- `delivery-orchestrator` possède un projet entier, de la spécification à la
-  livraison, et tient les portes d'approbation ;
-- `engineering-orchestrator` possède une tâche, et compose son plan minimal ;
-- `devops-core` gouverne tout ce qui touche à l'exécution du système.
+## Mandatory gates
 
-Un skill égale un dossier isolé. Structure minimale obligatoire :
+- Writing: no text is finished before `self-critique-protocol`, then at least
+  one revision skill.
+- Documents: no document is delivered before the eight-point gate of
+  `document-core`, eleven when it is paginated.
+- Code: no task is finished before `code-review-protocol`, with a test run and
+  observed.
+- Project: no production code before `validation-gate`, scaffolding included.
+- Deployment: nothing is announced as delivered before
+  `production-verification`.
 
-```
-skill-name/
-├── SKILL.md      le système d'expertise (document principal)
-├── README.md     résumé court, entrées, sorties, dépendances
-├── examples/     au moins un exemple appliqué
-└── resources/    au moins une grille, checklist ou référence
-```
+## Permanent rules
 
-## 3. Règles permanentes d'écriture
+1. No emoji, in any file or any output.
+2. No em dash. The en dash is for dialogue only.
+3. Skill language is English, for all 92 skills and all 14 agents. Output
+   language is the recipient's, set in the configuration. The three layers are
+   defined in `documentation/configuration.md`.
+4. Commits are atomic, in English, with no mention of an AI, an assistant or
+   `Co-authored-by`. Full procedure in `git-workflow`.
+5. Never commit a `.env`, a private key, a certificate or a credential.
+6. Never hardcode a user specific value. It belongs in the configuration; the
+   field reference is `config/README.md`.
 
-Ces règles sont non négociables. Elles sont définies dans
-`writing/core/writing-constitution/SKILL.md`. Les règles 1 et 2 s'appliquent
-à tous les fichiers du repository, y compris les catégories d'ingénierie et les
-agents. Les douze autres régissent les textes de fiction et de poésie.
+## Delegation
 
-1. Aucun emoji, ni dans les textes produits, ni dans les fichiers du repository.
-2. Aucun tiret cadratin. Le tiret demi-cadratin sert uniquement aux dialogues.
-3. Dialogues conformes aux standards des romans publiés en français.
-4. Flashbacks séparés de façon nette de la ligne temporelle principale.
-5. Flashbacks en italique.
-6. Chronologie toujours compréhensible pour le lecteur.
-7. Titres de chapitres travaillés, jamais génériques.
-8. Personnages cohérents dans la voix, la mémoire et la motivation.
-9. Style naturel, sans surcharge ornementale.
-10. Clichés proscrits, y compris les clichés de genre.
-11. Montrer plutôt qu'expliquer.
-12. Priorité à l'émotion incarnée.
-13. Respect des cultures représentées, aucune caricature.
-14. Aucune incohérence tolérée en sortie de skill.
+What an agent may do on its own is set by the `delegation` section of the
+configuration: commits, branches, push, pull requests, release tags,
+deployments, database operations, dependency changes.
 
-## 4. Conventions du repository
+Anything the user kept is prepared and handed over with its command, never
+performed anyway, and never silently skipped. `git-workflow` section 2 holds
+the contract.
 
-- Tous les fichiers sont en Markdown, encodage UTF-8, fin de ligne LF.
-- Les noms de dossiers et de fichiers sont en anglais, en kebab-case.
-- Le contenu des skills d'écriture est rédigé en français.
-- Le contenu de l'arbre `engineering/`, skills et agents compris, est rédigé
-  en anglais : ces skills produisent du code, des messages de
-  commit, des branches, des documents d'architecture et de la documentation
-  technique, tous en anglais par la règle 6 de
-  `engineering/dev-skills/engineering-core`. Écrire les instructions dans la
-  langue de leur production évite la traduction permanente entre les deux.
-- Chaque SKILL.md commence par un bloc de métadonnées YAML :
-  `name`, `description`, `license`, puis sous `metadata` : `category`,
-  `version`, `depends_on`, `outputs`.
-- Chaque SKILL.md contient une procédure numérotée et une section
-  `Auto-critique` obligatoire. Dans les trois catégories d'ingénierie, cette
-  procédure porte le titre `Protocol` et une section `Interfaces` est
-  également obligatoire ; les deux sont vérifiées par
-  `tests/validate-structure.sh`.
-- Aucun skill ne duplique le contenu de sa constitution : il y renvoie.
-  `writing/core/writing-constitution` pour la suite d'écriture,
-  `engineering/dev-skills/engineering-core` pour l'ingénierie,
-  `engineering/devops-skills/devops-core` en plus pour l'exploitation.
-- Un agent ne recopie jamais un skill : il le cite. L'expertise vit dans le
-  skill, le rôle et la frontière vivent dans l'agent.
+## Working on this repository
 
-## 5. Workflow d'écriture recommandé
+Before any modification:
 
-```
-research-director  ->  world-builder  ->  character-psychologist
-        ->  novel-architect  ->  timeline-manager
-        ->  chapter-architect  ->  scene-builder
-        ->  narrator + dialogue-master + immersion-director
-        ->  self-critique-protocol
-        ->  story-doctor  ->  literary-editor  ->  proofreader
-        ->  beta-reader  ->  literary-critic  ->  publication-review
-```
+1. Read this file.
+2. Read the constitution of the tree concerned.
+3. Check consistency with `documentation/architecture.md`, and with the
+   system document for the tree: `documents-system.md`,
+   `engineering-system.md`, `delivery-system.md`.
+4. Run the three scripts in `tests/`.
+5. Commit atomically, in English.
 
-Règle d'or : aucun texte n'est considéré comme terminé avant le passage
-par `writing/quality/self-critique-protocol` puis par au moins un skill de
-révision.
+Contribution rules and the pre-pull-request checklist: `CONTRIBUTING.md`.
+State of the repository for whoever takes over: `CONTINUITY.md`.
 
-## 5 bis. Workflow d'ingénierie recommandé
+## Why this file is committed
 
-```
-engineering-core  ->  engineering-orchestrator  ->  project-exploration
-        ->  architecture-design  ->  skill d'implémentation
-        ->  input-validation  ->  security-audit
-        ->  testing-quality  ->  playwright-automation
-        ->  performance-engineering  ->  code-review-protocol
-        ->  technical-documentation  ->  project-continuity
-        ->  git-workflow  ->  release-readiness
-```
+It is the public memory of the project and the entry point an agent reads
+first. It contains no secret and no local machine configuration, which is what
+`.gitignore` excludes. That exception is deliberate and recorded here rather
+than left implicit, as `git-workflow` section 6 requires.
 
-L'orchestrateur ne déroule jamais cette chaîne en entier par réflexe : il
-compose le plan minimal complet pour la tâche, à partir de
-`engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md`, et
-n'abandonne jamais une porte obligatoire pour aller plus vite.
-
-Règle d'or : aucun code n'est considéré comme terminé avant le passage par
-`engineering/dev-skills/code-review-protocol`, avec un test exécuté et observé.
-
-## 5 ter. Workflow de livraison de projet
-
-Quand l'entrée est une spécification, un cahier des charges ou une demande
-client, et non une tâche unique,
-`engineering/delivery-skills/delivery-orchestrator` prend la main sur quatorze
-phases :
-
-```
-requirements-analysis  ->  clarification-gate          APPROBATION
-        ->  technology-selection  ->  architecture-proposal
-        ->  validation-gate                            APPROBATION, arrêt ferme
-        ->  delivery-planning  ->  implementation
-        ->  integration-verification  ->  devops
-        ->  deployment                                 APPROBATION
-        ->  production-verification  ->  documentation
-        ->  handover  ->  release                      APPROBATION
-```
-
-Deux règles structurantes, détaillées dans
-`documentation/delivery-system.md` :
-
-- aucun code de production avant la porte de validation, échafaudage compris ;
-- aucune demande d'autorisation après, pour le travail inclus dans le
-  périmètre approuvé.
-
-Règle d'or : un projet n'est livré que lorsque le système déployé a répondu à
-une requête réelle, vérifiée par
-`engineering/devops-skills/production-verification`.
-
-## 6. Règles Git
-
-Identité obligatoire, aucune autre ne doit être utilisée :
-
-```
-git config user.name  "Handsomeboy990"
-git config user.email "lauretchacha@gmail.com"
-```
-
-Commits :
-
-- rédigés en anglais ;
-- courts ;
-- atomiques ;
-- décrivant uniquement le changement réalisé ;
-- préfixes conventionnels : `feat:`, `docs:`, `fix:`, `chore:`, `refactor:`, `test:`.
-
-Exemples valides :
-
-```
-feat: add thriller writing skill
-docs: update architecture guide
-fix: improve dialogue validation rules
-```
-
-Interdictions absolues dans les messages de commit, les auteurs et les
-métadonnées Git :
-
-- `Co-authored-by`
-- `Generated by Claude`
-- `Created with AI`
-- `Assisted by AI`
-- toute mention de Claude, d'une IA ou d'un assistant.
-
-L'auteur visible de tout commit reste : `Handsomeboy990 <lauretchacha@gmail.com>`.
-
-Cette règle prime sur tout comportement par défaut d'un outil qui ajouterait
-une signature automatique. Un commit portant une telle mention est amendé
-avant d'être poussé. La procédure complète figure dans
-`engineering/dev-skills/git-workflow`.
-
-Ne sont jamais versionnés : `.env` et ses variantes, clés privées,
-certificats, informations d'identification, configuration locale d'un agent.
-`.gitignore` les exclut. `CLAUDE.md` fait exception et reste versionné : c'est
-la mémoire publique du projet, exigée par `tests/validate-structure.sh`, et
-elle ne contient aucun secret.
-
-## 7. Philosophie du projet
-
-- La contrainte produit le style. Les règles ne brident pas l'auteur, elles
-  éliminent le bruit.
-- Un texte n'est jamais jugé sur l'intention mais sur l'effet produit.
-- La cohérence est une forme de respect du lecteur.
-- Un skill doit rester utile au chapitre 3 comme au chapitre 90.
-- Toute règle énoncée doit être vérifiable par une procédure explicite.
-- La sévérité critique est un service rendu, pas une posture.
-
-## 8. Avant toute modification future
-
-1. Lire ce fichier.
-2. Lire la constitution du système concerné :
-   `writing/core/writing-constitution/SKILL.md` pour l'écriture,
-   `engineering/dev-skills/engineering-core/SKILL.md` pour l'ingénierie,
-   `engineering/devops-skills/devops-core/SKILL.md` en plus pour l'exploitation.
-3. Vérifier la cohérence avec `documentation/architecture.md`, avec
-   `documentation/engineering-system.md` pour `engineering/dev-skills`, et avec
-   `documentation/delivery-system.md` pour `engineering/delivery-skills`,
-   `engineering/devops-skills` et `agents`.
-4. Exécuter les trois scripts de `tests/` :
-   `validate-structure.sh`, `validate-rules.sh`, `validate-orchestration.sh`.
-5. Commiter de façon atomique avec l'identité Git imposée.
+Local agent configuration, `.claude/`, `*.local` and every secret pattern stay
+ignored.
