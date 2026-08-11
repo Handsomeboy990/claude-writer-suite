@@ -1,106 +1,103 @@
 ---
 name: detective
-description: Écrit un roman d'enquête : choix de l'école, construction de l'enquêteur, progression en neuf étapes, vérité de métier et procédure, technique de l'interrogatoire. À utiliser pour un polar, un procédural ou un roman noir.
+description: Writes an investigation novel: choice of school, construction of the investigator, a nine-step progression, professional and procedural truth, interrogation technique. Use for crime fiction, a procedural, or a roman noir.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, mystery, character-psychologist]
-  outputs: [dossier-d-enquete, procedure]
+  outputs: [investigation-dossier, procedure]
 ---
 
 # Detective
 
-Roman d'enquête centré sur l'enquêteur. Là où le mystère organise l'énigme, le
-roman policier organise une méthode, un milieu et un regard.
+An investigation novel centred on the investigator. Where the mystery
+organises the puzzle, crime fiction organises a method, a milieu and a gaze.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : un enquêteur dont la méthode se comprend, un milieu
-documenté, une progression par le travail, une vérité qui coûte à celui qui la
-trouve.
+The reader demands: an investigator whose method is legible, a documented
+milieu, progress through work, and a truth that costs the person who finds it.
 
-## 2. Choix de l'école
+## 2. Choice of school
 
-| École | Moteur | Ce que le lecteur vient chercher |
+| School | Engine | What the reader comes for |
 |---|---|---|
-| Énigme classique | déduction pure | le plaisir du puzzle |
-| Procédural | méthode collective, institution | l'exactitude du métier |
-| Hard boiled | corruption du milieu | la voix et le désenchantement |
-| Roman noir | déterminisme social | la fatalité, pas la solution |
-| Enquête intime | secret de famille | la vérité qui détruit |
+| Classic puzzle | pure deduction | the pleasure of the puzzle |
+| Procedural | collective method, institution | the accuracy of the trade |
+| Hard boiled | corruption of the milieu | the voice and the disenchantment |
+| Roman noir | social determinism | fatality, not the solution |
+| Intimate investigation | a family secret | the truth that destroys |
 
-Le choix commande le rythme, la voix et la fin. Il est déclaré dans la bible.
+The choice governs rhythm, voice and ending. It is declared in the bible.
 
-## 3. L'enquêteur
+## 3. The investigator
 
-Cinq champs obligatoires en plus de la fiche personnage standard :
+Five mandatory fields beyond the standard character sheet:
 
-1. Méthode : ce qu'il regarde en premier sur une scène.
-2. Angle mort : ce qu'il ne voit jamais, et qui coûte au moins une erreur.
-3. Autorité : de quel droit il enquête, et ce qui peut le lui retirer.
-4. Prix personnel : ce que l'enquête lui prend.
-5. Rapport à la loi : ce qu'il est prêt à enfreindre, et où il s'arrête.
+1. Method: what they look at first at a scene.
+2. Blind spot: what they never see, which costs at least one error.
+3. Authority: by what right they investigate, and what can remove it.
+4. Personal price: what the investigation takes from them.
+5. Relation to the law: what they will break, and where they stop.
 
-L'enquêteur doit se tromper au moins deux fois, dont une fois gravement.
+The investigator must be wrong at least twice, once seriously.
 
-## 4. Progression de l'enquête
+## 4. Progression of the investigation
 
-Étapes canoniques, à adapter :
+Canonical steps, to be adapted:
 
-1. Découverte et premières constatations.
-2. Cercle des intéressés, mobiles apparents.
-3. Première hypothèse, cohérente et fausse.
-4. Élément qui ruine l'hypothèse.
-5. Résistance du milieu : quelqu'un empêche l'enquête.
-6. Deuxième hypothèse, partiellement vraie.
-7. Danger direct pour l'enquêteur ou pour un tiers.
-8. Vérité, obtenue par un détail antérieur relu.
-9. Conséquence, souvent injuste.
+1. Discovery and first observations.
+2. The circle of interested parties, apparent motives.
+3. A first hypothesis, coherent and wrong.
+4. The element that ruins the hypothesis.
+5. Resistance from the milieu: someone obstructs the investigation.
+6. A second hypothesis, partly true.
+7. Direct danger to the investigator or to a third party.
+8. The truth, obtained by rereading an earlier detail.
+9. The consequence, often unjust.
 
-## 5. Procédure et vérité de métier
+## 5. Procedure and professional truth
 
-- Documenter le cadre légal réel : garde à vue, réquisition, autopsie,
-  compétence territoriale, hiérarchie.
-- Montrer la lenteur administrative, qui est une source de tension gratuite.
-- Le laboratoire n'est ni instantané ni infaillible.
-- Les témoins mentent par intérêt, par pudeur, par mémoire défaillante, plus
-  souvent que par culpabilité.
-- Un interrogatoire est une scène de conflit d'objectifs, pas un questionnaire.
+- Document the real legal framework: custody, warrants, autopsy, territorial
+  jurisdiction, hierarchy.
+- Show administrative slowness, which is a free source of tension.
+- The laboratory is neither instant nor infallible.
+- Witnesses lie out of self-interest, modesty or faulty memory far more often
+  than out of guilt.
+- An interrogation is a scene of conflicting objectives, not a questionnaire.
 
-## 6. Interrogatoire, technique
+## 6. Interrogation technique
 
-- Fixer ce que chacun veut obtenir et ce que chacun veut cacher.
-- Établir qui a le pouvoir dans la pièce, et le faire basculer une fois.
-- Utiliser le silence, la répétition d'une question, le retour sur un détail
-  matériel.
-- L'aveu, s'il vient, arrive par lassitude ou par vanité, jamais par
-  démonstration.
+- Fix what each party wants to obtain and what each wants to hide.
+- Establish who holds power in the room, and make it shift once.
+- Use silence, the repetition of a question, the return to a material detail.
+- A confession, if it comes, arrives through weariness or vanity, never
+  through demonstration.
 
-## 7. Clichés à retourner ou proscrire
+## 7. Cliches to turn or prohibit
 
-- L'enquêteur alcoolique divorcé sans autre trait.
-- Le supérieur qui retire l'affaire sans motif crédible.
-- Le médecin légiste qui donne l'heure de la mort à la minute.
-- Le tueur en série génial qui laisse des énigmes.
-- L'informateur qui sait tout.
+- The alcoholic divorced investigator with no other trait.
+- The superior who removes the case for no credible reason.
+- The medical examiner who gives the time of death to the minute.
+- The brilliant serial killer who leaves riddles.
+- The informant who knows everything.
 
-## 8. Contrôles de sortie
+## 8. Exit checks
 
-- La méthode de l'enquêteur est visible dans au moins cinq scènes.
-- Chaque avancée résulte d'un acte, jamais d'une confidence gratuite.
-- Le milieu est documenté au niveau 2 minimum.
-- La vérité a un coût pour l'enquêteur.
+- The investigator's method is visible in at least five scenes.
+- Every advance results from an act, never from a free confidence.
+- The milieu is researched at level 2 minimum.
+- The truth costs the investigator something.
 
 ## 9. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : lisibilité de la
-méthode, exactitude procédurale, qualité des interrogatoires, coût de la
-vérité.
+The eleven constitution axes, plus four genre axes: legibility of the method,
+procedural accuracy, quality of interrogations, cost of the truth.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur exactitude procédurale.
+Threshold: no axis below 3, average at least 4 on procedural accuracy.
 
 ## 10. Interfaces
 
-- Amont : `mystery`, `research-director`.
-- Voisins : `genres/thriller`, `genres/political-fiction`.
+- Upstream: `mystery`, `research-director`.
+- Neighbours: `genres/thriller`, `genres/political-fiction`.

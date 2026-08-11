@@ -1,9 +1,25 @@
 # dark-fantasy
 
-Fantasy où le monde ne récompense pas la vertu : règles de la noirceur,
-échelle morale interne, compromission progressive, dignité résiduelle,
-interdits de complaisance.
+Fantasy in which the world does not reward virtue: rules of darkness, an
+internal moral scale, progressive compromise, residual dignity, prohibitions
+against complacency.
 
-- Entrées : bible du monde, échelle morale.
-- Sorties : bible de dark fantasy, échelle morale documentée.
-- Dépendances : writing-constitution, fantasy, horror.
+- Inputs: world bible, moral scale.
+- Outputs: dark fantasy bible, documented moral scale.
+- Depends on: `writing-constitution`, `fantasy`, `horror`.
+- Neighbours: `political-fiction`, `dystopian`.
+
+## When to use
+
+A dark narrative, an antihero, or a brutal fantasy world.
+
+## The line it draws
+
+Darkness is a structural consequence of how the world works, not a tone
+applied to it. Rule 2 of section 3 is the operational test: a hard scene that
+produces no narrative consequence is complacent and gets cut, and the
+auto-critique threshold on that axis is 4.
+
+## Configuration
+
+`language.creative_output` sets the output language.

@@ -1,135 +1,131 @@
 ---
 name: world-builder
-description: Construit des univers cohérents à partir de la contrainte matérielle : géographie, économie, pouvoir, croyances, technique, langue, systèmes de magie ou de technologie. À utiliser pour créer un monde, vérifier sa cohérence en cascade, ou définir les règles d'un système d'impossible.
+description: Builds coherent worlds from material constraint: geography, economy, power, belief, technology, language, systems of magic or technology. Use to create a world, check its consistency in cascade, or define the rules of a system of the impossible.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, research-director]
-  outputs: [bible-du-monde, regles-internes, cartographie, lexique]
+  outputs: [world-bible, internal-rules, cartography, lexicon]
 ---
 
 # World Builder
 
-Création d'univers cohérents, qu'ils soient inventés, historiques ou
-contemporains. Un monde n'est crédible que s'il est contraint.
+Creation of coherent worlds, invented, historical or contemporary. A world is
+credible only when it is constrained.
 
-## 1. Principe directeur
+## 1. Guiding principle
 
-On ne construit pas un monde pour lui-même. On construit ce qui produit du
-conflit, ce qui limite les personnages et ce qui sera vu. Tout le reste existe
-en arrière-plan, sans être écrit, et se manifeste par des effets.
+You do not build a world for its own sake. You build what produces conflict,
+what limits the characters, and what will be seen. Everything else exists in
+the background, unwritten, and shows itself through effects.
 
-Règle du dixième : le lecteur voit un dixième du monde construit. Le neuvième
-dixième sert uniquement à garantir que le dixième visible ne se contredit pas.
+The rule of the tenth: the reader sees one tenth of the world you build. The
+other nine tenths exist solely to guarantee that the visible tenth does not
+contradict itself.
 
-## 2. Ordre de construction
+## 2. Order of construction
 
-### 1. Contrainte matérielle
+### 1. Material constraint
 
-Commencer par la ressource rare : eau, terre arable, énergie, métal, sécurité,
-information. Toute société s'organise autour de ce qui manque. La rareté
-détermine ensuite le pouvoir, le droit, la géographie du peuplement et les
-conflits.
+Start with the scarce resource: water, arable land, energy, metal, safety,
+information. Every society organises itself around what it lacks. Scarcity
+then determines power, law, the geography of settlement, and the conflicts.
 
-### 2. Géographie et climat
+### 2. Geography and climate
 
-Relief, réseaux d'eau, sols, saisons, vents dominants. Puis en déduire :
-routes, ports, frontières naturelles, cultures, architecture, vêtement,
-rythme de la journée.
+Relief, water networks, soils, seasons, prevailing winds. Then derive: roads,
+ports, natural borders, crops, architecture, clothing, the rhythm of the day.
 
-### 3. Économie
+### 3. Economy
 
-Qui produit, qui échange, qui prélève. Monnaie ou troc, crédit, dette.
-Un monde sans économie visible sonne creux même en fantasy.
+Who produces, who trades, who takes a cut. Currency or barter, credit, debt. A
+world with no visible economy rings hollow, fantasy included.
 
-### 4. Pouvoir
+### 4. Power
 
-Source de légitimité : force, naissance, élection, savoir, religion, argent.
-Mode de succession. Contre-pouvoirs. Ce qui arrive à celui qui désobéit,
-concrètement, avec un exemple daté.
+Source of legitimacy: force, birth, election, knowledge, religion, money. Mode
+of succession. Counter-powers. What happens to someone who disobeys,
+concretely, with a dated example.
 
-### 5. Croyances
+### 5. Belief
 
-Ce que l'on craint, ce que l'on promet aux morts, ce qui est impur. Les rites
-sont des faits sociaux : ils coûtent du temps et de l'argent, ils excluent
-et ils rassemblent.
+What is feared, what is promised to the dead, what is unclean. Rites are
+social facts: they cost time and money, they exclude and they gather.
 
-### 6. Savoir et technique
+### 6. Knowledge and technology
 
-Niveau technique, transmission du savoir, alphabétisation, médecine. Le
-niveau technique doit être cohérent avec l'économie et l'énergie disponibles.
+Technical level, transmission of knowledge, literacy, medicine. The technical
+level must be consistent with the economy and the available energy.
 
-### 7. Langue
+### 7. Language
 
-Voir `resources/lexique.md`. Ne créer que les mots que le récit emploiera.
-Cinq à quinze termes suffisent pour donner l'impression d'une langue entière.
+See `resources/lexique.md`. Invent only the words the narrative will use. Five
+to fifteen terms are enough to suggest an entire language.
 
-## 3. Systèmes spéciaux : magie, technologie, pouvoir surnaturel
+## 3. Special systems: magic, technology, supernatural power
 
-Cinq questions obligatoires, sans réponse ferme le système ne tient pas :
+Five mandatory questions. Without a firm answer to each, the system does not
+hold:
 
-1. Qui peut l'utiliser, et pourquoi eux.
-2. Quel est le coût, payé immédiatement et visiblement.
-3. Quelle est la limite absolue, jamais franchie.
-4. Qui contrôle l'accès, et quel pouvoir social cela crée.
-5. Pourquoi le monde n'a pas été transformé plus radicalement par son
-   existence.
+1. Who can use it, and why them.
+2. What does it cost, paid immediately and visibly.
+3. What is the absolute limit, never crossed.
+4. Who controls access, and what social power that creates.
+5. Why has the world not been more radically transformed by its existence.
 
-Corollaire : le lecteur doit connaître les règles avant qu'elles ne résolvent
-un problème majeur. Une capacité révélée au moment du climax annule la
-tension.
+Corollary: the reader must know the rules before those rules solve a major
+problem. A capability revealed at the climax cancels the tension.
 
-## 4. Cohérence en cascade
+## 4. Consistency in cascade
 
-Toute décision se propage. Vérifier systématiquement les conséquences sur :
+Every decision propagates. Systematically check the consequences on:
 
-- la nourriture et sa conservation ;
-- la durée des déplacements ;
-- la circulation de l'information ;
-- la place des femmes, des enfants et des vieillards ;
-- la médecine et la mortalité ;
-- le traitement des morts ;
-- l'éclairage et le rapport à la nuit.
+- food and its preservation;
+- travel times;
+- the circulation of information;
+- the place of women, children and the old;
+- medicine and mortality;
+- the treatment of the dead;
+- lighting and the relation to night.
 
-Ces sept points révèlent quatre-vingt-dix pour cent des incohérences.
+Those seven points expose ninety percent of inconsistencies.
 
-## 5. Révélation du monde
+## 5. Revealing the world
 
-- Aucun paragraphe d'encyclopédie. L'information passe par l'usage, le
-  conflit, le manque ou l'erreur d'un personnage.
-- Un personnage ne remarque pas ce qui lui est familier : le monde se décrit
-  par l'oeil de qui arrive, de qui revient, ou de qui perd quelque chose.
-- Trois détails précis valent mieux qu'une description exhaustive.
-- Le lexique local s'introduit par le contexte, jamais par une glose.
+- No encyclopaedia paragraphs. Information arrives through use, conflict, lack
+  or a character's mistake.
+- A character does not notice what is familiar to them: the world is described
+  through the eye of someone arriving, someone returning, or someone losing
+  something.
+- Three precise details beat an exhaustive description.
+- Local vocabulary is introduced by context, never by a gloss.
 
-## 6. Mondes réels et historiques
+## 6. Real and historical worlds
 
-Quand le monde existe, il est documenté par `research-director` et non
-inventé. Les règles de représentation de la constitution, section 8,
-s'appliquent intégralement. Aucun raccourci, aucune couleur locale
-décorative.
+When the world exists, it is documented by `research-director` rather than
+invented. Section 8 of the constitution, on representation, applies in full.
+No shortcuts, no decorative local colour.
 
-## 7. Pièges
+## 7. Traps
 
-- Le monde figé, où rien n'a changé depuis mille ans.
-- La carte avant la contrainte.
-- L'empire unique sans concurrence ni périphérie.
-- Le peuple entier défini par un seul trait.
-- Le système magique sans coût, ou dont le coût n'est jamais payé à l'écran.
-- La géographie impossible : capitale sans eau, port sans arrière-pays.
+- The frozen world, where nothing has changed in a thousand years.
+- The map before the constraint.
+- The single empire with no rival and no periphery.
+- An entire people defined by one trait.
+- A magic system with no cost, or whose cost is never paid on the page.
+- Impossible geography: a capital with no water, a port with no hinterland.
 
 ## 8. Auto-critique
 
-Axes notés de 0 à 5 : cohérence interne, contrainte matérielle, crédibilité
-économique, logique du pouvoir, tenue du système spécial, absence
-d'encyclopédisme, richesse sensorielle, originalité, respect culturel,
-utilité dramatique.
+Score 0 to 5: internal consistency, material constraint, economic
+credibility, logic of power, special system held, absence of encyclopaedism,
+sensory richness, originality, cultural respect, dramatic usefulness.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8.
+Threshold: no axis below 3, average at least 3.8.
 
 ## 9. Interfaces
 
-- Amont : `research-director`.
-- Latéral : `immersion-director`, `timeline-manager`.
-- Contrôle : `continuity-manager`.
+- Upstream: `research-director`.
+- Lateral: `immersion-director`, `timeline-manager`.
+- Review: `continuity-manager`.

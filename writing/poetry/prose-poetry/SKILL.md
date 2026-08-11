@@ -1,87 +1,85 @@
 ---
 name: prose-poetry
-description: Écrit un poème en prose : bloc compact, quatre forces de cohésion (rythme, champ lexical, progression sensorielle, clôture), familles de formes, pièges du lyrisme et de la chute explicative. À utiliser pour une prose poétique, une notation ou un fragment.
+description: Writes a prose poem: compact block, four cohesion forces (rhythm, lexical field, sensory progression, closure), families of form, and the traps of lyricism and the explanatory ending. Use for poetic prose, a notation, or a fragment.
 license: MIT
 metadata:
   category: poetry
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, poet]
-  outputs: [proses-poetiques]
+  outputs: [prose-poems]
 ---
 
 # Prose Poetry
 
-Le poème en prose n'a ni vers ni retour à la ligne, mais il obéit à une
-nécessité formelle interne. Ce qui le distingue d'un fragment de récit, c'est
-qu'il ne progresse pas : il s'approfondit.
+The prose poem has no lines and no line breaks, but it obeys an internal
+formal necessity. What distinguishes it from a fragment of narrative is that
+it does not progress: it deepens.
 
-## 1. Caractéristiques
+## 1. Characteristics
 
-- Bloc compact, généralement de cinq à trente lignes.
-- Pas de vers, pas de rime obligatoire, mais un travail rythmique constant.
-- Unité de ton, d'image ou de lieu.
-- Pas d'intrigue. S'il y a un récit, il est prétexte.
-- Clôture par déplacement, jamais par conclusion.
+- A compact block, usually five to thirty lines.
+- No verse, no obligatory rhyme, but constant rhythmic work.
+- Unity of tone, image or place.
+- No plot. If there is a narrative, it is a pretext.
+- Closure by displacement, never by conclusion.
 
-## 2. Ce qui tient le texte
+## 2. What holds the text together
 
-Puisque le vers ne soutient plus, quatre forces le remplacent :
+Since the line no longer supports it, four forces take over:
 
-1. Le rythme de la phrase, avec des retours de structure et des variations de
-   longueur.
-2. L'unité de champ lexical, tenue avec discipline.
-3. La progression sensorielle : le texte change de sens perceptif, du visuel
-   au sonore, du sonore au tactile.
-4. La dernière phrase, qui doit ouvrir plutôt que refermer.
+1. The rhythm of the sentence, with returning structures and varying lengths.
+2. Unity of lexical field, held with discipline.
+3. Sensory progression: the text changes perceptual register, from visual to
+   aural, from aural to tactile.
+4. The last sentence, which must open rather than close.
 
-## 3. Écriture
+## 3. Writing
 
-- Phrases de longueurs très contrastées. Une phrase longue de cinq lignes
-  suivie d'une phrase de trois mots produit l'essentiel de l'effet.
-- Répétition d'un mot ou d'une structure toutes les trois ou quatre phrases,
-  employée comme scansion.
-- Le concret domine : objets, gestes, matières, prix, noms propres.
-- Aucun commentaire du sens par le texte lui-même.
-- La ponctuation est l'unique instrument de coupe : elle est travaillée
-  comme une partition.
+- Sentences of strongly contrasting lengths. A five-line sentence followed by
+  a three-word one produces most of the effect.
+- Repetition of a word or a structure every three or four sentences, used as
+  scansion.
+- The concrete dominates: objects, gestures, materials, prices, proper nouns.
+- No commentary by the text on its own meaning.
+- Punctuation is the only instrument of the cut: it is worked like a score.
 
-## 4. Familles
+## 4. Families
 
-| Famille | Principe |
+| Family | Principle |
 |---|---|
-| Notation | consigner un lieu ou un instant, sans intention |
-| Fable brève | un événement minuscule qui bascule dans l'étrange |
-| Portrait | un être saisi par ses gestes et ses objets |
-| Lettre ou adresse | un destinataire non nommé, une parole retenue |
-| Inventaire | une liste qui devient un récit par accumulation |
+| Notation | recording a place or an instant, with no intention |
+| Brief fable | a tiny event tipping into the strange |
+| Portrait | a person caught through their gestures and objects |
+| Letter or address | an unnamed recipient, a withheld word |
+| Inventory | a list that becomes a narrative by accumulation |
 
-## 5. Pièges
+## 5. Traps
 
-- Le lyrisme sans objet.
-- Le récit qui prend le dessus et transforme le texte en nouvelle courte.
-- L'accumulation d'images sans progression sensorielle.
-- La chute explicative.
-- La ponctuation relâchée, qui détruit le rythme.
+- Lyricism with no object.
+- Narrative taking over and turning the text into a short story.
+- Accumulated images with no sensory progression.
+- The explanatory ending.
+- Slack punctuation, which destroys the rhythm.
 
-## 6. Procédure
+## 6. Procedure
 
-1. Choisir un lieu, un instant ou un objet unique.
-2. Écrire d'un jet, sans coupe.
-3. Retirer toute abstraction et tout commentaire.
-4. Travailler les longueurs de phrase par contraste.
-5. Installer une reprise, employée trois fois.
-6. Réécrire la dernière phrase au moins cinq fois.
-7. Lire à voix haute, ajuster la ponctuation.
+1. Choose a single place, instant or object.
+2. Write in one go, with no cuts.
+3. Remove every abstraction and every commentary.
+4. Work the sentence lengths by contrast.
+5. Install a repetition, used three times.
+6. Rewrite the last sentence at least five times.
+7. Read aloud, adjust the punctuation.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : tenue rythmique, unité, progression sensorielle,
-concrétude, qualité de la clôture, absence de récit envahissant, absence de
-commentaire.
+Score 0 to 5: rhythmic control, unity, sensory progression, concreteness,
+quality of the closure, absence of invasive narrative, absence of commentary.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur tenue rythmique et clôture.
+Threshold: no axis below 3, average at least 4 on rhythmic control and
+closure.
 
 ## 8. Interfaces
 
-- Amont : `poet`.
-- Voisins : `poetry/free-verse`, `genres/magical-realism`.
+- Upstream: `poet`.
+- Neighbours: `poetry/free-verse`, `genres/magical-realism`.

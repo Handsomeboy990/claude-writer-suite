@@ -1,97 +1,96 @@
 ---
 name: mystery
-description: Construit un mystère équitable : récit réel des faits contre récit de la découverte, règles d'équité, typologie et dissimulation des indices, fausses pistes honnêtes, structure de la révélation. À utiliser pour une énigme, un whodunit ou un récit à révélation finale.
+description: Builds a fair mystery: the real account of the facts against the account of the discovery, fairness rules, clue typology and concealment, honest false trails, the structure of the revelation. Use for a puzzle, a whodunit, or any narrative with a final reveal.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, novel-architect, timeline-manager]
-  outputs: [plan-du-mystere, table-des-indices]
+  outputs: [mystery-plan, clue-table]
 ---
 
 # Mystery
 
-Le mystère est un contrat d'équité : le lecteur doit pouvoir résoudre, et
-échouer de justesse. Toute la construction consiste à donner l'information
-sans qu'elle soit vue.
+A mystery is a contract of fairness: the reader must be able to solve it, and
+fail narrowly. The whole construction consists of giving the information
+without it being seen.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : une question claire, des indices honnêtes, une solution
-inattendue mais inévitable rétrospectivement. Il ne pardonne pas la
-dissimulation d'un fait connu du narrateur.
+The reader demands: a clear question, honest clues, a solution that is
+unexpected but inevitable in retrospect. They do not forgive the concealment
+of a fact the narrator holds.
 
-## 2. Les deux récits
+## 2. The two accounts
 
-Un mystère contient toujours deux récits :
+A mystery always contains two accounts:
 
-1. Le récit de ce qui s'est passé, chronologique, complet, écrit en premier
-   et jamais publié.
-2. Le récit de la découverte, ordre de lecture, qui expose les traces du
-   premier.
+1. The account of what happened: chronological, complete, written first and
+   never published.
+2. The account of the discovery: the reading order, which exposes the traces
+   of the first.
 
-Aucune ligne du second n'est écrite avant que le premier soit intégralement
-établi, y compris les heures, les motivations et les erreurs du coupable.
+No line of the second is written before the first is fully established, hours,
+motives and the culprit's mistakes included.
 
-## 3. Règles d'équité
+## 3. Fairness rules
 
-- Tout indice nécessaire à la solution est présent dans le texte avant la
-  révélation.
-- Le coupable apparaît dans le premier tiers.
-- Aucune information n'est cachée par le narrateur s'il la détient, sauf
-  narration non fiable déclarée.
-- Aucun jumeau inconnu, aucune coïncidence salvatrice, aucun poison inventé.
-- La solution repose sur des éléments compréhensibles sans expertise.
+- Every clue needed for the solution is present in the text before the
+  revelation.
+- The culprit appears in the first third.
+- No information is hidden by the narrator if they hold it, except under a
+  declared unreliable narration.
+- No unknown twin, no saving coincidence, no invented poison.
+- The solution rests on elements understandable without expertise.
 
-## 4. Technique des indices
+## 4. Clue technique
 
-| Type | Fonction | Placement |
+| Type | Function | Placement |
 |---|---|---|
-| Indice vrai | permet la solution | dissimulé dans une liste, ou dans une scène chargée |
-| Indice vrai déguisé | paraît insignifiant | donné pendant une action plus intéressante |
-| Fausse piste honnête | oriente ailleurs, sans mentir | doit avoir sa propre explication |
-| Contre-indice | innocente à tort | résolu avant la fin |
-| Indice de confirmation | rassure après la révélation | placé dans le dernier tiers |
+| True clue | enables the solution | hidden in a list, or in a crowded scene |
+| Disguised true clue | appears insignificant | given during a more interesting action |
+| Honest false trail | points elsewhere without lying | must have its own explanation |
+| Counter-clue | wrongly exonerates | resolved before the end |
+| Confirming clue | reassures after the reveal | placed in the final third |
 
-Techniques de dissimulation : placer l'indice avant une émotion forte, le
-donner par un personnage antipathique, le noyer dans une énumération, le
-formuler comme une évidence.
+Concealment techniques: place the clue just before a strong emotion, deliver
+it through an unlikeable character, bury it in an enumeration, phrase it as
+something obvious.
 
 ## 5. Structure
 
-- Chapitre 1 : la question. Pas nécessairement un crime.
-- Premier tiers : présentation du cercle fermé, tous les suspects vus.
-- Point médian : une certitude tombe, la question se déplace.
-- Dernier tiers : élimination, resserrement, danger pour l'enquêteur.
-- Révélation : reconstitution qui relit des scènes déjà lues.
-- Après la révélation : conséquence humaine, jamais une simple arrestation.
+- Chapter 1: the question. Not necessarily a crime.
+- First third: the closed circle presented, every suspect seen.
+- Midpoint: a certainty falls, the question moves.
+- Final third: elimination, tightening, danger for the investigator.
+- Revelation: a reconstruction that rereads scenes already read.
+- After the revelation: a human consequence, never merely an arrest.
 
-## 6. Clichés à retourner ou proscrire
+## 6. Cliches to turn or prohibit
 
-- Le coupable le moins probable choisi pour cette seule raison.
-- L'aveu spontané en fin de livre.
-- Le témoin qui meurt juste avant de parler.
-- Le carnet retrouvé qui contient tout.
-- La reconstitution devant tous les suspects réunis, sauf traitement ironique
-  assumé.
+- The least likely culprit chosen for that reason alone.
+- The spontaneous confession at the end of the book.
+- The witness who dies just before speaking.
+- The recovered notebook that contains everything.
+- The reconstruction in front of all the suspects, unless treated ironically
+  and deliberately.
 
-## 7. Contrôles de sortie
+## 7. Exit checks
 
-- Relire en cherchant les indices : leur nombre doit être compris entre cinq
-  et neuf pour un roman.
-- Chaque fausse piste a une explication propre et vérifiable.
-- Le lecteur peut reconstituer la chronologie réelle après lecture.
-- La solution est énonçable en cinq phrases.
+- Reread hunting for clues: for a novel there should be between five and nine.
+- Every false trail has its own verifiable explanation.
+- The reader can reconstruct the real chronology after reading.
+- The solution can be stated in five sentences.
 
 ## 8. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : équité, qualité de
-la dissimulation, inévitabilité rétrospective, tenue des fausses pistes.
+The eleven constitution axes, plus four genre axes: fairness, quality of the
+concealment, retrospective inevitability, false trails held.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur équité et inévitabilité.
+Threshold: no axis below 3, average at least 4 on fairness and inevitability.
 
 ## 9. Interfaces
 
-- Amont : `novel-architect`, `timeline-manager`.
-- Latéral : `continuity-manager` pour le registre du savoir.
-- Voisins : `genres/detective`, `genres/thriller`.
+- Upstream: `novel-architect`, `timeline-manager`.
+- Lateral: `continuity-manager` for the knowledge register.
+- Neighbours: `genres/detective`, `genres/thriller`.

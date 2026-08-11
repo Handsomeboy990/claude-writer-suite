@@ -1,45 +1,43 @@
 ---
 name: screenwriter
-description: Écrit un scénario : pitch, synopsis, traitement, séquencier, continuité dialoguée, format standard, structure long métrage et série, adaptation d'un roman. À utiliser pour écrire ou adapter un scénario, ou convertir de l'intériorité romanesque en action visible.
+description: Writes a screenplay: pitch, synopsis, treatment, scene breakdown, full script, standard format, feature and series structure, adaptation of a novel. Use to write or adapt a screenplay, or to convert novelistic interiority into visible action.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, scene-builder, dialogue-master]
-  outputs: [traitement, sequencier, continuite-dialoguee]
+  outputs: [treatment, scene-breakdown, screenplay]
 ---
 
 # Screenwriter
 
-Écriture scénaristique : long métrage, série, adaptation d'un roman. Le
-scénario n'est pas un roman découpé : il ne dispose que de ce qui se voit et
-de ce qui s'entend.
+Screenwriting: feature, series, adaptation of a novel. A screenplay is not a
+novel cut into pieces: it has access only to what is seen and what is heard.
 
-## 1. Contrainte fondatrice
+## 1. Founding constraint
 
-Tout ce qui n'est ni visible ni audible n'existe pas. Les pensées, les
-souvenirs, les intentions doivent être traduits en actions, en objets, en
-regards, en silences.
+Anything neither visible nor audible does not exist. Thoughts, memories and
+intentions must be translated into actions, objects, looks, silences.
 
-Test de conversion : prendre un paragraphe de roman, supprimer tout ce qui
-relève de l'intériorité, et vérifier ce qu'il reste. Ce reste est le point de
-départ de la scène.
+Conversion test: take a paragraph of the novel, remove everything that belongs
+to interiority, and see what remains. What remains is the starting point of
+the scene.
 
-## 2. Étapes du travail
+## 2. Stages of the work
 
-1. Pitch : une phrase.
-2. Synopsis : deux à cinq pages, au présent, sans dialogue.
-3. Traitement : découpage séquence par séquence, au présent, actions
-   dominantes, quelques répliques clés.
-4. Séquencier : tableau numéroté avec lieu, moment, personnages, objectif,
-   conflit, sortie.
-5. Continuité dialoguée : le scénario complet.
+1. Pitch: one sentence.
+2. Synopsis: two to five pages, present tense, no dialogue.
+3. Treatment: sequence by sequence, present tense, dominant actions, a few key
+   lines.
+4. Scene breakdown: a numbered table with place, time, characters, objective,
+   conflict, exit.
+5. Screenplay: the full script.
 
-Ne jamais écrire la continuité dialoguée avant que le séquencier tienne.
+Never write the script before the breakdown holds.
 
 ## 3. Format
 
-En-tête de scène : nature, lieu, moment.
+Scene heading: interior or exterior, place, time.
 
 ```
 INT. BUREAU DU CHEF DE SECTEUR - JOUR
@@ -54,78 +52,75 @@ bureau, de biais.
           Vous avez l'ordre de la direction ?
 ```
 
-Règles :
+Rules:
 
-- Présent de l'indicatif, troisième personne.
-- Un personnage est en capitales à sa première apparition seulement.
-- Pas d'indication de plan, de mouvement de caméra, sauf nécessité absolue.
-- Pas de didascalie psychologique : `il pense à sa mère` est irrecevable.
-- Une page équivaut à une minute environ.
+- Present tense, third person.
+- A character is capitalised on their first appearance only.
+- No shot or camera movement indications, unless absolutely necessary.
+- No psychological stage direction: `il pense à sa mère` is inadmissible.
+- One page is roughly one minute.
 
 ## 4. Structure
 
-Long métrage, cent dix pages :
+Feature, one hundred and ten pages:
 
-- Séquence d'ouverture, pages 1 à 10 : monde et manque.
-- Élément déclencheur, page 12.
-- Fin d'acte 1, page 27 : le protagoniste s'engage.
-- Point médian, page 55 : renversement.
-- Fin d'acte 2, page 85 : tout est perdu.
-- Climax, pages 95 à 105.
-- Résolution, pages 105 à 110.
+- Opening sequence, pages 1 to 10: the world and the lack.
+- Inciting incident, page 12.
+- End of act 1, page 27: the protagonist commits.
+- Midpoint, page 55: reversal.
+- End of act 2, page 85: everything is lost.
+- Climax, pages 95 to 105.
+- Resolution, pages 105 to 110.
 
-Série : ajouter par épisode une question fermée en fin d'épisode et une
-question de saison qui reste ouverte. Voir `saga-architect` pour la logique
-multi-saisons.
+Series: add, per episode, a closed question answered at the end of the
+episode, and a season question that stays open. See `saga-architect` for
+multi-season logic.
 
-## 5. Scène de scénario
+## 5. The screenplay scene
 
-Chaque scène tient sur quatre lignes de préparation : où, qui veut quoi, quel
-obstacle, quelle sortie. Une scène de plus de trois pages doit être justifiée.
+Every scene sits on four lines of preparation: where, who wants what, what
+obstacle, what exit. A scene longer than three pages must be justified.
 
-Techniques d'efficacité :
+Techniques:
 
-- entrer sur un objet qui pose la situation ;
-- couper la scène sur la réplique qui déséquilibre, pas sur la réponse ;
-- laisser la caméra à un personnage qui ne parle pas ;
-- utiliser le hors-champ pour ce qui coûterait cher ou serait complaisant.
+- open on an object that states the situation;
+- cut the scene on the line that unbalances, not on the answer;
+- leave the camera on a character who is not speaking;
+- use the off-screen for what would be expensive or complacent.
 
-## 6. Dialogue de scénario
+## 6. Screenplay dialogue
 
-Différences avec le roman :
+Differences from the novel:
 
-- pas d'incise, le nom du personnage remplace le verbe de parole ;
-- répliques plus courtes, quatre lignes maximum ;
-- l'oralité est plus marquée, mais reste écrite : on coupe les hésitations
-  réelles ;
-- le sous-texte est encore plus déterminant, car il n'y a pas de narrateur
-  pour compenser.
+- no incise; the character name replaces the speech verb;
+- shorter lines, four at most;
+- orality is more marked, but still written: real hesitations are cut;
+- subtext matters even more, because no narrator compensates.
 
-Les règles de la constitution sur les emoji, le tiret cadratin, les clichés et
-les cultures s'appliquent intégralement.
+The constitution's rules on emoji, em dashes, cliches and cultures apply in
+full.
 
-## 7. Adaptation d'un roman
+## 7. Adapting a novel
 
-Protocole :
+Protocol:
 
-1. Identifier la question dramatique du roman.
-2. Lister les scènes qui font avancer cette question. Les autres sautent.
-3. Fusionner les personnages redondants.
-4. Convertir toute intériorité majeure en action ou en conflit.
-5. Déplacer les révélations pour tenir le rythme de la structure.
-6. Accepter de perdre le style : il sera remplacé par la mise en scène, le
-   cadre et le montage.
+1. Identify the dramatic question of the novel.
+2. List the scenes that advance that question. The others go.
+3. Merge redundant characters.
+4. Convert every major interiority into action or conflict.
+5. Move the reveals to hold the rhythm of the structure.
+6. Accept losing the prose: it is replaced by staging, framing and editing.
 
 ## 8. Auto-critique
 
-Axes notés de 0 à 5 : clarté visuelle, absence d'intériorité non traduite,
-efficacité des entrées et sorties de scène, structure, rythme des pages,
-qualité des dialogues, sous-texte, économie de personnages, format.
+Score 0 to 5: visual clarity, absence of untranslated interiority,
+effectiveness of scene entries and exits, structure, page rhythm, quality of
+dialogue, subtext, economy of characters, format.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8.
+Threshold: no axis below 3, average at least 3.8.
 
 ## 9. Interfaces
 
-- Amont : `novel-architect`, `character-psychologist`.
-- Latéral : `scene-builder`, `dialogue-master`.
-- Contrôle : `quality/story-doctor`.
+- Upstream: `novel-architect`, `character-psychologist`.
+- Lateral: `scene-builder`, `dialogue-master`.
+- Review: `quality/story-doctor`.

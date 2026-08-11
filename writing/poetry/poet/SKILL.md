@@ -1,119 +1,119 @@
 ---
 name: poet
-description: Écrit de la poésie en français : prosodie (mètres, césure, rimes, enjambement), travail de l'image et du son, procédure de composition en sept étapes, interdits et seuils relevés. À utiliser pour composer ou réviser un poème, ou vérifier un compte de syllabes.
+description: Writes poetry in French: prosody (metres, caesura, rhyme, enjambment), work on image and sound, a seven-step composition procedure, prohibitions and raised thresholds. Use to compose or revise a poem, or to verify a syllable count.
 license: MIT
 metadata:
   category: poetry
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [poemes, note-prosodique]
+  outputs: [poems, prosody-note]
 ---
 
 # Poet
 
-Skill général de poésie. Il porte la prosodie française, le travail de
-l'image et les procédures de révision applicables à toutes les formes.
+General poetry skill. It carries French prosody, the work on image, and the
+revision procedures common to every form.
 
-## 1. Principes
+Section 2 is French prosody and applies to French output. Sections 3 to 7
+apply in any output language. When `language.creative_output` is not French,
+replace section 2 with the target language's own metrics, stated explicitly.
+The sub-skills `sonnet`, `haiku`, `free-verse` and `prose-poetry` follow the
+same rule.
 
-- Un poème ne dit pas une émotion, il la produit par la forme.
-- La contrainte n'est pas un obstacle : elle force le déplacement qui fait
-  trouver ce que l'on ne cherchait pas.
-- Le premier vers venu est presque toujours un vers entendu ailleurs.
-- Un poème se juge à voix haute. Ce qui ne tient pas à l'oreille ne tient pas.
+## 1. Principles
 
-## 2. Prosodie française
+- A poem does not state an emotion; it produces one through form.
+- Constraint is not an obstacle: it forces the displacement that finds what
+  you were not looking for.
+- The first line that comes is almost always a line heard somewhere else.
+- A poem is judged aloud. What does not hold in the ear does not hold.
 
-### 2.1 Compte des syllabes
+## 2. French prosody
 
-- La syllabe finale muette ne compte pas en fin de vers.
-- Le e muet compte à l'intérieur du vers s'il est suivi d'une consonne,
-  ne compte pas s'il est suivi d'une voyelle ou en fin de vers.
-- La diérèse sépare deux voyelles en deux syllabes, la synérèse les réunit.
-  Le choix est fixé par l'usage classique et par l'oreille.
+### 2.1 Counting syllables
 
-### 2.2 Mètres
+- The final mute syllable does not count at the end of a line.
+- The mute e counts inside the line when followed by a consonant, and does not
+  count when followed by a vowel or at the end of a line.
+- Dieresis splits two vowels into two syllables; syneresis joins them. The
+  choice is fixed by classical usage and by the ear.
 
-| Mètre | Syllabes | Caractère |
+### 2.2 Metres
+
+| Metre | Syllables | Character |
 |---|---|---|
-| Alexandrin | 12 | ampleur, pensée, récit |
-| Décasyllabe | 10 | tension, ancienneté |
-| Octosyllabe | 8 | vivacité, chanson |
-| Heptasyllabe | 7 | déséquilibre, légèreté |
-| Pentasyllabe | 5 | fragment, souffle court |
+| Alexandrin | 12 | breadth, thought, narrative |
+| Décasyllabe | 10 | tension, antiquity |
+| Octosyllabe | 8 | briskness, song |
+| Heptasyllabe | 7 | imbalance, lightness |
+| Pentasyllabe | 5 | fragment, short breath |
 
-### 2.3 Césure et coupes
+### 2.3 Caesura and cuts
 
-L'alexandrin classique se coupe à l'hémistiche, six plus six. Le trimètre
-romantique le découpe en quatre plus quatre plus quatre. Une césure qui tombe
-à l'intérieur d'un mot ou après un e muet est une faute, sauf effet cherché
-et tenu.
+The classical alexandrin breaks at the hemistich, six plus six. The romantic
+trimetre divides it four plus four plus four. A caesura falling inside a word,
+or after a mute e, is a fault, unless the effect is deliberate and sustained.
 
-### 2.4 Rimes
+### 2.4 Rhyme
 
-- Rime pauvre : un son commun. Rime suffisante : deux. Rime riche : trois ou
-  plus.
-- Alternance des rimes masculines et féminines, la rime féminine se terminant
-  par un e muet.
-- Dispositions : plates AABB, croisées ABAB, embrassées ABBA.
-- Hiatus, rencontre de deux voyelles entre deux mots, à éviter en vers
-  classique.
-- Une rime trop riche attire l'attention sur elle et affaiblit le sens.
+- Poor rhyme: one shared sound. Sufficient: two. Rich: three or more.
+- Alternation of masculine and feminine rhymes, the feminine ending in a mute
+  e.
+- Arrangements: flat AABB, crossed ABAB, embraced ABBA.
+- Hiatus, two vowels meeting across two words, is avoided in classical verse.
+- A rhyme that is too rich draws attention to itself and weakens the sense.
 
-### 2.5 Enjambement
+### 2.5 Enjambment
 
-Rejet, contre-rejet et enjambement créent une tension entre la syntaxe et le
-mètre. Ils ne s'emploient pas par commodité : chaque enjambement doit produire
-un effet de sens.
+Rejet, contre-rejet and enjambment create tension between syntax and metre.
+They are not used for convenience: each must produce an effect of sense.
 
 ## 3. Image
 
-- Une image forte relie deux domaines éloignés par une nécessité, pas par une
-  ressemblance décorative.
-- Vérifier la cohérence des images filées : aucun changement de domaine en
-  cours de route.
-- Bannir les images fossiles : cristal des larmes, océan des regrets, oiseau
-  de la liberté.
-- Le concret précis vaut mieux que l'abstrait noble : un nom d'outil, un
-  nom de plante, un prix, une heure.
+- A strong image links two distant domains by necessity, not by decorative
+  resemblance.
+- Check sustained images for consistency: no change of domain midway.
+- Ban fossil images: the crystal of tears, the ocean of regret, the bird of
+  freedom.
+- The precise concrete beats the noble abstract: the name of a tool, a plant,
+  a price, an hour.
 
-## 4. Son
+## 4. Sound
 
-- Allitérations et assonances employées avec parcimonie et intention.
-- Éviter les rimes internes involontaires et les cacophonies.
-- Travailler la longueur des voyelles et la place des consonnes occlusives
-  pour ralentir ou accélérer.
-- Lire à voix haute est la seule vérification valable.
+- Alliteration and assonance used sparingly and deliberately.
+- Avoid involuntary internal rhymes and cacophony.
+- Work the length of vowels and the placement of plosives to slow down or
+  speed up.
+- Reading aloud is the only valid verification.
 
-## 5. Procédure de composition
+## 5. Composition procedure
 
-1. Trouver le noyau : une image, une phrase entendue, une contrainte.
-2. Écrire une version longue, sans forme, pour trouver la matière.
-3. Choisir la forme en fonction de ce que la matière demande.
-4. Composer en respectant strictement la contrainte choisie.
-5. Retirer le tiers le plus faible.
-6. Lire à voix haute, corriger ce qui bute.
-7. Laisser reposer, relire, retirer encore.
+1. Find the core: an image, an overheard sentence, a constraint.
+2. Write a long version, formless, to find the material.
+3. Choose the form according to what the material asks for.
+4. Compose in strict respect of the chosen constraint.
+5. Remove the weakest third.
+6. Read aloud, correct what stumbles.
+7. Let it rest, reread, remove again.
 
-## 6. Interdits
+## 6. Prohibitions
 
-- Aucun emoji, aucun tiret cadratin, conformément à la constitution.
-- Aucune inversion syntaxique artificielle pour sauver une rime.
-- Aucun archaïsme non motivé, aucun `ô` lyrique par défaut.
-- Aucune ponctuation d'emphase, aucun point d'exclamation en fin de poème.
-- Aucun titre explicatif du poème.
+- No emoji, no em dash, per the constitution.
+- No artificial syntactic inversion to save a rhyme.
+- No unmotivated archaism, no default lyrical `ô`.
+- No emphatic punctuation, no exclamation mark ending a poem.
+- No title that explains the poem.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : justesse prosodique, force des images, nécessité de
-chaque vers, tenue sonore, originalité, émotion produite, absence de
-cliché, tenue de la forme choisie.
+Score 0 to 5: prosodic accuracy, strength of images, necessity of each line,
+sound, originality, emotion produced, absence of cliche, the chosen form held.
 
-Seuil : aucun axe sous 3, moyenne minimale 4. Un poème publiable exige
-davantage qu'une prose publiable.
+Threshold: no axis below 3, average at least 4. A publishable poem demands
+more than publishable prose.
 
 ## 8. Interfaces
 
-- Aval : `poetry/sonnet`, `poetry/haiku`, `poetry/free-verse`,
+- Downstream: `poetry/sonnet`, `poetry/haiku`, `poetry/free-verse`,
   `poetry/prose-poetry`.
-- Contrôle : `quality/literary-critic`.
+- Review: `quality/literary-critic`.

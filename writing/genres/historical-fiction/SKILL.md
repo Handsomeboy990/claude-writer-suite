@@ -1,98 +1,97 @@
 ---
 name: historical-fiction
-description: Écrit un roman historique : règle du présent, reconstitution des mentalités, documentation de niveau 3, traitement de la langue sans pastiche, personnages réels, note de l'auteur. À utiliser pour tout récit situé dans le passé et pour traquer les anachronismes.
+description: Writes historical fiction: the rule of the present, reconstructing period mentalities, level 3 research requirements, handling language without pastiche, real historical figures, the author's note. Use for any narrative set in the past, and to hunt anachronisms.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, research-director, immersion-director]
-  outputs: [dossier-historique, plan-historique, note-de-l-auteur]
+  outputs: [historical-dossier, historical-outline, author-note]
 ---
 
 # Historical Fiction
 
-Le roman historique n'illustre pas le passé : il fait vivre des gens qui
-ignorent la suite. Toute la difficulté tient dans ce point.
+Historical fiction does not illustrate the past: it brings to life people who
+do not know what comes next. The entire difficulty sits in that point.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : une époque tenue, des personnages qui pensent selon leur
-temps, une intrigue qui n'est pas dépendante de sa connaissance des faits, et
-une honnêteté déclarée sur les libertés prises.
+The reader demands: a period held, characters who think according to their
+time, a plot that does not depend on their knowledge of the facts, and a
+declared honesty about the liberties taken.
 
-## 2. Règle du présent
+## 2. The rule of the present
 
-Les personnages ne savent pas ce qui va arriver. Ils ne disent jamais qu'ils
-vivent une époque charnière. Ils se soucient de la récolte, du loyer, de la
-santé d'un enfant, pas de la portée historique des événements.
+Characters do not know what is coming. They never say they are living through
+a pivotal age. They worry about the harvest, the rent, a child's health, not
+about the historical significance of events.
 
-Corollaire : les grands événements se voient de biais, par leurs effets
-locaux, par la rumeur, par le prix du pain.
+Corollary: great events are seen obliquely, through their local effects,
+through rumour, through the price of bread.
 
-## 3. Mentalités
+## 3. Mentalities
 
-- Reconstituer ce qui allait de soi, ce qui était impensable, ce qui était
-  scandaleux.
-- Ne pas transformer le protagoniste en conscience contemporaine égarée dans
-  le passé. Un personnage peut être en avance sur son temps, mais il doit
-  alors en payer le prix social, et le lecteur doit voir ce prix.
-- La religion, la superstition, l'honneur et la hiérarchie sont des
-  motivations réelles, pas des accessoires.
-- Les rapports au corps, à la mort, à l'enfance et au temps diffèrent
-  profondément et doivent être documentés.
+- Reconstruct what went without saying, what was unthinkable, what was
+  scandalous.
+- Do not turn the protagonist into a contemporary conscience lost in the past.
+  A character may be ahead of their time, but they must then pay the social
+  price, and the reader must see that price.
+- Religion, superstition, honour and hierarchy are real motivations, not
+  accessories.
+- Relations to the body, to death, to childhood and to time differ deeply and
+  must be researched.
 
-## 4. Documentation
+## 4. Research
 
-Niveau 3 obligatoire sur : chronologie des faits utilisés, cadre juridique,
-monnaie et prix, moyens de transport et durées, hiérarchie sociale, vêtement
-et alimentation, techniques du métier représenté.
+Level 3 mandatory on: the chronology of the facts used, the legal framework,
+currency and prices, means of transport and durations, social hierarchy,
+clothing and food, the techniques of the trade represented.
 
-Le contrôle des anachronismes de `research-director` s'applique à chaque
-chapitre, y compris sur le vocabulaire des dialogues.
+The `research-director` anachronism check applies to every chapter, dialogue
+vocabulary included.
 
-## 5. Langue
+## 5. Language
 
-- Ni pastiche archaïsant, ni langue contemporaine. Une langue lisible dont on
-  a retiré les mots impossibles.
-- Bannir les termes issus de concepts postérieurs : stress, motivation,
-  planning, traumatisme, en dehors d'un usage assumé.
-- Employer le lexique concret de l'époque pour les objets et les métiers : ce
-  sont les noms de choses qui datent un texte, pas la syntaxe.
-- Les formes d'adresse et le tutoiement suivent la hiérarchie sociale.
+- Neither archaising pastiche nor contemporary speech. A readable language
+  from which impossible words have been removed.
+- Ban terms drawn from later concepts: stress, motivation, planning, trauma,
+  outside a deliberate use.
+- Use the concrete vocabulary of the period for objects and trades: it is the
+  names of things that date a text, not the syntax.
+- Forms of address and familiar pronouns follow the social hierarchy.
 
-## 6. Personnages historiques réels
+## 6. Real historical figures
 
-- Les faits attestés ne sont pas contredits.
-- Les zones d'ombre sont le terrain de la fiction.
-- Aucune calomnie inventée sur une personne réelle, aucune attribution de
-  crime non documenté.
-- Les libertés prises sont déclarées dans la note de l'auteur.
+- Attested facts are not contradicted.
+- The gaps in the record are the ground for fiction.
+- No invented slander about a real person, no attribution of an undocumented
+  crime.
+- Liberties taken are declared in the author's note.
 
-## 7. Clichés à retourner ou proscrire
+## 7. Cliches to turn or prohibit
 
-- La femme moderne avant l'heure, sans conséquence sociale.
-- Le personnage qui explique le contexte historique à un autre qui le connaît.
-- Le peuple sale et le noble propre, ou l'inverse mécanique.
-- La bataille racontée du point de vue du stratège plutôt que du combattant.
-- Le personnage qui rencontre toutes les célébrités de son époque.
+- The modern woman before her time, with no social consequence.
+- The character who explains the historical context to another who knows it.
+- The dirty commoner and the clean noble, or the mechanical reverse.
+- The battle told from the strategist's view rather than the combatant's.
+- The character who meets every celebrity of their age.
 
-## 8. Contrôles de sortie
+## 8. Exit checks
 
-- Aucune anticipation des faits par un personnage.
-- Checklist anachronismes passée sur chaque chapitre.
-- Les grands événements sont vus par leurs effets locaux.
-- La note de l'auteur liste les libertés prises.
-- Le vocabulaire des dialogues est contrôlé mot à mot sur les scènes clés.
+- No character anticipates the facts.
+- The anachronism checklist is run on every chapter.
+- Great events are seen through their local effects.
+- The author's note lists the liberties taken.
+- Dialogue vocabulary is checked word by word on the key scenes.
 
 ## 9. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : exactitude
-documentaire, justesse des mentalités, tenue de la langue, honnêteté du
-paratexte.
+The eleven constitution axes, plus four genre axes: documentary accuracy,
+accuracy of mentalities, language held, honesty of the paratext.
 
-Seuil : aucun axe sous 4 sur exactitude documentaire et mentalités.
+Threshold: no axis below 4 on documentary accuracy and mentalities.
 
 ## 10. Interfaces
 
-- Amont : `research-director`, `immersion-director`.
-- Voisins : `genres/political-fiction`, `genres/adventure`.
+- Upstream: `research-director`, `immersion-director`.
+- Neighbours: `genres/political-fiction`, `genres/adventure`.

@@ -1,109 +1,104 @@
 ---
 name: rewriting-engine
-description: Réécrit méthodiquement un texte existant : décision corriger ou réécrire, six modes (fonction, point de vue, contraction, expansion, registre, suppression), règles de récupération, signes d'une réécriture ratée. À utiliser quand la correction ne suffit plus.
+description: Rewrites an existing text methodically: the correct-or-rewrite decision, six modes (function, point of view, contraction, expansion, register, deletion), salvage rules, and the signs of a failed rewrite. Use when correction is no longer enough.
 license: MIT
 metadata:
   category: quality
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, self-critique-protocol]
-  outputs: [version-reecrite, journal-de-reecriture]
+  outputs: [rewritten-version, rewrite-log]
 ---
 
 # Rewriting Engine
 
-Réécriture méthodique d'un texte existant. La réécriture n'est pas la
-correction : elle refait, à partir de l'intention, ce que la correction ne
-peut pas sauver.
+Methodical rewriting of an existing text. Rewriting is not correction: it
+remakes, from the intent, what correction cannot save.
 
-## 1. Décider : corriger ou réécrire
+## 1. Decide: correct or rewrite
 
-| Situation | Décision |
+| Situation | Decision |
 |---|---|
-| Défauts de surface, structure saine | corriger, via `literary-editor` |
-| Objectif de scène absent ou faux | réécrire la scène |
-| Voix du personnage instable | réécrire les dialogues |
-| Trois cycles d'auto-critique sans atteindre le seuil | réécrire depuis la fiche |
-| Le texte est bon mais ne sert pas le chapitre | réécrire depuis la fonction |
+| Surface defects, sound structure | correct, through `literary-editor` |
+| The scene objective is absent or wrong | rewrite the scene |
+| The character's voice is unstable | rewrite the dialogue |
+| Three self-critique cycles without reaching the threshold | rewrite from the sheet |
+| The text is good but does not serve the chapter | rewrite from the function |
 
-Règle : on ne réécrit jamais en regardant l'ancienne version. On écrit à
-partir de la fiche, puis on compare, puis on récupère les meilleures phrases.
+Rule: never rewrite while looking at the old version. Write from the sheet,
+then compare, then salvage the best sentences.
 
-## 2. Les six modes de réécriture
+## 2. The six modes
 
-### Mode 1 : réécriture de fonction
-La scène est correcte mais ne remplit pas la fonction assignée par le
-chapitre. Repartir de la fiche de scène, changer l'objectif, garder le lieu.
+### Mode 1: function rewrite
+The scene is correct but does not fulfil the function the chapter assigned to
+it. Start again from the scene sheet, change the objective, keep the place.
 
-### Mode 2 : réécriture de point de vue
-Même scène, autre personnage. Révèle immédiatement ce que la scène cachait.
-Souvent utilisé pour les scènes de confrontation qui tournent à vide.
+### Mode 2: point of view rewrite
+Same scene, different character. Immediately reveals what the scene was
+hiding. Often used on confrontation scenes that spin in place.
 
-### Mode 3 : réécriture par contraction
-Réduire de moitié sans rien perdre d'essentiel. Exercice de vérité : ce qui
-survit à la contraction est le texte réel.
+### Mode 3: contraction rewrite
+Halve the length without losing anything essential. An exercise in truth: what
+survives the contraction is the real text.
 
-### Mode 4 : réécriture par expansion
-Un passage résumé devient une scène. Réservé aux moments où une valeur
-bascule et où le résumé a volé l'émotion au lecteur.
+### Mode 4: expansion rewrite
+A summarised passage becomes a scene. Reserved for moments where a value
+swings and the summary stole the emotion from the reader.
 
-### Mode 5 : réécriture de registre
-Même contenu, autre distance narrative ou autre temps. Utilisé quand une
-scène est juste mais froide, ou juste mais bavarde.
+### Mode 5: register rewrite
+Same content, different narrative distance or different tense. Used when a
+scene is accurate but cold, or accurate but talkative.
 
-### Mode 6 : réécriture par suppression
-Supprimer la scène et vérifier ce qui manque en aval. Si rien ne manque, la
-suppression est définitive. Environ une scène sur dix ne survit pas à ce test.
+### Mode 6: deletion rewrite
+Remove the scene and check what is missing downstream. If nothing is missing,
+the deletion is final. Roughly one scene in ten does not survive this test.
 
-## 3. Protocole
+## 3. Protocol
 
-1. Établir le diagnostic, issu de `self-critique-protocol` ou `story-doctor`.
-2. Choisir un mode, un seul.
-3. Reformuler l'intention de la scène en une phrase.
-4. Écrire la nouvelle version sans consulter l'ancienne.
-5. Comparer les deux versions ligne à ligne.
-6. Récupérer de l'ancienne version uniquement ce qui est meilleur, et le
-   justifier.
-7. Passer la nouvelle version au protocole d'auto-critique.
-8. Consigner dans le journal de réécriture.
+1. Establish the diagnosis, from `self-critique-protocol` or `story-doctor`.
+2. Choose one mode, only one.
+3. Restate the intent of the scene in one sentence.
+4. Write the new version without consulting the old one.
+5. Compare the two versions line by line.
+6. Salvage from the old version only what is better, and justify it.
+7. Put the new version through the self-critique protocol.
+8. Record it in the rewrite log.
 
-## 4. Récupération
+## 4. Salvage
 
-Une phrase de l'ancienne version n'est conservée que si elle satisfait deux
-conditions : elle est meilleure que son équivalent neuf, et elle ne tire pas
-le nouveau texte vers l'ancien rythme. La deuxième condition élimine la
-majorité des candidates.
+A sentence from the old version is kept only if it satisfies two conditions:
+it is better than its new equivalent, and it does not pull the new text back
+toward the old rhythm. The second condition eliminates most candidates.
 
-## 5. Réécriture globale
+## 5. Whole-manuscript rewriting
 
-Pour un manuscrit entier :
+- Never rewrite linearly from chapter 1 to the end. Handle the turning-point
+  chapters first, then the chapters that prepare them.
+- Fix one stylistic rule per pass: for example, this pass handles only chapter
+  endings.
+- Keep every version, numbered. Never overwrite.
+- Stop when two consecutive passes no longer improve the overall score.
+  Persistence past that point degrades.
 
-- Ne jamais réécrire linéairement du chapitre 1 au dernier. Traiter d'abord
-  les chapitres de bascule, puis les chapitres qui les préparent.
-- Fixer une règle de style unique par passe : par exemple, cette passe ne
-  traite que les fins de chapitre.
-- Conserver toutes les versions, numérotées. Ne jamais écraser.
-- Arrêter quand deux passes consécutives n'améliorent plus la note globale.
-  L'acharnement dégrade.
+## 6. Signs of a failed rewrite
 
-## 6. Signes d'une réécriture ratée
+- The text is more correct and less alive.
+- The sentences are shorter but all identical.
+- The particularities of the voice have gone.
+- The text gained clarity and lost its mystery.
+- The author no longer recognises their text.
 
-- Le texte est plus correct et moins vivant.
-- Les phrases sont plus courtes mais toutes identiques.
-- Les particularités de la voix ont disparu.
-- Le texte a gagné en clarté et perdu son mystère.
-- L'auteur ne reconnaît plus son texte.
-
-Dans ces cas, revenir à la version antérieure et changer de mode.
+In those cases, return to the earlier version and change mode.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : pertinence du mode choisi, gain réel, préservation de
-la voix, absence de sur-correction, qualité de la récupération, traçabilité.
+Score 0 to 5: relevance of the chosen mode, real gain, voice preserved,
+absence of over-correction, quality of the salvage, traceability.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur préservation de la voix et
-gain réel.
+Threshold: no axis below 3, average at least 4 on voice preservation and real
+gain.
 
 ## 8. Interfaces
 
-- Amont : `self-critique-protocol`, `story-doctor`, `literary-critic`.
-- Aval : `literary-editor`, `proofreader`.
+- Upstream: `self-critique-protocol`, `story-doctor`, `literary-critic`.
+- Downstream: `literary-editor`, `proofreader`.

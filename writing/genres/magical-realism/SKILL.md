@@ -1,86 +1,85 @@
 ---
 name: magical-realism
-description: Écrit du réalisme magique : règle du non-étonnement, ancrage social et matériel, formulation ordinaire de l'extraordinaire, conséquences pratiques, voix de conteur, sens laissé ouvert. À utiliser pour un récit où le merveilleux est traité comme un fait banal.
+description: Writes magical realism: the rule of non-astonishment, social and material anchoring, ordinary phrasing of the extraordinary, practical consequences, a storyteller's voice, meaning left open. Use for a narrative where the marvellous is treated as a commonplace fact.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, immersion-director, narrator]
-  outputs: [charte-du-merveilleux, plan-realiste-magique]
+  outputs: [marvellous-charter, magical-realist-outline]
 ---
 
 # Magical Realism
 
-Le réalisme magique ne mélange pas deux mondes : il n'en a qu'un, où
-l'extraordinaire est traité avec la même banalité que le reste.
+Magical realism does not mix two worlds: it has only one, in which the
+extraordinary is treated with the same ordinariness as everything else.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : un ancrage social et matériel fort, un merveilleux non
-expliqué, un narrateur qui ne s'étonne pas, et une signification qui reste
-ouverte.
+The reader demands: strong social and material anchoring, an unexplained
+marvellous, a narrator who is not astonished, and a meaning that stays open.
 
-## 2. Règle du non-étonnement
+## 2. The rule of non-astonishment
 
-Le narrateur et les personnages ne s'étonnent pas de l'événement
-extraordinaire. Ils s'occupent de ses conséquences pratiques.
+The narrator and the characters are not astonished by the extraordinary event.
+They deal with its practical consequences.
 
-Test : si un personnage demande comment c'est possible, le texte a basculé
-dans le fantastique et n'appartient plus au genre.
+Test: if a character asks how this is possible, the text has tipped into the
+fantastic and no longer belongs to the genre.
 
-## 3. Ancrage
+## 3. Anchoring
 
-- Le merveilleux ne fonctionne que sur un socle réaliste dense : prix,
-  travail, familles, administration, maladies, saisons.
-- Plus l'événement est extraordinaire, plus la phrase qui le porte doit être
-  ordinaire.
-- Le merveilleux est souvent lié à une réalité sociale : deuil, exil, mémoire
-  effacée, violence politique. C'est ce lien qui donne son sens au genre.
+- The marvellous only works on a dense realist base: prices, work, families,
+  administration, illnesses, seasons.
+- The more extraordinary the event, the more ordinary the sentence carrying it
+  must be.
+- The marvellous is often tied to a social reality: bereavement, exile, erased
+  memory, political violence. That link is what gives the genre its meaning.
 
-## 4. Écriture du merveilleux
+## 4. Writing the marvellous
 
-- Une seule phrase, sans emphase, insérée dans une énumération de faits
-  ordinaires.
-- Aucune explication, aucune règle, aucun système. La cohérence est
-  émotionnelle, pas mécanique.
-- Les conséquences pratiques sont traitées sérieusement : qui nettoie, qui
-  paye, ce que disent les voisins.
-- Le merveilleux peut cesser sans raison, comme il est venu.
+- One sentence, without emphasis, inserted into an enumeration of ordinary
+  facts.
+- No explanation, no rules, no system. The coherence is emotional, not
+  mechanical.
+- Practical consequences are treated seriously: who cleans, who pays, what the
+  neighbours say.
+- The marvellous may cease for no reason, as it came.
 
-## 5. Voix
+## 5. Voice
 
-- Voix de conteur, souvent proche de l'oralité, avec des reprises et des
-  digressions maîtrisées.
-- Temps longs, générations, répétitions de motifs à travers les époques.
-- Le narrateur peut savoir des choses qu'il n'a pas vues, à condition de ne
-  jamais justifier ce savoir.
-- Le discours indirect libre est l'outil central, voir `core/narrator`.
+- A storyteller's voice, often close to orality, with controlled repetitions
+  and digressions.
+- Long spans of time, generations, motifs repeating across eras.
+- The narrator may know things they did not witness, provided they never
+  justify that knowledge.
+- Free indirect speech is the central tool; see `core/narrator`.
 
-## 6. Clichés à retourner ou proscrire
+## 6. Cliches to turn or prohibit
 
-- L'exotisme comme justification du merveilleux.
-- Le merveilleux uniquement décoratif, sans conséquence sociale.
-- Le personnage qui devient fou pour expliquer le surnaturel.
-- La métaphore explicitée par le texte lui-même.
-- La copie de motifs déjà employés par les auteurs fondateurs du genre.
+- Exoticism used as the justification for the marvellous.
+- A marvellous that is purely decorative, with no social consequence.
+- The character who goes mad to explain the supernatural.
+- The metaphor explained by the text itself.
+- Copying motifs already used by the founding authors of the genre.
 
-## 7. Contrôles de sortie
+## 7. Exit checks
 
-- Aucun personnage ne demande d'explication.
-- Chaque événement merveilleux a une conséquence pratique traitée.
-- Le socle réaliste occupe la majorité du texte.
-- Aucune règle systématique n'est énoncée.
-- La signification reste ouverte, non énoncée par le narrateur.
+- No character asks for an explanation.
+- Every marvellous event has a practical consequence that is dealt with.
+- The realist base occupies the majority of the text.
+- No systematic rule is stated.
+- The meaning stays open, not stated by the narrator.
 
 ## 8. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : tenue du non
-étonnement, densité du socle réaliste, ordinaire de la formulation,
-ouverture du sens.
+The eleven constitution axes, plus four genre axes: non-astonishment held,
+density of the realist base, ordinariness of the phrasing, openness of
+meaning.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur tenue du non-étonnement.
+Threshold: no axis below 3, average at least 4 on non-astonishment held.
 
 ## 9. Interfaces
 
-- Amont : `narrator`, `immersion-director`.
-- Voisins : `genres/fantasy`, `poetry/prose-poetry`.
+- Upstream: `narrator`, `immersion-director`.
+- Neighbours: `genres/fantasy`, `poetry/prose-poetry`.

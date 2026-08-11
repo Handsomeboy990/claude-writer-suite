@@ -1,15 +1,28 @@
 # writing-constitution
 
-Document fondateur de Claude Writer Suite. Toutes les règles communes,
-non négociables, applicables à l'ensemble des skills.
+Founding document of the creative writing tree. Every shared, non-negotiable
+rule, applicable to every skill in it.
 
-- Entrées : aucune. Le skill est toujours actif.
-- Sorties : règles appliquées, rapport de conformité.
-- Dépendances : aucune. Tous les autres skills en dépendent.
+- Inputs: none. The skill is always active.
+- Outputs: applied rules, conformity report.
+- Depends on: nothing. Every other writing skill depends on it.
 
-Contenu : interdits typographiques, conventions de dialogue françaises,
-traitement des flashbacks, titres de chapitre, principes de style,
-cohérence des personnages, représentation des cultures, seuils
-d'auto-critique.
+Contents: typographic prohibitions, French dialogue conventions, flashback
+handling, chapter titles, style principles, character consistency, cultural
+representation, self-critique thresholds.
 
-À lire avant tout usage de la suite.
+## Language
+
+Written in English. Produces French by default, selected by
+`language.creative_output`.
+
+The structural rules apply in any output language. The typographic and
+dialogue rules of sections 2 and 3 are French conventions; another output
+language replaces them with its own, stated rather than assumed. Sections 2.1
+and 2.2, no emoji and no em dash, apply to every language and to every file in
+this repository.
+
+## Read first
+
+Before any use of this tree. Every other skill refers to it and none restates
+it.

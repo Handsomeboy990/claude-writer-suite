@@ -1,9 +1,24 @@
 # saga-architect
 
-Conduite d'oeuvres en plusieurs tomes : loi des deux niveaux, formes de série,
-courbe d'ensemble, mémoire longue, dettes narratives, rappels au lecteur,
-évolution et mortalité des personnages, renouvellement.
+Multi-volume works: the law of two levels, series forms, the overall curve,
+long memory, narrative debts, reminders to the reader, character evolution and
+mortality, renewal.
 
-- Entrées : bible du roman du tome 1, plan général.
-- Sorties : bible de saga, plan multi-tomes, registre inter-tomes.
-- Dépendances : writing-constitution, novel-architect, continuity-manager.
+- Inputs: the novel bible of volume 1, master outline.
+- Outputs: saga bible, multi-volume plan, cross-volume register.
+- Depends on: `writing-constitution`, `novel-architect`,
+  `continuity-manager`.
+
+## When to use
+
+To plan a saga, or before launching the next volume.
+
+## The balance it enforces
+
+Resolve the volume question, move the saga question. A volume that resolves
+nothing frustrates; a volume that resolves everything ends the series. Section
+6 is the checklist that keeps volume N+1 from contradicting volume N.
+
+## Configuration
+
+`language.creative_output` sets the output language.

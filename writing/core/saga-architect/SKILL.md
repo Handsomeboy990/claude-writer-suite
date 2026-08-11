@@ -1,126 +1,125 @@
 ---
 name: saga-architect
-description: Conduit une oeuvre en plusieurs tomes : question de tome et question de saga, formes de série, courbe d'ensemble, registre inter-tomes, dettes narratives, rappels au lecteur, mortalité et relève. À utiliser pour planifier une saga ou lancer un tome suivant.
+description: Runs a multi-volume work: volume question against saga question, series forms, the overall curve, the cross-volume register, narrative debts, reminders to the reader, mortality and succession. Use to plan a saga or to launch the next volume.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, novel-architect, continuity-manager]
-  outputs: [bible-de-saga, plan-multi-tomes, registre-inter-tomes]
+  outputs: [saga-bible, multi-volume-plan, cross-volume-register]
 ---
 
 # Saga Architect
 
-Conception et conduite d'oeuvres longues en plusieurs tomes. Une saga n'est
-pas un roman étiré : c'est une architecture à deux niveaux, où chaque tome est
-complet et où l'ensemble raconte autre chose que la somme des tomes.
+Design and conduct of long works across several volumes. A saga is not a
+stretched novel: it is a two-level architecture where each volume is complete
+and where the whole tells something other than the sum of its parts.
 
-## 1. Loi des deux niveaux
+## 1. Law of the two levels
 
-- Niveau tome : question dramatique propre, posée au début, résolue à la fin.
-- Niveau saga : question globale, ouverte au tome 1, résolue au dernier tome.
+- Volume level: its own dramatic question, asked at the start, resolved at the
+  end.
+- Saga level: a global question, opened in volume 1, resolved in the last.
 
-Un tome qui ne résout rien frustre. Un tome qui résout tout referme la saga.
-Le bon équilibre : résoudre la question du tome, déplacer la question de la
-saga.
+A volume that resolves nothing frustrates. A volume that resolves everything
+closes the saga. The balance: resolve the volume question, move the saga
+question.
 
-## 2. Architecture de série
+## 2. Series architecture
 
-### 2.1 Formes possibles
+### 2.1 Possible forms
 
-| Forme | Principe | Risque |
+| Form | Principle | Risk |
 |---|---|---|
-| Cumulative | chaque tome élargit l'enjeu | inflation, surenchère |
-| Cyclique | même structure, contexte renouvelé | répétition perçue |
-| Générationnelle | changement de protagoniste par tome | perte d'attachement |
-| Chorale | plusieurs lignes, convergence finale | dispersion |
-| Enquête longue | une question, révélations échelonnées | essoufflement |
+| Cumulative | each volume widens the stake | inflation, escalation |
+| Cyclical | same structure, renewed context | perceived repetition |
+| Generational | protagonist changes per volume | loss of attachment |
+| Choral | several lines, final convergence | dispersion |
+| Long investigation | one question, staged reveals | running out of breath |
 
-Le choix est déclaré dans la bible de saga et ne change pas.
+The choice is declared in the saga bible and does not change.
 
-### 2.2 Courbe d'ensemble
+### 2.2 Overall curve
 
-Sur cinq tomes, distribution éprouvée :
+Across five volumes, a proven distribution:
 
-- Tome 1 : établir le monde, le protagoniste, la question de saga. Fin
-  satisfaisante et fissurée.
-- Tome 2 : élargir, complexifier, révéler que la victoire du tome 1 était
-  partielle. Fin la plus sombre de la série.
-- Tome 3 : point médian de la saga, renversement d'information majeur, coût
-  humain élevé.
-- Tome 4 : conséquences, dispersion des personnages, préparation.
-- Tome 5 : convergence, paiement de toutes les dettes narratives.
+- Volume 1: establish the world, the protagonist, the saga question. A
+  satisfying ending, with a crack in it.
+- Volume 2: widen, complicate, reveal that the victory of volume 1 was
+  partial. The darkest ending of the series.
+- Volume 3: midpoint of the saga, major reversal of information, high human
+  cost.
+- Volume 4: consequences, characters dispersed, preparation.
+- Volume 5: convergence, every narrative debt paid.
 
-## 3. Gestion de la mémoire longue
+## 3. Long memory
 
-### 3.1 Registre inter-tomes
+### 3.1 Cross-volume register
 
-Extension du registre de `continuity-manager` avec une colonne de tome.
-Obligatoire dès le tome 2. Aucun élément d'un tome antérieur ne peut être
-réutilisé sans relecture de son entrée d'origine.
+An extension of the `continuity-manager` register with a volume column.
+Mandatory from volume 2. No element from an earlier volume may be reused
+without rereading its original entry.
 
-### 3.2 Dettes narratives
+### 3.2 Narrative debts
 
-Toute promesse ouverte est inscrite avec le tome d'ouverture et le tome de
-paiement prévu. Une dette non payée à la fin de la saga est un échec, même si
-le reste est excellent.
+Every open promise is recorded with the volume that opened it and the volume
+where it is due. A debt unpaid at the end of the saga is a failure, however
+good the rest is.
 
-### 3.3 Rappels au lecteur
+### 3.3 Reminders to the reader
 
-Un lecteur qui a attendu deux ans entre deux tomes a tout oublié. Techniques
-de rappel acceptables :
+A reader who waited two years between volumes has forgotten everything.
+Acceptable reminder techniques:
 
-- réintroduire un personnage par une action caractéristique, pas par un
-  résumé ;
-- faire réapparaître un objet, ce qui réactive la mémoire épisodique ;
-- faire répéter une information par un personnage qui a intérêt à la
-  déformer ;
-- placer un rappel dans un conflit, jamais dans une explication.
+- reintroduce a character through a characteristic action, not a summary;
+- bring an object back, which reactivates episodic memory;
+- have information repeated by a character with an interest in distorting it;
+- place a reminder inside a conflict, never inside an explanation.
 
-Interdit : le prologue récapitulatif, le personnage qui raconte le tome
-précédent, la note de l'auteur.
+Forbidden: the recap prologue, the character who narrates the previous volume,
+the author's note.
 
-## 4. Personnages sur la durée
+## 4. Characters over the long run
 
-- Un protagoniste ne peut pas parcourir cinq arcs complets. Prévoir un arc de
-  saga découpé en étapes, une par tome.
-- Prévoir la mortalité : une saga sans perte irréversible perd sa gravité.
-- Prévoir la relève : les personnages secondaires du tome 1 deviennent les
-  porteurs du tome 3.
-- Faire vieillir : un enfant du tome 1 doit avoir grandi de façon cohérente.
+- A protagonist cannot travel five complete arcs. Plan one saga arc cut into
+  stages, one per volume.
+- Plan for mortality: a saga with no irreversible loss loses its gravity.
+- Plan for succession: the secondary characters of volume 1 become the
+  carriers of volume 3.
+- Let them age: a child from volume 1 must have grown coherently.
 
-## 5. Renouvellement
+## 5. Renewal
 
-Chaque tome doit apporter un élément neuf de nature, pas de degré :
+Every volume must bring something new in kind, not in degree:
 
-- un nouveau lieu structurant ;
-- un nouveau rapport de force ;
-- une nouvelle règle du monde révélée ;
-- un changement de forme narrative maîtrisé.
+- a new structuring place;
+- a new balance of power;
+- a new world rule revealed;
+- a controlled change of narrative form.
 
-L'inflation d'enjeux, plus grand ennemi, plus grande armée, plus grand
-danger, est interdite comme seul moteur.
+Escalation of stakes, a bigger enemy, a bigger army, a bigger danger, is
+forbidden as the sole engine.
 
-## 6. Contrôle avant lancement du tome suivant
+## 6. Check before launching the next volume
 
-- [ ] Question du tome précédent résolue.
-- [ ] Question de saga déplacée, non résolue.
-- [ ] Registre inter-tomes à jour.
-- [ ] Dettes narratives listées et datées.
-- [ ] Âges recalculés.
-- [ ] Éléments neufs identifiés.
-- [ ] Personnages morts, définitivement morts.
+- [ ] The previous volume question is resolved.
+- [ ] The saga question has moved, not resolved.
+- [ ] The cross-volume register is current.
+- [ ] Narrative debts are listed and dated.
+- [ ] Ages recalculated.
+- [ ] New elements identified.
+- [ ] Dead characters are permanently dead.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : autonomie du tome, progression de la question de saga,
-tenue de la mémoire longue, qualité des rappels, évolution des personnages,
-renouvellement, absence d'inflation, paiement des dettes.
+Score 0 to 5: autonomy of the volume, progression of the saga question, long
+memory held, quality of reminders, character evolution, renewal, absence of
+inflation, debts paid.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 à partir du tome 3.
+Threshold: no axis below 3, average at least 4 from volume 3 onward.
 
 ## 8. Interfaces
 
-- Amont : `novel-architect`.
-- Latéral : `continuity-manager`, `timeline-manager`.
-- Contrôle : `quality/story-doctor`, `quality/publication-review`.
+- Upstream: `novel-architect`.
+- Lateral: `continuity-manager`, `timeline-manager`.
+- Review: `quality/story-doctor`, `quality/publication-review`.

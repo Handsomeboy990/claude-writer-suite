@@ -1,142 +1,139 @@
 ---
 name: chapter-architect
-description: Découpe un roman en chapitres : fonction dramatique, valeurs d'entrée et de sortie, ouvertures et clôtures, longueur, alternance des points de vue, titres travaillés. À utiliser pour organiser des chapitres, décider où couper, ou trouver des titres qui ne soient pas génériques.
+description: Breaks a novel into chapters: dramatic function, entry and exit values, openings and closings, length, point of view alternation, worked titles. Use to organise chapters, decide where to cut, or find titles that are not generic.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, novel-architect]
-  outputs: [decoupage-en-chapitres, fiche-chapitre, titres-de-chapitre]
+  outputs: [chapter-breakdown, chapter-sheet, chapter-titles]
 ---
 
 # Chapter Architect
 
-Transforme un plan général en chapitres jouables : découpage, fonction,
-entrée, sortie, longueur, alternance des points de vue, titres.
+Turns a master outline into playable chapters: breakdown, function, entry,
+exit, length, point of view alternation, titles.
 
-## 1. Définition de travail
+## 1. Working definition
 
-Un chapitre est une unité de tension complète. Il commence par une question
-implicite et se termine par une réponse partielle qui en ouvre une autre.
-Un chapitre qui ne change ni la situation, ni l'information, ni la relation
-entre deux personnages est supprimé ou fusionné.
+A chapter is a complete unit of tension. It begins with an implicit question
+and ends with a partial answer that opens another. A chapter that changes
+neither the situation, nor the information, nor the relationship between two
+characters is cut or merged.
 
-## 2. Entrées requises
+## 2. Required inputs
 
-- Plan général issu de `novel-architect`.
-- Calendrier des révélations.
-- Liste des points de vue autorisés.
-- Contrainte de longueur globale.
+- Master outline from `novel-architect`.
+- Reveal schedule.
+- List of permitted points of view.
+- Overall length constraint.
 
-## 3. Protocole
+## 3. Protocol
 
-### Étape 1 : attribuer une fonction unique
+### Step 1: assign a single function
 
-Une fonction dominante par chapitre. En admettre deux affaiblit les deux.
-Fonctions : installation, déclenchement, poursuite, obstacle, révélation,
-renversement, respiration, confrontation, effondrement, résolution.
+One dominant function per chapter. Allowing two weakens both. Functions:
+setup, trigger, pursuit, obstacle, revelation, reversal, breathing space,
+confrontation, collapse, resolution.
 
-### Étape 2 : fixer la valeur d'entrée et la valeur de sortie
+### Step 2: fix the entry and exit values
 
-Chaque chapitre déplace une valeur sur un axe : sécurité vers danger, ignorance
-vers savoir, lien vers rupture, espoir vers désespoir, ou l'inverse. Noter le
-signe : positif, négatif, ou double basculement.
+Each chapter moves a value along an axis: safety to danger, ignorance to
+knowledge, bond to rupture, hope to despair, or the reverse. Record the sign:
+positive, negative, or double swing.
 
-Interdiction de trois chapitres consécutifs de même signe. La monotonie de
-signe produit une lassitude que le lecteur attribue au style.
+Three consecutive chapters of the same sign are forbidden. Monotony of sign
+produces a weariness the reader attributes to the prose.
 
-### Étape 3 : définir l'entrée
+### Step 3: define the entry
 
-L'entrée d'un chapitre se fait au plus tard possible dans la situation. Quatre
-ouvertures fiables :
+A chapter enters the situation as late as possible. Four reliable openings:
 
-- en pleine action déjà engagée ;
-- sur une réplique qui déséquilibre ;
-- sur un détail concret qui contient la scène entière ;
-- sur un déplacement, un corps qui va quelque part.
+- in the middle of action already underway;
+- on a line of dialogue that unbalances;
+- on a concrete detail that contains the whole scene;
+- on a movement, a body going somewhere.
 
-Ouvertures interdites : le réveil, la météo seule, le résumé du chapitre
-précédent, la description d'un personnage devant un miroir.
+Forbidden openings: waking up, weather alone, a summary of the previous
+chapter, a character described in front of a mirror.
 
-### Étape 4 : définir la sortie
+### Step 4: define the exit
 
-Cinq sorties efficaces :
+Five effective exits:
 
-1. décision irréversible ;
-2. information nouvelle qui recadre tout le chapitre ;
-3. arrivée d'un élément non prévu ;
-4. question posée et non répondue ;
-5. image qui prolonge l'émotion sans commentaire.
+1. an irreversible decision;
+2. new information that reframes the whole chapter;
+3. the arrival of something unplanned;
+4. a question asked and not answered;
+5. an image that extends the emotion without comment.
 
-La sortie ne doit pas être un cliffhanger mécanique répété à chaque chapitre.
-Au-delà d'un chapitre sur trois, l'effet s'annule et devient prévisible.
+The exit must not be a mechanical cliffhanger repeated at every chapter.
+Beyond one chapter in three, the effect cancels itself and becomes
+predictable.
 
-### Étape 5 : calibrer la longueur
+### Step 5: calibrate the length
 
-- Roman littéraire : 2500 à 5000 mots par chapitre.
-- Thriller, policier : 1200 à 2500 mots, coupes fréquentes.
-- Fantasy et science-fiction : 3000 à 6000 mots, avec chapitres courts en
-  alternance pour éviter la satiété descriptive.
+- Literary novel: 2500 to 5000 words per chapter.
+- Thriller, crime: 1200 to 2500 words, frequent cuts.
+- Fantasy and science fiction: 3000 to 6000 words, with short chapters
+  alternating to avoid descriptive satiety.
 
-Faire varier la longueur en fonction de la tension : plus la tension monte,
-plus les chapitres raccourcissent. La longueur est un instrument de rythme,
-pas une norme.
+Vary length with tension: the higher the tension, the shorter the chapters.
+Length is an instrument of rhythm, not a standard.
 
-### Étape 6 : organiser l'alternance des points de vue
+### Step 6: organise point of view alternation
 
-- Un seul point de vue par chapitre, sauf choix de narration omnisciente
-  assumé et déclaré dans la bible.
-- Ne pas introduire un nouveau point de vue après le premier tiers du roman
-  sans nécessité structurelle.
-- Un point de vue utilisé moins de trois fois est un point de vue à supprimer.
-- Une alternance régulière rassure, une alternance rompue au bon moment
-  inquiète. Rompre volontairement au seuil et à l'effondrement.
+- One point of view per chapter, unless an omniscient narration is chosen
+  deliberately and declared in the bible.
+- Do not introduce a new point of view after the first third of the novel
+  without structural necessity.
+- A point of view used fewer than three times is a point of view to remove.
+- Regular alternation reassures; alternation broken at the right moment
+  unsettles. Break it deliberately at the threshold and at the collapse.
 
-### Étape 7 : écrire le titre
+### Step 7: write the title
 
-Appliquer la section 5 de la constitution. Méthode en trois passes :
+Apply section 5 of the constitution. Three passes:
 
-1. écrire dix titres sans filtre ;
-2. éliminer ceux qui résument, ceux qui divulguent, ceux qui pourraient
-   convenir à un autre chapitre ;
-3. garder celui qui prend un second sens après lecture.
+1. write ten titles without filtering;
+2. eliminate those that summarise, those that give away, and those that would
+   suit another chapter equally well;
+3. keep the one that takes a second meaning after reading.
 
-Contrôler ensuite la table des matières complète : lue d'affilée, elle doit
-former une progression, presque un poème, jamais une liste d'étiquettes.
+Then check the full table of contents: read in sequence, it must form a
+progression, almost a poem, never a list of labels.
 
-### Étape 8 : découper en scènes
+### Step 8: break into scenes
 
-Deux à quatre scènes par chapitre. Chaque scène est ensuite traitée par
-`scene-builder`. Un chapitre à scène unique est réservé aux moments de
-bascule.
+Two to four scenes per chapter. Each scene is then handled by `scene-builder`.
+A single-scene chapter is reserved for turning points.
 
-## 4. Fiche chapitre
+## 4. Chapter sheet
 
-Gabarit dans `resources/fiche-chapitre.md`. Champs obligatoires : numéro,
-titre, fonction, point de vue, lieu, date interne, durée écoulée, valeur
-d'entrée, valeur de sortie, révélation, objets et indices plantés, promesse
-ouverte, promesse fermée.
+Template in `resources/fiche-chapitre.md`. Required fields: number, title,
+function, point of view, place, internal date, elapsed time, entry value, exit
+value, reveal, objects and clues planted, promise opened, promise closed.
 
-## 5. Erreurs fréquentes
+## 5. Common errors
 
-- Ouvrir chaque chapitre par un résumé de ce que le lecteur vient de lire.
-- Terminer chaque chapitre sur un cliffhanger, ce qui les neutralise tous.
-- Aligner des chapitres de longueur identique.
-- Changer de point de vue au milieu d'un chapitre sans marquage.
-- Écrire un chapitre entier pour transmettre une seule information : elle se
-  place dans un chapitre existant.
+- Opening every chapter with a summary of what the reader has just read.
+- Ending every chapter on a cliffhanger, which neutralises them all.
+- Lining up chapters of identical length.
+- Changing point of view mid-chapter with no marker.
+- Writing a whole chapter to deliver a single piece of information: it belongs
+  inside an existing chapter.
 
 ## 6. Auto-critique
 
-Axes notés de 0 à 5 : nécessité du chapitre, force de l'entrée, force de la
-sortie, alternance des signes, pertinence du point de vue, qualité du titre,
-rythme interne, densité d'information, absence de redondance, tenue de la
-promesse ouverte.
+Score 0 to 5: necessity of the chapter, strength of the entry, strength of the
+exit, alternation of signs, relevance of the point of view, quality of the
+title, internal rhythm, information density, absence of redundancy, promise
+opened and held.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8.
+Threshold: no axis below 3, average at least 3.8.
 
 ## 7. Interfaces
 
-- Amont : `novel-architect`, `timeline-manager`.
-- Aval : `scene-builder`, `narrator`.
-- Contrôle : `continuity-manager`, `quality/story-doctor`.
+- Upstream: `novel-architect`, `timeline-manager`.
+- Downstream: `scene-builder`, `narrator`.
+- Review: `continuity-manager`, `quality/story-doctor`.

@@ -1,136 +1,131 @@
 ---
 name: immersion-director
-description: Crée l'immersion culturelle et sensorielle : lieux, cultures, langues, climats, paysages, traditions, gastronomie, sons, odeurs. Dosage par type de scène et contrôle anti-exotisme. À utiliser pour rendre un lieu vivant, ou quand une description sonne comme un dépliant touristique.
+description: Creates cultural and sensory immersion: places, cultures, languages, climates, landscapes, traditions, food, sounds, smells. Dosage by scene type and an anti-exoticism check. Use to make a place live, or when a description reads like a tourist brochure.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, world-builder, research-director]
-  outputs: [dossier-sensoriel, passages-immersifs]
+  outputs: [sensory-dossier, immersive-passages]
 ---
 
 # Immersion Director
 
-Responsable de l'immersion culturelle et sensorielle complète. Le lecteur doit
-sortir du livre en ayant l'impression d'avoir habité un lieu, pas d'avoir lu
-sa description.
+Owns complete cultural and sensory immersion. The reader must leave the book
+feeling they inhabited a place, not that they read its description.
 
 ## 1. Doctrine
 
-L'immersion n'est pas un volume de description. C'est un rapport de
-familiarité. Un lieu devient réel quand il gêne, quand il use, quand il sent,
-quand il oblige à faire un détour.
+Immersion is not a volume of description. It is a relation of familiarity. A
+place becomes real when it hinders, when it wears, when it smells, when it
+forces a detour.
 
-Trois lois :
+Three laws:
 
-1. Loi du détail unique. Un détail précis et vérifiable installe plus qu'un
-   paragraphe entier.
-2. Loi de l'usage. Le monde se révèle par ce que les personnages en font, pas
-   par ce qu'ils en disent.
-3. Loi de la friction. On ne ressent que ce qui résiste : la chaleur qui
-   ralentit, la poussière qui colle, la langue qu'on ne comprend pas.
+1. Law of the single detail. One precise, verifiable detail establishes more
+   than a whole paragraph.
+2. Law of use. The world reveals itself through what characters do with it,
+   not through what they say about it.
+3. Law of friction. We only feel what resists: the heat that slows, the dust
+   that clings, the language we do not understand.
 
-## 2. Les neuf canaux
+## 2. The nine channels
 
-Chaque scène importante mobilise au moins trois canaux, jamais les neuf.
+Every important scene uses at least three channels, never all nine.
 
-### 2.1 Lieux
+### 2.1 Places
 
-Ne pas décrire l'espace, décrire ce qu'il impose. Hauteur de plafond, largeur
-d'un couloir, distance jusqu'au point d'eau, endroit où l'on se met pour être
-vu, endroit où l'on se met pour ne pas l'être.
+Do not describe the space; describe what it imposes. Ceiling height, corridor
+width, distance to water, the spot people stand in to be seen, the spot they
+stand in not to be.
 
 ### 2.2 Cultures
 
-Ce qui se fait, ce qui ne se fait pas, ce que l'on doit accepter, à qui l'on
-parle en premier, qui mange avant qui, ce qu'il est impoli de refuser. La
-culture s'écrit en règles implicites transgressées par quelqu'un.
+What is done, what is not done, what must be accepted, who is greeted first,
+who eats before whom, what it is rude to refuse. Culture is written as
+implicit rules that someone transgresses.
 
-### 2.3 Langues
+### 2.3 Languages
 
-Alternance de langues, registres, langue du travail contre langue de
-l'intimité, ce qui ne se dit que dans une seule langue. Aucune traduction
-entre parenthèses.
+Alternation of languages, registers, the language of work against the language
+of intimacy, what is only said in one of them. No translation in parentheses.
 
-### 2.4 Climats
+### 2.4 Climates
 
-Le climat est un personnage antagoniste. Il modifie les vêtements, le sommeil,
-l'humeur, l'odeur, les horaires, le prix des choses. Une saison des pluies ne
-se décrit pas : elle décale un rendez-vous.
+Climate is an antagonist. It changes clothing, sleep, mood, smell, schedules,
+the price of things. A rainy season is not described: it moves an appointment.
 
-### 2.5 Paysages
+### 2.5 Landscapes
 
-Trois plans : ce que l'on voit au loin, ce que l'on voit à hauteur d'homme, ce
-que l'on a sous les pieds. Le troisième plan est le plus négligé et le plus
-efficace.
+Three planes: what is seen in the distance, what is seen at eye level, what is
+underfoot. The third plane is the most neglected and the most effective.
 
 ### 2.6 Traditions
 
-Rites de passage, funérailles, mariages, salutations, dettes d'honneur.
-Toujours écrites du point de vue de quelqu'un qui y participe, jamais d'un
-observateur ethnographique.
+Rites of passage, funerals, weddings, greetings, debts of honour. Always
+written from the point of view of a participant, never of an ethnographic
+observer.
 
-### 2.7 Gastronomie
+### 2.7 Food
 
-Ce que l'on mange, à quelle heure, avec quoi, dans quel ordre, ce que coûte un
-plat, ce qui se mange avec les doigts, ce qui se partage, ce qui se refuse.
-Le goût est un accès direct à la mémoire et donc à l'émotion.
+What is eaten, at what hour, with what, in what order, what a dish costs, what
+is eaten with the fingers, what is shared, what is refused. Taste is a direct
+route to memory, and therefore to emotion.
 
-### 2.8 Sons
+### 2.8 Sounds
 
-Sons de fond permanents, sons qui signalent l'heure, sons qui annoncent le
-danger, silence anormal. Un lieu se reconnaît d'abord à son bruit de fond.
+Permanent background sounds, sounds that mark the hour, sounds that signal
+danger, abnormal silence. A place is first recognised by its background noise.
 
-### 2.9 Odeurs
+### 2.9 Smells
 
-Canal le plus puissant et le plus sous-employé. Une odeur par lieu majeur,
-tenue tout au long du roman, suffit à créer un ancrage durable et à déclencher
-les flashbacks de façon légitime.
+The most powerful channel and the most underused. One smell per major place,
+held throughout the novel, is enough to create a durable anchor and to trigger
+flashbacks legitimately.
 
-## 3. Protocole d'immersion d'une scène
+## 3. Immersion protocol for a scene
 
-1. Identifier le canal dominant du lieu, celui que ce lieu impose.
-2. Choisir deux canaux secondaires.
-3. Écrire trois détails concrets, dont un qui gêne le personnage.
-4. Vérifier que chaque détail est perçu par quelqu'un et coloré par son état.
-5. Supprimer tout détail qui ne pourrait pas être remarqué à ce moment
-   précis, dans cet état émotionnel.
-6. Vérifier qu'aucun paragraphe descriptif ne dépasse cinq lignes en scène
-   tendue.
+1. Identify the dominant channel of the place, the one the place imposes.
+2. Choose two secondary channels.
+3. Write three concrete details, one of which hinders the character.
+4. Verify that each detail is perceived by someone, and coloured by their
+   state.
+5. Remove any detail that could not be noticed at that precise moment, in that
+   emotional state.
+6. Verify that no descriptive paragraph exceeds five lines in a tense scene.
 
 ## 4. Dosage
 
-| Moment | Densité descriptive |
+| Moment | Descriptive density |
 |---|---|
-| Ouverture de chapitre | forte, trois à cinq détails |
-| Scène d'action | faible, un détail par pic |
-| Dialogue tendu | un détail toutes les dix répliques, en attribution |
-| Scène de deuil ou de mémoire | forte, canal odeur et son |
-| Transition, déplacement | moyenne, canal paysage et climat |
+| Chapter opening | high, three to five details |
+| Action scene | low, one detail per peak |
+| Tense dialogue | one detail every ten lines, as attribution |
+| Grief or memory scene | high, smell and sound channels |
+| Transition, travel | medium, landscape and climate channels |
 
-## 5. Contrôle anti-exotisme
+## 5. Anti-exoticism check
 
-Questions à poser sur tout passage immersif :
+Questions to ask of any immersive passage:
 
-- Ce détail est-il présent parce qu'il est vrai, ou parce qu'il est pittoresque ?
-- Un habitant du lieu le remarquerait-il ?
-- Le passage traite-t-il cette culture avec le même niveau de détail que celle
-  du lecteur supposé ?
-- Un lecteur issu de ce lieu se reconnaîtrait-il, ou se sentirait-il regardé ?
+- Is this detail present because it is true, or because it is picturesque?
+- Would someone who lives there notice it?
+- Does the passage treat this culture with the same level of detail as the
+  assumed reader's own?
+- Would a reader from this place recognise themselves, or feel looked at?
 
-Une seule réponse défavorable impose la réécriture.
+A single unfavourable answer requires a rewrite.
 
 ## 6. Auto-critique
 
-Axes notés de 0 à 5 : précision des détails, variété des canaux, absence
-d'exotisme, intégration au conflit, sobriété, cohérence avec la bible du
-monde, mémorabilité, effet émotionnel, justesse culturelle, absence de
-catalogue.
+Score 0 to 5: precision of detail, variety of channels, absence of exoticism,
+integration into the conflict, restraint, consistency with the world bible,
+memorability, emotional effect, cultural accuracy, absence of catalogue.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8.
+Threshold: no axis below 3, average at least 3.8.
 
 ## 7. Interfaces
 
-- Amont : `world-builder`, `research-director`.
-- Latéral : `scene-builder`.
-- Contrôle : `quality/literary-editor`, `quality/beta-reader`.
+- Upstream: `world-builder`, `research-director`.
+- Lateral: `scene-builder`.
+- Review: `quality/literary-editor`, `quality/beta-reader`.

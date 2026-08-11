@@ -1,83 +1,81 @@
 ---
 name: free-verse
-description: Écrit en vers libres avec rigueur : le vers comme unité de souffle, motivation de chaque coupe, contrainte inventée pour chaque poème, rythme mesuré. À utiliser pour un poème en vers libres, ou pour éviter la prose simplement découpée en lignes.
+description: Writes free verse with rigour: the line as a unit of breath, every break motivated, a constraint invented for each poem, measured rhythm. Use for a free verse poem, or to avoid prose merely cut into lines.
 license: MIT
 metadata:
   category: poetry
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, poet]
-  outputs: [poemes-en-vers-libres]
+  outputs: [free-verse-poems]
 ---
 
 # Free Verse
 
-Le vers libre n'est pas l'absence de forme : c'est une forme inventée pour
-chaque poème, et tenue avec autant de rigueur qu'une forme fixe.
+Free verse is not the absence of form: it is a form invented for each poem,
+and held with as much rigour as a fixed one.
 
-## 1. Loi fondamentale
+## 1. Fundamental law
 
-Puisque aucune règle extérieure ne soutient le poème, chaque décision doit
-être motivée : la longueur du vers, la place de la coupe, le blanc, la
-répétition. Un vers libre non motivé est de la prose découpée.
+Since no external rule supports the poem, every decision must be motivated:
+the length of the line, the placement of the break, the white space, the
+repetition. An unmotivated free verse line is prose cut into pieces.
 
-## 2. Le vers comme unité
+## 2. The line as a unit
 
-- Le vers est une unité de souffle et de sens, pas un segment arbitraire.
-- La fin de vers est une position forte : le dernier mot est mis en valeur,
-  et le lecteur marque une hésitation.
-- L'enjambement crée une double lecture : le vers dit une chose, la phrase en
-  dit une autre. Cette tension est le principal outil du vers libre.
-- Un vers court après plusieurs vers longs produit un choc. L'inverse produit
-  une ouverture.
+- The line is a unit of breath and of sense, not an arbitrary segment.
+- The line ending is a strong position: the last word is highlighted, and the
+  reader marks a hesitation.
+- Enjambment creates a double reading: the line says one thing, the sentence
+  says another. That tension is the main tool of free verse.
+- A short line after several long ones produces a shock. The reverse produces
+  an opening.
 
 ## 3. Structure
 
-Choisir une contrainte propre au poème et la tenir :
+Choose a constraint proper to the poem and hold it:
 
-- une contrainte de longueur, par exemple aucun vers de plus de sept mots ;
-- une contrainte de reprise, un mot ou une structure revenant à intervalles
-  réguliers ;
-- une contrainte de progression, une image qui se transforme d'une strophe à
-  l'autre ;
-- une contrainte typographique, blancs, alinéas, colonnes.
+- a length constraint, for example no line longer than seven words;
+- a repetition constraint, a word or structure returning at regular intervals;
+- a progression constraint, an image transforming from stanza to stanza;
+- a typographic constraint: white space, indents, columns.
 
-La contrainte est notée dans la note prosodique et vérifiée à la relecture.
+The constraint is recorded in the prosody note and verified on reread.
 
-## 4. Rythme
+## 4. Rhythm
 
-- Compter les syllabes, même en vers libre : la régularité involontaire
-  produit un ronronnement, la variation produit du sens.
-- Alterner les groupes rythmiques courts et longs.
-- Utiliser les répétitions comme scansion, jamais comme remplissage.
-- Éviter la ponctuation lourde : le blanc et la coupe suffisent souvent.
+- Count syllables even in free verse: involuntary regularity produces a drone,
+  variation produces sense.
+- Alternate short and long rhythmic groups.
+- Use repetition as scansion, never as filler.
+- Avoid heavy punctuation: white space and the break are often enough.
 
-## 5. Pièges
+## 5. Traps
 
-- La prose sentimentale coupée en lignes.
-- L'accumulation d'images sans progression.
-- L'abstraction majuscule : la Mort, l'Amour, le Temps.
-- Le poème qui explique son propre sens dans la dernière strophe.
-- Le blanc typographique employé comme substitut d'idée.
+- Sentimental prose cut into lines.
+- Accumulated images with no progression.
+- Capitalised abstraction: Death, Love, Time.
+- A poem that explains its own meaning in the last stanza.
+- White space used as a substitute for an idea.
 
-## 6. Procédure
+## 6. Procedure
 
-1. Écrire la matière en prose, sans retour à la ligne.
-2. Identifier le noyau : la phrase qui tient debout seule.
-3. Choisir une contrainte de forme.
-4. Découper en vers en cherchant, à chaque fin de vers, un mot qui gagne à
-   être isolé.
-5. Lire à voix haute, ajuster les coupes.
-6. Supprimer au moins un tiers.
-7. Vérifier que la contrainte est tenue de bout en bout.
+1. Write the material as prose, with no line breaks.
+2. Identify the core: the sentence that stands alone.
+3. Choose a formal constraint.
+4. Break into lines, looking at each line ending for a word that gains from
+   being isolated.
+5. Read aloud, adjust the breaks.
+6. Cut at least a third.
+7. Verify the constraint is held from beginning to end.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : motivation des coupes, tenue de la contrainte, force des
-fins de vers, rythme, progression, concrétude, absence de prose découpée.
+Score 0 to 5: breaks motivated, constraint held, strength of line endings,
+rhythm, progression, concreteness, absence of cut-up prose.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur motivation des coupes.
+Threshold: no axis below 3, average at least 4 on motivated breaks.
 
 ## 8. Interfaces
 
-- Amont : `poet`.
-- Voisins : `poetry/prose-poetry`, `poetry/haiku`.
+- Upstream: `poet`.
+- Neighbours: `poetry/prose-poetry`, `poetry/haiku`.

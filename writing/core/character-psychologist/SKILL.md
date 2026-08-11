@@ -1,131 +1,128 @@
 ---
 name: character-psychologist
-description: Crée des personnages complexes : désir conscient, besoin inconscient, blessure, mensonge, défense, contradiction, couches d'accès, traduction comportementale, arcs, cartographie relationnelle. À utiliser pour construire un protagoniste, un antagoniste crédible, ou réparer un personnage fade ou incohérent.
+description: Builds complex characters: conscious desire, unconscious need, wound, lie, defence, contradiction, access layers, behavioural translation, arcs, relational mapping. Use to build a protagonist, a credible antagonist, or to repair a flat or inconsistent character.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [fiches-personnages, arcs, cartographie-relationnelle]
+  outputs: [character-sheets, character-arcs, relational-map]
 ---
 
 # Character Psychologist
 
-Construction de personnages complexes, cohérents et capables de surprendre
-sans se contredire.
+Construction of complex, consistent characters capable of surprising without
+contradicting themselves.
 
-## 1. Principe directeur
+## 1. Guiding principle
 
-Un personnage n'est pas une somme de traits. C'est un système de tensions.
-On le construit en cherchant la contradiction interne qui le rend prévisible
-dans sa nature et imprévisible dans ses actes.
+A character is not a sum of traits. It is a system of tensions. You build one
+by finding the internal contradiction that makes them predictable in nature
+and unpredictable in action.
 
-## 2. Noyau en sept champs
+## 2. The seven field core
 
-Ces sept champs suffisent à écrire n'importe quelle scène du personnage.
+These seven fields are enough to write any scene the character appears in.
 
-1. Désir conscient : ce qu'il poursuit et peut formuler.
-2. Besoin inconscient : ce qui le guérirait, et qu'il refuse.
-3. Blessure fondatrice : événement précis, daté, avec un lieu et un témoin.
-4. Mensonge : la croyance fausse née de la blessure, formulée à la première
-   personne.
-5. Peur : la conséquence redoutée si le mensonge tombe.
-6. Défense : le comportement qui protège le mensonge, visible dès la
-   première scène.
-7. Contradiction : le trait qui va contre tout ce qui précède, et qui rend le
-   personnage vivant.
+1. Conscious desire: what they pursue and can articulate.
+2. Unconscious need: what would heal them, and what they refuse.
+3. Founding wound: a precise, dated event, with a place and a witness.
+4. Lie: the false belief born of the wound, stated in the first person.
+5. Fear: the consequence dreaded if the lie collapses.
+6. Defence: the behaviour that protects the lie, visible from the first scene.
+7. Contradiction: the trait that runs against everything above, and makes the
+   character alive.
 
-Exemple de mensonge : `Si je m'arrête, tout le monde s'arrête.`
-Défense correspondante : il ne délègue rien, il arrive avant les autres, il
-refuse d'être malade.
+Example lie: `Si je m'arrête, tout le monde s'arrête.`
+Matching defence: they delegate nothing, arrive before everyone else, refuse
+to be ill.
 
-## 3. Couches d'accès
+## 3. Access layers
 
-Trois couches, révélées dans cet ordre au lecteur :
+Three layers, revealed to the reader in this order:
 
-- Couche publique : ce que les inconnus voient, y compris ce qu'il met en
-  scène volontairement.
-- Couche privée : ce que voient les proches, ses relâchements, ses colères.
-- Couche secrète : ce qu'il ne montre à personne, souvent lié à la blessure.
+- Public layer: what strangers see, including what the character stages
+  deliberately.
+- Private layer: what those close to them see, their lapses, their anger.
+- Secret layer: what they show nobody, usually tied to the wound.
 
-Chaque révélation de couche est un événement dramatique. Ne pas descendre de
-deux couches dans la même scène.
+Every layer revealed is a dramatic event. Never descend two layers in one
+scene.
 
-## 4. Comportement observable
+## 4. Observable behaviour
 
-Traduire la psychologie en signes, seul matériau utilisable par le romancier :
+Translate psychology into signs, the only material a novelist can use:
 
-| Élément intérieur | Traduction concrète |
+| Inner element | Concrete translation |
 |---|---|
-| Peur de perdre le contrôle | arrive en avance, vérifie deux fois, refuse qu'on conduise |
-| Honte sociale | corrige son langage, évite certains lieux, paye trop vite |
-| Deuil non fait | conserve un objet, garde une habitude devenue inutile |
-| Colère refoulée | politesse excessive, précision du vocabulaire, gestes lents |
-| Besoin d'approbation | reformule pour être compris, rit avant l'autre |
+| Fear of losing control | arrives early, checks twice, refuses to be driven |
+| Social shame | corrects their speech, avoids certain places, pays too quickly |
+| Unfinished grief | keeps an object, keeps a habit that has become useless |
+| Suppressed anger | excessive politeness, precise vocabulary, slow gestures |
+| Need for approval | rephrases to be understood, laughs before the other does |
 
-Le tableau se prolonge dans `resources/table-comportements.md`.
+The table continues in `resources/table-comportements.md`.
 
-## 5. Voix du personnage
+## 5. Character voice
 
-Renseigner, pour chaque personnage porteur de dialogue :
+For every character who carries dialogue, record:
 
-- deux mots qu'il emploie souvent ;
-- deux mots qu'il n'emploierait jamais ;
-- longueur moyenne de ses répliques ;
-- rapport à la question et au mensonge ;
-- ce qu'il fait quand il ne sait pas quoi répondre.
+- two words they use often;
+- two words they would never use;
+- the average length of their lines;
+- their relation to questions and to lying;
+- what they do when they do not know how to answer.
 
-## 6. Arc et transformation
+## 6. Arc and transformation
 
-Quatre trajectoires possibles :
+Four possible trajectories:
 
-1. Arc positif : le mensonge tombe, le personnage change et paye le prix.
-2. Arc négatif : le mensonge gagne, le personnage se referme.
-3. Arc plat : le personnage ne change pas, il change le monde autour de lui.
-4. Arc de désillusion : il découvre que sa vérité était le mensonge d'un autre.
+1. Positive arc: the lie falls, the character changes and pays the price.
+2. Negative arc: the lie wins, the character closes.
+3. Flat arc: the character does not change; they change the world around them.
+4. Disillusion arc: they discover their truth was someone else's lie.
 
-Points de passage obligés : scène qui prouve le mensonge, scène qui le coûte,
-scène de choix. Sans scène de choix explicite, la transformation est affirmée
-et non démontrée : le lecteur ne la croira pas.
+Mandatory waypoints: a scene that proves the lie, a scene that makes it cost,
+a scene of choice. Without an explicit choice scene, the transformation is
+asserted rather than demonstrated, and the reader will not believe it.
 
-## 7. Personnages secondaires
+## 7. Secondary characters
 
-- Chaque secondaire a un désir propre, indépendant du protagoniste.
-- Il a une vie qui continue hors champ, matérialisée par au moins un détail
-  non expliqué.
-- Il ne doit jamais être présent uniquement pour poser une question à la
-  place du lecteur.
-- Trois secondaires bien tenus valent mieux que dix silhouettes.
+- Every secondary has a desire of their own, independent of the protagonist.
+- They have a life continuing off the page, materialised by at least one
+  unexplained detail.
+- They must never exist solely to ask a question on the reader's behalf.
+- Three well-held secondaries beat ten silhouettes.
 
-## 8. Cartographie relationnelle
+## 8. Relational mapping
 
-Pour chaque couple de personnages significatif, noter :
+For every significant pair, record:
 
-- ce que A veut de B ;
-- ce que B croit que A veut ;
-- la dette ou le pouvoir qui circule entre eux ;
-- la phrase qu'ils ne se diront jamais ;
-- l'événement qui pourrait renverser la relation.
+- what A wants from B;
+- what B believes A wants;
+- the debt or the power circulating between them;
+- the sentence they will never say to each other;
+- the event that could reverse the relationship.
 
-## 9. Pièges
+## 9. Traps
 
-- Le passé traumatique comme seule explication de tout comportement.
-- Le personnage compétent en tout, faible seulement par modestie.
-- La contradiction décorative, jamais mise en jeu par l'intrigue.
-- Le méchant sans logique interne défendable de son point de vue.
-- L'évolution soudaine, non préparée, à la faveur du climax.
+- A traumatic past used as the sole explanation of every behaviour.
+- The character competent at everything, weak only through modesty.
+- Decorative contradiction, never put into play by the plot.
+- A villain with no internal logic defensible from their own point of view.
+- Sudden, unprepared change arriving with the climax.
 
 ## 10. Auto-critique
 
-Axes notés de 0 à 5 : cohérence interne, force de la contradiction, lisibilité
-du désir, profondeur du besoin, traduction comportementale, singularité de la
-voix, crédibilité de l'arc, autonomie des secondaires, absence de stéréotype,
-capacité à surprendre.
+Score 0 to 5: internal consistency, strength of the contradiction, legibility
+of the desire, depth of the need, behavioural translation, singularity of
+voice, credibility of the arc, autonomy of the secondaries, absence of
+stereotype, capacity to surprise.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8.
+Threshold: no axis below 3, average at least 3.8.
 
 ## 11. Interfaces
 
-- Amont : `research-director` pour les milieux et les métiers.
-- Latéral : `dialogue-master`, `scene-builder`.
-- Contrôle : `continuity-manager`, `quality/beta-reader`.
+- Upstream: `research-director` for milieux and trades.
+- Lateral: `dialogue-master`, `scene-builder`.
+- Review: `continuity-manager`, `quality/beta-reader`.

@@ -1,10 +1,24 @@
 # novel-architect
 
-Construction globale d'un roman : prémisse, promesses, structure, points de
-bascule, arcs, sous-intrigues, calendrier des révélations, plan chapitre par
-chapitre.
+Global construction of a novel: premise, promises, structure, turning points,
+arcs, subplots, reveal schedule, chapter by chapter outline.
 
-- Entrées : prémisse, genre, longueur cible, public, ton.
-- Sorties : bible du roman, plan général, arcs, calendrier des révélations.
-- Dépendances : writing-constitution.
-- Aval : timeline-manager, chapter-architect, saga-architect.
+- Inputs: premise, genre, target length, readership, tone.
+- Outputs: novel bible, master outline, character arcs, reveal schedule.
+- Depends on: `writing-constitution`.
+- Downstream: `timeline-manager`, `chapter-architect`, `saga-architect`.
+
+## When to use
+
+At the start of a long project, when a manuscript loses its direction, or
+before any major restructuring.
+
+## When not to use
+
+For a single scene or chapter. That is `scene-builder` and
+`chapter-architect`.
+
+## Configuration
+
+`language.creative_output` sets the output language. Templates in `resources/`
+are French, as is the prose the skill produces by default.

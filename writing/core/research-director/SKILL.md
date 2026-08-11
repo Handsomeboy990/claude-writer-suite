@@ -1,129 +1,125 @@
 ---
 name: research-director
-description: Dirige la documentation d'un projet : identification des besoins par chapitre, trois niveaux de profondeur, hiérarchie des sources, vérification croisée, traduction en matière narrative, contrôle des anachronismes, sujets sensibles. À utiliser avant d'écrire sur un métier, une époque ou un lieu réel.
+description: Directs the research for a project: identifying what each chapter needs, three depth levels, source hierarchy, cross-verification, translation into narrative material, anachronism checks, sensitive subjects. Use before writing about a real trade, period or place.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [dossier-documentaire, fiches-sources, notes-de-verification]
+  outputs: [research-dossier, source-sheets, verification-notes]
 ---
 
 # Research Director
 
-Direction documentaire du projet. Détermine ce qu'il faut savoir, à quel
-niveau de certitude, et comment cette matière entre dans le texte sans
-l'alourdir.
+Owns the research effort. Determines what must be known, at what level of
+certainty, and how that material enters the text without weighing it down.
 
-## 1. Principe
+## 1. Principle
 
-On ne documente pas un sujet, on documente une scène. La recherche part
-toujours d'un besoin narratif précis, sinon elle devient une fuite devant
-l'écriture.
+You do not research a subject; you research a scene. Research always starts
+from a precise narrative need, otherwise it becomes an escape from writing.
 
-Trois niveaux de profondeur :
+Three depth levels:
 
-| Niveau | Usage | Effort |
+| Level | Use | Effort |
 |---|---|---|
-| Niveau 1, ambiance | mentions ponctuelles, arrière-plan | rapide, sources générales |
-| Niveau 2, opérationnel | gestes, procédures, vocabulaire de métier | sources spécialisées, témoignages |
-| Niveau 3, structurel | l'intrigue dépend de l'exactitude | sources primaires, vérification croisée |
+| Level 1, atmosphere | passing mentions, background | quick, general sources |
+| Level 2, operational | gestures, procedures, trade vocabulary | specialist sources, testimony |
+| Level 3, structural | the plot depends on accuracy | primary sources, cross-verification |
 
-Un roman standard comporte deux à quatre sujets de niveau 3 au maximum.
+A standard novel carries two to four level 3 subjects at most.
 
-## 2. Protocole
+## 2. Protocol
 
-### Étape 1 : lister les besoins
+### Step 1: list the needs
 
-Parcourir le plan et noter, chapitre par chapitre, toute affirmation
-vérifiable : métier, arme, maladie, trajet, monnaie, loi, date, technique,
-climat, coutume.
+Go through the outline and record, chapter by chapter, every verifiable
+assertion: trade, weapon, illness, journey, currency, law, date, technique,
+climate, custom.
 
-### Étape 2 : classer par niveau
+### Step 2: assign levels
 
-Attribuer un niveau à chaque besoin. Ne pas documenter au niveau 3 ce qui
-n'est pas structurel.
+Give each need a level. Do not research at level 3 what is not structural.
 
-### Étape 3 : chercher
+### Step 3: search
 
-Ordre de priorité des sources :
+Source priority:
 
-1. sources primaires : archives, textes de loi, rapports, correspondances,
-   photographies, cartes d'époque ;
-2. témoignages directs et entretiens ;
-3. travaux universitaires ;
-4. ouvrages de vulgarisation sérieux ;
-5. presse contemporaine des faits.
+1. primary sources: archives, statutes, reports, correspondence, photographs,
+   period maps;
+2. direct testimony and interviews;
+3. academic work;
+4. serious popular works;
+5. press contemporary with the events.
 
-Les sources encyclopédiques en ligne servent d'entrée, jamais de preuve.
+Online encyclopaedic sources are an entry point, never a proof.
 
-### Étape 4 : vérifier
+### Step 4: verify
 
-Toute donnée de niveau 3 doit être confirmée par deux sources indépendantes.
-Attention particulière aux chiffres, aux dates, aux distances, aux durées de
-trajet et aux termes techniques.
+Every level 3 fact must be confirmed by two independent sources. Particular
+attention to figures, dates, distances, travel times and technical terms.
 
-### Étape 5 : ficher
+### Step 5: record
 
-Une fiche par sujet, avec les champs du gabarit `resources/fiche-source.md`.
-Consigner explicitement la marge d'incertitude et ce qui reste inconnu.
+One sheet per subject, using the template in `resources/fiche-source.md`.
+Record the margin of uncertainty explicitly, and what remains unknown.
 
-### Étape 6 : traduire en matière narrative
+### Step 6: translate into narrative material
 
-Pour chaque fiche, extraire :
+From each sheet, extract:
 
-- un geste précis qu'un praticien ferait sans y penser ;
-- un mot de métier employé sans être expliqué ;
-- une contrainte qui peut faire échouer un personnage ;
-- une erreur classique que commet un novice ;
-- un détail sensoriel non évident.
+- a precise gesture a practitioner would make without thinking;
+- a trade word used without being explained;
+- a constraint that can make a character fail;
+- a classic mistake a novice makes;
+- a non-obvious sensory detail.
 
-C'est ce quintet, et non la fiche, qui entre dans le texte.
+That set of five, not the sheet, is what enters the text.
 
-### Étape 7 : oublier
+### Step 7: forget
 
-Après rédaction, vérifier que moins de dix pour cent de la documentation
-apparaît. Si la proportion est plus élevée, le texte est un exposé.
+After writing, check that under ten percent of the research appears. If the
+proportion is higher, the text is a lecture.
 
-## 3. Anachronismes et vigilance
+## 3. Anachronism and vigilance
 
-Points de contrôle systématiques pour un récit situé dans le passé :
+Systematic checkpoints for a narrative set in the past:
 
-- objets du quotidien et leur date d'apparition ;
-- vocabulaire et expressions, y compris dans les dialogues ;
-- rapports sociaux, statut juridique des personnes ;
-- durée réelle des communications et des déplacements ;
-- monnaie, prix, salaires ;
-- éclairage, chauffage, hygiène, médecine ;
-- gestes disparus, comme allumer, se laver, écrire, payer.
+- everyday objects and the date they appeared;
+- vocabulary and expressions, dialogue included;
+- social relations, the legal status of persons;
+- the real duration of communication and travel;
+- currency, prices, wages;
+- lighting, heating, hygiene, medicine;
+- vanished gestures: lighting a fire, washing, writing, paying.
 
-## 4. Sujets sensibles
+## 4. Sensitive subjects
 
-Pour toute représentation d'une culture, d'une religion, d'un handicap, d'une
-maladie, d'une violence ou d'un métier à risque :
+For any representation of a culture, a religion, a disability, an illness,
+violence, or a hazardous trade:
 
-- privilégier les sources produites par les personnes concernées ;
-- distinguer ce qui est documenté de ce qui est supposé ;
-- refuser le détail spectaculaire non nécessaire ;
-- documenter les conséquences, pas seulement les faits.
+- prefer sources produced by the people concerned;
+- distinguish what is documented from what is supposed;
+- refuse spectacular detail that is not necessary;
+- document the consequences, not only the facts.
 
-## 5. Traçabilité
+## 5. Traceability
 
-Le dossier documentaire est versionné avec le manuscrit. Chaque affirmation de
-niveau 3 dans le texte renvoie à une fiche. En cas de contestation éditoriale,
-la fiche est la réponse.
+The research dossier is versioned with the manuscript. Every level 3
+assertion in the text points to a sheet. If an editor challenges it, the sheet
+is the answer.
 
 ## 6. Auto-critique
 
-Axes notés de 0 à 5 : pertinence des besoins identifiés, qualité des sources,
-vérification croisée, absence d'anachronisme, traduction narrative,
-discrétion de la documentation, traitement des sujets sensibles,
-traçabilité.
+Score 0 to 5: relevance of the needs identified, quality of sources,
+cross-verification, absence of anachronism, narrative translation, discretion
+of the research, handling of sensitive subjects, traceability.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8. Pour un récit historique,
-seuil relevé à 4 sur l'axe anachronisme.
+Threshold: no axis below 3, average at least 3.8. For historical fiction, the
+anachronism axis is raised to 4.
 
 ## 7. Interfaces
 
-- Aval : `world-builder`, `immersion-director`, `character-psychologist`.
-- Contrôle : `continuity-manager`, `quality/publication-review`.
+- Downstream: `world-builder`, `immersion-director`,
+  `character-psychologist`.
+- Review: `continuity-manager`, `quality/publication-review`.
