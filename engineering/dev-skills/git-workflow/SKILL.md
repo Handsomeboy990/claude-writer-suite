@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: Professional version control: fixed author identity, atomic English commits in the imperative, branch conventions read from the repository, pull request contents, history hygiene, repository ignore rules and secret prevention. Use before every commit, branch or pull request.
+description: Professional version control: author identity read from the configuration, delegation boundaries deciding which steps are performed and which are handed over, atomic English commits in the imperative, branch conventions read from the repository, pull request contents, history hygiene and secret prevention. Use before every commit, branch or pull request.
 license: MIT
 metadata:
   category: dev-skills
