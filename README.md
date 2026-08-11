@@ -1,201 +1,355 @@
 # Claude Writer Suite
 
-Deux systèmes d'expertise pour un agent Claude, dans un seul repository :
-**écrire** et **construire des logiciels**.
+Four expertise systems for an agent, in one repository: **write**,
+**produce documents**, **build software**, and **review your own work**.
 
-83 skills et 14 agents. Pas des prompts : des protocoles numérotés, des
-critères de décision, des grilles d'évaluation et des procédures de révision.
+92 skills and 14 agents. Not prompts: numbered protocols, decision criteria,
+scoring grids and review procedures, each with a stated threshold for what
+counts as finished.
+
+[Version francaise](README.fr.md)
 
 ```
 claude-writer-suite/
-├── writing/          42 skills d'écriture professionnelle, en français
-├── engineering/      41 skills d'ingénierie et 14 agents, en anglais
-├── documentation/    documentation technique des deux systèmes
-└── tests/            trois scripts de validation
+├── shared/           2 cross domain skills, called by every tree
+├── writing/         42 creative writing skills
+├── documents/        7 professional document skills
+├── engineering/     41 software skills and 14 agents
+├── config/           user specific values, nothing hardcoded
+├── documentation/    technical documentation of the four trees
+└── tests/            three validation scripts
 ```
 
-Les deux arbres sont indépendants. Aucun skill de l'un ne dépend d'un skill de
-l'autre. Ils partagent la structure de skill, les tests et les règles Git,
-rien d'autre.
+## Why it exists
 
-## writing
+An agent that writes a chapter, a letter or an endpoint will produce something
+plausible on the first attempt. Plausible is not the same as correct, and the
+gap only appears later: at the deadline, in the reader's hands, in production.
 
-Bibliothèque d'écriture professionnelle. L'agent intervient comme romancier,
-scénariste, directeur littéraire, éditeur, critique, documentaliste,
-correcteur et bêta-lecteur, de la nouvelle à la saga.
+Every skill here encodes the same shape. What the work is for. How it is done,
+as a numbered procedure. What must be verified before it is called finished.
+What score it has to reach. What it refuses to do.
 
-| Catégorie | Skills | Objet |
+## Language
+
+The repository separates three languages that are routinely confused.
+
+| Layer | What it is | Value |
 |---|---|---|
-| [core](writing/core/) | 14 | fondations et production |
-| [genres](writing/genres/) | 15 | thriller, mystère, fantasy, SF, romance, historique |
-| [poetry](writing/poetry/) | 5 | prosodie française et quatre formes |
-| [quality](writing/quality/) | 8 | diagnostic, réécriture, correction, validation |
+| Skill language | the instructions themselves | English, all 92 skills |
+| System language | paths, identifiers, config keys, commits | English |
+| Output language | what the reader receives | theirs, set per project |
 
-Plus [resources/](writing/resources/), typographie et lexiques partagés, et
-[examples/](writing/examples/), un projet de démonstration complet.
+Skills are written in English so the system is usable internationally. What
+they produce is a separate decision: `language.creative_output` defaults to
+French because the writing tree encodes French craft, and
+`language.document_output` is set to the language of whoever receives the
+document. The French reference material in `writing/resources/` stays French,
+because it is what the skills produce rather than how they are instructed.
 
-Index : [writing/README.md](writing/README.md).
+## The four trees
 
-## engineering
+### shared
 
-Système d'ingénierie logicielle et de livraison de projet. L'agent prend un
-cahier des charges et livre un système implémenté, testé, documenté, déployé
-et vérifié en production.
+Two skills that belong to no domain and are called by all of them.
 
-| Catégorie | Skills | Question à laquelle elle répond |
+| Skill | Runs | Produces |
 |---|---|---|
-| [dev-skills](engineering/dev-skills/) | 20 | comment une modification est faite correctement |
-| [delivery-skills](engineering/delivery-skills/) | 10 | quoi construire, dans quel ordre, avec quelle approbation |
-| [devops-skills](engineering/devops-skills/) | 11 | comment le système tourne, se déploie et se restaure |
-| [agents](engineering/agents/) | 14 | qui possède quoi, et ce qui est transmis |
+| [project-brief](shared/project-brief/) | before the work | the agreement the work is measured against |
+| [self-critique](shared/self-critique/) | after the work | the corrected result, and what was found |
 
-Agnostique de la pile technique et de la plateforme : le système lit le projet
-qu'on lui confie plutôt que d'en présupposer la forme.
+`project-brief` inspects what exists, asks the decision-critical questions once
+in a single batch, and records an assumption for everything it did not ask.
+`self-critique` selects the professional roles that will actually receive the
+work, runs one pass per role, and fixes what it finds rather than reporting it.
 
-Index : [engineering/README.md](engineering/README.md).
+### writing
+
+Creative writing. The agent works as novelist, screenwriter, editor, critic,
+researcher, proofreader and beta reader, from a short story to a saga.
+
+| Category | Skills | Purpose |
+|---|---|---|
+| [core](writing/core/) | 14 | foundations and production |
+| [genres](writing/genres/) | 15 | thriller, mystery, fantasy, SF, romance, historical |
+| [poetry](writing/poetry/) | 5 | French prosody and four forms |
+| [quality](writing/quality/) | 8 | diagnosis, rewriting, correction, validation |
+
+Index: [writing/README.md](writing/README.md).
+
+### documents
+
+Professional documents that are delivered to someone.
+
+| Category | Skills | Question it answers |
+|---|---|---|
+| [documentation](documents/documentation/) | 4 | how the reader understands and uses the system |
+| [administrative](documents/administrative/) | 1 | how a formal document survives being filed and quoted |
+| [publishing](documents/publishing/) | 2 | how it looks, paginates and renders |
+
+Four rules run through the tree: the audience is named before the first
+sentence; the output language is the recipient's; nothing is asserted that was
+not verified; and a generated PDF is not a finished PDF until the rendered
+pages have been looked at.
+
+Index: [documents/README.md](documents/README.md).
+
+### engineering
+
+Software engineering and project delivery. The agent takes a specification and
+delivers a system that is implemented, tested, documented, deployed and
+verified in production.
+
+| Category | Skills | Question it answers |
+|---|---|---|
+| [dev-skills](engineering/dev-skills/) | 20 | how a change is made correctly |
+| [delivery-skills](engineering/delivery-skills/) | 10 | what to build, in what order, with what approval |
+| [devops-skills](engineering/devops-skills/) | 11 | how the system runs, deploys and restores |
+| [agents](engineering/agents/) | 14 | who owns what, and what is handed on |
+
+Stack and platform agnostic: the system reads the project it is given rather
+than assuming its shape.
+
+Index: [engineering/README.md](engineering/README.md).
 
 ## Installation
 
-Aucune dépendance. Le repository est un ensemble de fichiers Markdown.
+No dependencies. The repository is Markdown and shell.
 
-```
-git clone <url-du-depot> claude-writer-suite
+```bash
+git clone <repository-url> claude-writer-suite
 cd claude-writer-suite
+
 bash tests/validate-structure.sh
 bash tests/validate-rules.sh
 bash tests/validate-orchestration.sh
+
+bash install.sh
+bash install.sh --configure
 ```
 
-Puis, pour installer dans le répertoire personnel de l'agent :
+Scopes, each of which also installs the two cross domain skills:
 
-```
-bash install.sh              83 skills et 14 agents
-bash install.sh --writing    les 42 skills d'écriture seulement
-bash install.sh --dev        les 41 skills d'ingénierie seulement
-bash install.sh --agents     les 14 agents seulement
-bash install.sh --no-agents  les skills sans les agents
-bash install.sh --zip        construit aussi une archive par skill dans dist/
-bash install.sh --remove     désinstalle
-```
-
-Les options de portée se combinent avec `--zip` et `--remove`. Les skills vont
-dans `~/.claude/skills`, les agents dans `~/.claude/agents` ; les deux cibles
-sont configurables par `CLAUDE_SKILLS_DIR` et `CLAUDE_AGENTS_DIR`.
-
-Pour un usage sans installation, placer le repository dans le répertoire de
-travail et faire lire `CLAUDE.md` en premier, puis la constitution du système
-concerné.
-
-## Démarrer
-
-### Écrire
-
-1. Remplir `writing/resources/templates/demarrage-de-projet.md`.
-2. Charger `writing/core/writing-constitution`, qui porte les règles communes.
-3. Suivre `documentation/workflow.md`, phase par phase.
-4. Ne jamais livrer un texte sans `writing/quality/self-critique-protocol`.
-
-```
-chapter-architect -> scene-builder -> dialogue-master
-    -> self-critique-protocol -> continuity-manager
+```bash
+bash install.sh --writing      42 creative writing skills
+bash install.sh --documents     7 professional document skills
+bash install.sh --dev          41 engineering skills and 14 agents
+bash install.sh --shared        the 2 cross domain skills only
+bash install.sh --agents        the 14 agents only
+bash install.sh --no-agents     skills without agents
+bash install.sh --zip           also build one archive per skill in dist/
+bash install.sh --remove        uninstall
 ```
 
-### Construire
+Skills go to `~/.claude/skills`, agents to `~/.claude/agents`, configuration to
+`~/.claude/writer-suite.config.yaml`. All three are overridable with
+`CLAUDE_SKILLS_DIR`, `CLAUDE_AGENTS_DIR` and `CLAUDE_CONFIG_FILE`.
 
-1. Charger `engineering/dev-skills/engineering-core`, qui porte les règles
-   communes.
-2. Laisser `engineering/dev-skills/engineering-orchestrator` classer la tâche
-   et composer le plan minimal complet.
-3. Ne rien supposer du projet : `project-exploration` établit les faits avant
-   toute décision.
-4. Ne jamais considérer un changement comme terminé avant
-   `code-review-protocol`, avec un test exécuté et observé.
+Full detail, including installing one skill alone:
+[documentation/installation.md](documentation/installation.md).
 
-```
-project-exploration -> backend-engineering -> input-validation
-    -> security-audit -> testing-quality -> code-review-protocol
-```
+## Configuration
 
-### Livrer un projet complet
+Nothing assumes who you are, which tools you use, or which language your
+readers speak.
 
-Quand l'entrée est une spécification plutôt qu'une tâche,
-`engineering/delivery-skills/delivery-orchestrator` prend la main sur quatorze
-phases, avec quatre portes d'approbation.
-
-```
-requirements-analysis -> clarification-gate -> technology-selection
-    -> architecture-proposal -> validation-gate -> delivery-planning
+```bash
+bash install.sh --configure
 ```
 
-Deux règles structurantes : aucun code de production avant la porte de
-validation, échafaudage compris ; aucune demande d'autorisation après, pour le
-travail inclus dans le périmètre approuvé.
+Every question has a recommended answer, already selected: press enter to
+accept it. Only the fields relevant to the scope you installed are asked.
 
-## Règles communes aux deux arbres
+Two fields are required and have no default, ever: `identity.author_name` and
+`identity.author_email`. A commit carries a real person, and `git-workflow`
+stops and names the missing field rather than inventing one. The installer
+rejects an author name that looks like a tool.
 
-Deux interdits s'appliquent à tous les fichiers du repository : **aucun
-emoji**, **aucun tiret cadratin**. Ils sont vérifiés par
-`tests/validate-rules.sh`.
+### What the agent may do on its own
 
-Le reste diffère par arbre :
+The `delegation` section decides how much of the work reaches you as a
+finished action and how much reaches you as a prepared step.
 
-- `writing/core/writing-constitution` : dialogues aux normes françaises,
-  flashbacks en italique, chronologie compréhensible, titres travaillés,
-  personnages cohérents, refus des clichés, montrer plutôt qu'expliquer,
-  respect des cultures représentées.
-- `engineering/dev-skills/engineering-core` : ne jamais deviner, lire avant
-  d'écrire, vérifier avant d'affirmer, traiter toute entrée externe comme
-  hostile, ne jamais versionner un secret, finir le travail.
-- `engineering/devops-skills/devops-core` : ne rien coder en dur qui varie
-  selon l'environnement, refuser de démarrer sans une variable requise,
-  classer le rayon d'impact avant toute opération, vérifier la cible avant
-  toute action destructrice.
-
-Chaque skill se termine par une auto-évaluation avec seuil de livraison
-chiffré.
-
-## Documentation
-
-| Fichier | Contenu |
+| Field | Values |
 |---|---|
-| [CLAUDE.md](CLAUDE.md) | mémoire du projet, conventions, règles Git |
-| [documentation/architecture.md](documentation/architecture.md) | organisation, isolation des skills, métadonnées |
-| [documentation/skills-guide.md](documentation/skills-guide.md) | répertoire des 83 skills, table de choix |
-| [documentation/writing-rules.md](documentation/writing-rules.md) | règles d'écriture, version opérationnelle |
-| [documentation/workflow.md](documentation/workflow.md) | workflow d'écriture en onze phases |
-| [documentation/engineering-system.md](documentation/engineering-system.md) | la couche dev-skills en détail |
-| [documentation/delivery-system.md](documentation/delivery-system.md) | livraison, exploitation et agents |
-| [CONTINUITY.md](CONTINUITY.md) | état de reprise du repository |
-| [CHANGELOG.md](CHANGELOG.md) | historique des versions |
+| `commits` | yes, stage-only, no |
+| `branches` | yes, no |
+| `push` | yes, branch-only, no |
+| `pull_requests` | yes, draft, no |
+| `release_tags` | yes, no |
+| `deployments` | yes, non-production, no |
+| `database_operations` | yes, non-production, no |
+| `dependency_changes` | yes, with-justification, no |
+
+Say no to anything you would rather do yourself. The agent stops at that
+boundary, hands you what it prepared, and names the step.
+
+Everything you keep is written to `writer-suite-manual-tasks.md`, next to the
+configuration file, with the command for each step. Nothing is silently left
+undone.
+
+Two rules are never delegated: a destructive operation is counted and
+confirmed before it runs, and a leaked secret is reported for rotation rather
+than quietly removed.
+
+Field reference: [config/README.md](config/README.md). Installer side:
+[documentation/configuration.md](documentation/configuration.md).
+
+## Which skill do I need
+
+| Situation | Skill |
+|---|---|
+| I am starting a project of any kind | `shared/project-brief` |
+| I finished something and want it checked | `shared/self-critique` |
+| I am starting a novel | `writing/core/novel-architect` |
+| My scene is flat | `writing/core/scene-builder` |
+| Every character speaks alike | `writing/core/dialogue-master` |
+| My middle sags | `writing/quality/story-doctor` |
+| Is this publishable | `writing/quality/literary-critic` |
+| A partner must integrate with our API | `documents/documentation/technical-writing` |
+| A customer cannot find how to do something | `documents/documentation/user-documentation` |
+| Leadership must decide | `documents/documentation/report-writing` |
+| A formal letter has to be sent | `documents/administrative/administrative-writing` |
+| The client wants a PDF | `documents/publishing/pdf-production` |
+| I have a coding task | `engineering/dev-skills/engineering-orchestrator` |
+| I have a bug | `engineering/dev-skills/debugging` |
+| I have a specification, not a task | `engineering/delivery-skills/delivery-orchestrator` |
+| Something must be deployed | `engineering/devops-skills/devops-core` |
+
+Full directory: [documentation/skills-guide.md](documentation/skills-guide.md).
+
+## Using a skill
+
+Every skill is a self-contained directory:
+
+```
+skill-name/
+├── SKILL.md      the expertise: procedure, thresholds, refusals
+├── README.md     summary, inputs, outputs, dependencies, configuration
+├── examples/     at least one worked example
+└── resources/    at least one grid, checklist or reference
+```
+
+The README states its dependencies in four lines. `Depends on: nothing` means
+it works alone; copy the directory and use it. A skill that depends on another
+refers to it rather than restating it, so the other one is needed too.
+
+Six skills depend on nothing and work entirely on their own:
+`shared/self-critique`, `shared/project-brief`,
+`documents/documentation/document-core`,
+`engineering/dev-skills/engineering-core`,
+`engineering/devops-skills/devops-core`,
+`writing/core/writing-constitution`.
+
+## Agents
+
+Fourteen role definitions, for a runtime that supports subagents.
+
+```
+Skill          how this kind of work is done correctly
+Agent          who owns this piece of work, what they may touch, what they hand on
+Orchestration  which agents run, in what order, and where the gates are
+```
+
+An agent is thin by design: it names the skills it uses and never restates
+them. For a single task the skills alone are enough; install with
+`--no-agents` and let `engineering-orchestrator` sequence them in one context.
+
+Detail: [documentation/agents.md](documentation/agents.md).
+
+## Dependencies between skills
+
+```
+project-brief
+    -> requirements-analysis -> architecture-proposal -> validation-gate
+    -> implementation -> testing-quality -> security-audit
+    -> code-review-protocol -> release-readiness
+    -> self-critique
+```
+
+Each tree has one constitution that every skill in it refers to and none
+restates:
+
+| Tree | Constitution |
+|---|---|
+| writing | `writing/core/writing-constitution` |
+| documents | `documents/documentation/document-core` |
+| engineering | `engineering/dev-skills/engineering-core` |
+| engineering, operations | `engineering/devops-skills/devops-core` |
+
+`tests/validate-orchestration.sh` verifies that every declared dependency and
+every cross reference resolves, so the declarations are accurate rather than
+aspirational.
+
+## What the system refuses
+
+```
+guessing anything the repository can establish
+asserting without having run it
+writing a command into a document without running it first
+inventing a legal reference, a registration number or an institution
+leaving fake functionality on a reachable path
+writing production code before the architecture is approved
+weakening a test to obtain a green pipeline
+hardcoding a value that varies by environment
+running a destructive statement without counting the rows first
+declaring a deployment successful without exercising a journey
+delivering a PDF whose pages were never rendered and looked at
+attributing a commit to a tool
+```
+
+Two prohibitions apply to every file in the repository, including this one:
+**no emoji**, **no em dash**. Both are enforced by
+`tests/validate-rules.sh`.
 
 ## Validation
 
-```
-bash tests/validate-structure.sh      structure et métadonnées des 83 skills
-bash tests/validate-rules.sh          emoji, tiret cadratin, typographie
-bash tests/validate-orchestration.sh  plans, phases, agents, références
+```bash
+bash tests/validate-structure.sh      structure and metadata of 92 skills
+bash tests/validate-rules.sh          emoji, em dash, secrets, hardcoded identity
+bash tests/validate-orchestration.sh  plans, phases, agents, cross references
 ```
 
-Les trois doivent passer sans erreur avant tout commit. Le détail figure dans
+All three must pass before any commit. Detail in
 [tests/README.md](tests/README.md).
 
-## Contribution
+## Documentation
 
-Voir [CONTRIBUTING.md](CONTRIBUTING.md). Toute contribution respecte la
-constitution de son arbre, la structure de skill imposée, et passe les trois
-scripts de `tests/`.
+| File | Contents |
+|---|---|
+| [documentation/architecture.md](documentation/architecture.md) | organisation, skill isolation, metadata |
+| [documentation/skills-guide.md](documentation/skills-guide.md) | directory of the 92 skills |
+| [documentation/installation.md](documentation/installation.md) | full and per-skill installation |
+| [documentation/configuration.md](documentation/configuration.md) | the configuration contract |
+| [documentation/agents.md](documentation/agents.md) | skill, agent, orchestration |
+| [documentation/documents-system.md](documentation/documents-system.md) | the documents tree in detail |
+| [documentation/engineering-system.md](documentation/engineering-system.md) | the dev-skills layer in detail |
+| [documentation/delivery-system.md](documentation/delivery-system.md) | delivery, operations and agents |
+| [documentation/writing-rules.md](documentation/writing-rules.md) | the writing rules, operational form |
+| [documentation/workflow.md](documentation/workflow.md) | the writing workflow, phase by phase |
+| [CONTINUITY.md](CONTINUITY.md) | state of the repository for whoever takes over |
+| [CHANGELOG.md](CHANGELOG.md) | version history |
 
-## Philosophie
+## Extending it
 
-- La contrainte produit le style. Les règles éliminent le bruit.
-- Un texte se juge sur l'effet produit, jamais sur l'intention.
-- Un système se juge sur ce qui a été exécuté, jamais sur ce qui a été prévu.
-- La cohérence est une forme de respect du lecteur, et de l'ingénieur suivant.
-- Un skill doit rester utile au chapitre 3 comme au chapitre 90, au premier
-  commit comme au centième.
-- Toute règle énoncée doit être vérifiable par une procédure explicite.
-- La sévérité critique est un service rendu, pas une posture.
+Adding a skill: create the directory with its four elements, declare the
+metadata, refer to the constitution of its tree without restating it, add at
+least one example and one resource, update the category index and
+`documentation/skills-guide.md`, then run the three scripts.
 
-## Licence
+Contribution rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-MIT. Voir [LICENSE](LICENSE).
+## Philosophy
+
+- Constraint produces style. Rules remove noise rather than freedom.
+- A text is judged on its effect, never on its intention.
+- A system is judged on what was executed, never on what was planned.
+- Consistency is a form of respect, for the reader and for the next engineer.
+- A skill must stay useful at chapter 3 and at chapter 90, at the first commit
+  and at the hundredth.
+- Every rule stated must be verifiable by an explicit procedure.
+- Critical severity is a service, not a posture.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
