@@ -70,11 +70,11 @@ done
 # them. They are only uninstalled by an unscoped removal or by --shared,
 # so removing one tree never breaks another.
 case "$SCOPE" in
-  writing)   GROUPS="$WRITING_GROUPS $SHARED_GROUPS" ;;
-  documents) GROUPS="$DOCUMENT_GROUPS $SHARED_GROUPS" ;;
-  dev)       GROUPS="$ENGINEERING_GROUPS $SHARED_GROUPS" ;;
-  shared)    GROUPS="$SHARED_GROUPS" ;;
-  *)         GROUPS="$WRITING_GROUPS $DOCUMENT_GROUPS $ENGINEERING_GROUPS $SHARED_GROUPS" ;;
+  writing)   SKILL_GROUPS="$WRITING_GROUPS $SHARED_GROUPS" ;;
+  documents) SKILL_GROUPS="$DOCUMENT_GROUPS $SHARED_GROUPS" ;;
+  dev)       SKILL_GROUPS="$ENGINEERING_GROUPS $SHARED_GROUPS" ;;
+  shared)    SKILL_GROUPS="$SHARED_GROUPS" ;;
+  *)         SKILL_GROUPS="$WRITING_GROUPS $DOCUMENT_GROUPS $ENGINEERING_GROUPS $SHARED_GROUPS" ;;
 esac
 
 case "$SCOPE" in
@@ -83,7 +83,7 @@ case "$SCOPE" in
 esac
 
 skills() {
-  for group in $GROUPS; do
+  for group in $SKILL_GROUPS; do
     for skill in "$ROOT/$group"/*/; do
       [ -d "$skill" ] && printf '%s\n' "$skill"
     done
@@ -91,7 +91,7 @@ skills() {
 }
 
 removable_skills() {
-  for group in $GROUPS; do
+  for group in $SKILL_GROUPS; do
     case "$group" in
       shared) [ "$REMOVE_SHARED" = "yes" ] || continue ;;
     esac
