@@ -5,8 +5,11 @@ rewritten history later.
 
 ## Identity
 
-- [ ] `git config user.name` returns `Handsomeboy990`.
-- [ ] `git config user.email` returns `lauretchacha@gmail.com`.
+- [ ] `git config user.name` returns `identity.author_name` from the suite
+      configuration, or the repository's deliberate override.
+- [ ] `git config user.email` returns `identity.author_email`.
+- [ ] Neither field is empty. If one is, stop and run
+      `bash install.sh --configure`.
 - [ ] The message contains no automated attribution of any kind.
 
 ## Content of the staged diff

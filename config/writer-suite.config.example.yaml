@@ -1,0 +1,76 @@
+# Claude Writer Suite configuration
+#
+# Copy to the location the agent reads, then edit, or let the installer write
+# it for you:
+#
+#   bash install.sh --configure
+#
+# Default location: ~/.claude/writer-suite.config.yaml
+# Override with:    CLAUDE_CONFIG_FILE
+#
+# This file must never contain a secret. No token, no password, no private
+# key, no connection string. Skills that need a credential read it from the
+# environment of the target project, never from here.
+#
+# An empty value means: do not assume, read the answer from the project.
+# It is not the same as a missing key. A missing required key is an error.
+
+identity:
+  # Required by git-workflow. The installer refuses a name that looks like an
+  # assistant, a bot or a generator.
+  author_name: ""
+  author_email: ""
+  # Optional. Used on document covers, letterheads and PDF metadata.
+  organization: ""
+
+# What the agent is allowed to do on its own. Every value other than a plain
+# yes moves that step to your manual task list, written next to this file as
+# writer-suite-manual-tasks.md. The agent stops at the boundary, hands you
+# what it prepared, and names the step instead of performing it.
+delegation:
+  commits: yes              # yes | stage-only | no
+  branches: yes             # yes | no
+  push: branch-only         # yes | branch-only | no
+  pull_requests: yes        # yes | draft | no
+  release_tags: no          # yes | no
+  deployments: no           # yes | non-production | no
+  database_operations: no   # yes | non-production | no
+  dependency_changes: with-justification   # yes | with-justification | no
+
+git:
+  # conventional -> feat: add user profile endpoint
+  # plain        -> Add user profile endpoint
+  commit_convention: conventional
+  # Pattern used only when the repository has no convention of its own.
+  branch_convention: "type/short-kebab-description"
+  default_branch: main
+  # Branches nothing may reach without a pull request.
+  # default | default+release | none
+  protected_branches: default
+
+language:
+  # The language the skills themselves are written in. English, always.
+  # Present so that a reader sees the three layers side by side. Not editable.
+  skill: english
+  # Language of the technical documentation the engineering tree produces.
+  documentation: english
+  # Default output language of the writing/ tree. The craft encoded there is
+  # French: dialogue typography, prosody, syllable counting, proofreading.
+  creative_output: french
+  # Default output language of the documents/ tree. Set it to the language of
+  # the reader who receives the document, not to your own.
+  document_output: english
+
+engineering:
+  # Empty means: detect it from the lockfile and the manifest.
+  package_manager: ""
+  deployment_platform: ""
+  database: ""
+
+documents:
+  # Empty means: pdf-production selects the engine from the document, then
+  # verifies the engine is installed before promising a PDF.
+  pdf_engine: ""
+  page_size: A4
+  # iso -> 2026-08-11, fr -> 11 aout 2026, us -> August 11, 2026
+  date_format: iso
