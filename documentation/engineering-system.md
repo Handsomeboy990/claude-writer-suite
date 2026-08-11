@@ -1,132 +1,131 @@
-# Système de skills d'ingénierie
+# The engineering skill system
 
-Documentation technique de `engineering/dev-skills`, la couche de pratique du
-code.
+Technical documentation of `engineering/dev-skills`, the code practice layer.
 
-Deux couches la complètent, documentées dans `delivery-system.md` :
-`engineering/delivery-skills` conduit un projet de la spécification à la
-livraison, et `engineering/devops-skills` gouverne l'exécution du système. Ce
-document couvre la question : comment une modification est faite correctement.
+Two layers complete it, documented in `delivery-system.md`:
+`engineering/delivery-skills` runs a project from specification to delivery,
+and `engineering/devops-skills` governs how the system runs. This document
+covers one question: how a change is made correctly.
 
-## 1. Objet
+## 1. Purpose
 
-Permettre à un agent d'intervenir sur une base de code de production comme un
-ingénieur expérimenté : lire avant d'écrire, vérifier avant d'affirmer,
-terminer la tranche verticale entière et non la partie qui se démontre bien.
+To let an agent work on a production codebase the way an experienced engineer
+does: read before writing, verify before asserting, finish the whole vertical
+slice rather than the part that demonstrates well.
 
-Le système est agnostique de la pile technique. Aucun skill ne présuppose un
-framework, une base de données, un mécanisme d'authentification ou une
-arborescence. Chaque skill lit le projet qu'on lui confie.
+The system is stack agnostic. No skill assumes a framework, a database, an
+authentication mechanism or a directory layout. Each reads the project it is
+given.
 
-## 2. Langue
+## 2. Language
 
-Le contenu de `engineering/dev-skills` est rédigé en anglais, contrairement au
-reste du repository. Ces skills produisent du code, des messages de commit,
-des noms de branche, des pull requests et de la documentation technique, en
-anglais
-par la règle 6 de `engineering-core`. Rédiger les instructions dans la langue
-de leur production supprime une traduction permanente et une source d'erreurs.
+These skills produce code, commit messages, branch names, pull requests and
+technical documentation, all in English by rule 6 of `engineering-core`.
+Writing the instructions in the language of their output removes a permanent
+translation and a source of error.
 
-Les règles 1 et 2 de la constitution d'écriture continuent de s'appliquer à
-tous les fichiers : aucun emoji, aucun tiret cadratin.
+Since version 2.0.0 that is no longer specific to this tree: all 92 skills are
+written in English, and the output language is a configuration decision. See
+`configuration.md`.
 
-## 3. Les vingt skills
+Rules 1 and 2 of the writing constitution still apply to every file: no emoji,
+no em dash.
 
-### Fondation
+## 3. The twenty skills
 
-| Skill | Responsabilité |
+### Foundation
+
+| Skill | Responsibility |
 |---|---|
-| `engineering-core` | huit lois, règle de preuve, vocabulaire de certitude, définition du terminé |
-| `project-exploration` | transforme un repository inconnu en faits vérifiés |
-| `engineering-orchestrator` | classe la tâche, compose le plan, impose les portes |
+| `engineering-core` | eight laws, the evidence rule, the certainty vocabulary, the definition of done |
+| `project-exploration` | turns an unknown repository into verified facts |
+| `engineering-orchestrator` | classifies the task, composes the plan, imposes the gates |
 
-### Conception
+### Design
 
-| Skill | Responsabilité |
+| Skill | Responsibility |
 |---|---|
-| `architecture-design` | la plus petite architecture qui serve le produit |
-| `ui-ux-engineering` | l'expérience rendue, spécifiée avant d'être codée |
-| `dependency-selection` | ajouter, remplacer, mettre à jour ou refuser une bibliothèque |
+| `architecture-design` | the smallest architecture that serves the product |
+| `ui-ux-engineering` | the rendered experience, specified before it is built |
+| `dependency-selection` | add, replace, upgrade or refuse a library |
 
-### Implémentation
+### Implementation
 
-| Skill | Responsabilité |
+| Skill | Responsibility |
 |---|---|
-| `frontend-engineering` | fonctionnalités client, cinq états, accessibilité |
-| `backend-engineering` | handlers, services, données, transactions, jobs |
-| `fullstack-engineering` | la tranche verticale et le contrat partagé |
+| `frontend-engineering` | client features, the five states, accessibility |
+| `backend-engineering` | handlers, services, data, transactions, jobs |
+| `fullstack-engineering` | the vertical slice and the shared contract |
 
-### Vérification
+### Verification
 
-| Skill | Responsabilité |
+| Skill | Responsibility |
 |---|---|
-| `input-validation` | toute valeur externe, validée à la frontière de confiance |
-| `security-audit` | balayage en vingt-quatre points, corrections et actions manuelles |
-| `debugging` | cause racine avec fichier, ligne et mécanisme |
-| `testing-quality` | la bonne couche, dix cas obligatoires, des tests qui peuvent échouer |
-| `playwright-automation` | parcours navigateur, preuve responsive et clavier |
-| `performance-engineering` | mesurer, corriger le coût dominant, prouver l'écart |
-| `code-review-protocol` | cinq passes, puis corriger et vérifier |
+| `input-validation` | every external value, validated at the trust boundary |
+| `security-audit` | a twenty-four point sweep, fixes and manual actions |
+| `debugging` | root cause with file, line and mechanism |
+| `testing-quality` | the right layer, ten mandatory cases, tests that can fail |
+| `playwright-automation` | browser journeys, responsive and keyboard proof |
+| `performance-engineering` | measure, fix the dominant cost, prove the delta |
+| `code-review-protocol` | five passes, then fix and verify |
 
-### Livraison
+### Delivery
 
-| Skill | Responsabilité |
+| Skill | Responsibility |
 |---|---|
-| `technical-documentation` | une documentation conforme à l'implémentation |
-| `project-continuity` | une reprise possible par la session suivante |
-| `git-workflow` | identité, commits atomiques, hygiène de l'historique |
-| `release-readiness` | neuf portes et un verdict de mise en production |
+| `technical-documentation` | documentation matching the implementation |
+| `project-continuity` | a handover the next session can resume from |
+| `git-workflow` | identity, delegation boundaries, atomic commits, history hygiene |
+| `release-readiness` | nine gates and a go or no go verdict |
 
-## 4. Chaîne d'exécution
+## 4. Execution chain
 
 ```
-requête  ->  engineering-core
+request  ->  engineering-core
          ->  engineering-orchestrator
-              classification, localisation de la surface
+              classification, locating the affected surface
          ->  project-exploration
-              établissement des faits
-         ->  skills sélectionnés, dans l'ordre
-         ->  portes obligatoires
-         ->  verdict de complétude
+              establishing the facts
+         ->  the selected skills, in order
+         ->  the mandatory gates
+         ->  completion verdict
 ```
 
-`engineering-core` se charge en premier et n'est jamais recopié par les
-autres. L'orchestrateur compose le plan minimal complet : une correction de
-faute de frappe fait quatre étapes, un endpoint de paiement en fait onze. Les
-deux sont corrects.
+`engineering-core` loads first and is never copied by the others. The
+orchestrator composes the smallest complete plan: a typo fix takes four steps,
+a payment endpoint takes eleven. Both are correct.
 
-## 5. Portes obligatoires
+## 5. Mandatory gates
 
-Jamais abandonnées pour gagner du temps.
+Never abandoned to save time.
 
-| Porte | S'applique quand |
+| Gate | Applies when |
 |---|---|
-| exploration avant décision | du code non lu est touché |
-| validation avant persistance | une entrée externe atteint le stockage ou un effet |
-| autorisation avant exposition | une route ou une requête renvoie des données d'un utilisateur |
-| revue de sécurité avant fusion | auth, paiements, uploads, contenu utilisateur, permissions, secrets, dépendances |
-| test avant terminé | tout changement de comportement |
-| revue avant livraison | tout code écrit par l'agent |
-| continuité avant passation | toute session ayant modifié le repository |
-| contrôle d'auteur avant commit | chaque commit |
+| exploration before decision | unread code is touched |
+| validation before persistence | an external input reaches storage or an effect |
+| authorization before exposure | a route or a query returns a user's data |
+| security review before merge | auth, payments, uploads, user content, permissions, secrets, dependencies |
+| test before done | any behaviour change |
+| review before delivery | any code written by the agent |
+| continuity before handover | any session that changed the repository |
+| author check before commit | every commit |
 
-Une porte peut être satisfaite par une preuve plutôt que par l'exécution
-complète d'un skill. Un test existant, exécuté, rouge avant et vert après,
-satisfait la porte de test.
+A gate can be satisfied by evidence rather than by running a whole skill. An
+existing test, executed, red before and green after, satisfies the test gate.
 
-## 6. Catégories de tâches
+## 6. Task categories
 
-Vingt catégories de classification, chacune dotée d'un plan canonique dans
-`engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md` :
+Twenty classification categories, each with a canonical plan in
+`engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md`:
 
 EXPLORATION, ARCHITECTURE, FRONTEND, BACKEND, FULLSTACK, DATABASE, API,
 AUTHENTICATION, SECURITY, VALIDATION, DEBUGGING, PERFORMANCE, UI_UX, TESTING,
 BROWSER_AUTOMATION, DOCUMENTATION, GIT, RELEASE, REFACTORING, DEPENDENCY.
 
-Le format des plans est lisible par machine, ce qui permet à
-`tests/validate-orchestration.sh` de vérifier leur cohérence.
+The plan format is machine readable, which is what allows
+`tests/validate-orchestration.sh` to verify their coherence.
 
-## 7. Graphe de dépendances
+## 7. Dependency graph
 
 ```
 engineering-core
@@ -164,47 +163,48 @@ engineering-core
                         release-readiness
 ```
 
+`shared/self-critique` sits alongside `code-review-protocol` rather than
+inside this graph. It selects the review panel and enforces the loop, then
+delegates the depth here.
+
 ## 8. Validation
 
+```bash
+bash tests/validate-structure.sh      structure and metadata of the 92 skills
+bash tests/validate-rules.sh          the repository-wide prohibitions
+bash tests/validate-orchestration.sh  plans, references and scenarios
 ```
-bash tests/validate-structure.sh      structure et métadonnées des 83 skills
-bash tests/validate-rules.sh          règles de la constitution
-bash tests/validate-orchestration.sh  plans, références et scénarios
-```
 
-Le troisième script couvre les trois catégories d'ingénierie et les agents. Il
-vérifie que chaque catégorie de tâche possède un plan, que chaque étape
-désigne un skill existant, que les portes obligatoires figurent là où elles
-sont
-exigées, que l'ordre interne des plans est cohérent, qu'aucun skill n'est
-orphelin, que les `depends_on` et les références croisées existent, et que les
-cinq scénarios de routage de référence sont respectés.
+The third script covers the four trees and the agents. It verifies that every
+task category has a plan, that every step names an existing skill, that the
+mandatory gates appear where they are required, that plan ordering is
+coherent, that no engineering skill is orphaned, that `depends_on` and cross
+references resolve, and that the five reference routing scenarios hold.
 
-Il couvre également les quatorze phases de livraison et les quatorze
-définitions d'agents. Le détail des douze contrôles figure dans
-`delivery-system.md` section 10.
+It also covers the fourteen delivery phases, the fourteen agent definitions,
+the document pipeline and the independence of `shared/`. The thirteen checks
+are listed in `tests/README.md`.
 
-Ces scénarios sont :
+The reference scenarios:
 
-| Scénario | Catégorie | Sous-séquence vérifiée |
+| Scenario | Category | Subsequence verified |
 |---|---|---|
-| A, bug dans une API | DEBUGGING | exploration, debugging, backend, tests, revue |
-| B, nouvelle page | FRONTEND | exploration, UI/UX, frontend, validation, tests, playwright, performance, revue |
-| C, endpoint de paiement | BACKEND | exploration, architecture, backend, validation, sécurité, tests, revue |
-| D, revue d'authentification | SECURITY | exploration, sécurité, revue, documentation, avec tests présents |
-| E, fonctionnalité complète | FULLSTACK | les douze étapes de la tranche verticale |
+| A, bug in an API | DEBUGGING | exploration, debugging, backend, tests, review |
+| B, new page | FRONTEND | exploration, UI/UX, frontend, validation, tests, playwright, performance, review |
+| C, payment endpoint | BACKEND | exploration, architecture, backend, validation, security, tests, review |
+| D, authentication review | SECURITY | exploration, security, review, documentation, with tests present |
+| E, complete feature | FULLSTACK | the twelve steps of the vertical slice |
 
-## 9. Extension
+## 9. Extending
 
-Ajouter un skill d'ingénierie suppose :
+Adding an engineering skill:
 
-1. créer le dossier dans `engineering/dev-skills/` avec ses quatre éléments
-   obligatoires ;
-2. déclarer `category: dev-skills` dans le bloc de métadonnées ;
-3. renvoyer à `engineering-core` sans le recopier ;
-4. inclure une section `Protocol` numérotée, une section `Auto-critique` et
-   une section `Interfaces` ;
-5. l'ajouter au moins à un plan d'exécution, faute de quoi il est signalé
-   comme orphelin ;
-6. mettre à jour `engineering/dev-skills/README.md` et ce fichier ;
-7. exécuter les trois scripts de validation.
+1. create the directory in `engineering/dev-skills/` with its four mandatory
+   elements;
+2. declare `category: dev-skills` in the metadata block;
+3. refer to `engineering-core` without copying it;
+4. include a numbered `Protocol` section, an `Auto-critique` section and an
+   `Interfaces` section;
+5. add it to at least one execution plan, or check 7 reports it as an orphan;
+6. update `engineering/dev-skills/README.md`, `skills-guide.md` and this file;
+7. run the three validation scripts.

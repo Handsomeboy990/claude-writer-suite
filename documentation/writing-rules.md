@@ -1,90 +1,100 @@
-# Règles d'écriture
+# Writing rules
 
-Version opérationnelle de `writing/core/writing-constitution/SKILL.md`. En cas de
-divergence, la constitution fait foi.
+Operational form of `writing/core/writing-constitution/SKILL.md`. Where the two
+diverge, the constitution wins.
 
-## 1. Interdits absolus
+These rules describe French output, which is the default of the writing tree.
+Set `language.creative_output` to another language and sections 2, 3 and the
+typographic part of section 5 are replaced by that language's own conventions,
+stated explicitly rather than approximated. Sections 1, 4, 6 to 10 apply in any
+language.
 
-1. Aucun emoji.
-2. Aucun tiret cadratin.
-3. Aucune majuscule d'emphase.
-4. Aucun gras dans le corps du récit.
-5. Aucun point d'exclamation doublé.
-6. Aucun astérisque d'action.
+## 1. Absolute prohibitions
 
-## 2. Dialogues
+1. No emoji.
+2. No em dash.
+3. No emphatic capitals.
+4. No bold in narrative body text.
+5. No doubled exclamation mark.
+6. No asterisk marking an action.
 
-- Guillemets français en ouverture et fermeture du dialogue.
-- Tiret demi-cadratin en tête de chaque réplique suivante.
-- Un alinéa par changement de locuteur.
-- Incise entre virgules, sujet et verbe inversés.
-- Verbe de parole neutre dans quatre cas sur cinq.
-- Aucun adverbe de manière accolé à un verbe de parole.
-- Une incise sur trois répliques au maximum.
-- Test de voix : sans incise, l'attribution doit rester possible.
+The first two apply to every file in this repository, not only to the prose.
 
-## 3. Flashbacks et temporalité
+## 2. Dialogue
 
-- Flashback intégralement en italique.
-- Déclencheur diégétique obligatoire : objet, odeur, son, phrase, lieu.
-- Retour au présent marqué par un élément sensoriel.
-- Longueur maximale en italique : deux mille signes.
-- Aucun flashback imbriqué.
-- Le lecteur doit toujours pouvoir répondre à trois questions : quand, depuis
-  combien de temps, dans quel ordre.
+- French guillemets opening and closing the dialogue.
+- An en dash at the head of each following line.
+- One paragraph per change of speaker.
+- Incise between commas, subject and verb inverted.
+- A neutral speech verb in four cases out of five.
+- No manner adverb attached to a speech verb.
+- One incise per three lines at most.
+- Voice test: with the incises removed, attribution must stay possible.
 
-## 4. Chapitres
+## 3. Flashbacks and time
 
-- Titre travaillé, jamais générique, jamais interchangeable.
-- Une fonction dramatique dominante par chapitre.
-- Valeur d'entrée différente de la valeur de sortie.
-- Jamais trois chapitres consécutifs de même signe.
-- Entrée le plus tard possible, sortie sur le dernier élément signifiant.
+- Flashback set entirely in italic.
+- A diegetic trigger is mandatory: object, smell, sound, sentence, place.
+- The return to the present is marked by a sensory element.
+- Maximum length in italic: two thousand characters.
+- No nested flashbacks.
+- The reader must always be able to answer three questions: when, for how
+  long, in what order.
+
+## 4. Chapters
+
+- A worked title, never generic, never interchangeable.
+- One dominant dramatic function per chapter.
+- An entry value different from the exit value.
+- Never three consecutive chapters of the same sign.
+- Enter as late as possible, leave on the last meaningful element.
 
 ## 5. Style
 
-- Montrer plutôt qu'expliquer. Ne jamais nommer l'émotion visée.
-- Moins d'un adverbe en -ment par page.
-- Un adjectif par substantif.
-- Aucun filtre de perception inutile.
-- Aucune répétition involontaire sur une fenêtre de trois cents mots.
-- Une image forte vaut mieux que trois images correctes.
-- Le mot juste plutôt que le mot rare.
+- Show rather than explain. Never name the intended emotion.
+- Fewer than one adverb in -ment per page.
+- One adjective per noun.
+- No unnecessary perception filter.
+- No involuntary repetition across a three hundred word window.
+- One strong image beats three correct ones.
+- The exact word rather than the rare word.
 
-## 6. Personnages
+## 6. Characters
 
-- Chaque personnage veut quelque chose dans chaque scène.
-- Le désir conscient et le besoin inconscient ne coïncident pas.
-- Cohérence sur trois axes : voix, mémoire, morale.
-- Aucun personnage n'existe uniquement pour servir l'intrigue.
+- Every character wants something in every scene.
+- Conscious desire and unconscious need do not coincide.
+- Consistency on three axes: voice, memory, morality.
+- No character exists solely to serve the plot.
 
-## 7. Clichés
+## 7. Cliches
 
-Sont proscrits, sauf retournement visible dans le texte : les formules usées,
-les personnages types non subvertis, les scènes types non subverties, les
-résolutions par hasard favorable. La liste de référence figure dans
-`resources/lexiques/mots-a-bannir.md`.
+Prohibited unless turned visibly in the text: worn formulas, unsubverted stock
+characters, unsubverted stock scenes, resolutions by favourable coincidence.
+The reference list is in `writing/resources/lexiques/mots-a-bannir.md`.
 
 ## 8. Cultures
 
-- Même niveau de détail et de dignité pour toutes les cultures représentées.
-- Aucun décor exotique, aucune caricature.
-- Langues étrangères compréhensibles par le contexte, sans traduction entre
-  parenthèses.
-- Nourriture, musique, vêtement et rite traités comme des faits sociaux.
-- Sources documentées via `writing/core/research-director`.
+- The same level of detail and dignity for every culture represented.
+- No exotic scenery, no caricature.
+- Foreign languages understandable from context, with no translation in
+  parentheses.
+- Food, music, clothing and ritual treated as social facts.
+- Sources documented through `writing/core/research-director`.
 
-## 9. Émotion
+## 9. Emotion
 
-Quatre appuis obligatoires : enjeu concret connu du lecteur, résistance du
-personnage à ressentir, manifestation physique précise, conséquence
-irréversible. S'il en manque un, la scène est sentimentale et non émouvante.
+Four mandatory supports: a concrete stake the reader knows, the character's
+resistance to feeling, a precise physical manifestation, an irreversible
+consequence. If one is missing, the scene is sentimental rather than moving.
 
 ## 10. Auto-critique
 
-Onze axes, notés de 0 à 5, avec preuve citée : qualité narrative, cohérence,
-rythme, personnages, dialogues, émotion, originalité, crédibilité,
-répétitions, clichés, logique.
+Eleven axes, scored 0 to 5, each with quoted evidence: narrative quality,
+consistency, rhythm, characters, dialogue, emotion, originality, credibility,
+repetition, cliche, logic.
 
-Seuil de livraison : aucun axe sous 3, moyenne au moins égale à 3,8. Seuil
-relevé à 4,2 pour un chapitre d'ouverture ou de bascule.
+Delivery threshold: no axis below 3, average at or above 3.8. Raised to 4.2 for
+an opening or a turning-point chapter.
+
+A score with no quotation from the text is void and counts as zero. That single
+rule is what separates an assessment from a feeling.
