@@ -123,27 +123,83 @@ Aucune dépendance. Le dépôt est du Markdown et du shell.
 ```bash
 git clone <url-du-depot> claude-writer-suite
 cd claude-writer-suite
-
-bash tests/validate-structure.sh
-bash tests/validate-rules.sh
-bash tests/validate-orchestration.sh
-
 bash install.sh
+```
+
+**Rien n'est installé tant que vous n'avez pas choisi.** Sans argument,
+l'installeur demande ce que vous faites réellement et n'installe que cela. Un
+développeur ne reçoit jamais la trousse d'un romancier, et un romancier ne
+reçoit jamais l'arbre d'ingénierie.
+
+```
+  1) Creative writing        42 skills   romans, poésie, scénario, édition
+  2) Professional documents   7 skills   guides, manuels, rapports, lettres, PDF
+  3) Software engineering    41 skills   plus 14 agents
+  4) Everything              92 skills   plus 14 agents
+  5) Individual skills, chosen by name
+
+Choice [1]:
+```
+
+Plusieurs numéros sont acceptés : `1 2` installe l'écriture et les documents.
+
+Puis la configuration :
+
+```bash
 bash install.sh --configure
 ```
 
-Portées, chacune installant aussi les deux skills transversaux :
+### Choisir sans passer par la question
 
 ```bash
 bash install.sh --writing      les 42 skills d'écriture
 bash install.sh --documents     les 7 skills de document
 bash install.sh --dev          les 41 skills d'ingénierie et les 14 agents
+bash install.sh --all          tout
 bash install.sh --shared        les 2 skills transversaux seulement
 bash install.sh --agents        les 14 agents seulement
 bash install.sh --no-agents     les skills sans les agents
 bash install.sh --zip           construit aussi une archive par skill dans dist/
-bash install.sh --remove        désinstalle
+bash install.sh --remove        désinstalle la portée choisie
 ```
+
+Les portées se combinent : `bash install.sh --writing --documents`.
+
+Chaque portée installe aussi les deux skills transversaux, `self-critique` et
+`project-brief`, parce que tous les arbres les appellent. Une désinstallation
+partielle les conserve, si bien que retirer un arbre n'en casse jamais un
+autre.
+
+### Un seul skill à la fois
+
+```bash
+bash install.sh --list                    tous les skills et leur objet
+bash install.sh --skill thriller          un skill, et ce dont il a besoin
+bash install.sh --skill sonnet,haiku      plusieurs
+```
+
+Les dépendances sont résolues de proche en proche : un skill isolé n'est
+jamais installé cassé.
+
+```
+$ bash install.sh --skill thriller
+7 skills installed
+Installed: thriller writing-constitution novel-architect scene-builder
+           chapter-architect self-critique project-brief
+```
+
+Un nom inconnu interrompt l'installation au lieu de la raccourcir en silence.
+
+### Sans cloner d'abord
+
+```bash
+curl -fsSL <url-brute>/install.sh | bash -s -- --writing
+```
+
+Le script récupère les skills dans `~/.cache/claude-writer-suite` quand il n'en
+trouve aucun à côté de lui. Sans portée, il pose quand même la question, en
+lisant la réponse sur le terminal et non sur le tube. Si le dépôt est privé,
+clonez-le et lancez `install.sh` depuis l'intérieur.
 
 Les skills vont dans `~/.claude/skills`, les agents dans `~/.claude/agents`, la
 configuration dans `~/.claude/writer-suite.config.yaml`. Les trois cibles sont

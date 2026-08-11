@@ -119,27 +119,81 @@ No dependencies. The repository is Markdown and shell.
 ```bash
 git clone <repository-url> claude-writer-suite
 cd claude-writer-suite
-
-bash tests/validate-structure.sh
-bash tests/validate-rules.sh
-bash tests/validate-orchestration.sh
-
 bash install.sh
+```
+
+**Nothing is installed until you choose.** With no argument the installer asks
+what you actually do, and installs only that. A developer is never given a
+novelist's toolkit, and a novelist is never given the engineering tree.
+
+```
+  1) Creative writing        42 skills   novels, poetry, screenplay, editing
+  2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
+  3) Software engineering    41 skills   plus 14 agents
+  4) Everything              92 skills   plus 14 agents
+  5) Individual skills, chosen by name
+
+Choice [1]:
+```
+
+Several numbers may be given: `1 2` installs writing and documents.
+
+Then configure it:
+
+```bash
 bash install.sh --configure
 ```
 
-Scopes, each of which also installs the two cross domain skills:
+### Choosing without the prompt
 
 ```bash
 bash install.sh --writing      42 creative writing skills
 bash install.sh --documents     7 professional document skills
 bash install.sh --dev          41 engineering skills and 14 agents
+bash install.sh --all          everything
 bash install.sh --shared        the 2 cross domain skills only
 bash install.sh --agents        the 14 agents only
 bash install.sh --no-agents     skills without agents
 bash install.sh --zip           also build one archive per skill in dist/
-bash install.sh --remove        uninstall
+bash install.sh --remove        uninstall the selected scope
 ```
+
+Scopes combine: `bash install.sh --writing --documents`.
+
+Every scope also installs the two cross domain skills, `self-critique` and
+`project-brief`, because every tree calls them. A scoped removal leaves them
+in place, so removing one tree never breaks another.
+
+### One skill at a time
+
+```bash
+bash install.sh --list                    every skill, with its purpose
+bash install.sh --skill thriller          one skill, and what it needs
+bash install.sh --skill sonnet,haiku      several
+```
+
+Dependencies are resolved transitively, so a single skill is never installed
+broken:
+
+```
+$ bash install.sh --skill thriller
+7 skills installed
+Installed: thriller writing-constitution novel-architect scene-builder
+           chapter-architect self-critique project-brief
+```
+
+An unknown name stops the install rather than silently shortening it.
+
+### Without cloning first
+
+```bash
+curl -fsSL <raw-url>/install.sh | bash -s -- --writing
+```
+
+The script fetches the skills into `~/.cache/claude-writer-suite` when it has
+none beside it. It still asks what to install if you give it no scope, reading
+your answer from the terminal rather than from the pipe. If the repository is
+private, clone it yourself and run `install.sh` from inside it.
 
 Skills go to `~/.claude/skills`, agents to `~/.claude/agents`, configuration to
 `~/.claude/writer-suite.config.yaml`. All three are overridable with

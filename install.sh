@@ -1,34 +1,49 @@
 #!/usr/bin/env bash
 # Claude Writer Suite installer.
 #
-#   bash install.sh                install every skill and every agent
-#   bash install.sh --writing      the creative writing tree only
-#   bash install.sh --documents    the professional document tree only
-#   bash install.sh --dev          the engineering tree only
-#   bash install.sh --shared       the cross domain skills only
-#   bash install.sh --agents       the agents only
+# With no argument it asks what you want, so nothing is installed by default.
+# A novelist is never given the engineering tree, and a developer is never
+# given the writing tree.
+#
+#   bash install.sh                ask what to install
+#   bash install.sh --writing      creative writing, 42 skills
+#   bash install.sh --documents    professional documents, 7 skills
+#   bash install.sh --dev          software engineering, 41 skills and 14 agents
+#   bash install.sh --shared       the 2 cross domain skills only
+#   bash install.sh --all          everything, 92 skills and 14 agents
+#   bash install.sh --skill a,b    only these skills, with their dependencies
+#   bash install.sh --list         print every installable skill and exit
+#   bash install.sh --agents       the 14 agents only
 #   bash install.sh --no-agents    skills without agents
 #   bash install.sh --configure    ask for the user specific values only
 #   bash install.sh --zip          also build one archive per skill in dist/
-#   bash install.sh --remove       uninstall
+#   bash install.sh --remove       uninstall the selected scope
 #   bash install.sh --help         this text
 #
-# Scope options combine with --zip and --remove:
+# Scope options combine, and combine with --zip and --remove:
 #
+#   bash install.sh --writing --documents
 #   bash install.sh --dev --zip
 #   bash install.sh --writing --remove
+#
+# Run it without a copy of the repository, if the repository is reachable:
+#
+#   curl -fsSL <raw url>/install.sh | bash -s -- --writing
 #
 # Targets, all overridable:
 #
 #   CLAUDE_SKILLS_DIR   default ~/.claude/skills
 #   CLAUDE_AGENTS_DIR   default ~/.claude/agents
 #   CLAUDE_CONFIG_FILE  default ~/.claude/writer-suite.config.yaml
+#   CLAUDE_SUITE_REPO   clone source when the script runs on its own
+#   CLAUDE_SUITE_CACHE  where that clone lands, default ~/.cache/claude-writer-suite
 set -u
 
-ROOT="$(cd "$(dirname "$0")" && pwd)"
+ROOT="$(cd "$(dirname "$0")" 2>/dev/null && pwd || printf '')"
 TARGET="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 AGENT_TARGET="${CLAUDE_AGENTS_DIR:-$HOME/.claude/agents}"
 CONFIG_FILE="${CLAUDE_CONFIG_FILE:-$HOME/.claude/writer-suite.config.yaml}"
+REPO_URL="${CLAUDE_SUITE_REPO:-https://github.com/Handsomeboy990/claude-writer-suite.git}"
 
 # A skill group is a repository relative path holding skill directories.
 WRITING_GROUPS="writing/core writing/genres writing/poetry writing/quality"
@@ -37,68 +52,204 @@ ENGINEERING_GROUPS="engineering/dev-skills engineering/delivery-skills engineeri
 SHARED_GROUPS="shared"
 
 MODE="install"
-SCOPE="all"
-WITH_AGENTS="yes"
+WANT_WRITING="no"
+WANT_DOCUMENTS="no"
+WANT_ENGINEERING="no"
+WANT_SHARED_ONLY="no"
+SELECTED_SKILLS=""
+SCOPE_GIVEN="no"
+WITH_AGENTS=""
 WITH_SKILLS="yes"
-WITH_SHARED="yes"
 
 usage() {
-  sed -n '2,30p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,42p' "$0" | sed 's/^# \{0,1\}//'
 }
 
-for arg in "$@"; do
-  case "$arg" in
+die() { printf '%s\n' "$1" >&2; exit 1; }
+
+while [ $# -gt 0 ]; do
+  case "$1" in
     --help|-h)   usage; exit 0 ;;
+    --list)      MODE="list" ;;
     --remove)    MODE="remove" ;;
     --zip)       MODE="zip" ;;
     --configure) MODE="configure" ;;
-    --writing)   SCOPE="writing";   WITH_AGENTS="no" ;;
-    --documents) SCOPE="documents"; WITH_AGENTS="no" ;;
-    --dev)       SCOPE="dev" ;;
-    --shared)    SCOPE="shared";    WITH_AGENTS="no" ;;
-    --agents)    WITH_SKILLS="no";  WITH_AGENTS="yes" ;;
+    --writing)   WANT_WRITING="yes";     SCOPE_GIVEN="yes" ;;
+    --documents) WANT_DOCUMENTS="yes";   SCOPE_GIVEN="yes" ;;
+    --dev)       WANT_ENGINEERING="yes"; SCOPE_GIVEN="yes" ;;
+    --shared)    WANT_SHARED_ONLY="yes"; SCOPE_GIVEN="yes" ;;
+    --all)
+      WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes"
+      SCOPE_GIVEN="yes"
+      ;;
+    --skill=*|--skills=*)
+      SELECTED_SKILLS="$SELECTED_SKILLS $(printf '%s' "${1#*=}" | tr ',' ' ')"
+      SCOPE_GIVEN="yes"
+      ;;
+    --skill|--skills)
+      shift
+      [ $# -gt 0 ] || die "--skill needs at least one skill name. See: bash install.sh --list"
+      while [ $# -gt 0 ]; do
+        case "$1" in --*) break ;; esac
+        SELECTED_SKILLS="$SELECTED_SKILLS $(printf '%s' "$1" | tr ',' ' ')"
+        shift
+      done
+      SCOPE_GIVEN="yes"
+      continue
+      ;;
+    --agents)    WITH_SKILLS="no";  WITH_AGENTS="yes"; SCOPE_GIVEN="yes" ;;
     --no-agents) WITH_AGENTS="no" ;;
     *)
-      printf 'Unknown option: %s\n\n' "$arg"
+      printf 'Unknown option: %s\n\n' "$1"
       usage
       exit 1
       ;;
   esac
+  shift
 done
 
-# The cross domain skills belong to every scope, because every tree calls
-# them. They are only uninstalled by an unscoped removal or by --shared,
-# so removing one tree never breaks another.
-case "$SCOPE" in
-  writing)   SKILL_GROUPS="$WRITING_GROUPS $SHARED_GROUPS" ;;
-  documents) SKILL_GROUPS="$DOCUMENT_GROUPS $SHARED_GROUPS" ;;
-  dev)       SKILL_GROUPS="$ENGINEERING_GROUPS $SHARED_GROUPS" ;;
-  shared)    SKILL_GROUPS="$SHARED_GROUPS" ;;
-  *)         SKILL_GROUPS="$WRITING_GROUPS $DOCUMENT_GROUPS $ENGINEERING_GROUPS $SHARED_GROUPS" ;;
-esac
+# ---------------------------------------------------------------------------
+# Locating the skills
+# ---------------------------------------------------------------------------
 
-case "$SCOPE" in
-  all|shared) REMOVE_SHARED="yes" ;;
-  *)          REMOVE_SHARED="no" ;;
-esac
+# Piped from the network, the script has no repository next to it. Clone one.
+bootstrap() {
+  [ -n "$ROOT" ] && [ -d "$ROOT/shared" ] && return 0
+  command -v git >/dev/null 2>&1 \
+    || die "No skills next to this script, and git is not available to fetch them."
+  cache="${CLAUDE_SUITE_CACHE:-$HOME/.cache/claude-writer-suite}"
+  if [ -d "$cache/.git" ]; then
+    git -C "$cache" pull --ff-only -q 2>/dev/null || true
+  else
+    printf 'Fetching the skills into %s\n' "$cache"
+    git clone -q --depth 1 "$REPO_URL" "$cache" \
+      || die "Could not clone $REPO_URL. If the repository is private, clone it yourself and run install.sh from inside it."
+  fi
+  ROOT="$cache"
+  [ -d "$ROOT/shared" ] || die "The clone at $ROOT does not look like this repository."
+}
 
-skills() {
-  for group in $SKILL_GROUPS; do
+# Called in the main shell: die inside a process substitution would only kill
+# the subshell and let the install continue with a silently shorter list.
+validate_selected_skills() {
+  local name
+  for name in ${SELECTED_SKILLS:-}; do
+    skill_path "$name" >/dev/null \
+      || die "Unknown skill: $name
+See the full list with: bash install.sh --list"
+  done
+}
+
+all_groups() {
+  printf '%s %s %s %s' \
+    "$WRITING_GROUPS" "$DOCUMENT_GROUPS" "$ENGINEERING_GROUPS" "$SHARED_GROUPS"
+}
+
+# Absolute path of a skill, whatever tree holds it.
+skill_path() {
+  local group
+  for group in $(all_groups); do
+    if [ -d "$ROOT/$group/$1" ]; then
+      printf '%s\n' "$ROOT/$group/$1"
+      return 0
+    fi
+  done
+  return 1
+}
+
+# The skills a skill declares it needs.
+deps_of() {
+  local path
+  path="$(skill_path "$1")" || return 0
+  grep -m1 '^  depends_on:' "$path/SKILL.md" 2>/dev/null \
+    | sed 's/^  depends_on: *\[//; s/\]$//; s/,/ /g'
+}
+
+# Transitive closure. Installing thriller without writing-constitution and
+# novel-architect would install something that refuses to run.
+resolve_with_deps() {
+  local pending=("$@") seen=() name dep found
+  while [ ${#pending[@]} -gt 0 ]; do
+    name="${pending[0]}"
+    pending=("${pending[@]:1}")
+    found=no
+    for dep in ${seen[@]+"${seen[@]}"}; do
+      [ "$dep" = "$name" ] && found=yes && break
+    done
+    [ "$found" = "yes" ] && continue
+    skill_path "$name" >/dev/null \
+      || die "Unknown skill: $name. Run: bash install.sh --list"
+    seen+=("$name")
+    for dep in $(deps_of "$name"); do
+      [ -n "$dep" ] && pending+=("$dep")
+    done
+  done
+  printf '%s\n' ${seen[@]+"${seen[@]}"}
+}
+
+active_groups() {
+  local groups=""
+  [ "$WANT_WRITING" = "yes" ]     && groups="$groups $WRITING_GROUPS"
+  [ "$WANT_DOCUMENTS" = "yes" ]   && groups="$groups $DOCUMENT_GROUPS"
+  [ "$WANT_ENGINEERING" = "yes" ] && groups="$groups $ENGINEERING_GROUPS"
+  # The cross domain pair belongs to every scope: every tree calls it.
+  [ -n "$groups" ] && groups="$groups $SHARED_GROUPS"
+  [ "$WANT_SHARED_ONLY" = "yes" ] && groups="$SHARED_GROUPS"
+  printf '%s' "$groups"
+}
+
+# Every skill directory the current selection covers.
+selected_skill_dirs() {
+  local name group skill
+  if [ -n "${SELECTED_SKILLS// /}" ]; then
+    while IFS= read -r name; do
+      [ -n "$name" ] && skill_path "$name"
+    done < <(resolve_with_deps $SELECTED_SKILLS)
+    # A named skill still gets the cross domain pair, for the same reason.
+    for name in self-critique project-brief; do
+      case " $(resolve_with_deps $SELECTED_SKILLS | tr '\n' ' ') " in
+        *" $name "*) ;;
+        *) skill_path "$name" ;;
+      esac
+    done
+    return 0
+  fi
+  for group in $(active_groups); do
     for skill in "$ROOT/$group"/*/; do
       [ -d "$skill" ] && printf '%s\n' "$skill"
     done
   done
 }
 
-removable_skills() {
-  for group in $SKILL_GROUPS; do
-    case "$group" in
-      shared) [ "$REMOVE_SHARED" = "yes" ] || continue ;;
-    esac
-    for skill in "$ROOT/$group"/*/; do
-      [ -d "$skill" ] && printf '%s\n' "$skill"
+# Removal never takes the cross domain pair unless it was asked for on its
+# own, or everything was, so removing one tree never breaks another.
+removing_everything() {
+  [ "$WANT_WRITING" = "yes" ] && [ "$WANT_DOCUMENTS" = "yes" ] \
+    && [ "$WANT_ENGINEERING" = "yes" ] && return 0
+  [ "$WANT_SHARED_ONLY" = "yes" ] && return 0
+  return 1
+}
+
+removable_skill_dirs() {
+  local skill name
+  # A named removal takes only what was named. Its dependencies are shared
+  # with other skills, and removing writing-constitution because someone
+  # dropped haiku would break the rest of the tree.
+  if [ -n "${SELECTED_SKILLS// /}" ]; then
+    for name in $SELECTED_SKILLS; do
+      skill_path "$name"
     done
-  done
+    return 0
+  fi
+  while IFS= read -r skill; do
+    name="$(basename "$skill")"
+    case "$name" in
+      self-critique|project-brief)
+        removing_everything || continue
+        ;;
+    esac
+    printf '%s\n' "$skill"
+  done < <(selected_skill_dirs)
 }
 
 # Agents are single files. README and the handoff protocol are documentation,
@@ -111,6 +262,131 @@ agents() {
     esac
     printf '%s\n' "$agent"
   done
+}
+
+count_in() {
+  local group total=0 skill
+  for group in $1; do
+    for skill in "$ROOT/$group"/*/; do
+      [ -d "$skill" ] && total=$((total + 1))
+    done
+  done
+  printf '%s' "$total"
+}
+
+# ---------------------------------------------------------------------------
+# Choosing what to install
+# ---------------------------------------------------------------------------
+
+list_skills() {
+  local group name desc
+  for group in $(all_groups); do
+    printf '\n%s\n' "$group"
+    for skill in "$ROOT/$group"/*/; do
+      [ -d "$skill" ] || continue
+      name="$(basename "$skill")"
+      desc="$(grep -m1 '^description:' "$skill/SKILL.md" | cut -c14- | cut -c1-72)"
+      printf '  %-26s %s\n' "$name" "$desc"
+    done
+  done
+  printf '\nInstall a subset:\n  bash install.sh --skill <name>,<name>\n'
+  printf 'Dependencies are added automatically.\n'
+}
+
+# Reads from the terminal even when the script itself arrived on stdin, as it
+# does under curl | bash. /dev/tty can exist as a path and still refuse to
+# open, so the open is attempted rather than the path tested.
+TTY_FD=""
+open_tty() {
+  [ -n "$TTY_FD" ] && return 0
+  if [ -t 0 ]; then TTY_FD=0; return 0; fi
+  if { exec 3</dev/tty; } 2>/dev/null; then TTY_FD=3; return 0; fi
+  return 1
+}
+
+ask_tty() {
+  local prompt="$1" answer=""
+  open_tty || return 1
+  printf '%s' "$prompt" >&2
+  if [ "$TTY_FD" = "0" ]; then
+    IFS= read -r answer || return 1
+  else
+    IFS= read -r -u 3 answer || return 1
+  fi
+  printf '%s' "$answer"
+}
+
+no_terminal() {
+  die "install.sh asks what to install, and no terminal is available.
+Pass a scope instead:
+  bash install.sh --writing      creative writing
+  bash install.sh --documents    professional documents
+  bash install.sh --dev          software engineering
+  bash install.sh --all          everything
+  bash install.sh --skill <name> one skill and its dependencies
+  bash install.sh --list         see every skill first"
+}
+
+interactive_select() {
+  local writing documents engineering total answer picked
+
+  open_tty || no_terminal
+
+  writing="$(count_in "$WRITING_GROUPS")"
+  documents="$(count_in "$DOCUMENT_GROUPS")"
+  engineering="$(count_in "$ENGINEERING_GROUPS")"
+  total=$((writing + documents + engineering + $(count_in "$SHARED_GROUPS")))
+
+  {
+    printf '\nClaude Writer Suite\n\n'
+    printf 'Nothing is installed until you choose. Pick what you actually do.\n\n'
+    printf '  1) Creative writing        %2s skills   novels, poetry, screenplay, editing\n' "$writing"
+    printf '  2) Professional documents  %2s skills   guides, manuals, reports, letters, PDF\n' "$documents"
+    printf '  3) Software engineering    %2s skills   plus 14 agents\n' "$engineering"
+    printf '  4) Everything              %2s skills   plus 14 agents\n' "$total"
+    printf '  5) Individual skills, chosen by name\n\n'
+    printf 'Every choice also installs the 2 cross domain skills, self-critique and\n'
+    printf 'project-brief, because every tree calls them.\n\n'
+    printf 'Several numbers may be given, separated by spaces. For example: 1 2\n'
+  } >&2
+
+  answer="$(ask_tty 'Choice [1]: ')" || no_terminal
+  [ -n "$answer" ] || answer="1"
+
+  for picked in $answer; do
+    case "$picked" in
+      1) WANT_WRITING="yes" ;;
+      2) WANT_DOCUMENTS="yes" ;;
+      3) WANT_ENGINEERING="yes" ;;
+      4) WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes" ;;
+      5) select_individual_skills ;;
+      *) die "Not one of the offered choices: $picked" ;;
+    esac
+  done
+
+  if [ "$WANT_WRITING" = "no" ] && [ "$WANT_DOCUMENTS" = "no" ] \
+     && [ "$WANT_ENGINEERING" = "no" ] && [ -z "${SELECTED_SKILLS// /}" ]; then
+    die "Nothing selected. Nothing installed."
+  fi
+}
+
+select_individual_skills() {
+  local answer
+  list_skills >&2
+  answer="$(ask_tty '
+Skill names, separated by spaces: ')" || no_terminal
+  [ -n "${answer// /}" ] || die "No skill named. Nothing installed."
+  SELECTED_SKILLS="$SELECTED_SKILLS $answer"
+}
+
+# Agents follow the engineering tree unless stated otherwise.
+resolve_agents() {
+  [ -n "$WITH_AGENTS" ] && return 0
+  if [ "$WANT_ENGINEERING" = "yes" ] && [ -z "${SELECTED_SKILLS// /}" ]; then
+    WITH_AGENTS="yes"
+  else
+    WITH_AGENTS="no"
+  fi
 }
 
 # ---------------------------------------------------------------------------
@@ -268,14 +544,9 @@ configure() {
   printf 'stop at that boundary and list the step for you instead.\n'
   printf 'Never put a secret here. Field reference: config/README.md\n'
 
-  local need_engineering=no need_writing=no need_documents=no
-  case "$SCOPE" in
-    all)       need_engineering=yes; need_writing=yes; need_documents=yes ;;
-    dev)       need_engineering=yes ;;
-    writing)   need_writing=yes ;;
-    documents) need_documents=yes ;;
-    shared)    ;;
-  esac
+  local need_engineering="$WANT_ENGINEERING"
+  local need_writing="$WANT_WRITING"
+  local need_documents="$WANT_DOCUMENTS"
 
   if [ "$need_engineering" = "yes" ]; then
     printf '\n--- Identity, used on every commit ---\n'
@@ -595,11 +866,8 @@ write_manual_tasks() {
 
 # Reports what the installed skills still need. Never guesses a value.
 report_configuration_state() {
-  local needs_identity=no
-  case "$SCOPE" in
-    all|dev) needs_identity=yes ;;
-  esac
-  [ "$needs_identity" = "yes" ] || return 0
+  # Only the engineering tree commits, so only it needs an identity.
+  [ "$WANT_ENGINEERING" = "yes" ] || return 0
 
   if [ ! -f "$CONFIG_FILE" ]; then
     printf 'Configuration missing: %s\n' "$CONFIG_FILE"
@@ -621,23 +889,52 @@ report_configuration_state() {
 # Modes
 # ---------------------------------------------------------------------------
 
+bootstrap
+
+if [ "$MODE" = "list" ]; then
+  list_skills
+  exit 0
+fi
+
 if [ "$MODE" = "configure" ]; then
+  # Configure asks about the trees that are installed, so infer them from the
+  # target directory rather than making the user restate a scope.
+  if [ "$SCOPE_GIVEN" = "no" ]; then
+    [ -d "$TARGET/writing-constitution" ] && WANT_WRITING="yes"
+    [ -d "$TARGET/document-core" ]        && WANT_DOCUMENTS="yes"
+    [ -d "$TARGET/engineering-core" ]     && WANT_ENGINEERING="yes"
+    if [ "$WANT_WRITING" = "no" ] && [ "$WANT_DOCUMENTS" = "no" ] \
+       && [ "$WANT_ENGINEERING" = "no" ]; then
+      WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes"
+    fi
+  fi
   configure
   exit 0
 fi
+
+validate_selected_skills
+
+# No scope on the command line means ask. Never install everything by default:
+# a developer should not receive a novelist's toolkit, and the reverse.
+if [ "$SCOPE_GIVEN" = "no" ]; then
+  interactive_select
+fi
+
+resolve_agents
 
 if [ "$MODE" = "remove" ]; then
   count=0
   if [ "$WITH_SKILLS" = "yes" ]; then
     while IFS= read -r skill; do
+      [ -n "$skill" ] || continue
       name="$(basename "$skill")"
       if [ -d "$TARGET/$name" ]; then
         rm -rf "${TARGET:?}/$name"
         count=$((count + 1))
       fi
-    done < <(removable_skills)
+    done < <(removable_skill_dirs)
     printf '%s skills removed from %s\n' "$count" "$TARGET"
-    [ "$REMOVE_SHARED" = "yes" ] \
+    removing_everything \
       || printf 'Cross domain skills kept: another tree may still use them.\n'
   fi
   if [ "$WITH_AGENTS" = "yes" ]; then
@@ -655,7 +952,7 @@ if [ "$MODE" = "remove" ]; then
   exit 0
 fi
 
-bash "$ROOT/tests/validate-structure.sh" >/dev/null || {
+bash "$ROOT/tests/validate-structure.sh" >/dev/null 2>&1 || {
   printf 'Structure invalid, installation stopped. Run tests/validate-structure.sh for the detail.\n'
   exit 1
 }
@@ -663,13 +960,21 @@ bash "$ROOT/tests/validate-structure.sh" >/dev/null || {
 if [ "$WITH_SKILLS" = "yes" ]; then
   mkdir -p "$TARGET"
   count=0
+  added=""
   while IFS= read -r skill; do
+    [ -n "$skill" ] || continue
     name="$(basename "$skill")"
     rm -rf "${TARGET:?}/$name"
     cp -r "$skill" "$TARGET/$name"
     count=$((count + 1))
-  done < <(skills)
+    added="$added $name"
+  done < <(selected_skill_dirs)
   printf '%s skills installed in %s\n' "$count" "$TARGET"
+  # A named selection is short enough to show, and showing it is how the user
+  # learns that dependencies were pulled in.
+  if [ -n "${SELECTED_SKILLS// /}" ]; then
+    printf 'Installed:%s\n' "$added"
+  fi
 fi
 
 if [ "$WITH_AGENTS" = "yes" ]; then
@@ -687,11 +992,12 @@ if [ "$MODE" = "zip" ]; then
   mkdir -p "$ROOT/dist"
   rm -f "$ROOT"/dist/*.zip
   while IFS= read -r skill; do
+    [ -n "$skill" ] || continue
     name="$(basename "$skill")"
     parent="$(dirname "$skill")"
     ( cd "$parent" && zip -rq "$ROOT/dist/$name.zip" "$name" )
-  done < <(skills)
-  printf '%s archives built in dist/\n' "$(ls "$ROOT"/dist/*.zip | wc -l)"
+  done < <(selected_skill_dirs)
+  printf '%s archives built in dist/\n' "$(ls "$ROOT"/dist/*.zip 2>/dev/null | wc -l)"
 fi
 
 report_configuration_state

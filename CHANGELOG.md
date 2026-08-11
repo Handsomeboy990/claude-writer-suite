@@ -46,6 +46,20 @@ now require the configuration file instead of embedded defaults.
   - `install.sh --configure`: recommendation-first numbered prompts, scoped to
     what was installed, with validation that refuses an author name resembling
     a tool.
+  - Selective installation. `bash install.sh` with no argument now asks what
+    to install instead of installing all 92 skills. A developer is not given a
+    novelist's toolkit, and the reverse. Scopes combine, `--all` restores the
+    old behaviour explicitly, and with no terminal and no scope the installer
+    refuses rather than guessing.
+  - `--skill <name>` installs one skill with its dependencies resolved
+    transitively across trees, so a named skill is never installed broken. An
+    unknown name stops the run instead of silently shortening it. A named
+    removal takes only what was named, since dependencies are shared.
+  - `--list` prints every skill with its purpose.
+  - The script bootstraps itself: with no skills beside it, it clones the
+    repository into `~/.cache/claude-writer-suite`, which makes
+    `curl ... | bash -s -- --writing` work. It opens the terminal directly for
+    its questions, since its own stdin is the pipe.
   - `writer-suite-manual-tasks.md`, generated next to the configuration:
     every step the user kept, with its command.
 - `README.fr.md`: complete French entry point, equivalent to `README.md`.

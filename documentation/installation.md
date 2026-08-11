@@ -15,75 +15,136 @@ Optional, and only for `pdf-production`: `pdfinfo`, `pdffonts`, `pdftotext`
 and `pdftoppm` from Poppler, plus `qpdf`. The skill states which of its checks
 could not be run when they are absent rather than implying they passed.
 
-## Full system installation
+## Choosing what to install
+
+The installer never decides for you. With no argument it asks, and it installs
+only what you pick. That is deliberate: the four trees serve different people,
+and a developer has no use for a prosody skill.
 
 ```bash
 git clone <repository-url> claude-writer-suite
 cd claude-writer-suite
-
-bash tests/validate-structure.sh
-bash tests/validate-rules.sh
-bash tests/validate-orchestration.sh
-
 bash install.sh
-bash install.sh --configure
 ```
 
-That installs 92 skills into `~/.claude/skills` and 14 agents into
-`~/.claude/agents`, then asks for the user-specific values.
+```
+  1) Creative writing        42 skills   novels, poetry, screenplay, editing
+  2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
+  3) Software engineering    41 skills   plus 14 agents
+  4) Everything              92 skills   plus 14 agents
+  5) Individual skills, chosen by name
 
-The installer runs `validate-structure.sh` itself and refuses to install a
-repository that does not pass it.
+Choice [1]:
+```
 
-## Partial installation
+Several numbers may be given, separated by spaces. `1 2` installs writing and
+documents.
 
-Each tree installs alone. The two cross-domain skills come with every scope,
-because every tree calls them.
+With no terminal available and no scope given, the installer refuses and
+prints the flags instead of guessing. It never falls back to installing
+everything.
+
+## Scoped installation
 
 ```bash
-bash install.sh --writing      42 creative writing skills, plus shared
-bash install.sh --documents     7 professional document skills, plus shared
-bash install.sh --dev          41 engineering skills, 14 agents, plus shared
+bash install.sh --writing      42 creative writing skills
+bash install.sh --documents     7 professional document skills
+bash install.sh --dev          41 engineering skills and 14 agents
+bash install.sh --all          everything
 bash install.sh --shared        the 2 cross domain skills only
 bash install.sh --agents        the 14 agents only
 bash install.sh --no-agents     skills without agents
 ```
 
-Scope options combine with `--zip` and `--remove`.
+Scopes combine, and combine with `--zip` and `--remove`:
 
 ```bash
+bash install.sh --writing --documents
 bash install.sh --dev --zip
 bash install.sh --writing --remove
 ```
 
-## Installing a single skill
+Agents follow the engineering tree unless `--agents` or `--no-agents` says
+otherwise.
 
-Every skill is a self-contained directory. Copy it.
+Every scope also installs the two cross domain skills, because every tree
+calls them. A scoped removal keeps them; only `--all --remove` or
+`--shared --remove` takes them out.
+
+## Installing individual skills
+
+```bash
+bash install.sh --list
+bash install.sh --skill thriller
+bash install.sh --skill sonnet,haiku
+bash install.sh --skill pdf-production report-writing
+```
+
+Dependencies are resolved transitively from the `depends_on` field, so a named
+skill is never installed without what it refers to:
+
+```
+$ bash install.sh --skill thriller
+7 skills installed in ~/.claude/skills
+Installed: thriller writing-constitution novel-architect scene-builder
+           chapter-architect self-critique project-brief
+```
+
+Resolution crosses trees. `pdf-production` pulls `document-design` and
+`document-core` with it.
+
+An unknown name stops the install and points at `--list`. It does not install
+a shorter list quietly.
+
+Six skills depend on nothing and install alone:
+
+```
+self-critique
+project-brief
+document-core
+engineering-core
+devops-core
+writing-constitution
+```
+
+For those, copying the directory is equivalent:
 
 ```bash
 cp -r shared/self-critique ~/.claude/skills/
 ```
 
-Before doing so, read the skill's `README.md`. It states its dependencies in
-four lines. A skill with `Depends on: none` works alone. A skill that depends
-on another needs that other one copied too, because it refers to it rather
-than restating it.
+## Installing without cloning
 
-Dependency-free and usable entirely on their own:
-
-```
-shared/self-critique
-shared/project-brief
-documents/documentation/document-core
-engineering/dev-skills/engineering-core
-engineering/devops-skills/devops-core
-writing/core/writing-constitution
+```bash
+curl -fsSL <raw-url>/install.sh | bash -s -- --writing
 ```
 
-Every other skill declares its dependencies in the `depends_on` field of its
-`SKILL.md` and in its README. `tests/validate-orchestration.sh` check 8
-verifies that every declared dependency resolves, so the declarations are
-accurate rather than aspirational.
+When the script finds no skills beside it, it clones the repository into
+`~/.cache/claude-writer-suite` and works from there. Subsequent runs pull
+rather than re-clone.
+
+Under `curl | bash` the script's own stdin is the pipe, so it opens the
+terminal directly to ask its questions. If no terminal can be opened, it
+refuses rather than choosing for you.
+
+| Variable | Effect |
+|---|---|
+| `CLAUDE_SUITE_REPO` | clone source, when the script runs on its own |
+| `CLAUDE_SUITE_CACHE` | where that clone lands, default `~/.cache/claude-writer-suite` |
+
+A private repository cannot be fetched this way without credentials. Clone it
+yourself and run `install.sh` from inside it.
+
+## Verifying before installing
+
+```bash
+bash tests/validate-structure.sh
+bash tests/validate-rules.sh
+bash tests/validate-orchestration.sh
+```
+
+The installer runs the first one itself and refuses to install a repository
+that does not pass it.
 
 ## Archives
 
@@ -125,24 +186,30 @@ engineering/devops-skills/devops-core        anything that runs
 ## Updating
 
 ```bash
-git pull
-bash tests/validate-structure.sh
-bash install.sh
+git switch dev && git pull
+bash install.sh --writing        the scope you installed before
 ```
 
-Installation overwrites each skill directory it manages. It never touches the
-configuration file.
+Installation overwrites each skill directory it manages and leaves the others
+alone, so re-running a scope updates exactly what you have. It never touches
+the configuration file.
 
 ## Uninstalling
 
 ```bash
-bash install.sh --remove             every skill and agent
+bash install.sh --all --remove       every skill and agent
 bash install.sh --writing --remove   one tree
+bash install.sh --skill haiku --remove   only that skill
 ```
 
-A scoped removal keeps the cross-domain skills, since another tree may still
-use them. Only `--remove` without a scope, or `--shared --remove`, takes them
-out.
+`--remove` with no scope asks what to remove, the same way installing does.
+
+A scoped removal keeps the two cross domain skills, since another tree may
+still use them. Only `--all --remove` or `--shared --remove` takes them out.
+
+A named removal takes only what was named. Its dependencies stay: they are
+shared, and removing `writing-constitution` because someone dropped `haiku`
+would break the rest of the tree.
 
 Uninstalling never deletes the configuration file. Its path is printed so it
 can be removed deliberately.
@@ -150,10 +217,12 @@ can be removed deliberately.
 ## Verifying the installation
 
 ```bash
-ls ~/.claude/skills | wc -l      # 92 after a full install
-ls ~/.claude/agents | wc -l      # 14
+ls ~/.claude/skills | wc -l      # 44 writing, 9 documents, 43 dev, 92 all
+ls ~/.claude/agents | wc -l      # 14, with the engineering tree
 cat ~/.claude/writer-suite.config.yaml
 ```
+
+Each scope count includes the two cross domain skills.
 
 After a full install, the installer reports whether the identity fields the
 engineering tree requires are present, and names the ones that are missing. It

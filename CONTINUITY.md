@@ -46,6 +46,10 @@ Session 4, this one:
   no deletions. Read back and verified by attempting a direct push to each.
 - `LICENSE` names the copyright holder, and both READMEs carry an Author
   section.
+- Selective installation: the installer asks what to install rather than
+  installing everything, supports `--skill` with transitive dependency
+  resolution, `--list`, `--all`, combined scopes, and bootstraps itself from a
+  clone when run through a pipe.
 
 ## Current state
 
@@ -183,6 +187,16 @@ Looks finished and is not:
   erroring. That cost the installer every skill it was meant to copy, and the
   scripts passed `bash -n` throughout. The lesson generalises: these scripts
   are verified by running them against a sandbox target, not by reading them.
+- The installer is verified by running every mode against a sandbox target
+  through `CLAUDE_SKILLS_DIR`, never against `~/.claude`. Three defects were
+  found that way in the selection work alone: a bare `--skill NAME` rejected
+  by the argument parser, an `exec 3</dev/tty` whose failure message escaped
+  its own `2>/dev/null`, and a `die` inside a process substitution that killed
+  only the subshell and let the install continue with a shorter list.
+- `/dev/tty` can exist as a path and still refuse to open. Test it by
+  attempting the open, never with `[ -r /dev/tty ]`: the path test passes in a
+  sandbox, the read then fails, and the caller silently takes the default.
+  That bug installed the writing tree for a user who had chosen nothing.
 - Do not test branch protection by pushing to the protected branch. With
   `enforce_admins` off the push succeeds, and undoing it needs a force push,
   which the protection then refuses. It happened during setup: a probe commit
