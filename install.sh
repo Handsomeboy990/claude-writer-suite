@@ -11,6 +11,7 @@
 #   bash install.sh --dev          software engineering, 41 skills and 14 agents
 #   bash install.sh --shared       the 2 cross domain skills only
 #   bash install.sh --all          everything, 92 skills and 14 agents
+#   bash install.sh --group a,b    only these categories
 #   bash install.sh --skill a,b    only these skills, with their dependencies
 #   bash install.sh --list         print every installable skill and exit
 #   bash install.sh --agents       the 14 agents only
@@ -23,6 +24,7 @@
 # Scope options combine, and combine with --zip and --remove:
 #
 #   bash install.sh --writing --documents
+#   bash install.sh --group genres,quality
 #   bash install.sh --dev --zip
 #   bash install.sh --writing --remove
 #
@@ -57,12 +59,13 @@ WANT_DOCUMENTS="no"
 WANT_ENGINEERING="no"
 WANT_SHARED_ONLY="no"
 SELECTED_SKILLS=""
+SELECTED_GROUPS=""
 SCOPE_GIVEN="no"
 WITH_AGENTS=""
 WITH_SKILLS="yes"
 
 usage() {
-  sed -n '2,42p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,44p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 die() { printf '%s\n' "$1" >&2; exit 1; }
@@ -81,6 +84,21 @@ while [ $# -gt 0 ]; do
     --all)
       WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes"
       SCOPE_GIVEN="yes"
+      ;;
+    --group=*|--groups=*|--category=*)
+      SELECTED_GROUPS="$SELECTED_GROUPS $(printf '%s' "${1#*=}" | tr ',' ' ')"
+      SCOPE_GIVEN="yes"
+      ;;
+    --group|--groups|--category)
+      shift
+      [ $# -gt 0 ] || die "--group needs at least one category name. See: bash install.sh --list"
+      while [ $# -gt 0 ]; do
+        case "$1" in --*) break ;; esac
+        SELECTED_GROUPS="$SELECTED_GROUPS $(printf '%s' "$1" | tr ',' ' ')"
+        shift
+      done
+      SCOPE_GIVEN="yes"
+      continue
       ;;
     --skill=*|--skills=*)
       SELECTED_SKILLS="$SELECTED_SKILLS $(printf '%s' "${1#*=}" | tr ',' ' ')"
@@ -127,6 +145,25 @@ bootstrap() {
   fi
   ROOT="$cache"
   [ -d "$ROOT/shared" ] || die "The clone at $ROOT does not look like this repository."
+}
+
+# A category, named either bare (genres) or with its tree (writing/genres).
+group_path() {
+  local group
+  for group in $(all_groups); do
+    [ "$group" = "$1" ] && { printf '%s' "$group"; return 0; }
+    [ "$(basename "$group")" = "$1" ] && { printf '%s' "$group"; return 0; }
+  done
+  return 1
+}
+
+validate_selected_groups() {
+  local name
+  for name in ${SELECTED_GROUPS:-}; do
+    group_path "$name" >/dev/null \
+      || die "Unknown category: $name
+Categories: $(for g in $(all_groups); do basename "$g"; done | tr '\n' ' ')"
+  done
 }
 
 # Called in the main shell: die inside a process substitution would only kill
@@ -188,37 +225,42 @@ resolve_with_deps() {
 }
 
 active_groups() {
-  local groups=""
+  local groups="" name
+  for name in ${SELECTED_GROUPS:-}; do
+    groups="$groups $(group_path "$name")"
+  done
   [ "$WANT_WRITING" = "yes" ]     && groups="$groups $WRITING_GROUPS"
   [ "$WANT_DOCUMENTS" = "yes" ]   && groups="$groups $DOCUMENT_GROUPS"
   [ "$WANT_ENGINEERING" = "yes" ] && groups="$groups $ENGINEERING_GROUPS"
   # The cross domain pair belongs to every scope: every tree calls it.
   [ -n "$groups" ] && groups="$groups $SHARED_GROUPS"
+  # deduplicate, since --group shared --writing would list it twice
+  groups="$(printf '%s\n' $groups | awk '!seen[$0]++' | tr '\n' ' ')"
   [ "$WANT_SHARED_ONLY" = "yes" ] && groups="$SHARED_GROUPS"
   printf '%s' "$groups"
 }
 
-# Every skill directory the current selection covers.
+# Every skill directory the current selection covers: named skills with their
+# dependencies, plus whole categories, plus whole trees, deduplicated.
 selected_skill_dirs() {
   local name group skill
-  if [ -n "${SELECTED_SKILLS// /}" ]; then
-    while IFS= read -r name; do
-      [ -n "$name" ] && skill_path "$name"
-    done < <(resolve_with_deps $SELECTED_SKILLS)
-    # A named skill still gets the cross domain pair, for the same reason.
-    for name in self-critique project-brief; do
-      case " $(resolve_with_deps $SELECTED_SKILLS | tr '\n' ' ') " in
-        *" $name "*) ;;
-        *) skill_path "$name" ;;
-      esac
+  {
+    if [ -n "${SELECTED_SKILLS// /}" ]; then
+      while IFS= read -r name; do
+        [ -n "$name" ] && skill_path "$name"
+      done < <(resolve_with_deps $SELECTED_SKILLS)
+      # A named selection still gets the cross domain pair, for the same
+      # reason every tree does: everything calls it.
+      for name in self-critique project-brief; do
+        skill_path "$name"
+      done
+    fi
+    for group in $(active_groups); do
+      for skill in "$ROOT/$group"/*/; do
+        [ -d "$skill" ] && printf '%s\n' "$skill"
+      done
     done
-    return 0
-  fi
-  for group in $(active_groups); do
-    for skill in "$ROOT/$group"/*/; do
-      [ -d "$skill" ] && printf '%s\n' "$skill"
-    done
-  done
+  } | awk '!seen[$0]++'
 }
 
 # Removal never takes the cross domain pair unless it was asked for on its
@@ -235,7 +277,7 @@ removable_skill_dirs() {
   # A named removal takes only what was named. Its dependencies are shared
   # with other skills, and removing writing-constitution because someone
   # dropped haiku would break the rest of the tree.
-  if [ -n "${SELECTED_SKILLS// /}" ]; then
+  if [ -n "${SELECTED_SKILLS// /}" ] && [ -z "${SELECTED_GROUPS// /}" ]; then
     for name in $SELECTED_SKILLS; do
       skill_path "$name"
     done
@@ -344,7 +386,8 @@ interactive_select() {
     printf '  2) Professional documents  %2s skills   guides, manuals, reports, letters, PDF\n' "$documents"
     printf '  3) Software engineering    %2s skills   plus 14 agents\n' "$engineering"
     printf '  4) Everything              %2s skills   plus 14 agents\n' "$total"
-    printf '  5) Individual skills, chosen by name\n\n'
+    printf '  5) Individual skills, chosen by name\n'
+    printf '  6) One or more categories, for example genres only\n\n'
     printf 'Every choice also installs the 2 cross domain skills, self-critique and\n'
     printf 'project-brief, because every tree calls them.\n\n'
     printf 'Several numbers may be given, separated by spaces. For example: 1 2\n'
@@ -360,14 +403,31 @@ interactive_select() {
       3) WANT_ENGINEERING="yes" ;;
       4) WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes" ;;
       5) select_individual_skills ;;
+      6) select_categories ;;
       *) die "Not one of the offered choices: $picked" ;;
     esac
   done
 
   if [ "$WANT_WRITING" = "no" ] && [ "$WANT_DOCUMENTS" = "no" ] \
-     && [ "$WANT_ENGINEERING" = "no" ] && [ -z "${SELECTED_SKILLS// /}" ]; then
+     && [ "$WANT_ENGINEERING" = "no" ] && [ "$WANT_SHARED_ONLY" = "no" ] \
+     && [ -z "${SELECTED_SKILLS// /}" ] && [ -z "${SELECTED_GROUPS// /}" ]; then
     die "Nothing selected. Nothing installed."
   fi
+}
+
+select_categories() {
+  local answer group
+  {
+    printf '\nCategories:\n\n'
+    for group in $(all_groups); do
+      printf '  %-16s %2s skills   %s\n' \
+        "$(basename "$group")" "$(count_in "$group")" "$group"
+    done
+  } >&2
+  answer="$(ask_tty '
+Category names, separated by spaces: ')" || no_terminal
+  [ -n "${answer// /}" ] || die "No category named. Nothing installed."
+  SELECTED_GROUPS="$SELECTED_GROUPS $answer"
 }
 
 select_individual_skills() {
@@ -912,13 +972,16 @@ if [ "$MODE" = "configure" ]; then
   exit 0
 fi
 
-validate_selected_skills
-
 # No scope on the command line means ask. Never install everything by default:
 # a developer should not receive a novelist's toolkit, and the reverse.
 if [ "$SCOPE_GIVEN" = "no" ]; then
   interactive_select
 fi
+
+# After the prompt as well as before it: a name typed at the prompt is as
+# likely to be wrong as one typed on the command line.
+validate_selected_skills
+validate_selected_groups
 
 resolve_agents
 
@@ -972,7 +1035,7 @@ if [ "$WITH_SKILLS" = "yes" ]; then
   printf '%s skills installed in %s\n' "$count" "$TARGET"
   # A named selection is short enough to show, and showing it is how the user
   # learns that dependencies were pulled in.
-  if [ -n "${SELECTED_SKILLS// /}" ]; then
+  if [ -n "${SELECTED_SKILLS// /}" ] && [ -z "${SELECTED_GROUPS// /}" ]; then
     printf 'Installed:%s\n' "$added"
   fi
 fi

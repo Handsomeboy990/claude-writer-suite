@@ -71,6 +71,44 @@ Every scope also installs the two cross domain skills, because every tree
 calls them. A scoped removal keeps them; only `--all --remove` or
 `--shared --remove` takes them out.
 
+### By category
+
+A tree is often more than you need. A thriller writer has no use for prosody.
+
+```bash
+bash install.sh --group genres            15 skills, plus the shared pair
+bash install.sh --group genres,quality    two categories
+bash install.sh --group writing/poetry    the full path also works
+bash install.sh --group devops-skills     operations only
+```
+
+| Category | Skills | Tree |
+|---|---|---|
+| `core` | 14 | writing |
+| `genres` | 15 | writing |
+| `poetry` | 5 | writing |
+| `quality` | 8 | writing |
+| `documentation` | 4 | documents |
+| `administrative` | 1 | documents |
+| `publishing` | 2 | documents |
+| `dev-skills` | 20 | engineering |
+| `delivery-skills` | 10 | engineering |
+| `devops-skills` | 11 | engineering |
+| `shared` | 2 | shared |
+
+Everything combines, and the result is deduplicated:
+
+```bash
+bash install.sh --group poetry --skill thriller
+12 skills installed
+```
+
+The five poetry skills, `thriller` with its four dependencies,
+`writing-constitution` counted once, and the cross domain pair.
+
+The agents follow the engineering tree, not a category of it. Add them with
+`--agents` when installing `--group dev-skills` alone.
+
 ## Installing individual skills
 
 ```bash

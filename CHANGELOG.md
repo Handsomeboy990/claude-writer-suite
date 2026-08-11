@@ -55,6 +55,10 @@ now require the configuration file instead of embedded defaults.
     transitively across trees, so a named skill is never installed broken. An
     unknown name stops the run instead of silently shortening it. A named
     removal takes only what was named, since dependencies are shared.
+  - `--group <category>` installs one or more of the ten categories, so a
+    thriller writer takes `genres` without the prosody skills. Trees,
+    categories and named skills combine freely and the result is
+    deduplicated.
   - `--list` prints every skill with its purpose.
   - The script bootstraps itself: with no skills beside it, it clones the
     repository into `~/.cache/claude-writer-suite`, which makes

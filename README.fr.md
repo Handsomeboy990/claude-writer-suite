@@ -170,6 +170,45 @@ Chaque portée installe aussi les deux skills transversaux, `self-critique` et
 partielle les conserve, si bien que retirer un arbre n'en casse jamais un
 autre.
 
+### Par catégorie
+
+Un arbre entier est souvent plus que nécessaire. Un auteur de thrillers n'a
+que faire de la prosodie.
+
+```bash
+bash install.sh --group genres            15 skills, plus la paire transversale
+bash install.sh --group genres,quality    deux catégories
+bash install.sh --group writing/poetry    le chemin complet fonctionne aussi
+bash install.sh --group devops-skills     l'exploitation seule
+```
+
+| Catégorie | Skills | Arbre |
+|---|---|---|
+| `core` | 14 | writing |
+| `genres` | 15 | writing |
+| `poetry` | 5 | writing |
+| `quality` | 8 | writing |
+| `documentation` | 4 | documents |
+| `administrative` | 1 | documents |
+| `publishing` | 2 | documents |
+| `dev-skills` | 20 | engineering |
+| `delivery-skills` | 10 | engineering |
+| `devops-skills` | 11 | engineering |
+| `shared` | 2 | shared |
+
+Tout se combine, et le résultat est dédoublonné :
+
+```bash
+bash install.sh --group poetry --skill thriller
+12 skills installed
+```
+
+Les cinq skills de poésie, `thriller` et ses quatre dépendances,
+`writing-constitution` compté une seule fois, et la paire transversale.
+
+Les agents suivent l'arbre d'ingénierie, pas une de ses catégories. Ajoutez
+`--agents` si vous installez `--group dev-skills` seul.
+
 ### Un seul skill à la fois
 
 ```bash

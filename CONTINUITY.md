@@ -46,10 +46,11 @@ Session 4, this one:
   no deletions. Read back and verified by attempting a direct push to each.
 - `LICENSE` names the copyright holder, and both READMEs carry an Author
   section.
-- Selective installation: the installer asks what to install rather than
-  installing everything, supports `--skill` with transitive dependency
-  resolution, `--list`, `--all`, combined scopes, and bootstraps itself from a
-  clone when run through a pipe.
+- Selective installation at three levels: tree, category and named skill.
+  The installer asks rather than installing everything, supports `--group`,
+  `--skill` with transitive dependency resolution, `--list`, `--all`, freely
+  combined and deduplicated scopes, and bootstraps itself from a clone when
+  run through a pipe.
 
 ## Current state
 
@@ -193,6 +194,14 @@ Looks finished and is not:
   by the argument parser, an `exec 3</dev/tty` whose failure message escaped
   its own `2>/dev/null`, and a `die` inside a process substitution that killed
   only the subshell and let the install continue with a shorter list.
+- Validate a name after the prompt as well as before it. Moving
+  `validate_selected_groups` to run only before `interactive_select` meant a
+  category typed at the menu was never checked, and a typo installed just the
+  cross domain pair instead of failing.
+- The Bash tool runs zsh, which does not word-split an unquoted expansion.
+  A sweep loop calling `bash install.sh $flags` passes `--group genres` as one
+  argument and reports a failure the installer did not have. Split explicitly,
+  or run the sweep under `bash -c`.
 - `/dev/tty` can exist as a path and still refuse to open. Test it by
   attempting the open, never with `[ -r /dev/tty ]`: the path test passes in a
   sandbox, the read then fails, and the caller silently takes the default.
