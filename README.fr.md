@@ -1,0 +1,368 @@
+# Claude Writer Suite
+
+Quatre systèmes d'expertise pour un agent, dans un seul dépôt : **écrire**,
+**produire des documents**, **construire des logiciels**, et **relire son
+propre travail**.
+
+92 skills et 14 agents. Pas des prompts : des protocoles numérotés, des
+critères de décision, des grilles d'évaluation et des procédures de révision,
+chacun avec un seuil chiffré de ce qui compte comme terminé.
+
+[English version](README.md)
+
+```
+claude-writer-suite/
+├── shared/           2 skills transversaux, appelés par tous les arbres
+├── writing/         42 skills d'écriture créative
+├── documents/        7 skills de document professionnel
+├── engineering/     41 skills d'ingénierie et 14 agents
+├── config/           valeurs propres à l'utilisateur, rien n'est codé en dur
+├── documentation/    documentation technique des quatre arbres
+└── tests/            trois scripts de validation
+```
+
+## Raison d'être
+
+Un agent qui écrit un chapitre, une lettre ou un endpoint produit du plausible
+au premier essai. Le plausible n'est pas le correct, et l'écart n'apparaît que
+plus tard : à l'échéance, entre les mains du lecteur, en production.
+
+Chaque skill encode la même forme. À quoi sert le travail. Comment il se fait,
+sous forme de procédure numérotée. Ce qui doit être vérifié avant de le
+déclarer terminé. Quel score il doit atteindre. Ce qu'il refuse de faire.
+
+## Langue
+
+Le dépôt sépare trois langues que l'on confond couramment.
+
+| Couche | De quoi il s'agit | Valeur |
+|---|---|---|
+| Langue des skills | les instructions elles-mêmes | anglais, pour les 92 skills |
+| Langue du système | chemins, identifiants, clés de configuration, commits | anglais |
+| Langue de sortie | ce que reçoit le lecteur | la sienne, réglée par projet |
+
+Les skills sont rédigés en anglais pour que le système soit utilisable à
+l'international. Ce qu'ils produisent est une décision distincte :
+`language.creative_output` vaut français par défaut, parce que l'arbre
+d'écriture encode un savoir-faire français, et `language.document_output` se
+règle sur la langue de celui qui reçoit le document. Les ressources de
+référence de `writing/resources/` restent en français : elles sont ce que les
+skills produisent, pas la façon dont ils sont instruits.
+
+## Les quatre arbres
+
+### shared
+
+Deux skills qui n'appartiennent à aucun domaine et que tous appellent.
+
+| Skill | Moment | Produit |
+|---|---|---|
+| [project-brief](shared/project-brief/) | avant le travail | l'accord auquel le travail sera comparé |
+| [self-critique](shared/self-critique/) | après le travail | le résultat corrigé, et ce qui a été trouvé |
+
+`project-brief` inspecte l'existant, pose en un seul lot les questions qui
+changent la décision, et consigne une hypothèse pour tout ce qu'il n'a pas
+demandé. `self-critique` choisit les rôles professionnels qui recevront
+réellement le travail, exécute une passe par rôle, et corrige ce qu'il trouve
+au lieu de le signaler.
+
+### writing
+
+Écriture créative. L'agent intervient comme romancier, scénariste, directeur
+littéraire, critique, documentaliste, correcteur et bêta-lecteur, de la
+nouvelle à la saga.
+
+| Catégorie | Skills | Objet |
+|---|---|---|
+| [core](writing/core/) | 14 | fondations et production |
+| [genres](writing/genres/) | 15 | thriller, mystère, fantasy, SF, romance, historique |
+| [poetry](writing/poetry/) | 5 | prosodie française et quatre formes |
+| [quality](writing/quality/) | 8 | diagnostic, réécriture, correction, validation |
+
+Index : [writing/README.md](writing/README.md).
+
+### documents
+
+Documents professionnels destinés à être remis à quelqu'un.
+
+| Catégorie | Skills | Question à laquelle elle répond |
+|---|---|---|
+| [documentation](documents/documentation/) | 4 | comment le lecteur comprend et utilise le système |
+| [administrative](documents/administrative/) | 1 | comment un document formel survit au classement et à la citation |
+| [publishing](documents/publishing/) | 2 | à quoi il ressemble, comment il pagine et se rend |
+
+Quatre règles traversent l'arbre : le destinataire est nommé avant la première
+phrase ; la langue de sortie est la sienne ; rien n'est affirmé qui n'ait été
+vérifié ; et un PDF généré n'est pas un PDF terminé tant que les pages rendues
+n'ont pas été regardées.
+
+Index : [documents/README.md](documents/README.md).
+
+### engineering
+
+Ingénierie logicielle et conduite de projet. L'agent prend un cahier des
+charges et livre un système implémenté, testé, documenté, déployé et vérifié
+en production.
+
+| Catégorie | Skills | Question à laquelle elle répond |
+|---|---|---|
+| [dev-skills](engineering/dev-skills/) | 20 | comment une modification est faite correctement |
+| [delivery-skills](engineering/delivery-skills/) | 10 | quoi construire, dans quel ordre, avec quelle approbation |
+| [devops-skills](engineering/devops-skills/) | 11 | comment le système tourne, se déploie et se restaure |
+| [agents](engineering/agents/) | 14 | qui possède quoi, et ce qui est transmis |
+
+Agnostique de la pile et de la plateforme : le système lit le projet qu'on lui
+confie plutôt que d'en présupposer la forme.
+
+Index : [engineering/README.md](engineering/README.md).
+
+## Installation
+
+Aucune dépendance. Le dépôt est du Markdown et du shell.
+
+```bash
+git clone <url-du-depot> claude-writer-suite
+cd claude-writer-suite
+
+bash tests/validate-structure.sh
+bash tests/validate-rules.sh
+bash tests/validate-orchestration.sh
+
+bash install.sh
+bash install.sh --configure
+```
+
+Portées, chacune installant aussi les deux skills transversaux :
+
+```bash
+bash install.sh --writing      les 42 skills d'écriture
+bash install.sh --documents     les 7 skills de document
+bash install.sh --dev          les 41 skills d'ingénierie et les 14 agents
+bash install.sh --shared        les 2 skills transversaux seulement
+bash install.sh --agents        les 14 agents seulement
+bash install.sh --no-agents     les skills sans les agents
+bash install.sh --zip           construit aussi une archive par skill dans dist/
+bash install.sh --remove        désinstalle
+```
+
+Les skills vont dans `~/.claude/skills`, les agents dans `~/.claude/agents`, la
+configuration dans `~/.claude/writer-suite.config.yaml`. Les trois cibles sont
+configurables par `CLAUDE_SKILLS_DIR`, `CLAUDE_AGENTS_DIR` et
+`CLAUDE_CONFIG_FILE`.
+
+Détail complet, y compris l'installation d'un seul skill :
+[documentation/installation.md](documentation/installation.md).
+
+## Configuration
+
+Rien ne présuppose qui vous êtes, quels outils vous employez, ni quelle langue
+lisent vos lecteurs.
+
+```bash
+bash install.sh --configure
+```
+
+Chaque question a une réponse recommandée, déjà sélectionnée : la touche
+entrée l'accepte. Seuls les champs utiles à la portée installée sont demandés.
+
+Deux champs sont obligatoires et n'auront jamais de valeur par défaut :
+`identity.author_name` et `identity.author_email`. Un commit porte une
+personne réelle, et `git-workflow` s'arrête en nommant le champ manquant
+plutôt que d'en inventer un. L'installeur refuse un nom d'auteur qui ressemble
+à un outil.
+
+### Ce que l'agent peut faire seul
+
+La section `delegation` décide de ce qui vous parvient sous forme d'action
+terminée et de ce qui vous parvient sous forme d'étape préparée.
+
+| Champ | Valeurs |
+|---|---|
+| `commits` | yes, stage-only, no |
+| `branches` | yes, no |
+| `push` | yes, branch-only, no |
+| `pull_requests` | yes, draft, no |
+| `release_tags` | yes, no |
+| `deployments` | yes, non-production, no |
+| `database_operations` | yes, non-production, no |
+| `dependency_changes` | yes, with-justification, no |
+
+Répondez non à tout ce que vous préférez faire vous-même. L'agent s'arrête à
+cette frontière, vous remet ce qu'il a préparé, et nomme l'étape.
+
+Tout ce que vous gardez est écrit dans `writer-suite-manual-tasks.md`, à côté
+du fichier de configuration, avec la commande correspondante. Rien n'est
+silencieusement laissé de côté.
+
+Deux règles ne se délèguent jamais : une opération destructrice est comptée et
+confirmée avant d'être exécutée, et un secret fuité est signalé pour rotation
+plutôt que discrètement supprimé.
+
+Référence des champs : [config/README.md](config/README.md). Côté installeur :
+[documentation/configuration.md](documentation/configuration.md).
+
+## Quel skill me faut-il
+
+| Situation | Skill |
+|---|---|
+| Je démarre un projet, quel qu'il soit | `shared/project-brief` |
+| J'ai fini quelque chose et je veux le faire contrôler | `shared/self-critique` |
+| Je démarre un roman | `writing/core/novel-architect` |
+| Ma scène est plate | `writing/core/scene-builder` |
+| Tous mes personnages parlent pareil | `writing/core/dialogue-master` |
+| Mon milieu de roman n'avance pas | `writing/quality/story-doctor` |
+| Est-ce publiable | `writing/quality/literary-critic` |
+| Un partenaire doit s'intégrer à notre API | `documents/documentation/technical-writing` |
+| Un client ne trouve pas comment faire | `documents/documentation/user-documentation` |
+| La direction doit décider | `documents/documentation/report-writing` |
+| Une lettre formelle doit partir | `documents/administrative/administrative-writing` |
+| Le client veut un PDF | `documents/publishing/pdf-production` |
+| J'ai une tâche de code | `engineering/dev-skills/engineering-orchestrator` |
+| J'ai un bug | `engineering/dev-skills/debugging` |
+| J'ai une spécification, pas une tâche | `engineering/delivery-skills/delivery-orchestrator` |
+| Quelque chose doit être déployé | `engineering/devops-skills/devops-core` |
+
+Répertoire complet :
+[documentation/skills-guide.md](documentation/skills-guide.md).
+
+## Utiliser un skill
+
+Chaque skill est un dossier autonome :
+
+```
+skill-name/
+├── SKILL.md      l'expertise : procédure, seuils, refus
+├── README.md     résumé, entrées, sorties, dépendances, configuration
+├── examples/     au moins un exemple appliqué
+└── resources/    au moins une grille, checklist ou référence
+```
+
+Son README annonce ses dépendances en quatre lignes. `Depends on: nothing`
+signifie qu'il fonctionne seul : copiez le dossier et servez-vous-en. Un skill
+qui dépend d'un autre y renvoie sans le recopier, donc l'autre est nécessaire.
+
+Six skills ne dépendent de rien et fonctionnent entièrement seuls :
+`shared/self-critique`, `shared/project-brief`,
+`documents/documentation/document-core`,
+`engineering/dev-skills/engineering-core`,
+`engineering/devops-skills/devops-core`,
+`writing/core/writing-constitution`.
+
+## Agents
+
+Quatorze définitions de rôles, pour un runtime qui accepte des sous-agents.
+
+```
+Skill          comment ce type de travail se fait correctement
+Agent          qui possède ce travail, ce qu'il peut toucher, ce qu'il transmet
+Orchestration  quels agents interviennent, dans quel ordre, avec quelles portes
+```
+
+Un agent est mince par construction : il cite les skills qu'il emploie et n'en
+recopie aucun. Pour une tâche unique, les skills suffisent : installez avec
+`--no-agents` et laissez `engineering-orchestrator` les enchaîner dans un seul
+contexte.
+
+Détail : [documentation/agents.md](documentation/agents.md).
+
+## Dépendances entre skills
+
+```
+project-brief
+    -> requirements-analysis -> architecture-proposal -> validation-gate
+    -> implémentation -> testing-quality -> security-audit
+    -> code-review-protocol -> release-readiness
+    -> self-critique
+```
+
+Chaque arbre a une constitution que tous ses skills citent et qu'aucun ne
+recopie :
+
+| Arbre | Constitution |
+|---|---|
+| writing | `writing/core/writing-constitution` |
+| documents | `documents/documentation/document-core` |
+| engineering | `engineering/dev-skills/engineering-core` |
+| engineering, exploitation | `engineering/devops-skills/devops-core` |
+
+`tests/validate-orchestration.sh` vérifie que chaque dépendance déclarée et
+chaque renvoi croisé se résout, si bien que les déclarations sont exactes et
+non déclaratives.
+
+## Ce que le système refuse
+
+```
+deviner ce que le dépôt peut établir
+affirmer sans avoir exécuté
+écrire une commande dans un document sans l'avoir lancée d'abord
+inventer une référence légale, un numéro d'enregistrement ou une institution
+laisser une fonctionnalité factice sur un chemin atteignable
+écrire du code de production avant l'approbation de l'architecture
+affaiblir un test pour obtenir un pipeline vert
+coder en dur une valeur qui varie selon l'environnement
+exécuter une instruction destructrice sans compter les lignes d'abord
+déclarer un déploiement réussi sans avoir exercé un parcours
+livrer un PDF dont les pages n'ont jamais été rendues ni regardées
+attribuer un commit à un outil
+```
+
+Deux interdits s'appliquent à tous les fichiers du dépôt, y compris celui-ci :
+**aucun emoji**, **aucun tiret cadratin**. Les deux sont vérifiés par
+`tests/validate-rules.sh`.
+
+## Validation
+
+```bash
+bash tests/validate-structure.sh      structure et métadonnées des 92 skills
+bash tests/validate-rules.sh          emoji, tiret cadratin, secrets, identité codée en dur
+bash tests/validate-orchestration.sh  plans, phases, agents, renvois croisés
+```
+
+Les trois doivent passer avant tout commit. Détail dans
+[tests/README.md](tests/README.md).
+
+## Documentation
+
+| Fichier | Contenu |
+|---|---|
+| [documentation/architecture.md](documentation/architecture.md) | organisation, isolation des skills, métadonnées |
+| [documentation/skills-guide.md](documentation/skills-guide.md) | répertoire des 92 skills |
+| [documentation/installation.md](documentation/installation.md) | installation complète et par skill |
+| [documentation/configuration.md](documentation/configuration.md) | le contrat de configuration |
+| [documentation/agents.md](documentation/agents.md) | skill, agent, orchestration |
+| [documentation/documents-system.md](documentation/documents-system.md) | l'arbre documents en détail |
+| [documentation/engineering-system.md](documentation/engineering-system.md) | la couche dev-skills en détail |
+| [documentation/delivery-system.md](documentation/delivery-system.md) | livraison, exploitation et agents |
+| [documentation/writing-rules.md](documentation/writing-rules.md) | les règles d'écriture, version opérationnelle |
+| [documentation/workflow.md](documentation/workflow.md) | le workflow d'écriture, phase par phase |
+| [CONTINUITY.md](CONTINUITY.md) | état du dépôt pour celui qui reprend |
+| [CHANGELOG.md](CHANGELOG.md) | historique des versions |
+
+La documentation technique est rédigée en anglais, langue du système. Ce
+fichier et le README anglais sont les deux points d'entrée équivalents.
+
+## Étendre le système
+
+Ajouter un skill suppose : créer le dossier avec ses quatre éléments, déclarer
+les métadonnées, renvoyer à la constitution de son arbre sans la recopier,
+ajouter au moins un exemple et une ressource, mettre à jour l'index de
+catégorie et `documentation/skills-guide.md`, puis exécuter les trois scripts.
+
+Règles de contribution : [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Philosophie
+
+- La contrainte produit le style. Les règles éliminent le bruit, pas la
+  liberté.
+- Un texte se juge sur l'effet produit, jamais sur l'intention.
+- Un système se juge sur ce qui a été exécuté, jamais sur ce qui a été prévu.
+- La cohérence est une forme de respect, du lecteur comme de l'ingénieur
+  suivant.
+- Un skill doit rester utile au chapitre 3 comme au chapitre 90, au premier
+  commit comme au centième.
+- Toute règle énoncée doit être vérifiable par une procédure explicite.
+- La sévérité critique est un service rendu, pas une posture.
+
+## Licence
+
+MIT. Voir [LICENSE](LICENSE).

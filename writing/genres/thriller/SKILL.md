@@ -1,98 +1,94 @@
 ---
 name: thriller
-description: Écrit un thriller : enjeu vital, échéance visible, antagoniste compétent, coût croissant, mécaniques de tension, chapitres courts, crédibilité procédurale. À utiliser pour construire ou réviser un thriller, un récit à compte à rebours ou une course contre la montre.
+description: Writes a thriller: vital stake, visible deadline, competent antagonist, rising cost, tension mechanics, short chapters, procedural credibility. Use to build or revise a thriller, a countdown narrative or a race against time.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, novel-architect, scene-builder]
-  outputs: [plan-thriller, scenes-de-tension]
+  outputs: [thriller-outline, tension-scenes]
 ---
 
 # Thriller
 
-Le thriller repose sur une seule ressource : le temps qui manque. Tout ce qui
-n'augmente pas la pression est supprimé.
+A thriller rests on one resource: time running out. Anything that does not
+increase the pressure is cut.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : une menace claire, un compte à rebours, un protagoniste
-dépassé mais actif, une accélération continue, une résolution qui coûte cher.
-Il tolère mal la lenteur, la digression et le hasard favorable.
+The reader demands: a clear threat, a countdown, a protagonist out of their
+depth but active, continuous acceleration, a resolution that costs dearly.
+They have little tolerance for slowness, digression and favourable
+coincidence.
 
-## 2. Les quatre piliers
+## 2. The four pillars
 
-1. Enjeu vital, énoncé avant la fin du chapitre 3.
-2. Échéance visible, rappelée physiquement, jamais par un compteur abstrait.
-3. Antagoniste compétent, en avance d'un coup pendant les deux premiers tiers.
-4. Coût croissant : chaque tentative du protagoniste lui retire quelque chose.
+1. A vital stake, stated before the end of chapter 3.
+2. A visible deadline, recalled physically, never by an abstract counter.
+3. A competent antagonist, one move ahead through the first two thirds.
+4. Rising cost: every attempt by the protagonist takes something from them.
 
 ## 3. Structure
 
-- Chapitres courts, 1200 à 2500 mots, raccourcissant à mesure que la tension
-  monte.
-- Fin de chapitre sur un déséquilibre, mais pas systématiquement sur un
-  cliffhanger : au-delà d'un chapitre sur trois, l'effet s'annule.
-- Point médian : le protagoniste comprend que le problème n'est pas celui
-  qu'il croyait.
-- Dernier tiers : plus aucune information nouvelle, uniquement des
-  conséquences.
+- Short chapters, 1200 to 2500 words, shortening as the tension rises.
+- End chapters on an imbalance, but not systematically on a cliffhanger:
+  beyond one chapter in three, the effect cancels itself.
+- Midpoint: the protagonist understands the problem is not the one they
+  thought.
+- Final third: no new information, only consequences.
 
-## 4. Mécaniques de tension
+## 4. Tension mechanics
 
-| Mécanique | Fonctionnement | Erreur à éviter |
+| Mechanic | How it works | Error to avoid |
 |---|---|---|
-| Bombe sous la table | le lecteur sait, le personnage ignore | oublier de rappeler la bombe |
-| Compte à rebours | échéance concrète et matérielle | échéance repoussée sans coût |
-| Piège qui se referme | les issues se ferment une à une | rouvrir une issue par facilité |
-| Traque inversée | le chasseur devient gibier | inverser trop tôt |
-| Preuve fragile | l'élément qui sauve peut être détruit | le rendre indestructible |
-| Allié incertain | le doute sur un proche | trancher le doute trop vite |
+| Bomb under the table | the reader knows, the character does not | forgetting to recall the bomb |
+| Countdown | a concrete, material deadline | pushing the deadline back at no cost |
+| Closing trap | the exits shut one by one | reopening an exit for convenience |
+| Reversed hunt | the hunter becomes the prey | reversing too early |
+| Fragile proof | the thing that saves can be destroyed | making it indestructible |
+| Uncertain ally | doubt about someone close | resolving the doubt too fast |
 
-## 5. Rythme
+## 5. Rhythm
 
-- Alterner scènes d'action et scènes de resserrement, jamais deux scènes
-  d'action consécutives sans conséquence entre elles.
-- La respiration est obligatoire après un pic, jamais avant.
-- La description est autorisée uniquement si elle prépare un danger ou une
-  fuite.
-- Le passé du personnage entre par fragments, jamais par flashback long.
+- Alternate action scenes and tightening scenes; never two consecutive action
+  scenes with no consequence between them.
+- A breathing space is mandatory after a peak, never before.
+- Description is permitted only when it prepares a danger or an escape.
+- The character's past enters in fragments, never as a long flashback.
 
-## 6. Clichés à retourner ou proscrire
+## 6. Cliches to turn or prohibit
 
-- Le protagoniste qui ne prévient pas la police sans raison crédible.
-- Le méchant qui explique son plan au moment de tuer.
-- Le téléphone qui n'a jamais de réseau.
-- L'expert qui trouve l'information en trois minutes.
-- La famille menacée employée comme seul moteur émotionnel.
-- Le retournement final qui annule tout ce qui précède.
+- The protagonist who does not call the police for no credible reason.
+- The villain who explains the plan while about to kill.
+- The phone that never has signal.
+- The expert who finds the information in three minutes.
+- The threatened family used as the sole emotional engine.
+- The final twist that cancels everything before it.
 
-## 7. Crédibilité
+## 7. Credibility
 
-Chaque procédure technique, policière, médicale ou administrative doit être
-documentée par `research-director` au niveau 2 minimum. Un thriller perd son
-lecteur sur une invraisemblance de métier plus vite que sur une faiblesse de
-style.
+Every technical, police, medical or administrative procedure must be
+researched by `research-director` at level 2 minimum. A thriller loses its
+reader on a professional implausibility faster than on weak prose.
 
-## 8. Contrôles de sortie
+## 8. Exit checks
 
-- L'échéance est rappelée toutes les vingt pages par un fait, pas par une
-  phrase.
-- Aucune scène ne se termine dans le même état d'équilibre qu'elle a commencé.
-- Le protagoniste agit dans au moins soixante pour cent des scènes.
-- Aucun sauvetage par hasard.
-- La menace se réalise partiellement au moins une fois avant le climax.
+- The deadline is recalled every twenty pages by a fact, not by a sentence.
+- No scene ends in the same state of balance it began in.
+- The protagonist acts in at least sixty percent of scenes.
+- No rescue by coincidence.
+- The threat is partially realised at least once before the climax.
 
 ## 9. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : pression temporelle,
-compétence de l'antagoniste, irréversibilité des pertes, crédibilité
-procédurale.
+The eleven constitution axes, plus four genre axes: temporal pressure,
+competence of the antagonist, irreversibility of losses, procedural
+credibility.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur les axes de genre.
+Threshold: no axis below 3, average at least 4 on the genre axes.
 
 ## 10. Interfaces
 
-- Amont : `novel-architect`, `research-director`.
-- Latéral : `scene-builder`, `timeline-manager`.
-- Voisins : `genres/espionage`, `genres/mystery`.
+- Upstream: `novel-architect`, `research-director`.
+- Lateral: `scene-builder`, `timeline-manager`.
+- Neighbours: `genres/espionage`, `genres/mystery`.

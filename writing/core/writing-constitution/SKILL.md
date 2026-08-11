@@ -1,74 +1,96 @@
 ---
 name: writing-constitution
-description: Règles d'écriture non négociables de Claude Writer Suite : interdiction des emoji et du tiret cadratin, typographie des dialogues français, flashbacks en italique, titres de chapitre, clichés, représentation des cultures, seuils d'auto-critique. À charger avant toute écriture de fiction ou de poésie, et pour vérifier la conformité d'un texte.
+description: Non-negotiable rules of the creative writing tree: no emoji and no em dash, French dialogue typography, flashbacks in italic, chapter titles, character consistency, cliche prohibitions, cultural representation, self-critique thresholds. Load before writing any fiction or poetry, and to check an existing text for conformity.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: []
-  outputs: [regles-appliquees, rapport-de-conformite]
+  outputs: [applied-rules, conformity-report]
 ---
 
 # Writing Constitution
 
-Document fondateur de Claude Writer Suite. Tous les skills de la suite lui sont
-subordonnés. En cas de conflit entre une consigne de genre et une règle de la
-constitution, la constitution l'emporte, sauf instruction explicite et écrite
-de l'auteur du projet.
+Founding document of the creative writing tree. Every skill in it is
+subordinate to this file. Where a genre instruction conflicts with a rule
+here, this file wins, unless the project author overrides it explicitly and in
+writing.
 
-## 1. Portée
+## 0. Language
 
-La constitution s'applique à :
+This skill is written in English. It produces French by default.
 
-- tout texte de fiction produit par un skill de la suite ;
-- tout texte de poésie ;
-- tout document de travail destiné à l'auteur (bible, fiche, synopsis) ;
-- tout fichier du repository.
+The craft encoded below is French: dialogue typography, incise inversion,
+adverb economy measured in French, the cliche list, the agreement rules its
+downstream skills enforce. `language.creative_output` in the suite
+configuration selects the output language.
 
-Elle ne s'applique pas aux citations d'oeuvres existantes, qui sont reproduites
-telles quelles et signalées comme citations.
+Set to another language, the structural rules of sections 4 to 9 still apply
+in full. The typographic rules of sections 2 and 3 are French conventions and
+are replaced by the target language's own, which is stated rather than assumed.
+Sections 2.1 and 2.2 apply to every language and to every file in this
+repository.
 
-## 2. Interdits typographiques
+The reference material this tree carries, in `writing/resources/` and in each
+skill's `resources/` and `examples/`, is French-language source data:
+typography tables, speech-verb lists, banned-word lexicons, worked samples of
+French prose. It stays in French, and keeps its French filenames, because it
+is what the skills produce rather than how they are instructed.
+
+## 1. Scope
+
+Applies to:
+
+- every work of fiction produced by a skill in this tree;
+- every poem;
+- every working document written for the author: bible, character sheet,
+  synopsis;
+- every file in this repository, for sections 2.1 and 2.2.
+
+Does not apply to quotations from existing works, which are reproduced
+unchanged and marked as quotations.
+
+## 2. Typographic prohibitions
 
 ### 2.1 Emoji
 
-Aucun emoji, aucun pictogramme, aucun symbole décoratif. Ni dans le texte
-narratif, ni dans les titres, ni dans les documents de travail, ni dans les
-messages de commit. Un roman publié ne contient pas d'emoji : la suite non plus.
+No emoji, no pictogram, no decorative symbol. Not in narrative text, not in
+titles, not in working documents, not in commit messages. A published novel
+contains no emoji, and neither does this suite.
 
-### 2.2 Tiret cadratin
+### 2.2 Em dash
 
-Le tiret cadratin est interdit sans exception.
+The em dash is forbidden without exception.
 
-Substituts autorisés selon la fonction :
+Permitted substitutes, by function:
 
-| Fonction | Solution imposée |
+| Function | Required solution |
 |---|---|
-| Prise de parole en dialogue | tiret demi-cadratin suivi d'une espace |
-| Incise dans une phrase | virgules, ou parenthèses si l'aparté est technique |
-| Rupture brutale du discours | points de suspension, ou point sec et phrase courte |
-| Liste dans le texte | deux-points suivis d'une énumération |
-| Intervalle numérique | préposition (de 1789 à 1799) ou trait d'union |
+| Speech turn in dialogue | en dash followed by a space |
+| Parenthetical inside a sentence | commas, or parentheses when the aside is technical |
+| Abrupt break in speech | ellipsis, or a full stop and a short sentence |
+| List inside a sentence | colon followed by an enumeration |
+| Numeric range | a preposition (de 1789 a 1799) or a hyphen |
 
-### 2.3 Autres interdits
+### 2.3 Other prohibitions
 
-- Pas de majuscules d'emphase (JAMAIS, TOUT DE SUITE).
-- Pas de gras dans le corps du récit.
-- Pas plus d'un point d'exclamation par page, jamais doublé.
-- Pas de points de suspension en fin de paragraphe pour créer un faux suspense.
-- Pas d'astérisques pour marquer une action ou une émotion.
+- No emphatic capitals (JAMAIS, TOUT DE SUITE).
+- No bold in narrative body text.
+- No more than one exclamation mark per page, never doubled.
+- No trailing ellipsis at the end of a paragraph to manufacture suspense.
+- No asterisks marking an action or an emotion.
 
-## 3. Dialogues
+## 3. Dialogue
 
-Norme de référence : édition française contemporaine (Gallimard, Actes Sud,
+Reference standard: contemporary French publishing (Gallimard, Actes Sud,
 Seuil, Albin Michel).
 
-### 3.1 Ouverture et structure
+### 3.1 Opening and structure
 
-Un dialogue s'ouvre par un guillemet français ouvrant, chaque réplique suivante
-commence par un tiret demi-cadratin en début de ligne, le dialogue se ferme par
-un guillemet français fermant. La forme allégée, sans guillemets, avec tirets
-seuls, est autorisée si elle est tenue sur l'ensemble du manuscrit.
+A dialogue opens with an opening French guillemet, each following line begins
+with an en dash at the start of the line, and the dialogue closes with a
+closing guillemet. The lighter form, without guillemets and with dashes only,
+is permitted if it is held across the whole manuscript.
 
 ```
 « Tu savais qu'il reviendrait.
@@ -77,33 +99,32 @@ seuls, est autorisée si elle est tenue sur l'ensemble du manuscrit.
 – Non. »
 ```
 
-Règle : un changement de locuteur égale un alinéa. Jamais deux locuteurs dans
-le même paragraphe.
+Rule: a change of speaker means a new paragraph. Never two speakers in one
+paragraph.
 
 ### 3.2 Incises
 
-L'incise se place entre virgules et inverse le sujet et le verbe.
+The incise sits between commas and inverts subject and verb.
 
 ```
 « Je n'irai pas, dit-elle.
 – Tu iras, répondit son frère, et tu te tairas.
 ```
 
-Contraintes :
+Constraints:
 
-- Le verbe de l'incise reste neutre dans quatre-vingts pour cent des cas :
-  dit, répondit, demanda, reprit. Les verbes expressifs (siffla, tonna,
-  murmura) sont réservés aux moments où l'information n'est pas déjà portée
-  par la réplique.
-- Aucun adverbe de manière accolé au verbe de parole (dit-il nerveusement).
-  Si la nervosité doit être perçue, elle passe par un geste, un rythme, une
-  reprise de souffle.
-- Une incise sur trois répliques au maximum. Au-delà, le lecteur perd la
-  vitesse du dialogue.
+- The incise verb stays neutral in eighty percent of cases: dit, répondit,
+  demanda, reprit. Expressive verbs (siffla, tonna, murmura) are reserved for
+  moments where the information is not already carried by the line itself.
+- No manner adverb attached to a speech verb (dit-il nerveusement). If the
+  nervousness must be perceived, it comes through a gesture, a rhythm, a
+  caught breath.
+- One incise per three lines at most. Beyond that, the reader loses the speed
+  of the exchange.
 
-### 3.3 Attribution par l'action
+### 3.3 Attribution by action
 
-Préférer l'attribution par le geste, qui informe deux fois.
+Prefer attribution by gesture, which informs twice.
 
 ```
 « Assieds-toi. »
@@ -111,38 +132,38 @@ Il ne s'assit pas. Il posa les clés sur la table, très lentement, et resta
 debout près de la porte.
 ```
 
-### 3.4 Ce qu'un dialogue n'est pas
+### 3.4 What a dialogue is not
 
-- Un dialogue n'est pas un canal d'exposition. Deux personnages ne se disent
-  pas ce qu'ils savent déjà.
-- Un dialogue n'est pas une conversation réaliste. Les salutations, les
-  redites et les banalités sont coupées, sauf si elles portent une tension.
-- Un dialogue n'est pas une alternance équitable. Un personnage qui esquive
-  répond à côté, coupe, ou se tait.
+- Not a channel for exposition. Two characters do not tell each other what
+  they both already know.
+- Not a realistic conversation. Greetings, repetitions and small talk are cut,
+  unless they carry tension.
+- Not a fair alternation. A character who evades answers beside the question,
+  interrupts, or says nothing.
 
-### 3.5 Test de voix
+### 3.5 Voice test
 
-Retirer toutes les incises d'une page de dialogue. Si l'on ne peut plus dire
-qui parle, les voix ne sont pas différenciées. Corriger par le lexique, la
-longueur de phrase, le registre, les tics de syntaxe, jamais par un accent
-écrit phonétiquement.
+Remove every incise from a page of dialogue. If you can no longer tell who is
+speaking, the voices are not differentiated. Correct through vocabulary,
+sentence length, register and syntactic habits, never through phonetically
+written accent.
 
-## 4. Temporalité et flashbacks
+## 4. Time and flashbacks
 
-### 4.1 Ligne principale
+### 4.1 Main line
 
-Une seule ligne temporelle porte le récit. Toute autre ligne est signalée.
+One timeline carries the narrative. Every other line is signalled.
 
 ### 4.2 Flashbacks
 
-- Tout flashback est composé en italique sur toute son étendue.
-- Il est introduit par un déclencheur diégétique explicite : un objet, une
-  odeur, une phrase, un lieu.
-- Il est refermé par un retour au présent narratif clairement marqué, en
-  romain, avec un repère spatial ou sensoriel.
-- Un flashback dépassant deux mille signes est isolé en section ou en chapitre
-  daté, et non plus en italique dans le fil du texte.
-- Interdiction du flashback dans un flashback.
+- Every flashback is set in italic across its whole extent.
+- It is introduced by an explicit diegetic trigger: an object, a smell, a
+  sentence, a place.
+- It is closed by a clearly marked return to the narrative present, in roman,
+  with a spatial or sensory anchor.
+- A flashback longer than two thousand characters is isolated as a dated
+  section or chapter, not left in italic inside the running text.
+- A flashback inside a flashback is forbidden.
 
 ```
 Il ouvrit la boîte. L'odeur de camphre monta d'un coup.
@@ -153,121 +174,120 @@ et répétait que ce n'était rien, que les points ne se voyaient jamais.*
 Il referma la boîte. Le camphre resta dans la pièce.
 ```
 
-### 4.3 Lisibilité chronologique
+### 4.3 Chronological legibility
 
-À tout moment, le lecteur doit pouvoir répondre à trois questions : quand,
-depuis combien de temps, dans quel ordre. Les repères sont donnés par les
-saisons, les états du corps, les changements matériels, non par des mentions
-mécaniques de dates.
+At any point, the reader must be able to answer three questions: when, for how
+long, in what order. The markers are seasons, states of the body, material
+changes, never mechanical mentions of dates.
 
-## 5. Titres de chapitre
+## 5. Chapter titles
 
-Un titre de chapitre est un objet littéraire, pas une étiquette.
+A chapter title is a literary object, not a label.
 
-Interdits : Chapitre 1, Le début, Retour, Confrontation, La vérité, Épilogue
-sans qualification.
+Forbidden: Chapitre 1, Le début, Retour, Confrontation, La vérité, Épilogue
+with no qualification.
 
-Critères d'un bon titre :
+Criteria for a good title:
 
-- il tient en cinq mots ou moins dans la majorité des cas ;
-- il prend son sens complet seulement après lecture du chapitre ;
-- il ne divulgue pas le retournement ;
-- il appartient au lexique du roman ;
-- l'ensemble des titres, lu à la suite, forme une progression lisible.
+- five words or fewer in most cases;
+- it takes its full meaning only after the chapter has been read;
+- it does not give away the reversal;
+- it belongs to the vocabulary of the novel;
+- read in sequence, the full set of titles forms a legible progression.
 
 ## 6. Style
 
-### 6.1 Principes
+### 6.1 Principles
 
-- Montrer plutôt qu'expliquer. Le narrateur ne nomme pas l'émotion qu'il veut
-  faire ressentir.
-- Une image forte vaut mieux que trois images correctes.
-- La phrase longue sert l'ampleur, la phrase courte sert le choc. Alterner
-  volontairement, jamais par défaut.
-- Le mot juste plutôt que le mot rare.
-- L'adverbe en -ment est un aveu de faiblesse du verbe. Un par page maximum.
-- Le verbe être et le verbe avoir en position centrale signalent souvent une
-  phrase à réécrire.
-- Les filtres de perception (il vit que, il sentit que, il comprit que)
-  éloignent le lecteur. Les supprimer et donner la perception directement.
+- Show rather than explain. The narrator does not name the emotion they want
+  the reader to feel.
+- One strong image beats three correct ones.
+- The long sentence serves breadth, the short sentence serves impact.
+  Alternate deliberately, never by default.
+- The exact word rather than the rare word.
+- An adverb in -ment is an admission that the verb is weak. One per page at
+  most.
+- The verbs être and avoir in the central position usually signal a sentence
+  to rewrite.
+- Perception filters (il vit que, il sentit que, il comprit que) push the
+  reader away. Remove them and give the perception directly.
 
-### 6.2 Répétitions
+### 6.2 Repetition
 
-Distinguer la répétition involontaire, qui est un défaut, de la répétition
-structurante, qui est un effet. La première est traquée sur une fenêtre de
-trois cents mots. La seconde est déclarée dans la bible du projet.
+Distinguish involuntary repetition, which is a defect, from structural
+repetition, which is an effect. The first is hunted across a three hundred
+word window. The second is declared in the project bible.
 
-### 6.3 Clichés
+### 6.3 Cliches
 
-Sont proscrits :
+Prohibited:
 
-- les formules usées : coeur qui bat la chamade, sang qui se glace, silence
-  assourdissant, larmes qui coulent le long des joues ;
-- les personnages types non subvertis : le mentor sage à barbe blanche, le
-  tueur au passé tragique, l'élue qui ignore son pouvoir ;
-- les scènes types non subverties : le réveil devant le miroir, la description
-  de soi par le reflet, la prophétie récitée intégralement, le méchant qui
-  explique son plan ;
-- les résolutions par hasard favorable.
+- worn formulas: coeur qui bat la chamade, sang qui se glace, silence
+  assourdissant, larmes qui coulent le long des joues;
+- unsubverted stock characters: the wise white-bearded mentor, the killer with
+  a tragic past, the chosen one unaware of their power;
+- unsubverted stock scenes: waking up in front of a mirror, self-description
+  by reflection, the prophecy recited in full, the villain explaining the
+  plan;
+- resolutions by favourable coincidence.
 
-Un cliché n'est admis que s'il est explicitement retourné, et le retournement
-doit être visible dans le texte lui-même.
+A cliche is admissible only if it is explicitly turned, and the turn must be
+visible in the text itself.
 
-## 7. Personnages
+## 7. Characters
 
-- Un personnage veut quelque chose dès sa première apparition, même dans une
-  scène calme.
-- Ce qu'il veut et ce dont il a besoin ne coïncident pas.
-- Sa cohérence est mesurée sur trois axes : voix, mémoire, morale. Un
-  personnage peut changer, il ne peut pas oublier ce qu'il sait ni renier une
-  valeur sans scène de bascule.
-- Aucun personnage n'existe pour servir uniquement l'intrigue.
+- A character wants something from their first appearance, even in a quiet
+  scene.
+- What they want and what they need do not coincide.
+- Consistency is measured on three axes: voice, memory, morality. A character
+  may change; they may not forget what they know, nor abandon a value without
+  a scene that turns it.
+- No character exists solely to serve the plot.
 
-## 8. Cultures et représentation
+## 8. Cultures and representation
 
-- Toute culture représentée est traitée avec le même niveau de détail et de
-  dignité que la culture de référence supposée du lecteur.
-- Aucun peuple, aucune religion, aucune région ne sert de décor exotique.
-- Les langues étrangères ne sont pas décoratives : une phrase non traduite
-  doit être compréhensible par le contexte.
-- La nourriture, la musique, le vêtement et le rite sont des faits sociaux,
-  pas des ornements.
-- Les sources sont documentées via `core/research-director`.
+- Every culture represented is treated with the same level of detail and
+  dignity as the reader's assumed reference culture.
+- No people, religion or region serves as exotic scenery.
+- Foreign languages are not decorative: an untranslated sentence must be
+  understandable from context.
+- Food, music, clothing and ritual are social facts, not ornaments.
+- Sources are documented through `core/research-director`.
 
-## 9. Émotion
+## 9. Emotion
 
-Une scène émotionnelle réussie repose sur quatre appuis :
+A successful emotional scene rests on four supports:
 
-1. un enjeu concret et connu du lecteur ;
-2. une résistance du personnage à ressentir ;
-3. une manifestation physique précise et non générique ;
-4. une conséquence irréversible.
+1. a concrete stake the reader knows;
+2. the character's resistance to feeling;
+3. a precise, non-generic physical manifestation;
+4. an irreversible consequence.
 
-Si l'un des quatre manque, la scène est sentimentale, pas émouvante.
+If one of the four is missing, the scene is sentimental, not moving.
 
-## 10. Auto-critique obligatoire
+## 10. Mandatory auto-critique
 
-Aucun texte produit par un skill de la suite n'est livré sans passage par le
-protocole de `quality/self-critique-protocol`. Le minimum imposé est
-l'évaluation des onze axes suivants, notés de 0 à 5 :
+No text produced by a skill in this tree is delivered without passing through
+`quality/self-critique-protocol`. The minimum imposed is the scoring of the
+following eleven axes, from 0 to 5:
 
-qualité narrative, cohérence, rythme, personnages, dialogues, émotion,
-originalité, crédibilité, répétitions, clichés, logique.
+narrative quality, consistency, rhythm, characters, dialogue, emotion,
+originality, credibility, repetition, cliche, logic.
 
-Seuil de livraison : aucun axe en dessous de 3, moyenne supérieure ou égale
-à 3,8. En dessous, révision obligatoire et nouvelle évaluation.
+Delivery threshold: no axis below 3, average at or above 3.8. Below that,
+revision is mandatory and the text is scored again.
 
-## 11. Conformité
+## 11. Conformity
 
-Un texte est conforme s'il passe les huit contrôles suivants :
+A text is conformant if it passes the following eight checks:
 
-1. zéro emoji ;
-2. zéro tiret cadratin ;
-3. dialogues au format imposé, alinéa par locuteur ;
-4. flashbacks en italique et refermés ;
-5. chronologie reconstituable ;
-6. titres de chapitre non génériques ;
-7. moins d'un adverbe en -ment par page ;
-8. auto-critique effectuée et documentée.
+1. zero emoji;
+2. zero em dash;
+3. dialogue in the required format, one paragraph per speaker;
+4. flashbacks in italic and closed;
+5. chronology reconstructable;
+6. chapter titles not generic;
+7. fewer than one adverb in -ment per page;
+8. self-critique performed and documented.
 
-La grille détaillée figure dans `resources/grille-de-conformite.md`.
+The detailed grid is in `resources/grille-de-conformite.md`.

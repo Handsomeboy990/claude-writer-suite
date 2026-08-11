@@ -1,120 +1,127 @@
-# Système de livraison de projet
+# The project delivery system
 
-Documentation technique de `engineering/delivery-skills`,
-`engineering/devops-skills` et `engineering/agents`.
+Technical documentation of `engineering/delivery-skills`,
+`engineering/devops-skills` and `engineering/agents`.
 
-## 1. Objet
+## 1. Purpose
 
-Prendre un cahier des charges, une spécification, un PRD, une liste de
-fonctionnalités ou une demande client, et livrer un système implémenté, testé,
-documenté, déployé et vérifié en production.
+Take a specification, a brief, a PRD, a feature list or a client request, and
+deliver a system that is implemented, tested, documented, deployed and
+verified in production.
 
-Le système d'ingénierie précédent, `engineering/dev-skills`, répond à la
-question : comment une modification est-elle faite correctement. Ce système
-répond à trois autres questions : quoi construire, dans quel ordre et avec
-quelle approbation ; comment le système tourne, se déploie et se restaure ; et
-qui possède chaque partie du travail.
+The engineering layer, `engineering/dev-skills`, answers one question: how a
+change is made correctly. This system answers three others: what to build, in
+what order and with what approval; how the system runs, deploys and restores;
+and who owns each part of the work.
 
-## 2. Les trois couches
+## 2. The three layers
 
 ```
-delivery-skills   quoi construire, dans quel ordre, avec quelle approbation
-dev-skills        comment chaque modification est faite correctement
-devops-skills     comment le système tourne, se déploie et se restaure
-agents            qui possède quoi, et ce qui est transmis
+delivery-skills   what to build, in what order, with what approval
+dev-skills        how each change is made correctly
+devops-skills     how the system runs, deploys and restores
+agents            who owns what, and what is handed on
 ```
 
-Aucune couche ne recopie le contenu d'une autre. `delivery-orchestrator`
-délègue chaque tâche d'implémentation à `engineering-orchestrator` et chaque
-tâche opérationnelle à `devops-core`.
+No layer copies the content of another. `delivery-orchestrator` delegates each
+implementation task to `engineering-orchestrator` and each operational task to
+`devops-core`.
 
-## 3. Les quatorze phases
+`shared/project-brief` sits before phase 01: it frames the request and
+produces the working agreement that `requirements-analysis` then turns into an
+engineering specification.
 
-Définies dans
+## 3. The fourteen phases
+
+Defined in
 `engineering/delivery-skills/delivery-orchestrator/resources/delivery-phases.md`,
-dans un format lisible par machine.
+in a machine-readable format.
 
-| # | Phase | Porte |
+| # | Phase | Gate |
 |---|---|---|
-| 01 | requirements-analysis | aucune |
-| 02 | clarification | approbation |
-| 03 | technology-selection | aucune |
-| 04 | architecture-proposal | aucune |
-| 05 | validation | approbation, arrêt ferme |
-| 06 | delivery-planning | aucune |
-| 07 | implementation | vérification |
-| 08 | integration-verification | vérification |
-| 09 | devops | vérification |
-| 10 | deployment | approbation |
-| 11 | production-verification | vérification |
-| 12 | documentation | aucune |
-| 13 | handover | aucune |
-| 14 | release | approbation |
+| 01 | requirements-analysis | none |
+| 02 | clarification | approval |
+| 03 | technology-selection | none |
+| 04 | architecture-proposal | none |
+| 05 | validation | approval, firm stop |
+| 06 | delivery-planning | none |
+| 07 | implementation | verification |
+| 08 | integration-verification | verification |
+| 09 | devops | verification |
+| 10 | deployment | approval |
+| 11 | production-verification | verification |
+| 12 | documentation | none |
+| 13 | handover | none |
+| 14 | release | approval |
 
-La profondeur de chaque phase s'adapte au projet. Aucune phase n'est
-supprimée sans raison écrite, et la phase 05 ne l'est jamais.
+The depth of each phase adapts to the project. No phase is removed without a
+written reason, and phase 05 is never removed.
 
-## 4. Les trois sortes de portes
+## 4. The three kinds of gate
 
-**Approbation.** Le système s'arrête et attend une réponse humaine. Quatre
-occurrences : clarification, validation de l'architecture, premier
-déploiement, mise en production. Plus toute action irréversible.
+**Approval.** The system stops and waits for a human answer. Four occurrences:
+clarification, architecture validation, first deployment, release. Plus any
+irreversible action.
 
-**Vérification.** Aucun humain requis, la porte s'ouvre sur des preuves :
-intégration exercée, audit de sécurité passé, suite de tests exécutée,
-système déployé ayant répondu à une requête réelle.
+**Verification.** No human required; the gate opens on evidence: integration
+exercised, security audit passed, test suite executed, a deployed system
+having answered a real request.
 
-**Qualité.** Déléguées à la suite d'ingénierie : `code-review-protocol`,
+**Quality.** Delegated to the engineering layer: `code-review-protocol`,
 `testing-quality`, `performance-engineering`, `ui-ux-engineering`.
 
-## 5. Les deux règles structurantes
+The `delegation` section of the configuration sits on top of all three. A user
+who kept deployments does not receive a deployment at phase 10; they receive
+the artefact, the migrations and the variable list, plus the step named in
+`writer-suite-manual-tasks.md`.
 
-**Aucun code de production avant la porte de validation.** Y compris
-l'échafaudage d'un projet. Tout ce qui précède la porte est bon marché à
-changer, tout ce qui suit ne l'est pas.
+## 5. The two structural rules
 
-**Aucune demande d'autorisation après.** Une fois l'architecture approuvée, le
-système exécute et rend compte aux frontières de phase. Interrompre
-l'utilisateur pour un nom de fichier ou une structure de test transforme une
-décision réfléchie en un flux de petites décisions, ce que la porte existe
-précisément pour éviter.
+**No production code before the validation gate.** Project scaffolding
+included. Everything before the gate is cheap to change; everything after is
+not.
 
-## 6. delivery-skills, dix skills
+**No permission requests after it.** Once the architecture is approved, the
+system executes and reports at phase boundaries. Interrupting the user for a
+filename or a test layout turns one considered decision into a stream of small
+ones, which is exactly what the gate exists to prevent.
 
-| Skill | Responsabilité |
+## 6. delivery-skills, ten skills
+
+| Skill | Responsibility |
 |---|---|
-| `delivery-orchestrator` | phases, portes, parallélisation, checklist, verdict |
-| `requirements-analysis` | entrée brute vers spécification d'ingénierie |
-| `clarification-gate` | ce qui doit être demandé, ce qui peut être supposé |
-| `technology-selection` | la pile, avec alternatives et compromis |
-| `architecture-proposal` | la proposition en neuf sections, contrat technique |
-| `validation-gate` | l'arrêt ferme avant implémentation |
-| `delivery-planning` | jalons et tâches atomiques ordonnées |
-| `implementation-integrity` | aucune fonctionnalité factice atteignable |
-| `scope-and-change-control` | ni dérive de périmètre ni dérive d'architecture |
-| `client-handover` | le dossier qu'une autre équipe peut reprendre |
+| `delivery-orchestrator` | phases, gates, parallelisation, checklist, verdict |
+| `requirements-analysis` | raw input into an engineering specification |
+| `clarification-gate` | what must be asked, what can be assumed |
+| `technology-selection` | the stack, with alternatives and trade-offs |
+| `architecture-proposal` | the nine-section proposal, the technical contract |
+| `validation-gate` | the firm stop before implementation |
+| `delivery-planning` | milestones and ordered atomic tasks |
+| `implementation-integrity` | no fake functionality on a reachable path |
+| `scope-and-change-control` | neither scope drift nor architecture drift |
+| `client-handover` | the package another team can take over |
 
-## 7. devops-skills, onze skills
+## 7. devops-skills, eleven skills
 
-| Skill | Responsabilité |
+| Skill | Responsibility |
 |---|---|
-| `devops-core` | échelle d'environnements, configuration, rayon d'impact |
-| `environment-management` | inventaire des variables et contrôles de dérive |
-| `secrets-management` | cycle de vie des identifiants, rotation, fuite |
-| `containerization` | pertinence d'un conteneur, et construction correcte |
-| `ci-cd-pipelines` | un pipeline qui échoue pour les bonnes raisons |
-| `deployment-engineering` | mise en service d'un artefact vérifié |
-| `database-operations` | migrations, verrous, reprises, sécurité des données |
-| `observability` | journaux, santé, métriques, alertes, expurgation |
-| `backup-recovery` | une sauvegarde non restaurée est une hypothèse |
-| `production-verification` | prouver que le système déployé fonctionne |
-| `release-engineering` | versions, étiquettes, changelog, déploiement progressif |
+| `devops-core` | environment ladder, configuration, blast radius |
+| `environment-management` | the variable inventory and drift checks |
+| `secrets-management` | credential lifecycle, rotation, leak handling |
+| `containerization` | whether a container is warranted, and how to build it |
+| `ci-cd-pipelines` | a pipeline that fails for the right reasons |
+| `deployment-engineering` | getting a verified artefact running |
+| `database-operations` | migrations, locks, backfills, data safety |
+| `observability` | logs, health, metrics, alerts, redaction |
+| `backup-recovery` | an unrestored backup is a hypothesis |
+| `production-verification` | proving the deployed system works |
+| `release-engineering` | versions, tags, changelog, progressive rollout |
 
-## 8. Les agents
+## 8. The agents
 
-Quatorze rôles, définis dans `engineering/agents/`. Un agent est mince par
-construction : l'expertise réside dans les skills, l'agent décide lesquels
-s'appliquent, exécute dans sa frontière, et transmet par un artefact durable.
+Fourteen roles, defined in `engineering/agents/`. An agent is thin by design:
+the expertise lives in the skills, the agent decides which apply, executes
+within its boundary, and hands off through a durable artefact.
 
 ```
                        delivery-orchestrator
@@ -141,105 +148,103 @@ s'appliquent, exécute dans sa frontière, et transmet par un artefact durable.
                  release-engineer
 ```
 
-Les lignes sont des chemins de transmission, pas une hiérarchie de
-commandement. Chaque agent rend compte à l'orchestrateur, qui tient les
-portes.
+The lines are handoff paths, not a chain of command. Every agent reports to
+the orchestrator, which holds the gates.
 
-### Portes de revue
+### Review gates
 
-Aucun agent n'est seul juge de son propre travail critique.
+No agent is the sole judge of its own critical work.
 
 ```
-frontend-engineer   -> qa-engineer, ui-ux-engineer, revue de code
-backend-engineer    -> security-engineer, qa-engineer, revue de code
+frontend-engineer   -> qa-engineer, ui-ux-engineer, code review
+backend-engineer    -> security-engineer, qa-engineer, code review
 database-engineer   -> backend-engineer, performance-engineer, release-engineer
 devops-engineer     -> security-engineer, release-engineer
-security-engineer   -> qa-engineer, pour les tests encodant chaque correction
+security-engineer   -> qa-engineer, for the tests encoding each fix
 ```
 
-### Transmission
+### Handoff
 
-Chaque agent termine par le bloc de
-`engineering/agents/handoff-protocol.md` : Completed, Changed, Decisions,
-Verified, Known issues, Next action, For. Rien d'important ne circule
-uniquement par le contexte conversationnel, car l'agent suivant peut démarrer
-sans aucun contexte.
+Every agent finishes with the block from
+`engineering/agents/handoff-protocol.md`: Completed, Changed, Decisions,
+Verified, Known issues, Next action, For. Nothing important travels through
+conversational context alone, because the next agent may start with none.
 
-### Emplacement et installation
+### Location and installation
 
-Les définitions vivent dans `engineering/agents/`, versionnées, et non dans
-`.claude/agents/`, parce que `.claude/` est une configuration locale de machine
-qui n'est jamais versionnée. L'installeur les copie à l'emplacement attendu
-par le runtime.
+The definitions live in `engineering/agents/`, tracked, rather than in
+`.claude/agents/`, because `.claude/` is local machine configuration and is
+never tracked. The installer copies them where the runtime expects them.
 
-```
-bash install.sh --agents      copie les agents dans ~/.claude/agents
-bash install.sh               skills et agents ensemble
-bash install.sh --no-agents   skills seulement
+```bash
+bash install.sh --agents      copies the agents to ~/.claude/agents
+bash install.sh               skills and agents together
+bash install.sh --no-agents   skills only
 ```
 
-## 9. Parallélisation
+Per-agent public contracts: `agents.md`.
 
-Le travail parallèle exige un contrat défini entre les parties parallèles.
+## 9. Parallelisation
 
-| Sûr | Pourquoi |
+Parallel work requires a defined contract between the parallel parts.
+
+| Safe | Why |
 |---|---|
-| frontend et backend après fixation du contrat d'API | le contrat est le point de synchronisation |
-| plusieurs modules de fonctionnalité indépendants | aucun fichier ni schéma partagé |
-| documentation d'une zone stabilisée et implémentation ailleurs | l'une lit, l'autre écrit ailleurs |
+| frontend and backend once the API contract is fixed | the contract is the synchronisation point |
+| several independent feature modules | no shared file or schema |
+| documenting a stabilised area while implementing elsewhere | one reads, the other writes elsewhere |
 
-| Risqué | Pourquoi |
+| Risky | Why |
 |---|---|
-| frontend avant l'existence du contrat de données | l'interface encode une supposition |
-| deux tâches touchant la même migration | l'ordre est indéfini |
-| une fonctionnalité et le remaniement du module qu'elle utilise | conflit garanti |
-| audit de sécurité d'un code encore en cours d'écriture | la cible bouge |
+| frontend before the data contract exists | the interface encodes a guess |
+| two tasks touching the same migration | the order is undefined |
+| a feature and the refactor of the module it uses | guaranteed conflict |
+| a security audit of code still being written | the target moves |
 
-Règle : paralléliser à travers un contrat, jamais à travers un inconnu.
+Rule: parallelise across a contract, never across an unknown.
 
 ## 10. Validation
 
+```bash
+bash tests/validate-structure.sh      structure and metadata of the 92 skills
+bash tests/validate-rules.sh          the repository-wide prohibitions
+bash tests/validate-orchestration.sh  thirteen coherence checks
 ```
-bash tests/validate-structure.sh      structure et métadonnées des 83 skills
-bash tests/validate-rules.sh          règles de la constitution
-bash tests/validate-orchestration.sh  douze contrôles de cohérence
-```
 
-Le troisième script couvre désormais :
+The third script covers:
 
-1. présence des fichiers du système, dont les trois index de catégorie et le
-   protocole de transmission ;
-2. une classification et un plan par catégorie de tâche ;
-3. chaque étape de plan désigne un skill réel, quelle que soit sa catégorie ;
-4. portes obligatoires et ordre interne des plans ;
-5. les cinq scénarios de routage de référence ;
-6. les quatorze phases de livraison : numérotation séquentielle, skills
-   existants, portes d'approbation aux phases 02, 05, 10 et 14 ;
-7. aucun skill orphelin, absent de tout plan et de toute phase ;
-8. chaque `depends_on` désigne un skill existant ;
-9. chaque référence croisée de la section Interfaces existe ;
-10. le titre du README de chaque skill correspond au dossier ;
-11. les quatorze agents existent, avec leurs métadonnées et leurs huit
-    sections obligatoires ;
-12. chaque skill cité par un agent existe.
+1. the system files, including the category indexes and the handoff protocol;
+2. one classification and one plan per task category;
+3. every plan step naming a real skill, in any tree;
+4. mandatory gates and plan ordering;
+5. the five reference routing scenarios;
+6. the fourteen delivery phases: sequential numbering, existing skills,
+   approval gates at phases 02, 05, 10 and 14;
+7. no orphan engineering skill, absent from every plan and phase;
+8. every `depends_on` naming an existing skill, in every tree;
+9. every `Interfaces` cross reference existing, in every procedural tree;
+10. the fourteen agents, with their metadata and eight mandatory sections;
+11. every skill cited by an agent existing;
+12. the document pipeline: `document-core` declared as a dependency, design
+    before production;
+13. `shared/` depending on nothing, so every tree can call it.
 
-## 11. Extension
+## 11. Extending
 
-Ajouter un skill de livraison ou d'exploitation suppose :
+Adding a delivery or operations skill:
 
-1. créer le dossier dans `engineering/delivery-skills/` ou
-   `engineering/devops-skills/` avec ses quatre éléments obligatoires ;
-2. déclarer la catégorie correspondante dans les métadonnées ;
-3. renvoyer à sa constitution sans la recopier : `engineering-core` pour tous,
-   `devops-core` en plus pour l'exploitation ;
-4. inclure une section `Protocol` numérotée, une section `Auto-critique` et
-   une section `Interfaces` ;
-5. l'inscrire dans au moins un plan d'exécution ou une phase de livraison,
-   faute de quoi il est signalé comme orphelin ;
-6. mettre à jour l'index de sa catégorie et ce fichier ;
-7. exécuter les trois scripts de validation.
+1. create the directory in `engineering/delivery-skills/` or
+   `engineering/devops-skills/` with its four mandatory elements;
+2. declare the matching category in the metadata;
+3. refer to its constitution without copying it: `engineering-core` for all,
+   `devops-core` additionally for operations;
+4. include a numbered `Protocol` section, an `Auto-critique` section and an
+   `Interfaces` section;
+5. add it to at least one execution plan or delivery phase, or check 7 reports
+   it as an orphan;
+6. update its category index, `skills-guide.md` and this file;
+7. run the three validation scripts.
 
-Ajouter un agent suppose : le fichier dans `engineering/agents/`, les huit
-sections obligatoires, une entrée dans `engineering/agents/README.md`, et
-l'ajout de son nom à la liste attendue de
-`tests/validate-orchestration.sh`.
+Adding an agent: the file in `engineering/agents/`, the eight mandatory
+sections, an entry in `engineering/agents/README.md`, and its name added to
+the expected list in `tests/validate-orchestration.sh`.

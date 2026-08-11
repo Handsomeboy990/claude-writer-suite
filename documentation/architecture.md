@@ -1,157 +1,136 @@
 # Architecture
 
-## Vue d'ensemble
+## Overview
 
-Claude Writer Suite est une bibliothèque de 83 skills organisée en sept
-catégories, plus quatorze agents, les ressources partagées, la documentation,
-un projet de démonstration et des tests de validation.
-
-Les quatre premières catégories forment la suite d'écriture. Les trois
-suivantes forment le système d'ingénierie et de livraison, documenté dans
-`engineering-system.md` et `delivery-system.md`. Les deux systèmes partagent
-la structure de skill, les tests et les règles Git, et ne se croisent pas :
-aucun skill de l'un ne dépend d'un skill de l'autre.
+Claude Writer Suite is a library of 92 skills in ten groups across four trees,
+plus fourteen agents, shared resources, the configuration contract,
+documentation, a demonstration project and validation scripts.
 
 ```
 claude-writer-suite/
-├── CLAUDE.md
-├── README.md
+├── README.md              entry point, English
+├── README.fr.md           entry point, French
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
+├── CONTINUITY.md
 ├── LICENSE
-├── core/          14 skills
-├── genres/        15 skills
-├── poetry/         5 skills
-├── quality/        8 skills
-├── dev-skills/    20 skills
-├── delivery-skills/ 10 skills
-├── devops-skills/  11 skills
-├── agents/         14 agents
-├── resources/
-├── examples/
+├── install.sh
+├── shared/                 2 skills, cross domain
+├── writing/               42 skills
+│   ├── core/              14
+│   ├── genres/            15
+│   ├── poetry/             5
+│   ├── quality/            8
+│   ├── resources/         French reference material
+│   └── examples/          demonstration project
+├── documents/              7 skills
+│   ├── documentation/      4
+│   ├── administrative/     1
+│   └── publishing/         2
+├── engineering/           41 skills and 14 agents
+│   ├── dev-skills/        20
+│   ├── delivery-skills/   10
+│   ├── devops-skills/     11
+│   └── agents/            14 role definitions
+├── config/                configuration template and field reference
 ├── documentation/
 └── tests/
 ```
 
-## Principe d'isolation
+The four trees do not depend on each other. `shared/` is the exception by
+design: it depends on nothing and is called by all three others, which is
+verified by `tests/validate-orchestration.sh` check 13.
 
-Un skill égale un dossier. Aucun skill ne dépend du contenu interne d'un
-autre : il en consomme uniquement les sorties déclarées dans son bloc de
-métadonnées. Cette règle permet d'ajouter, de remplacer ou de supprimer un
-skill sans casser la suite.
+## Trees and their constitutions
 
-Structure obligatoire :
+Each tree has exactly one constitution. Every skill in it refers to that file
+and none restates it.
+
+| Tree | Constitution | Governs |
+|---|---|---|
+| `writing/` | `core/writing-constitution` | fiction, poetry, screenplay |
+| `documents/` | `documentation/document-core` | delivered documents |
+| `engineering/` | `dev-skills/engineering-core` | any change to a system |
+| `engineering/` | `devops-skills/devops-core` | anything that runs |
+| `shared/` | none | usable alone, in any domain |
+
+## Isolation principle
+
+One skill equals one directory. No skill depends on the internal content of
+another: it consumes only the outputs declared in its metadata block. That
+rule allows a skill to be added, replaced or removed without breaking the
+rest.
+
+Mandatory structure:
 
 ```
 skill-name/
-├── SKILL.md      système d'expertise, document principal
-├── README.md     résumé, entrées, sorties, dépendances
-├── examples/     au moins un exemple appliqué
-└── resources/    au moins une grille, checklist ou référence
+├── SKILL.md      the expertise, main document
+├── README.md     summary, inputs, outputs, dependencies, configuration
+├── examples/     at least one worked example
+└── resources/    at least one grid, checklist or reference
 ```
 
-## Métadonnées
+Skills install flat, one directory per skill name.
+`tests/validate-structure.sh` refuses two skills sharing a name, so a flat
+target never loses one to another.
 
-Chaque `SKILL.md` s'ouvre par un bloc YAML :
+## Metadata
+
+Every `SKILL.md` opens with a YAML block:
 
 ```yaml
 ---
-name: nom-du-skill
-description: Ce que fait le skill, puis quand l'utiliser, avec les termes qui
-  doivent le déclencher.
+name: skill-name
+description: What the skill does, then when to use it, with the terms that
+  should trigger it.
 license: MIT
 metadata:
   category: core | genres | poetry | quality
+            | documentation | administrative | publishing
             | dev-skills | delivery-skills | devops-skills
-  version: 1.0.0
-  depends_on: [liste des skills requis]
-  outputs: [artefacts produits]
+            | shared
+  version: 2.0.0
+  depends_on: [required skills]
+  outputs: [artefacts produced]
 ---
 ```
 
-Les champs `name` et `description` sont au premier niveau : ils sont requis
-pour que le skill soit découvert et chargé par un agent. Le champ `name` doit
-être identique au nom du dossier. Les métadonnées propres au projet sont
-regroupées sous `metadata`, où elles n'interfèrent pas avec le chargement.
+`name` and `description` sit at the top level: both are required for a skill
+to be discovered and loaded by an agent. `name` must match the directory name,
+and `category` must match the basename of the group directory. Project
+specific metadata is grouped under `metadata`, where it does not interfere
+with loading.
 
-## Catégories
+Descriptions are English and at least forty characters, so that selection has
+something to work with.
 
-### core, 14 skills
+## Section contract
 
-Fondations et production. `writing-constitution` domine toute la suite.
+Every `SKILL.md` carries an `Auto-critique` section with a numeric threshold.
 
-writing-constitution, novel-architect, chapter-architect, scene-builder,
-narrator, dialogue-master, character-psychologist, world-builder,
-immersion-director, research-director, continuity-manager, timeline-manager,
-saga-architect, screenwriter.
+The English procedural trees, `documents/`, `engineering/` and `shared/`,
+additionally carry a numbered `Protocol` section and an `Interfaces` section.
+Both are verified by `tests/validate-structure.sh`. The writing tree names its
+procedure in ways inherited from its own domain and is exempt from that pair.
 
-### genres, 15 skills
+## Language
 
-Spécialisations. Chacune hérite de la constitution et ajoute un contrat de
-lecture, des codes, des interdits et des axes d'auto-critique propres.
+Three layers, kept apart.
 
-thriller, mystery, detective, horror, fantasy, dark-fantasy, science-fiction,
-cyberpunk, historical-fiction, romance, adventure, dystopian,
-political-fiction, espionage, magical-realism.
+| Layer | Value |
+|---|---|
+| Skill language | English, all 92 skills and all 14 agents |
+| System language | English: paths, identifiers, config keys, commits, technical documentation |
+| Output language | the recipient's, set per project in the configuration |
 
-### poetry, 5 skills
+The writing tree is written in English and produces French by default, because
+the craft it encodes is French. Its `resources/` and `examples/` stay French:
+they are reference data and worked samples of the output, not instructions.
 
-poet porte la prosodie française et sert de socle aux quatre formes.
+## Dependency graph
 
-poet, sonnet, haiku, free-verse, prose-poetry.
-
-### quality, 8 skills
-
-Contrôle et révision. `self-critique-protocol` est obligatoire en sortie de
-tout skill de production.
-
-self-critique-protocol, story-doctor, literary-editor, literary-critic,
-proofreader, beta-reader, rewriting-engine, publication-review.
-
-### dev-skills, 20 skills
-
-Ingénierie logicielle, agnostique de la pile technique. `engineering-core`
-domine le système, `engineering-orchestrator` le route. Contenu rédigé en
-anglais, pour les raisons exposées dans `engineering-system.md` section 2.
-
-engineering-core, project-exploration, engineering-orchestrator,
-architecture-design, ui-ux-engineering, dependency-selection,
-frontend-engineering, backend-engineering, fullstack-engineering,
-input-validation, security-audit, debugging, testing-quality,
-playwright-automation, performance-engineering, code-review-protocol,
-technical-documentation, project-continuity, git-workflow, release-readiness.
-
-Le graphe de dépendances de cette catégorie figure dans
-`engineering-system.md` section 7, avec les portes obligatoires et les
-catégories de tâches.
-
-### delivery-skills, 10 skills
-
-Conduite d'un projet de la spécification à la livraison.
-`delivery-orchestrator` tient les quatorze phases et leurs portes
-d'approbation.
-
-delivery-orchestrator, requirements-analysis, clarification-gate,
-technology-selection, architecture-proposal, validation-gate,
-delivery-planning, implementation-integrity, scope-and-change-control,
-client-handover.
-
-### devops-skills, 11 skills
-
-Exploitation, agnostique de la plateforme. `devops-core` domine la famille.
-
-devops-core, environment-management, secrets-management, containerization,
-ci-cd-pipelines, deployment-engineering, database-operations, observability,
-backup-recovery, production-verification, release-engineering.
-
-### agents, 14 rôles
-
-Hors catégories de skills : un agent n'a ni `SKILL.md` ni dossiers
-`examples/` et `resources/`. Un agent est un rôle mince qui cite des skills et
-transmet par le bloc de `engineering/agents/handoff-protocol.md`. Le détail
-figure dans `delivery-system.md` section 8.
-
-## Graphe de dépendances
+### writing
 
 ```
 writing-constitution
@@ -179,42 +158,77 @@ writing-constitution
         literary-editor --> proofreader --> publication-review
 ```
 
-## Ressources partagées
+### documents
 
-`resources/` contient ce qui serait dupliqué autrement : typographie,
-structures narratives, lexiques, gabarits de démarrage et de suivi. Un skill
-y renvoie, il n'en recopie jamais le contenu.
+```
+document-core
+    +-- technical-writing | user-documentation | report-writing
+    +-- administrative-writing
+                    |
+            document-design
+                    |
+             pdf-production
+```
+
+### engineering
+
+The graph for `dev-skills` is in `engineering-system.md` section 7, with the
+mandatory gates and the task categories. The fourteen delivery phases are in
+`delivery-system.md`.
+
+### shared
+
+None. `self-critique` and `project-brief` depend on nothing, which is what
+allows every other tree to call them.
+
+## Shared resources
+
+`writing/resources/` holds what would otherwise be duplicated: typography,
+narrative structures, lexicons, project templates. A skill refers to them and
+never copies their content.
+
+## Configuration
+
+`config/` holds the template and the field reference. Values live outside the
+repository, at `~/.claude/writer-suite.config.yaml` by default.
+
+Skills name the fields they read and state what happens when one is missing.
+No skill embeds a value. Identity fields have no default and never will: a
+skill that cannot resolve them stops and names the missing field.
+
+The `delegation` section decides which actions the agent performs and which it
+prepares and hands over. Everything handed over is written to
+`writer-suite-manual-tasks.md` next to the configuration.
 
 ## Tests
 
-`tests/` contient trois scripts sans dépendance externe :
+`tests/` holds three scripts with no external dependency.
 
-- `validate-structure.sh` vérifie la présence des fichiers et dossiers
-  obligatoires de chaque skill, ainsi que le bloc de métadonnées. Pour
-  les catégories d'ingénierie, il exige en plus une section `Protocol`
-  numérotée et une section `Interfaces`.
-- `validate-rules.sh` vérifie les interdits de la constitution sur tout le
-  repository : emoji, tiret cadratin, guillemets droits hors blocs de code,
-  exclamations multiples.
-- `validate-orchestration.sh` vérifie la cohérence interne des trois
-  catégories d'ingénierie et des agents : plans d'exécution, phases de
-  livraison, portes obligatoires, références croisées, scénarios de routage,
-  définitions d'agents.
+- `validate-structure.sh`: the mandatory files and directories of every skill,
+  the metadata block, duplicate skill names, the `Protocol` and `Interfaces`
+  sections for the procedural trees, and the presence of every index and
+  documentation file.
+- `validate-rules.sh`: the repository-wide prohibitions on every Markdown
+  file: emoji, em dash, credential-shaped strings, hardcoded personal
+  identity, plus French typography warnings scoped to `writing/`.
+- `validate-orchestration.sh`: thirteen checks on internal coherence:
+  execution plans, delivery phases, mandatory gates, routing scenarios,
+  declared dependencies across every tree, `Interfaces` cross references, agent
+  definitions, the document pipeline, and the independence of `shared/`.
 
-## Extension
+## Extending
 
-Ajouter un skill suppose : créer le dossier avec ses quatre éléments, déclarer
-les métadonnées, renvoyer à la constitution sans la recopier, ajouter au moins
-un exemple et une ressource, mettre à jour `documentation/skills-guide.md`,
-puis exécuter les trois scripts de test.
+Adding a skill: create the directory with its four elements, declare the
+metadata, refer to the constitution of its tree without restating it, add at
+least one example and one resource, update the category index and
+`skills-guide.md`, then run the three scripts.
 
-Pour un skill d'une catégorie d'ingénierie, quatre exigences supplémentaires
-figurent dans `engineering-system.md` section 9 et `delivery-system.md`
-section 11 : titre de procédure `Protocol`, section `Interfaces`,
-appartenance à au moins un plan d'exécution ou une phase de livraison, et mise
-à jour de l'index de catégorie.
+For a skill in `documents/`, `engineering/` or `shared/`, four further
+requirements: a numbered `Protocol` section, an `Interfaces` section, and for
+the engineering tree membership of at least one execution plan or delivery
+phase. Detail in `engineering-system.md` section 9, `delivery-system.md`
+section 11 and `documents-system.md` section 9.
 
-Ajouter un agent suppose : le fichier dans `engineering/agents/`, les huit
-sections obligatoires, une entrée dans `engineering/agents/README.md`, et
-l'ajout de son nom à la liste attendue de
-`tests/validate-orchestration.sh`.
+Adding an agent: the file in `engineering/agents/`, its eight mandatory
+sections, an entry in `engineering/agents/README.md`, and its name added to
+the expected list in `tests/validate-orchestration.sh`.

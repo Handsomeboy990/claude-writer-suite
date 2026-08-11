@@ -1,173 +1,226 @@
-# Guide des skills
+# Skills guide
 
-Répertoire complet des 83 skills, avec entrées, sorties et usage recommandé.
-Les quatre premières sections couvrent la suite d'écriture, les trois
-suivantes le système d'ingénierie et de livraison.
+Directory of the 92 skills. One line each: what it does, and when to open it.
 
-## core
+Every skill's own `README.md` carries its inputs, outputs, dependencies and
+configuration in four lines. This file is the index; the READMEs are the
+contracts.
 
-| Skill | Ce qu'il fait | Entrées | Sorties |
-|---|---|---|---|
-| writing-constitution | règles communes non négociables | aucune | règles appliquées, rapport de conformité |
-| novel-architect | construction globale d'un roman | prémisse, genre, longueur | bible, plan, arcs, révélations |
-| chapter-architect | découpage en chapitres | plan général | fiches chapitre, titres |
-| scene-builder | construction des scènes | fiche chapitre | scènes rédigées, fiches de scène |
-| narrator | instance narrative et voix | bible | charte de narration |
-| dialogue-master | dialogues aux normes françaises | fiches personnages | dialogues conformes |
-| character-psychologist | personnages complexes | contexte, bible | fiches, arcs, relations |
-| world-builder | univers cohérents | genre, dossier documentaire | bible du monde, lexique |
-| immersion-director | immersion sensorielle et culturelle | bible du monde | dossiers sensoriels |
-| research-director | direction documentaire | plan, époque, lieux | dossier documentaire, fiches sources |
-| continuity-manager | cohérence globale | chapitres rédigés | registre, rapport d'incohérences |
-| timeline-manager | temporalités et flashbacks | plan, chapitres | chronologies, table des flashbacks |
-| saga-architect | oeuvres multi-tomes | bible du tome 1 | bible de saga, registre inter-tomes |
-| screenwriter | écriture scénaristique | pitch ou roman source | traitement, séquencier, continuité |
+## Choosing by situation
 
-## genres
-
-| Skill | Contrat de lecture | Exigence dominante |
-|---|---|---|
-| thriller | menace, échéance, accélération | pression temporelle |
-| mystery | énigme équitable | équité des indices |
-| detective | méthode, milieu, coût de la vérité | exactitude procédurale |
-| horror | perte de sécurité | économie de la monstration |
-| fantasy | monde tenu, impossible cohérent | nécessité du fantastique |
-| dark-fantasy | monde qui ne récompense pas la vertu | absence de complaisance |
-| science-fiction | hypothèse menée jusqu'au bout | profondeur des conséquences |
-| cyberpunk | asymétrie de pouvoir, corps, dette | densité matérielle |
-| historical-fiction | époque tenue, mentalités justes | exactitude documentaire |
-| romance | transformation par la rencontre | force de l'obstacle interne |
-| adventure | territoire, attrition, retour | cohérence de l'attrition |
-| dystopian | système qui fonctionne | crédibilité du système |
-| political-fiction | fabrique de la décision | absence de manichéisme |
-| espionage | loyautés et leur coût | cohérence de la trahison |
-| magical-realism | merveilleux non expliqué | tenue du non-étonnement |
-
-## poetry
-
-| Skill | Objet | Exigence dominante |
-|---|---|---|
-| poet | prosodie française, image, son | justesse prosodique |
-| sonnet | forme fixe en quatorze vers | volte à sa position |
-| haiku | forme brève, saison, coupure | écart entre les images |
-| free-verse | forme inventée et tenue | motivation des coupes |
-| prose-poetry | bloc de prose sans progression | tenue rythmique et clôture |
-
-## quality
-
-| Skill | Rôle | Position |
-|---|---|---|
-| self-critique-protocol | auto-évaluation en onze axes | après chaque production |
-| story-doctor | diagnostic structurel | après un premier jet complet |
-| rewriting-engine | réécriture méthodique | après diagnostic |
-| literary-editor | style, phrase, paragraphe | après structure validée |
-| proofreader | orthographe et typographie | après édition |
-| beta-reader | simulation de lecture réelle | sur manuscrit complet |
-| literary-critic | jugement éditorial sévère | avant décision |
-| publication-review | validation finale | en dernier |
-
-## dev-skills
-
-Système d'ingénierie logicielle, agnostique de la pile technique. Contenu en
-anglais. Détail complet dans `engineering-system.md`.
-
-| Skill | Ce qu'il fait | Entrées | Sorties |
-|---|---|---|---|
-| engineering-core | règles communes non négociables | aucune | règles appliquées, rapport de conformité |
-| project-exploration | cartographie d'un repository inconnu | le repository, la tâche | carte du projet, conventions, traces de flux |
-| engineering-orchestrator | classification et plan d'exécution | la requête | classification, plan, portes, verdict |
-| architecture-design | la plus petite architecture viable | carte du projet, contraintes | décision, contrats, modèle de panne |
-| ui-ux-engineering | spécification de l'expérience rendue | design system existant | décisions, inventaire d'états, cibles d'accessibilité |
-| dependency-selection | ajouter, remplacer ou refuser une bibliothèque | le besoin, l'arbre installé | décision, grille d'évaluation |
-| frontend-engineering | implémentation client | spécification, conventions | composants, états, notes d'accessibilité |
-| backend-engineering | implémentation serveur | architecture, contrat validé | handlers, services, migrations, contrat d'erreur |
-| fullstack-engineering | la tranche verticale complète | la fonctionnalité demandée | contrat, matrice de complétude, vérification bout en bout |
-| input-validation | validation à la frontière de confiance | le changement, la carte des frontières | schémas, rapport de frontières, tests |
-| security-audit | balayage en vingt-quatre points | le diff ou le repository | constats, corrections, actions manuelles |
-| debugging | cause racine d'un défaut | le rapport de défaut | cause, reproduction, correction, test de régression |
-| testing-quality | stratégie et écriture des tests | le changement | plan de test, tests, lacunes, journal d'exécution |
-| playwright-automation | vérification navigateur | la fonctionnalité implémentée | parcours, captures, rapport responsive |
-| performance-engineering | mesure et optimisation | un symptôme ou une mesure | référence, analyse, écart mesuré |
-| code-review-protocol | revue en cinq passes puis correction | un diff | constats, corrections appliquées, journal de vérification |
-| technical-documentation | documentation conforme au code | le changement | readme, référence API, runbook, changelog |
-| project-continuity | passation exploitable | les commits de la session | notes de continuité, liste de suites |
-| git-workflow | identité, commits, historique | l'arbre de travail | commits, branches, pull request |
-| release-readiness | porte finale avant livraison | la révision, le diff de version | rapport, verdict, plan de retour arrière |
-
-## delivery-skills
-
-Conduite d'un projet, de la spécification à la livraison. Contenu en anglais.
-Détail complet dans `delivery-system.md`.
-
-| Skill | Ce qu'il fait | Entrées | Sorties |
-|---|---|---|---|
-| delivery-orchestrator | phases, portes, parallélisation, verdict | une spécification ou une demande client | plan de phases, checklist, verdict |
-| requirements-analysis | entrée brute vers spécification | cahier des charges, PRD, maquettes | spécification, hypothèses, inconnues |
-| clarification-gate | ce qui doit être demandé | registre des inconnues | lot de questions, hypothèses par défaut |
-| technology-selection | la pile, justifiée | spécification, contraintes | décisions, alternatives rejetées, coût |
-| architecture-proposal | le contrat technique | spécification, décisions de pile | document d'architecture, risques |
-| validation-gate | l'arrêt ferme avant implémentation | la proposition | dossier d'approbation, décision consignée |
-| delivery-planning | jalons et tâches atomiques | architecture approuvée | plan, dépendances, carte de parallélisation |
-| implementation-integrity | aucune fonctionnalité factice | le diff, l'application qui tourne | scan d'intégrité, registre des stubs |
-| scope-and-change-control | ni dérive de périmètre ni dérive d'architecture | découvertes en cours de route | décisions, suites, demandes de changement |
-| client-handover | le dossier de reprise | le système livré | dossier de livraison, guide d'exploitation |
-
-## devops-skills
-
-Exploitation, agnostique de la plateforme. Contenu en anglais.
-
-| Skill | Ce qu'il fait | Entrées | Sorties |
-|---|---|---|---|
-| devops-core | règles communes d'exploitation | le projet, ses environnements | modèle d'environnements, rayon d'impact |
-| environment-management | inventaire des variables | les lectures de configuration | inventaire, fichier d'exemple, dérive |
-| secrets-management | cycle de vie des identifiants | l'inventaire, la plateforme | inventaire, rotations, réponse à fuite |
-| containerization | pertinence et construction d'une image | le projet, la plateforme | images, fichiers compose, audit |
-| ci-cd-pipelines | un pipeline qui bloque | la plateforme, la suite de tests | définition du pipeline, portes |
-| deployment-engineering | mise en service d'un artefact | l'artefact, la cible | procédure, plan de retour arrière |
-| database-operations | opérations sur données vivantes | schéma, migrations, volumétrie | plan de migration, verrous, journal |
-| observability | rendre les pannes visibles | l'application, la plateforme | journaux, santé, métriques, alertes |
-| backup-recovery | prouver la restauration | objectifs RPO et RTO | politique, procédure, répétition |
-| production-verification | prouver que le déployé fonctionne | le déploiement terminé | rapport de vérification, décision |
-| release-engineering | comment la version part | la révision approuvée | version, étiquette, changelog, journal |
-
-## Choisir un skill
-
-| Situation | Skill à ouvrir |
+| Situation | Skill |
 |---|---|
-| Je démarre un projet | resources/templates/demarrage-de-projet.md, puis novel-architect |
-| Je ne sais pas comment couper mes chapitres | chapter-architect |
-| Ma scène est plate | scene-builder, puis self-critique-protocol |
-| Mes dialogues se ressemblent | dialogue-master, test de voix |
-| Mon milieu de roman n'avance pas | story-doctor |
-| Je perds le fil des dates | timeline-manager |
-| Je ne sais plus qui sait quoi | continuity-manager |
-| Mon texte est correct mais fade | literary-editor, puis rewriting-engine |
-| Je veux savoir si c'est publiable | literary-critic, puis publication-review |
-| Je découvre une base de code | project-exploration |
-| Je ne sais pas par quels skills passer | engineering-orchestrator |
-| Une API renvoie une erreur inexpliquée | debugging |
-| Je dois ajouter un endpoint | backend-engineering, puis input-validation |
-| Je dois créer une page | ui-ux-engineering, puis frontend-engineering |
-| Je me demande si c'est sûr | security-audit |
-| C'est lent | performance-engineering, jamais sans mesure |
-| Je veux ajouter une bibliothèque | dependency-selection |
-| Je viens d'écrire du code | code-review-protocol |
-| Je m'apprête à livrer | release-readiness |
-| Je termine une session | project-continuity |
-| On me remet un cahier des charges | delivery-orchestrator, puis requirements-analysis |
-| Je ne sais pas quoi demander au client | clarification-gate |
-| Je dois choisir une pile technique | technology-selection |
-| Je dois faire valider une architecture | architecture-proposal, puis validation-gate |
-| Je découpe le travail | delivery-planning |
-| Je soupçonne du code factice | implementation-integrity |
-| On me demande une chose hors périmètre | scope-and-change-control |
-| Je livre au client | client-handover |
-| Je configure des environnements | environment-management |
-| Une clé a fuité | secrets-management, rotation d'abord |
-| Je monte un pipeline | ci-cd-pipelines |
-| Je dois déployer | deployment-engineering |
-| Je dois migrer une base vivante | database-operations |
-| Une panne est passée inaperçue | observability |
-| On me dit que les sauvegardes existent | backup-recovery, répétition de restauration |
-| Le déploiement a réussi, et après | production-verification |
-| Je prépare une version | release-engineering |
+| I am starting anything significant | `project-brief` |
+| I finished something and want it checked | `self-critique` |
+| I am starting a novel | `novel-architect` |
+| I do not know where to cut my chapters | `chapter-architect` |
+| My scene is flat | `scene-builder` |
+| Every character speaks alike | `dialogue-master` |
+| My protagonist is dull | `character-psychologist` |
+| My setting reads like a brochure | `immersion-director` |
+| I am writing about a real trade or period | `research-director` |
+| I have lost track of the dates | `timeline-manager` |
+| I no longer know who knows what | `continuity-manager` |
+| My middle sags | `story-doctor` |
+| My text is correct but flat | `literary-editor` |
+| Is this publishable | `literary-critic` |
+| I am delivering a manuscript | `publication-review` |
+| A partner must integrate with our API | `technical-writing` |
+| A customer cannot find how to do something | `user-documentation` |
+| Leadership must decide | `report-writing` |
+| A formal letter has to be sent | `administrative-writing` |
+| Four deliverables must look like one set | `document-design` |
+| The client wants a PDF | `pdf-production` |
+| I have a coding task | `engineering-orchestrator` |
+| I have never seen this codebase | `project-exploration` |
+| I have a bug | `debugging` |
+| It is slow | `performance-engineering` |
+| Is it safe to ship | `release-readiness` |
+| I have a specification, not a task | `delivery-orchestrator` |
+| Something must be deployed | `devops-core` |
+| Is the deployment actually working | `production-verification` |
+
+## shared, 2 skills
+
+Depend on nothing. Callable from any tree, usable alone.
+
+| Skill | What it does |
+|---|---|
+| `project-brief` | frames work before it starts: inspects, asks the decision-critical questions in one batch, records assumptions, writes the working agreement |
+| `self-critique` | reviews finished work from the roles that will receive it, checks it against the request, fixes what it finds, re-reviews |
+
+## writing, 42 skills
+
+### core, 14
+
+| Skill | What it does |
+|---|---|
+| `writing-constitution` | the non-negotiable rules and the conformity grid |
+| `novel-architect` | premise, dramatic question, structure, arcs, reveal schedule, outline |
+| `chapter-architect` | chapter breakdown, entry and exit values, worked titles |
+| `scene-builder` | objective, escalating conflict, costly outcome, irreversibility |
+| `narrator` | person, focalisation, tense, distance, free indirect speech, voice |
+| `dialogue-master` | French dialogue typography, incises, subtext, voice differentiation |
+| `character-psychologist` | the seven field core, access layers, behavioural translation, arcs |
+| `world-builder` | material constraint, geography, economy, power, special systems |
+| `immersion-director` | nine sensory and cultural channels, dosage, anti-exoticism |
+| `research-director` | research needs, depth levels, sources, anachronism control |
+| `continuity-manager` | eight registers, per-chapter updates, eight-pass audit |
+| `timeline-manager` | master and reader chronologies, ellipses, flashbacks |
+| `saga-architect` | volume question against saga question, long memory, narrative debts |
+| `screenwriter` | pitch, treatment, breakdown, screenplay, adaptation |
+
+### genres, 15
+
+| Skill | Dominant requirement |
+|---|---|
+| `thriller` | temporal pressure |
+| `mystery` | fairness of the clues |
+| `detective` | procedural accuracy |
+| `horror` | economy of showing |
+| `fantasy` | necessity of the fantastic |
+| `dark-fantasy` | absence of complacency |
+| `science-fiction` | depth of consequences |
+| `cyberpunk` | material density |
+| `historical-fiction` | documentary accuracy |
+| `romance` | strength of the internal obstacle |
+| `adventure` | consistency of attrition |
+| `dystopian` | credibility of the system |
+| `political-fiction` | absence of manicheism |
+| `espionage` | coherence of the betrayal |
+| `magical-realism` | non-astonishment held |
+
+### poetry, 5
+
+| Skill | What it does |
+|---|---|
+| `poet` | French prosody, image, sound, seven-step composition |
+| `sonnet` | fourteen lines, rhyme arrangements, the volta |
+| `haiku` | brevity, season marker, the cut |
+| `free-verse` | a constraint invented per poem and held |
+| `prose-poetry` | a block, four cohesion forces, closure by displacement |
+
+### quality, 8
+
+| Skill | What it does |
+|---|---|
+| `self-critique-protocol` | eleven axes, quoted evidence, numeric thresholds |
+| `story-doctor` | structural diagnosis, symptom to cause, repair plan |
+| `rewriting-engine` | six rewrite modes, salvage rules |
+| `literary-editor` | six style passes, editorial note, cut log |
+| `proofreader` | five correction passes, French typography |
+| `beta-reader` | simulated reading, drop-off points, no prescription |
+| `literary-critic` | weighted grid, decision scale, one recommendation |
+| `publication-review` | seven checks, written decision, publication dossier |
+
+## documents, 7 skills
+
+| Skill | Category | What it does |
+|---|---|---|
+| `document-core` | documentation | audience model, language layers, evidence rule, quality gate |
+| `technical-writing` | documentation | architecture documents, API references, installation and operational guides |
+| `user-documentation` | documentation | guides, manuals, help articles, support material |
+| `report-writing` | documentation | status, audit, incident and options reports |
+| `administrative-writing` | administrative | letters, notices, attestations, minutes, applications |
+| `document-design` | publishing | hierarchy, typography, tables, page furniture, metadata |
+| `pdf-production` | publishing | engine selection, generation, render verification |
+
+## engineering, 41 skills
+
+### dev-skills, 20
+
+| Skill | What it does |
+|---|---|
+| `engineering-core` | the non-negotiable engineering rules |
+| `engineering-orchestrator` | classifies a task and composes the smallest complete plan |
+| `project-exploration` | maps an unfamiliar codebase before any change |
+| `architecture-design` | the smallest architecture that serves the product |
+| `ui-ux-engineering` | the rendered experience, states, accessibility |
+| `dependency-selection` | twelve point evaluation before adding a library |
+| `frontend-engineering` | pages, components, state, forms, the five UI states |
+| `backend-engineering` | handlers, services, authorization, transactions, jobs |
+| `fullstack-engineering` | a feature across every layer, contract first |
+| `input-validation` | every external input treated as hostile |
+| `security-audit` | twenty four point sweep of the real implementation |
+| `debugging` | reproduction, evidence, root cause, verified fix |
+| `testing-quality` | the right test layer, tests that can actually fail |
+| `playwright-automation` | browser verification of real journeys |
+| `performance-engineering` | baseline, bottleneck, targeted fix, proven delta |
+| `code-review-protocol` | senior review that finds defects and fixes them |
+| `technical-documentation` | documentation living in the codebase |
+| `project-continuity` | leaves the project resumable by someone else |
+| `git-workflow` | identity, atomic commits, delegation boundaries, pull requests |
+| `release-readiness` | nine gates, then a go or no go verdict |
+
+### delivery-skills, 10
+
+| Skill | What it does |
+|---|---|
+| `delivery-orchestrator` | fourteen phases, four approval gates, completion verdict |
+| `requirements-analysis` | a specification into an implementable engineering spec |
+| `clarification-gate` | what must be asked, once, in one grouped batch |
+| `technology-selection` | the stack, with a written justification per decision |
+| `architecture-proposal` | the formal proposal, sized to the project |
+| `validation-gate` | the firm stop before any production code |
+| `delivery-planning` | ordered atomic tasks with dependencies and milestones |
+| `implementation-integrity` | forbids and detects fake functionality |
+| `scope-and-change-control` | protects an approved scope from silent drift |
+| `client-handover` | the delivery package another team can take over |
+
+### devops-skills, 11
+
+| Skill | What it does |
+|---|---|
+| `devops-core` | environment ladder, configuration, blast radius, destructive protocol |
+| `environment-management` | the variable inventory and drift detection |
+| `secrets-management` | credential lifecycle, rotation, leak handling |
+| `containerization` | whether a container is warranted, and how to build it |
+| `ci-cd-pipelines` | a pipeline that fails for the right reasons |
+| `deployment-engineering` | a verified artefact running in a target environment |
+| `database-operations` | migrations, backfills, indexes, production safety |
+| `observability` | logs, health, metrics, alerts on user impact |
+| `backup-recovery` | a backup is untested until a restore has been performed |
+| `production-verification` | proves a deployed system works, by exercising it |
+| `release-engineering` | versioning, tagging, changelog, rollout, hotfix path |
+
+### agents, 14
+
+`delivery-orchestrator`, `requirements-analyst`, `software-architect`,
+`frontend-engineer`, `backend-engineer`, `database-engineer`,
+`security-engineer`, `qa-engineer`, `playwright-engineer`, `ui-ux-engineer`,
+`devops-engineer`, `performance-engineer`, `documentation-engineer`,
+`release-engineer`.
+
+Public contracts in `agents.md`. An agent is a role: it names the skills it
+uses and restates none of them.
+
+## Skills that work alone
+
+Six depend on nothing and can be copied and used on their own:
+
+```
+shared/self-critique
+shared/project-brief
+documents/documentation/document-core
+engineering/dev-skills/engineering-core
+engineering/devops-skills/devops-core
+writing/core/writing-constitution
+```
+
+Every other skill declares its dependencies in `depends_on` and in its README.
+`tests/validate-orchestration.sh` check 8 verifies that each one resolves.
+
+## Skills that read configuration
+
+| Skill | Fields |
+|---|---|
+| `git-workflow` | `identity.*`, `git.*`, `delegation.*` |
+| `release-engineering` | `git.commit_convention`, `delegation.release_tags` |
+| `deployment-engineering` | `engineering.deployment_platform`, `delegation.deployments` |
+| `database-operations` | `delegation.database_operations` |
+| `dependency-selection` | `engineering.package_manager`, `delegation.dependency_changes` |
+| `technical-documentation`, `technical-writing` | `language.documentation` |
+| the `writing/` tree | `language.creative_output` |
+| the `documents/` tree | `language.document_output`, `identity.organization`, `documents.*` |
+
+Field reference in `config/README.md`.

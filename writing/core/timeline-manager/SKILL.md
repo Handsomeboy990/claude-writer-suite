@@ -1,124 +1,118 @@
 ---
 name: timeline-manager
-description: Gère les temporalités : chronologie réelle et chronologie du lecteur, repères, ellipses, flashbacks en italique avec déclencheur et clôture, récits à lignes multiples, durée ressentie. À utiliser pour placer un flashback, vérifier des dates, ou clarifier une chronologie confuse.
+description: Manages time: the real chronology against the reader's chronology, temporal markers, ellipses, flashbacks in italic with a trigger and a close, multi-line narratives, felt duration. Use to place a flashback, check dates, or clarify a confused chronology.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, novel-architect]
-  outputs: [chronologie-maitresse, chronologie-lecteur, table-des-flashbacks]
+  outputs: [master-chronology, reader-chronology, flashback-table]
 ---
 
 # Timeline Manager
 
-Gestion des temporalités : chronologie réelle des événements, ordre de
-présentation au lecteur, ellipses, flashbacks, récits parallèles.
+Management of time: the real order of events, the order in which they reach
+the reader, ellipses, flashbacks, parallel narratives.
 
-## 1. Deux chronologies
+## 1. Two chronologies
 
-Toujours tenir deux documents distincts.
+Always keep two separate documents.
 
-1. Chronologie maîtresse : tous les événements dans l'ordre réel, y compris
-   ceux antérieurs au récit et ceux qui ne seront jamais racontés.
-2. Chronologie lecteur : l'ordre dans lequel l'information arrive.
+1. Master chronology: every event in real order, including those before the
+   narrative and those that will never be told.
+2. Reader chronology: the order in which information arrives.
 
-L'écart entre les deux est la matière même du suspense et de la surprise.
-Il doit être choisi, jamais subi.
+The gap between the two is the raw material of suspense and surprise. It is
+chosen, never suffered.
 
-## 2. Chronologie maîtresse
+## 2. Master chronology
 
-Colonnes obligatoires : date absolue, date relative, événement, personnages
-présents, conséquence durable, chapitre où l'événement est raconté ou évoqué.
+Required columns: absolute date, relative date, event, characters present,
+lasting consequence, chapter where the event is told or mentioned.
 
-Inclure les événements antérieurs qui expliquent les personnages : blessures
-fondatrices, dettes, morts, départs. Ils ne seront pas tous écrits, mais ils
-datent les cicatrices.
+Include the earlier events that explain the characters: founding wounds,
+debts, deaths, departures. Not all will be written, but they date the scars.
 
-## 3. Repères pour le lecteur
+## 3. Markers for the reader
 
-Le lecteur doit pouvoir répondre à trois questions à tout moment : quand,
-depuis combien de temps, dans quel ordre.
+The reader must be able to answer three questions at any moment: when, for how
+long, in what order.
 
-Techniques de repérage, du plus lourd au plus léger :
+Marking techniques, from heaviest to lightest:
 
-1. Mention datée en tête de chapitre. Efficace, mais mécanique si systématique.
-2. Repère saisonnier ou météorologique.
-3. Repère corporel : barbe, cicatrice, fatigue, grossesse, croissance d'un
-   enfant.
-4. Repère matériel : provisions, usure, réparations, dettes échues.
-5. Repère social : fêtes, marchés, échéances administratives.
+1. A date at the head of the chapter. Effective, but mechanical if systematic.
+2. A seasonal or weather marker.
+3. A bodily marker: beard, scar, exhaustion, pregnancy, a child growing.
+4. A material marker: supplies, wear, repairs, debts falling due.
+5. A social marker: festivals, markets, administrative deadlines.
 
-Préférer les niveaux 2 à 5. Réserver le niveau 1 aux récits à lignes
-multiples.
+Prefer levels 2 to 5. Reserve level 1 for multi-line narratives.
 
 ## 4. Ellipses
 
-- Une ellipse se marque par un blanc typographique ou un changement de section.
-- La première phrase après l'ellipse indique la durée écoulée, par un fait et
-  non par une formule.
-- Ne jamais ellipser un événement qui change la valeur du récit : ce qui
-  compte se joue à l'écran.
-- Ellipse longue en fin de partie, jamais en milieu de tension.
+- An ellipsis is marked by a typographic break or a change of section.
+- The first sentence after the ellipsis indicates the elapsed time through a
+  fact, not through a formula.
+- Never ellipse an event that changes the value of the narrative: what counts
+  happens on the page.
+- Long ellipses at the end of a part, never in the middle of tension.
 
 ## 5. Flashbacks
 
-Application stricte de la constitution, section 4.
+Strict application of section 4 of the constitution.
 
-Protocole en cinq points :
+Five point protocol:
 
-1. Nécessité : le flashback répond à une question que le lecteur se pose
-   déjà. Si la question n'est pas posée, le flashback est une digression.
-2. Déclencheur diégétique : odeur, objet, phrase, lieu, geste.
-3. Marquage : italique intégral, sans exception.
-4. Longueur : deux mille signes maximum en italique dans le fil du texte.
-   Au-delà, chapitre daté distinct, composé en romain.
-5. Retour : la première phrase après le flashback rétablit le présent par un
-   élément sensoriel du lieu réel.
+1. Necessity: the flashback answers a question the reader is already asking.
+   If the question has not been raised, the flashback is a digression.
+2. Diegetic trigger: a smell, an object, a sentence, a place, a gesture.
+3. Marking: italic throughout, without exception.
+4. Length: two thousand characters maximum in italic inside the running text.
+   Beyond that, a separate dated chapter, set in roman.
+5. Return: the first sentence after the flashback re-establishes the present
+   through a sensory element of the real place.
 
-Aucun flashback imbriqué. Aucun flashback dans les trois premiers chapitres,
-sauf construction fondée sur la mémoire et déclarée dans la bible.
+No nested flashbacks. No flashback in the first three chapters, unless the
+construction is founded on memory and declared in the bible.
 
-## 6. Récits à lignes multiples
+## 6. Multi-line narratives
 
-Quand deux ou plusieurs lignes temporelles coexistent :
+When two or more timelines coexist:
 
-- Chaque ligne a un marqueur constant : temps verbal, personne, typographie,
-  ou lieu.
-- L'alternance suit un rythme stable pendant le premier tiers, pour installer
-  le pacte de lecture, puis peut se déformer.
-- Les deux lignes doivent converger, sinon la structure n'est qu'un montage.
-- Le point de convergence est planifié dès le début et consigné.
+- Each line has a constant marker: verb tense, person, typography, or place.
+- The alternation follows a stable rhythm through the first third, to
+  establish the reading contract, then may deform.
+- The lines must converge, or the structure is only a montage.
+- The convergence point is planned from the start and recorded.
 
-## 7. Durée ressentie
+## 7. Felt duration
 
-Le temps de lecture n'est pas le temps raconté. Trois leviers :
+Reading time is not narrated time. Three levers:
 
-- dilatation : détail, ralenti, perception fragmentée, pour les instants
-  décisifs ;
-- contraction : sommaire, phrase unique, pour des mois sans enjeu ;
-- alternance : la dilatation ne produit d'effet qu'après une contraction.
+- dilation: detail, slow motion, fragmented perception, for decisive moments;
+- contraction: summary, a single sentence, for months with no stake;
+- alternation: dilation only produces an effect after a contraction.
 
-Un climax dilaté sur vingt pages sans contraction préalable devient mou.
+A climax dilated across twenty pages with no prior contraction goes slack.
 
-## 8. Contrôles
+## 8. Checks
 
-- Recalculer les âges à chaque changement d'année interne.
-- Vérifier la compatibilité entre durée de trajet et enchaînement des scènes.
-- Vérifier la saison à chaque scène extérieure.
-- Vérifier qu'aucune blessure ne guérit trop vite.
-- Vérifier que chaque flashback est refermé.
+- Recalculate ages at every change of internal year.
+- Check that travel times are compatible with the sequence of scenes.
+- Check the season at every exterior scene.
+- Check that no injury heals too fast.
+- Check that every flashback is closed.
 
 ## 9. Auto-critique
 
-Axes notés de 0 à 5 : exactitude de la chronologie maîtresse, lisibilité pour
-le lecteur, pertinence des ellipses, nécessité des flashbacks, respect du
-marquage, tenue des lignes multiples, gestion de la durée ressentie, absence
-de contradiction temporelle.
+Score 0 to 5: accuracy of the master chronology, legibility for the reader,
+relevance of ellipses, necessity of flashbacks, marking respected, multi-line
+handling, felt duration, absence of temporal contradiction.
 
-Seuil : aucun axe sous 4 sur les axes exactitude et marquage.
+Threshold: no axis below 4 on accuracy and on marking.
 
 ## 10. Interfaces
 
-- Amont : `novel-architect`.
-- Latéral : `chapter-architect`, `continuity-manager`.
-- Contrôle : `quality/story-doctor`.
+- Upstream: `novel-architect`.
+- Lateral: `chapter-architect`, `continuity-manager`.
+- Review: `quality/story-doctor`.

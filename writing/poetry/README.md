@@ -1,56 +1,63 @@
 # poetry
 
-Poésie française. 5 skills. `poet` porte la prosodie et sert de socle aux
-quatre formes.
+Poetry. 5 skills. `poet` carries the prosody and is the base for the four
+forms.
 
-## Les skills
+## The skills
 
-| Skill | Objet | Exigence dominante |
+| Skill | Object | Dominant requirement |
 |---|---|---|
-| [poet](poet/) | prosodie française, image, son, procédure en sept étapes | justesse prosodique |
-| [sonnet](sonnet/) | forme fixe en quatorze vers, dispositions de rimes | volte à sa position |
-| [haiku](haiku/) | forme brève, saison, coupure | écart entre les images |
-| [free-verse](free-verse/) | forme inventée et tenue | motivation de chaque coupe |
-| [prose-poetry](prose-poetry/) | bloc de prose sans progression narrative | tenue rythmique et clôture |
+| [poet](poet/) | French prosody, image, sound, a seven-step procedure | prosodic accuracy |
+| [sonnet](sonnet/) | fixed fourteen-line form, rhyme arrangements | the volta in its position |
+| [haiku](haiku/) | short form, season, cut | the gap between the images |
+| [free-verse](free-verse/) | a form invented and held | every break motivated |
+| [prose-poetry](prose-poetry/) | a prose block with no narrative progression | rhythmic control and closure |
 
-## Ordre d'usage
+## Order of use
 
-`poet` d'abord, toujours. Il porte le compte des syllabes, la césure, la rime,
-l'enjambement et le travail de l'image. Les quatre autres ajoutent les
-contraintes de leur forme.
+`poet` first, always. It carries syllable counting, caesura, rhyme, enjambment
+and the work on image. The other four add the constraints of their form.
 
 ```
 poet
-  +-- sonnet         quatorze vers, volte
-  +-- haiku          brièveté, saison, coupure
-  +-- free-verse     contrainte inventée par poème
-  +-- prose-poetry   bloc, quatre forces de cohésion
+  +-- sonnet         fourteen lines, a volta
+  +-- haiku          brevity, season, cut
+  +-- free-verse     a constraint invented per poem
+  +-- prose-poetry   a block, four cohesion forces
 ```
 
-## Quel skill ouvrir
+## Which skill to open
 
 | Situation | Skill |
 |---|---|
-| J'écris ou révise un poème | `poet` |
-| Je vérifie un compte de syllabes | `poet` |
-| J'écris une forme fixe en quatorze vers | `sonnet` |
-| J'écris une notation brève ou un recueil saisonnier | `haiku` |
-| J'écris en vers libres | `free-verse` |
-| J'écris une prose poétique ou un fragment | `prose-poetry` |
+| I am writing or revising a poem | `poet` |
+| I am checking a syllable count | `poet` |
+| I am writing a fixed fourteen-line form | `sonnet` |
+| I am writing a short notation or a seasonal collection | `haiku` |
+| I am writing free verse | `free-verse` |
+| I am writing poetic prose or a fragment | `prose-poetry` |
 
-## Le piège de chaque forme
+## The trap of each form
 
 ```
-sonnet         une volte décorative, placée n'importe où
-haiku          une image jolie sans écart entre les deux plans
-free-verse     de la prose découpée en lignes, sans coupe motivée
-prose-poetry   un lyrisme continu, puis une chute explicative
+sonnet         a decorative volta, placed anywhere
+haiku          a pretty image with no gap between its two planes
+free-verse     prose cut into lines, with unmotivated breaks
+prose-poetry   continuous lyricism, then an explanatory ending
 ```
 
-Chaque skill traite explicitement le piège de sa forme. C'est ce qui distingue
-la contrainte tenue de l'exercice formel.
+Each skill addresses the trap of its own form explicitly. That is what
+separates a constraint held from a formal exercise.
 
-## Sortie
+## Output language
 
-Auto-critique de la forme, puis `quality/self-critique-protocol`. Pour un
-recueil, `quality/publication-review` en dernier.
+Prosody is language-specific. `poet` section 2 is French: mute e, dieresis,
+hemistich, masculine and feminine rhyme. Set `language.creative_output` to
+another language and that section is replaced by the target language's own
+metrics, stated explicitly rather than approximated. Everything else, image,
+sound, procedure and prohibitions, applies in any language.
+
+## Output
+
+The form's self-critique, then `quality/self-critique-protocol`. For a
+collection, `quality/publication-review` last.

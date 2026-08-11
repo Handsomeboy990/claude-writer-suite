@@ -1,89 +1,88 @@
 ---
 name: sonnet
-description: Écrit un sonnet français, italien ou anglais : dispositions de rimes, place de la volte, économie strophique, contraintes techniques, composition à partir du vers de bascule. À utiliser pour écrire ou corriger un sonnet ou une forme fixe en quatorze vers.
+description: Writes a French, Italian or English sonnet: rhyme arrangements, placement of the volta, stanza economy, technical constraints, composition starting from the turning line. Use to write or correct a sonnet or any fixed fourteen-line form.
 license: MIT
 metadata:
   category: poetry
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, poet]
   outputs: [sonnets]
 ---
 
 # Sonnet
 
-Forme fixe de quatorze vers. Sa difficulté n'est pas le compte : c'est le
-retournement, qui doit arriver au bon endroit et paraître inévitable.
+A fixed form of fourteen lines. Its difficulty is not the count: it is the
+turn, which must arrive in the right place and seem inevitable.
 
 ## 1. Structures
 
-| Type | Strophes | Rimes des tercets | Caractère |
+| Type | Stanzas | Tercet rhymes | Character |
 |---|---|---|---|
-| Français, dit marotique | 2 quatrains, 2 tercets | CCD EED | équilibre, clôture nette |
-| Italien, dit pétrarquien | 2 quatrains, 2 tercets | CDE CDE | fluidité, ouverture |
-| Anglais, dit shakespearien | 3 quatrains, 1 distique | ABAB CDCD EFEF GG | démonstration puis pointe |
+| French, marotic | 2 quatrains, 2 tercets | CCD EED | balance, clean closure |
+| Italian, Petrarchan | 2 quatrains, 2 tercets | CDE CDE | fluidity, openness |
+| English, Shakespearean | 3 quatrains, 1 couplet | ABAB CDCD EFEF GG | demonstration then point |
 
-Les quatrains français emploient des rimes embrassées ABBA ABBA.
-Mètre par défaut : alexandrin. Le décasyllabe est admis.
+French quatrains use embraced rhymes, ABBA ABBA. Default metre: alexandrin.
+The décasyllabe is admitted.
 
-## 2. Le retournement
+## 2. The turn
 
-Le sonnet vit de la volte, qui sépare le poème en deux mouvements.
+A sonnet lives on its volta, which splits the poem into two movements.
 
-- Sonnet français et italien : volte entre le second quatrain et le premier
-  tercet, au vers 9.
-- Sonnet anglais : volte au vers 13, dans le distique final.
+- French and Italian sonnet: volta between the second quatrain and the first
+  tercet, at line 9.
+- English sonnet: volta at line 13, in the closing couplet.
 
-La volte est un changement de temps, de personne, d'échelle, de lieu ou de
-certitude. Elle n'est jamais annoncée par un connecteur logique lourd.
+The volta is a change of tense, person, scale, place or certainty. It is never
+announced by a heavy logical connective.
 
-## 3. Économie interne
+## 3. Internal economy
 
-- Quatrain 1 : poser la situation concrète.
-- Quatrain 2 : approfondir, compliquer, introduire une résistance.
-- Tercet 1 : basculer.
-- Tercet 2 : conclure sans expliquer.
+- Quatrain 1: establish the concrete situation.
+- Quatrain 2: deepen, complicate, introduce resistance.
+- Tercet 1: turn.
+- Tercet 2: conclude without explaining.
 
-Le dernier vers est la position la plus forte du poème. Il ne résume pas, il
-déplace.
+The last line is the strongest position in the poem. It does not summarise; it
+displaces.
 
-## 4. Contraintes techniques
+## 4. Technical constraints
 
-- Alternance obligatoire des rimes masculines et féminines.
-- Rimes suffisantes au minimum, dans l'idéal deux rimes riches par sonnet, pas
-  davantage.
-- Aucune rime répétée dans le poème.
-- Aucun mot de rime employé deux fois.
-- Pas de cheville, pas d'inversion artificielle.
-- Aucun enjambement entre les strophes du sonnet classique, sauf effet unique
-  et assumé.
+- Mandatory alternation of masculine and feminine rhymes.
+- Sufficient rhymes as a minimum; ideally two rich rhymes per sonnet, no more.
+- No rhyme repeated within the poem.
+- No rhyme word used twice.
+- No padding, no artificial inversion.
+- No enjambment between stanzas in the classical sonnet, except as a single
+  deliberate effect.
 
-## 5. Procédure
+## 5. Procedure
 
-1. Écrire d'abord le vers 9 ou le vers 14, celui qui porte la bascule.
-2. Trouver les quatre mots de rime des quatrains avant d'écrire les quatrains.
-3. Composer les quatrains vers la bascule.
-4. Composer les tercets à partir de la bascule.
-5. Vérifier le compte de chaque vers à voix haute.
-6. Vérifier l'alternance des rimes.
-7. Supprimer toute cheville, quitte à refaire une rime entière.
+1. Write line 9 or line 14 first, whichever carries the turn.
+2. Find the four rhyme words of the quatrains before writing the quatrains.
+3. Compose the quatrains toward the turn.
+4. Compose the tercets from the turn.
+5. Check the count of every line aloud.
+6. Check the rhyme alternation.
+7. Remove any padding, even if it means redoing a whole rhyme.
 
-## 6. Interdits
+## 6. Prohibitions
 
-- Sujet abstrait sans ancrage concret.
-- Vocabulaire de convention poétique : azur, aurore, langueur, sans travail
-  de déplacement.
-- Volte absente ou placée hors de sa position.
-- Dernier vers explicatif.
+- An abstract subject with no concrete anchor.
+- Conventional poetic vocabulary: azur, aurore, langueur, with no displacement
+  work.
+- A volta absent or placed outside its position.
+- An explanatory last line.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : exactitude métrique, qualité des rimes, force de la
-volte, nécessité de chaque vers, dernier vers, absence de cheville,
-originalité, émotion.
+Score 0 to 5: metrical accuracy, quality of rhymes, strength of the volta,
+necessity of each line, the last line, absence of padding, originality,
+emotion.
 
-Seuil : aucun axe sous 4 sur exactitude métrique et volte.
+Threshold: no axis below 4 on metrical accuracy and on the volta.
 
 ## 8. Interfaces
 
-- Amont : `poet`.
-- Contrôle : `quality/literary-critic`.
+- Upstream: `poet`.
+- Review: `quality/literary-critic`.

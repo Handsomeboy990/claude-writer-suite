@@ -1,93 +1,92 @@
 ---
 name: cyberpunk
-description: Écrit du cyberpunk matérialiste : corps augmenté et dette d'entretien, économie de l'information, pouvoirs concurrents, économie informelle, style dense, critique par le détail. À utiliser pour un récit d'anticipation urbaine, de hackers ou de corporations.
+description: Writes materialist cyberpunk: the augmented body and its maintenance debt, the economy of information, competing powers, the informal economy, dense prose, critique through detail. Use for urban near-future fiction, hackers, or corporations.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, science-fiction]
-  outputs: [bible-cyberpunk, cartographie-des-pouvoirs]
+  outputs: [cyberpunk-bible, power-map]
 ---
 
 # Cyberpunk
 
-High tech, low life. Le cyberpunk raconte ce que devient un corps humain dans
-un monde où la technologie appartient à ceux qui n'en ont pas besoin pour
-survivre.
+High tech, low life. Cyberpunk tells what becomes of a human body in a world
+where technology belongs to those who do not need it to survive.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : une texture urbaine dense, une asymétrie de pouvoir
-écrasante, des personnages marginaux compétents, une esthétique de la
-saturation, et une critique sociale qui ne s'énonce pas en discours.
+The reader demands: dense urban texture, crushing asymmetry of power,
+competent marginal characters, an aesthetic of saturation, and a social
+critique that is never delivered as a speech.
 
-## 2. Les quatre axes
+## 2. The four axes
 
-1. Corps : augmentation, dépendance, entretien, dette contractée pour se
-   modifier.
-2. Information : qui la détient, qui la vend, ce que coûte l'anonymat.
-3. Pouvoir : entreprises, mafias, administrations, tous concurrents, aucun
-   monolithique.
-4. Rue : la débrouille, les usages détournés, l'économie informelle qui rend
-   le monde vivable.
+1. Body: augmentation, dependency, maintenance, the debt taken on to modify
+   oneself.
+2. Information: who holds it, who sells it, what anonymity costs.
+3. Power: corporations, criminal networks, administrations, all competing,
+   none monolithic.
+4. Street: improvisation, diverted uses, the informal economy that makes the
+   world liveable.
 
-## 3. Règles
+## 3. Rules
 
-- La technologie est vieille, sale, réparée, incompatible. Le neuf est un
-  privilège visible.
-- Toute augmentation a un coût d'entretien récurrent, ce qui crée la dette,
-  moteur social du genre.
-- Le réseau n'est pas magique : il a des latences, des propriétaires, des
-  péages et des zones mortes.
-- La ville est stratifiée verticalement : altitude égale statut.
-- Le climat et la pollution sont des faits quotidiens, pas des décors.
-- La police est un service, pas une institution neutre.
+- Technology is old, dirty, repaired, incompatible. New is a visible
+  privilege.
+- Every augmentation carries a recurring maintenance cost, which creates debt,
+  the social engine of the genre.
+- The network is not magic: it has latency, owners, tolls and dead zones.
+- The city is stratified vertically: altitude equals status.
+- Climate and pollution are daily facts, not scenery.
+- The police are a service, not a neutral institution.
 
-## 4. Personnages
+## 4. Characters
 
-- Le protagoniste est compétent dans une seule chose, et cette compétence est
-  déjà obsolète ou en voie de l'être.
-- Il travaille pour un pouvoir qu'il méprise, faute d'alternative.
-- L'entourage relève de l'économie informelle : réparateurs, courtiers,
-  soignants sans licence.
-- L'antagoniste efficace n'est pas un dirigeant, c'est une procédure.
+- The protagonist is competent at one thing, and that competence is already
+  obsolete or becoming so.
+- They work for a power they despise, for lack of an alternative.
+- Their circle belongs to the informal economy: repairers, brokers, unlicensed
+  medics.
+- The effective antagonist is not an executive; it is a procedure.
 
-## 5. Style
+## 5. Prose
 
-- Phrases denses, lexique technique mêlé au parler de rue.
-- Marques, prix, modèles : nommer précisément, comme dans un roman naturaliste.
-- Immersion selon `immersion-director` : néons et pluie ne suffisent pas, il
-  faut le prix du repas, l'odeur du refroidissement, le bruit des ventilateurs.
-- La critique passe par le détail matériel, jamais par un personnage qui
-  explique le système.
+- Dense sentences, technical vocabulary mixed with street speech.
+- Brands, prices, model numbers: name things precisely, as in a naturalist
+  novel.
+- Immersion per `immersion-director`: neon and rain are not enough; the price
+  of a meal, the smell of coolant, the noise of the fans.
+- The critique comes through material detail, never through a character
+  explaining the system.
 
-## 6. Clichés à retourner ou proscrire
+## 6. Cliches to turn or prohibit
 
-- Le hacker adolescent génial qui traverse toute sécurité.
-- Le mégacorp unique et omnipotent.
-- Le japonisme décoratif et les enseignes en langue étrangère comme seul
-  marqueur d'altérité.
-- La pluie permanente sans conséquence sur la vie quotidienne.
-- L'intelligence artificielle qui devient soudainement consciente et bonne.
-- La révolte finale qui renverse le système en une nuit.
+- The teenage genius hacker who walks through every security layer.
+- The single omnipotent megacorp.
+- Decorative japonisme and foreign-language signage as the only marker of
+  otherness.
+- Permanent rain with no consequence for daily life.
+- The artificial intelligence that suddenly becomes conscious and good.
+- The final revolt that topples the system in one night.
 
-## 7. Contrôles de sortie
+## 7. Exit checks
 
-- Chaque augmentation a un coût d'entretien nommé.
-- Au moins trois pouvoirs concurrents, aucun tout-puissant.
-- L'économie informelle est représentée par des personnages nommés.
-- Aucun discours explicatif sur le système.
-- La fin ne renverse pas l'ordre : elle déplace une position individuelle.
+- Every augmentation has a named maintenance cost.
+- At least three competing powers, none all-powerful.
+- The informal economy is represented by named characters.
+- No explanatory speech about the system.
+- The ending does not overturn the order: it shifts one individual position.
 
 ## 8. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : densité matérielle,
-crédibilité des rapports de pouvoir, incarnation de la critique, absence
-d'exotisme décoratif.
+The eleven constitution axes, plus four genre axes: material density,
+credibility of the power relations, critique embodied, absence of decorative
+exoticism.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur densité matérielle.
+Threshold: no axis below 3, average at least 4 on material density.
 
 ## 9. Interfaces
 
-- Amont : `science-fiction`, `immersion-director`.
-- Voisins : `genres/dystopian`, `genres/thriller`.
+- Upstream: `science-fiction`, `immersion-director`.
+- Neighbours: `genres/dystopian`, `genres/thriller`.

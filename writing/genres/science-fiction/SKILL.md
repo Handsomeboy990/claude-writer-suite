@@ -1,102 +1,99 @@
 ---
 name: science-fiction
-description: Écrit de la science-fiction rigoureuse : formulation du novum, méthode des quatre niveaux de conséquences, exigences par sous-genre, infrastructure et panne, exposition sans didactisme. À utiliser pour de la hard SF, de l'anticipation, du space opera ou une uchronie.
+description: Writes rigorous science fiction: formulating the novum, the four-level consequence method, requirements by subgenre, infrastructure and breakdown, exposition without lecturing. Use for hard SF, near-future fiction, space opera or alternate history.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, world-builder, research-director]
-  outputs: [novum, bible-technologique, plan-sf]
+  outputs: [novum, technology-bible, sf-outline]
 ---
 
 # Science Fiction
 
-La science-fiction pose une hypothèse et en tire les conséquences jusqu'au
-bout. Ce n'est pas un décor futuriste : c'est une expérience de pensée
-incarnée.
+Science fiction states a hypothesis and follows its consequences to the end.
+It is not a futuristic setting: it is an embodied thought experiment.
 
-## 1. Le novum
+## 1. The novum
 
-Toute oeuvre repose sur un novum, l'élément nouveau qui n'existe pas dans
-notre monde. Un seul novum majeur par récit. Les autres nouveautés en
-découlent.
+Every work rests on a novum, the new element that does not exist in our world.
+One major novum per narrative. Everything else follows from it.
 
-Formuler le novum en une phrase : `Et si [élément nouveau] devenait
-disponible dans [conditions] ?`
+State the novum in one sentence: `What if [new element] became available under
+[conditions]?`
 
-## 2. Méthode des conséquences
+## 2. The consequence method
 
-Pour tout novum, dérouler quatre niveaux :
+For any novum, work through four levels:
 
-1. Effet direct : ce que la technologie fait.
-2. Effet économique : qui gagne de l'argent, qui en perd, qui perd son métier.
-3. Effet social et politique : qui contrôle l'accès, quelles lois apparaissent,
-   quels crimes deviennent possibles.
-4. Effet intime : ce que cela change dans une famille, un deuil, un
-   apprentissage, un mariage.
+1. Direct effect: what the technology does.
+2. Economic effect: who makes money, who loses it, whose trade disappears.
+3. Social and political effect: who controls access, what laws appear, what
+   crimes become possible.
+4. Intimate effect: what it changes in a family, a bereavement, an
+   apprenticeship, a marriage.
 
-Le quatrième niveau est le plus négligé et le plus littéraire. C'est lui qui
-fait la différence entre un essai déguisé et un roman.
+The fourth level is the most neglected and the most literary. It is what
+separates a disguised essay from a novel.
 
-## 3. Sous-genres et exigences
+## 3. Subgenres and their requirements
 
-| Sous-genre | Exigence dominante |
+| Subgenre | Dominant requirement |
 |---|---|
-| Hard SF | exactitude scientifique, extrapolation défendable |
-| SF sociale | cohérence des institutions et des rapports de classe |
-| Space opera | échelle, logistique, temps de trajet cohérents |
-| Post-apocalyptique | ressources, survie matérielle, transmission |
-| Anticipation proche | continuité crédible avec le présent documenté |
-| Uchronie | point de divergence unique, conséquences en cascade |
+| Hard SF | scientific accuracy, defensible extrapolation |
+| Social SF | coherence of institutions and class relations |
+| Space opera | scale, logistics, consistent travel times |
+| Post-apocalyptic | resources, material survival, transmission |
+| Near future | credible continuity with a documented present |
+| Alternate history | a single point of divergence, consequences in cascade |
 
-## 4. Règles de rigueur
+## 4. Rigour rules
 
-- Toute technologie a une infrastructure : énergie, entretien, pièces,
-  personnel qualifié.
-- Toute technologie a des usages détournés, souvent triviaux et
-  irrespectueux du projet initial.
-- La panne est plus intéressante que le fonctionnement.
-- Les distances et les durées sont calculées, pas suggérées.
-- L'intelligence artificielle n'est ni magique ni humaine : définir ce qu'elle
-  optimise et ce qu'elle ne perçoit pas.
-- Les langues et les cultures évoluent : un futur où l'on parle exactement
-  comme aujourd'hui est un futur non pensé.
+- Every technology has an infrastructure: energy, maintenance, parts,
+  qualified staff.
+- Every technology has diverted uses, often trivial and disrespectful of the
+  original purpose.
+- The breakdown is more interesting than the working state.
+- Distances and durations are calculated, not suggested.
+- Artificial intelligence is neither magical nor human: define what it
+  optimises and what it does not perceive.
+- Languages and cultures evolve: a future where people speak exactly as we do
+  is a future nobody thought about.
 
 ## 5. Exposition
 
-- Aucun paragraphe explicatif. Le monde s'expose par l'usage, la panne, le
-  prix, l'interdiction, la nostalgie d'un personnage.
-- Le personnage n'explique pas ce qui lui est familier.
-- Le terme technique s'introduit par le contexte, jamais par une définition.
-- Un enfant, un étranger ou un vieillard justifie une question naïve : un seul
-  par roman.
+- No explanatory paragraphs. The world is exposed through use, breakdown,
+  price, prohibition, a character's nostalgia.
+- A character does not explain what is familiar to them.
+- A technical term is introduced by context, never by definition.
+- A child, a foreigner or an elder justifies a naive question: one per novel.
 
-## 6. Clichés à retourner ou proscrire
+## 6. Cliches to turn or prohibit
 
-- L'humanité unifiée sous un seul gouvernement sans friction.
-- La planète à biome unique.
-- Le savant qui parle au nom de toute la science.
-- La technologie qui n'a d'usage que celui prévu par l'intrigue.
-- La révolte contre la machine sans économie derrière.
-- Le futur uniformément propre ou uniformément sale.
+- Humanity unified under one government with no friction.
+- The single-biome planet.
+- The scientist who speaks for all of science.
+- Technology with no use beyond the one the plot requires.
+- Revolt against the machine with no economy behind it.
+- A future uniformly clean or uniformly filthy.
 
-## 7. Contrôles de sortie
+## 7. Exit checks
 
-- Un seul novum majeur.
-- Les quatre niveaux de conséquences sont représentés dans le texte.
-- Les durées de trajet et les distances sont vérifiées.
-- Aucune exposition frontale de plus de six lignes.
-- Une panne ou un usage détourné apparaît au moins deux fois.
+- One major novum.
+- All four consequence levels are represented in the text.
+- Travel times and distances are verified.
+- No frontal exposition longer than six lines.
+- A breakdown or a diverted use appears at least twice.
 
 ## 8. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : rigueur de
-l'extrapolation, profondeur des conséquences, absence d'exposition,
-incarnation intime du novum.
+The eleven constitution axes, plus four genre axes: rigour of the
+extrapolation, depth of consequences, absence of exposition, intimate
+embodiment of the novum.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur conséquences et incarnation.
+Threshold: no axis below 3, average at least 4 on consequences and embodiment.
 
 ## 9. Interfaces
 
-- Amont : `research-director`, `world-builder`.
-- Voisins : `genres/cyberpunk`, `genres/dystopian`.
+- Upstream: `research-director`, `world-builder`.
+- Neighbours: `genres/cyberpunk`, `genres/dystopian`.

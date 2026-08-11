@@ -1,16 +1,38 @@
 # documentation
 
-- `architecture.md` : organisation du repository, isolation des skills,
-  métadonnées, graphe de dépendances, procédure d'extension.
-- `skills-guide.md` : répertoire des 83 skills, entrées, sorties, table de
-  choix par situation.
-- `writing-rules.md` : version opérationnelle des règles communes d'écriture.
-- `workflow.md` : enchaînement en onze phases, cadence, règles de non
-  régression.
-- `engineering-system.md` : documentation technique de `engineering/dev-skills`, chaîne
-  d'exécution, portes obligatoires, catégories de tâches, validation.
-- `delivery-system.md` : documentation technique de `engineering/delivery-skills`,
-  `engineering/devops-skills` et `agents` : quatorze phases, portes d'approbation,
-  parallélisation, transmission entre agents.
+Technical documentation of the four trees. Written in English, the system
+language.
 
-Pour la mémoire du projet et les règles Git, voir `CLAUDE.md` à la racine.
+## Start here
+
+| File | Contents |
+|---|---|
+| `architecture.md` | repository organisation, skill isolation, metadata, dependency graph, how to extend |
+| `skills-guide.md` | directory of the 92 skills, inputs, outputs, table of choice by situation |
+| `installation.md` | full installation, per-tree installation, installing a single skill |
+| `configuration.md` | the configuration contract, prompts, delegation, validation |
+
+## Per tree
+
+| File | Covers |
+|---|---|
+| `documents-system.md` | `documents/`: the constitution, the pipeline, the boundaries |
+| `engineering-system.md` | `engineering/dev-skills`: execution chain, mandatory gates, task categories |
+| `delivery-system.md` | `engineering/delivery-skills`, `engineering/devops-skills`, the fourteen phases and their approval gates |
+| `agents.md` | skill against agent against orchestration, the fourteen public contracts |
+| `writing-rules.md` | the writing rules, operational form |
+| `workflow.md` | the writing workflow, eleven phases, cadence, non-regression |
+
+## Elsewhere
+
+| Location | Contents |
+|---|---|
+| `README.md`, `README.fr.md` | the two entry points, English and French |
+| `config/README.md` | field reference for the configuration file |
+| `CONTINUITY.md` | state of the repository for whoever takes over |
+| `CONTRIBUTING.md` | contribution rules and the checklist before a pull request |
+| `CHANGELOG.md` | version history |
+| `tests/README.md` | what each validation script checks |
+
+Each tree and each category also carries its own index, next to the skills it
+describes.

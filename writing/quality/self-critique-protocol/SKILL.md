@@ -1,164 +1,169 @@
 ---
 name: self-critique-protocol
-description: Protocole d'auto-évaluation obligatoire en cinq passes : lecture froide, notation de onze axes avec preuves citées, diagnostic des causes, correction, réévaluation. Seuils chiffrés et règles anti-complaisance. À exécuter sur tout texte produit avant de le considérer comme terminé.
+description: Mandatory self-assessment protocol in five passes: cold read, scoring of eleven axes with quoted evidence, diagnosis of causes, correction, rescoring. Numeric thresholds and anti-complacency rules. Run on every text produced before considering it finished.
 license: MIT
 metadata:
   category: quality
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [grille-notee, liste-de-corrections, version-revisee]
+  outputs: [scored-grid, correction-list, revised-version]
 ---
 
 # Self Critique Protocol
 
-Protocole d'auto-évaluation obligatoire. Aucun texte produit par un skill de
-la suite n'est livré sans être passé par ce protocole. Il ne s'agit pas d'un
-avis, mais d'une procédure reproductible.
+Mandatory self-assessment protocol. No text produced by a skill in this tree
+is delivered without passing through it. It is not an opinion; it is a
+reproducible procedure.
 
-## 1. Règle absolue
+This is the creative writing depth. `shared/self-critique` selects
+perspectives across every domain and delegates here for fiction, poetry and
+screenplay, because the axes and thresholds below are more demanding than
+anything a general panel would produce.
 
-Générer, évaluer, corriger, réévaluer. Un texte non réévalué après correction
-n'est pas terminé. Le protocole s'exécute au minimum une fois, et se répète
-tant que le seuil n'est pas atteint, dans la limite de trois cycles. Au
-troisième échec, le texte est réécrit depuis la fiche de scène, non retouché.
+## 1. Absolute rule
 
-## 2. Les onze axes
+Generate, assess, correct, reassess. A text not reassessed after correction is
+not finished. The protocol runs at least once, and repeats until the threshold
+is met, up to three cycles. On the third failure, the text is rewritten from
+the scene sheet rather than patched.
 
-Chaque axe est noté de 0 à 5. La note doit être justifiée par une preuve
-prise dans le texte, citée. Une note sans preuve est nulle et vaut 0.
+## 2. The eleven axes
 
-### 1. Qualité narrative
-La scène raconte-t-elle quelque chose, ou décrit-elle seulement ? Y a-t-il un
-mouvement, une progression, une transformation ?
+Each axis is scored 0 to 5. The score must be justified by evidence taken from
+the text and quoted. A score with no evidence is void and counts as 0.
 
-### 2. Cohérence
-Contradictions internes, avec la bible, avec les chapitres antérieurs, avec
-le registre de continuité.
+### 1. Narrative quality
+Does the scene tell something, or only describe? Is there movement,
+progression, transformation?
 
-### 3. Rythme
-Alternance des longueurs de phrase et de paragraphe, adéquation entre densité
-et tension, présence de temps morts non voulus.
+### 2. Consistency
+Internal contradictions, against the bible, against earlier chapters, against
+the continuity register.
 
-### 4. Personnages
-Chacun veut-il quelque chose ? Agit-il selon sa fiche ? A-t-il une voix
-propre ? A-t-il le droit d'exister hors de l'intrigue ?
+### 3. Rhythm
+Alternation of sentence and paragraph lengths, match between density and
+tension, presence of unintended dead time.
 
-### 5. Dialogues
-Conformité typographique, sous-texte, différenciation, absence d'exposition,
-économie des incises.
+### 4. Characters
+Does each want something? Do they act according to their sheet? Do they have
+their own voice? Are they allowed to exist outside the plot?
 
-### 6. Émotion
-Les quatre appuis de la constitution sont-ils présents : enjeu, résistance,
-manifestation physique précise, conséquence irréversible.
+### 5. Dialogue
+Typographic conformity, subtext, differentiation, absence of exposition,
+economy of incises.
 
-### 7. Originalité
-Le traitement est-il celui que tout le monde aurait écrit ? Y a-t-il au moins
-un choix que personne n'attendait ?
+### 6. Emotion
+Are the constitution's four supports present: stake, resistance, precise
+physical manifestation, irreversible consequence.
 
-### 8. Crédibilité
-Le lecteur peut-il croire aux faits, aux réactions, aux durées, aux
-compétences affichées ?
+### 7. Originality
+Is the treatment the one anyone would have written? Is there at least one
+choice nobody expected?
 
-### 9. Répétitions
-Mots, images, structures de phrase, gestes récurrents sur une fenêtre de trois
-cents mots.
+### 8. Credibility
+Can the reader believe the facts, the reactions, the durations, the claimed
+competences?
 
-### 10. Clichés
-Formules usées, situations types, personnages types non subvertis.
+### 9. Repetition
+Words, images, sentence structures, recurring gestures, across a three hundred
+word window.
 
-### 11. Logique
-Enchaînement causal, décisions plausibles, absence de facilité et de hasard
-favorable.
+### 10. Cliche
+Worn formulas, stock situations, unsubverted stock characters.
 
-## 3. Barème
+### 11. Logic
+Causal chaining, plausible decisions, absence of convenience and favourable
+coincidence.
 
-| Note | Signification |
+## 3. Scale
+
+| Score | Meaning |
 |---|---|
-| 0 | absent ou contraire à la constitution |
-| 1 | gravement défaillant |
-| 2 | insuffisant, correction obligatoire |
-| 3 | acceptable, publiable sans fierté |
-| 4 | bon, conforme au niveau professionnel |
-| 5 | remarquable, tient seul hors contexte |
+| 0 | absent, or contrary to the constitution |
+| 1 | seriously deficient |
+| 2 | insufficient, correction mandatory |
+| 3 | acceptable, publishable without pride |
+| 4 | good, at professional level |
+| 5 | remarkable, stands alone out of context |
 
-Seuil de livraison : aucun axe inférieur à 3, moyenne supérieure ou égale à
-3,8. Pour un chapitre de bascule ou d'ouverture, seuil relevé à 4,2.
+Delivery threshold: no axis below 3, average at or above 3.8. For an opening
+or a turning-point chapter, the threshold rises to 4.2.
 
-## 4. Procédure
+## 4. Procedure
 
-### Passe 1 : lecture froide
-Lire le texte sans intention de correction, en notant uniquement les endroits
-où l'attention décroche. Marquer d'un signe, ne rien corriger.
+### Pass 1: cold read
+Read the text with no intention of correcting, noting only where attention
+slips. Mark them; correct nothing.
 
-### Passe 2 : notation
-Remplir la grille, un axe après l'autre, en citant une preuve par note.
-Interdiction de noter deux axes simultanément : chaque axe est une lecture.
+### Pass 2: scoring
+Fill the grid, one axis after another, quoting one piece of evidence per
+score. Scoring two axes at once is forbidden: each axis is its own read.
 
-### Passe 3 : diagnostic
-Pour chaque axe sous 4, écrire la cause, pas le symptôme. Exemple : `le
-dialogue est plat` est un symptôme, `les deux personnages veulent la même
-chose` est une cause.
+### Pass 3: diagnosis
+For every axis under 4, write the cause, not the symptom. For example, `the
+dialogue is flat` is a symptom; `both characters want the same thing` is a
+cause.
 
-### Passe 4 : correction
-Corriger par ordre décroissant de gravité. Une correction de cause vaut mieux
-que dix corrections de surface. Ne jamais corriger un axe en dégradant un
-autre : vérifier après chaque correction majeure.
+### Pass 4: correction
+Correct in decreasing order of severity. One correction of a cause beats ten
+surface corrections. Never fix one axis by degrading another: verify after
+each major correction.
 
-### Passe 5 : réévaluation
-Renoter les axes touchés. Si le seuil est atteint, livrer avec la grille. Si
-un axe reste sous 3 après trois cycles, réécrire.
+### Pass 5: reassessment
+Rescore the axes touched. If the threshold is met, deliver with the grid. If
+an axis stays under 3 after three cycles, rewrite.
 
-## 5. Questions de déblocage
+## 5. Unblocking questions
 
-Quand un axe stagne, appliquer la question correspondante :
+When an axis stalls, apply the matching question:
 
-| Axe | Question de déblocage |
+| Axis | Unblocking question |
 |---|---|
-| Narrative | Que perd le personnage dans cette scène ? |
-| Cohérence | Qui sait quoi, et depuis quand ? |
-| Rythme | Quel paragraphe puis-je supprimer sans rien perdre ? |
-| Personnages | Que veut celui qui parle le moins ? |
-| Dialogues | Que refusent-ils de dire ? |
-| Émotion | Quel geste remplacerait l'émotion nommée ? |
-| Originalité | Quelle est la deuxième idée qui m'est venue ? |
-| Crédibilité | Un praticien rirait-il en lisant ceci ? |
-| Répétitions | Quel mot revient trois fois en une page ? |
-| Clichés | Ai-je déjà lu cette phrase ailleurs ? |
-| Logique | Pourquoi ne fait-il pas la chose la plus simple ? |
+| Narrative | What does the character lose in this scene? |
+| Consistency | Who knows what, and since when? |
+| Rhythm | Which paragraph can I delete and lose nothing? |
+| Characters | What does the one who speaks least want? |
+| Dialogue | What are they refusing to say? |
+| Emotion | What gesture would replace the named emotion? |
+| Originality | What was the second idea I had? |
+| Credibility | Would a practitioner laugh reading this? |
+| Repetition | Which word appears three times on one page? |
+| Cliche | Have I read this sentence somewhere else? |
+| Logic | Why does he not do the simplest thing? |
 
-## 6. Format de sortie
+## 6. Output format
 
-Le protocole produit systématiquement trois éléments :
+The protocol always produces three things:
 
-1. la grille notée avec preuves ;
-2. la liste ordonnée des corrections effectuées ;
-3. la version révisée.
+1. the scored grid, with evidence;
+2. the ordered list of corrections applied;
+3. the revised version.
 
-Aucune livraison partielle.
+No partial delivery.
 
-## 7. Anti-complaisance
+## 7. Anti-complacency
 
-Trois règles pour éviter l'auto-validation :
+Three rules against self-validation:
 
-- Interdiction de noter 5 plus d'une fois par grille sans preuve exceptionnelle.
-- Toute grille dont la moyenne dépasse 4,5 dès le premier cycle est suspecte
-  et doit être recontrôlée par `quality/literary-critic`.
-- Le protocole cherche ce qui ne va pas. Il ne rédige pas d'éloge.
+- Scoring 5 more than once per grid requires exceptional evidence.
+- Any grid averaging above 4.5 on the first cycle is suspect and is rechecked
+  by `quality/literary-critic`.
+- The protocol looks for what is wrong. It does not write praise.
 
-## 8. Auto-critique du protocole
+## 8. Auto-critique of the protocol
 
-Le protocole s'applique à lui-même. Après chaque usage, contrôler :
+The protocol applies to itself. After each use, check:
 
-- chaque note est-elle adossée à une citation du texte ;
-- le diagnostic remonte-t-il à une cause ou reste-t-il au symptôme ;
-- une correction a-t-elle dégradé un autre axe sans être détectée ;
-- la moyenne du premier cycle dépasse-t-elle 4,5, ce qui signale une
-  complaisance ;
-- le nombre de cycles est-il resté inférieur ou égal à trois.
+- is every score backed by a quotation from the text;
+- does the diagnosis reach a cause, or stop at the symptom;
+- did a correction degrade another axis without being detected;
+- does the first cycle average exceed 4.5, which signals complacency;
+- did the number of cycles stay at three or fewer.
 
-Un protocole exécuté sans preuve citée est nul et doit être recommencé.
+A protocol run with no quoted evidence is void and is repeated.
 
 ## 9. Interfaces
 
-- Amont : tous les skills de production.
-- Aval : `story-doctor`, `literary-editor`, `literary-critic`.
+- Upstream: every production skill.
+- Downstream: `story-doctor`, `literary-editor`, `literary-critic`.
+- Related: `shared/self-critique` delegates here for creative text.

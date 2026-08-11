@@ -1,102 +1,99 @@
 ---
 name: fantasy
-description: Écrit de la fantasy exigeante : test de nécessité du fantastique, régimes de magie et coût, structure de quête doublée, peuples non monolithiques, économie de l'émerveillement. À utiliser pour un roman de fantasy, un système de magie ou un monde secondaire.
+description: Writes demanding fantasy: the necessity test for the fantastic, magic regimes and cost, the doubled quest structure, non-monolithic peoples, economy of wonder. Use for a fantasy novel, a magic system, or a secondary world.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, world-builder, novel-architect]
-  outputs: [bible-de-fantasy, plan-de-quete]
+  outputs: [fantasy-bible, quest-plan]
 ---
 
 # Fantasy
 
-La fantasy n'est pas un décor médiéval avec de la magie. C'est un récit où
-une règle du monde, impossible chez nous, produit une organisation sociale et
-un conflit qui ne pourraient exister autrement.
+Fantasy is not a medieval setting with magic in it. It is a narrative in which
+a rule of the world, impossible in ours, produces a social organisation and a
+conflict that could not exist otherwise.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : un monde tenu, un système d'impossible cohérent, un enjeu
-qui dépasse le personnage sans l'écraser, un émerveillement fondé sur la
-précision et non sur la grandiloquence.
+The reader demands: a world that holds, a coherent system of the impossible, a
+stake that exceeds the character without crushing them, and wonder founded on
+precision rather than grandiloquence.
 
-## 2. Test de nécessité
+## 2. Necessity test
 
-Question à poser au projet : si l'on retire l'élément fantastique, le récit
-tient-il encore ? Si oui, la fantasy est décorative. L'élément impossible doit
-être la cause du conflit, pas son ornement.
+The question to ask of the project: if the fantastic element is removed, does
+the narrative still stand? If it does, the fantasy is decorative. The
+impossible element must be the cause of the conflict, not its ornament.
 
-## 3. Système d'impossible
+## 3. System of the impossible
 
-Reprendre les cinq questions de `world-builder`, section 3 : qui peut, quel
-coût, quelle limite, qui contrôle, pourquoi le monde n'a pas été transformé
-davantage.
+Reuse the five questions from `world-builder` section 3: who can, what cost,
+what limit, who controls, why the world was not transformed further.
 
-Trois régimes possibles :
+Three possible regimes:
 
-| Régime | Principe | Usage |
+| Regime | Principle | Use |
 |---|---|---|
-| Magie dure | règles connues du lecteur, coût mesurable | la magie résout des problèmes |
-| Magie douce | règles inconnues, effet poétique | la magie crée des problèmes |
-| Magie mixte | dure pour le protagoniste, douce pour le reste du monde | équilibre le plus solide |
+| Hard magic | rules known to the reader, measurable cost | magic solves problems |
+| Soft magic | unknown rules, poetic effect | magic creates problems |
+| Mixed | hard for the protagonist, soft for the rest of the world | the most robust balance |
 
-Loi : la magie ne peut résoudre un problème majeur que si le lecteur en
-connaît les règles depuis au moins cinquante pages.
+Law: magic may resolve a major problem only if the reader has known its rules
+for at least fifty pages.
 
 ## 4. Structure
 
-- Quête, mais jamais quête seule : la quête extérieure doit doubler une quête
-  intérieure et entrer en contradiction avec elle.
-- Éviter la structure d'accumulation de compagnons.
-- Le voyage n'est raconté que lorsqu'il transforme une relation.
-- Prévoir un renversement du sens de la quête au point médian : ce que le
-  protagoniste cherchait n'est pas ce qu'il doit trouver.
+- A quest, but never a quest alone: the outer quest must double an inner one
+  and come into contradiction with it.
+- Avoid the structure that accumulates companions.
+- The journey is narrated only where it transforms a relationship.
+- Plan a reversal of the meaning of the quest at the midpoint: what the
+  protagonist was seeking is not what they must find.
 
-## 5. Peuples et cultures
+## 5. Peoples and cultures
 
-- Aucun peuple défini par un trait unique. Les nations inventées sont
-  travaillées avec le même soin qu'une culture réelle, selon la constitution,
-  section 8.
-- Les conflits ethniques inventés ne recyclent pas des stéréotypes réels
-  déplacés.
-- Prévoir des divergences internes : dissidents, classes, générations.
-- Les langues suivent `world-builder`, section 7 : peu de mots, employés.
+- No people defined by a single trait. Invented nations are worked with the
+  same care as a real culture, per section 8 of the constitution.
+- Invented ethnic conflicts do not recycle displaced real stereotypes.
+- Plan internal divergence: dissidents, classes, generations.
+- Languages follow `world-builder` section 7: few words, actually used.
 
-## 6. Économie de l'émerveillement
+## 6. Economy of wonder
 
-- Une merveille par partie, préparée et payée.
-- La merveille est vue par quelqu'un qui a une raison de la regarder.
-- Le détail précis crée plus d'émerveillement que la démesure : la hauteur
-  exacte d'un mur, le prix d'une monture, l'odeur d'une forge.
-- Jamais deux descriptions grandioses consécutives.
+- One wonder per part, prepared and paid for.
+- The wonder is seen by someone with a reason to look at it.
+- Precise detail creates more wonder than excess: the exact height of a wall,
+  the price of a mount, the smell of a forge.
+- Never two grandiose descriptions in a row.
 
-## 7. Clichés à retourner ou proscrire
+## 7. Cliches to turn or prohibit
 
-- L'élu, la prophétie récitée, l'orphelin de sang royal.
-- Le mentor qui meurt pour libérer le héros.
-- L'auberge d'ouverture, la carte au début, le conseil des sages.
-- Le peuple entièrement mauvais, éliminable sans problème moral.
-- L'arme qui décide de l'issue.
-- Le tyran sans administration ni logistique.
+- The chosen one, the recited prophecy, the orphan of royal blood.
+- The mentor who dies to free the hero.
+- The opening inn, the map at the front, the council of elders.
+- The entirely evil people, disposable with no moral problem.
+- The weapon that decides the outcome.
+- The tyrant with no administration and no logistics.
 
-## 8. Contrôles de sortie
+## 8. Exit checks
 
-- Test de nécessité passé.
-- Règles du système connues avant toute résolution majeure.
-- Aucun peuple monolithique.
-- Le voyage occupe moins de trente pour cent du texte.
-- Le coût de la magie est payé à l'écran au moins trois fois.
+- The necessity test passes.
+- The system rules are known before any major resolution.
+- No monolithic people.
+- The journey occupies under thirty percent of the text.
+- The cost of magic is paid on the page at least three times.
 
 ## 9. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : nécessité du
-fantastique, cohérence du système, densité culturelle, économie de
-l'émerveillement.
+The eleven constitution axes, plus four genre axes: necessity of the
+fantastic, coherence of the system, cultural density, economy of wonder.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur cohérence du système.
+Threshold: no axis below 3, average at least 4 on coherence of the system.
 
 ## 10. Interfaces
 
-- Amont : `world-builder`, `novel-architect`.
-- Voisins : `genres/dark-fantasy`, `genres/adventure`, `genres/magical-realism`.
+- Upstream: `world-builder`, `novel-architect`.
+- Neighbours: `genres/dark-fantasy`, `genres/adventure`,
+  `genres/magical-realism`.

@@ -1,86 +1,82 @@
 ---
 name: haiku
-description: Écrit des haikus en français : compte souple, marqueur de saison local, technique de la coupure et de l'écart entre deux images, interdits, composition en séries. À utiliser pour une forme brève, une notation ou un recueil saisonnier.
+description: Writes haiku in French: flexible count, local season marker, the cutting technique and the gap between two images, prohibitions, composition in series. Use for a short form, a notation, or a seasonal collection.
 license: MIT
 metadata:
   category: poetry
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, poet]
-  outputs: [haikus, serie-saisonniere]
+  outputs: [haiku, seasonal-series]
 ---
 
 # Haiku
 
-Forme brève d'origine japonaise. En français, elle ne se réduit pas à un
-compte de syllabes : elle repose sur une perception, une saison et une
-coupure.
+A short form of Japanese origin. In French it does not reduce to a syllable
+count: it rests on a perception, a season and a cut.
 
-## 1. Les trois éléments
+## 1. The three elements
 
-1. Le compte : traditionnellement cinq, sept, cinq. En français, la brièveté
-   compte plus que l'exactitude arithmétique. Un haiku de treize à dix-sept
-   syllabes est recevable si le déséquilibre est maîtrisé.
-2. Le mot de saison : un terme qui situe le poème dans un moment de l'année,
-   par un phénomène concret et non par le nom de la saison.
-3. La césure : une rupture entre deux images, qui produit un écart. C'est
-   l'élément essentiel et le plus souvent manqué.
+1. The count: traditionally five, seven, five. In French, brevity matters more
+   than arithmetic exactness. A haiku of thirteen to seventeen syllables is
+   admissible if the imbalance is controlled.
+2. The season word: a term placing the poem in a moment of the year, through a
+   concrete phenomenon rather than the name of the season.
+3. The cut: a break between two images, producing a gap. This is the essential
+   element, and the one most often missed.
 
-## 2. Ce qu'un haiku n'est pas
+## 2. What a haiku is not
 
-- Ce n'est pas un aphorisme. Aucune leçon, aucune morale.
-- Ce n'est pas une métaphore. Les deux images sont juxtaposées, pas
-  substituées.
-- Ce n'est pas un sentiment exprimé. L'émotion naît de l'écart entre les
-  images, jamais de sa formulation.
-- Ce n'est pas une phrase coupée en trois lignes.
+- Not an aphorism. No lesson, no moral.
+- Not a metaphor. The two images are juxtaposed, not substituted.
+- Not an expressed feeling. Emotion arises from the gap between images, never
+  from its statement.
+- Not a sentence cut into three lines.
 
-## 3. Technique de la coupure
+## 3. The cutting technique
 
-Structure la plus fiable : deux vers pour une image, un vers pour l'autre.
-La coupure se place entre les deux, sans ponctuation lourde.
+Most reliable structure: two lines for one image, one line for the other. The
+cut sits between them, without heavy punctuation.
 
-Types d'écart efficaces :
+Effective kinds of gap:
 
-| Écart | Exemple de principe |
+| Gap | Principle |
 |---|---|
-| Échelle | un très grand et un très petit |
-| Temps | ce qui dure et ce qui passe |
-| Sensoriel | un son et une chose vue |
-| Humain et non humain | un geste et un phénomène naturel |
-| Présence et absence | ce qui reste après quelqu'un |
+| Scale | something very large and something very small |
+| Time | what lasts and what passes |
+| Sensory | a sound and a seen thing |
+| Human and non-human | a gesture and a natural phenomenon |
+| Presence and absence | what remains after someone |
 
-## 4. Règles d'écriture
+## 4. Writing rules
 
-- Présent, ou absence de verbe.
-- Aucun adjectif évaluatif : beau, triste, magnifique.
-- Aucun `je` explicite dans la plupart des cas. La subjectivité passe par le
-  choix du détail.
-- Aucune comparaison introduite par `comme`.
-- Un seul concret par ligne.
-- Pas de titre.
+- Present tense, or no verb.
+- No evaluative adjective: beautiful, sad, magnificent.
+- No explicit `je` in most cases. Subjectivity comes through the choice of
+  detail.
+- No comparison introduced by `comme`.
+- One concrete thing per line.
+- No title.
 
-## 5. Adaptation au contexte francophone
+## 5. Adapting to a francophone context
 
-Le mot de saison japonais renvoie à un almanach codifié. En français, il faut
-choisir des marqueurs locaux vérifiables : une récolte, un vent nommé, un
-oiseau migrateur, une pratique saisonnière. Un haiku écrit sous les tropiques
-n'a pas quatre saisons : il a des saisons sèches et des saisons de pluies, et
-c'est cela qu'il doit inscrire.
+The Japanese season word refers to a codified almanac. In French, choose
+verifiable local markers: a harvest, a named wind, a migratory bird, a
+seasonal practice. A haiku written in the tropics does not have four seasons:
+it has dry seasons and rainy seasons, and that is what it must record.
 
-## 6. Séries
+## 6. Series
 
-Un haiku isolé est fragile. Composer par séries de cinq à douze, reliées par
-un lieu ou une saison, produit un ensemble plus solide et permet la
-progression.
+A single haiku is fragile. Composing in series of five to twelve, linked by a
+place or a season, produces a more solid whole and allows progression.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : présence d'un vrai écart, justesse du marqueur
-saisonnier, concrétude, absence de sentiment formulé, brièveté, oralité.
+Score 0 to 5: presence of a real gap, accuracy of the season marker,
+concreteness, absence of stated feeling, brevity, sound when read aloud.
 
-Seuil : aucun axe sous 4 sur l'écart et l'absence de sentiment formulé.
+Threshold: no axis below 4 on the gap and on the absence of stated feeling.
 
 ## 8. Interfaces
 
-- Amont : `poet`.
-- Voisins : `poetry/free-verse`.
+- Upstream: `poet`.
+- Neighbours: `poetry/free-verse`.

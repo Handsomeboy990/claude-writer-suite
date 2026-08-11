@@ -1,102 +1,103 @@
 ---
 name: horror
-description: Écrit de l'horreur : les trois peurs, construction de la menace en sept temps, économie de la monstration, rythme des décharges et des répits, rationalité des personnages. À utiliser pour une histoire d'épouvante, un récit surnaturel ou une scène de terreur.
+description: Writes horror: the three fears, seven-stage construction of the threat, economy of showing, the rhythm of shocks and respites, character rationality. Use for a horror story, a supernatural narrative, or a scene of terror.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, scene-builder, immersion-director]
-  outputs: [plan-de-terreur, scenes-d-horreur]
+  outputs: [terror-plan, horror-scenes]
 ---
 
 # Horror
 
-L'horreur ne travaille pas la peur du monstre, mais la perte de sécurité. Le
-lecteur doit sentir que les règles auxquelles il se fie ne tiennent plus.
+Horror does not work on fear of the monster, but on the loss of safety. The
+reader must feel that the rules they rely on no longer hold.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : une montée, une menace dont la logique lui échappe en
-partie, des personnages dont il redoute la perte, et une conclusion qui ne
-restaure pas complètement l'ordre.
+The reader demands: a build, a threat whose logic partly escapes them,
+characters whose loss they dread, and a conclusion that does not fully restore
+order.
 
-## 2. Les trois peurs
+## 2. The three fears
 
-| Peur | Objet | Traitement |
+| Fear | Object | Treatment |
 |---|---|---|
-| Terreur | ce qui va arriver | anticipation, hors-champ, suggestion |
-| Horreur | ce qui arrive | monstration brève, précise, non complaisante |
-| Répulsion | ce qui reste | conséquence corporelle et morale |
+| Terror | what is about to happen | anticipation, off-screen, suggestion |
+| Horror | what happens | brief, precise, non-complacent showing |
+| Revulsion | what remains | bodily and moral consequence |
 
-Une oeuvre efficace consacre soixante-dix pour cent à la terreur, vingt à
-l'horreur, dix à la répulsion. L'inversion de ce rapport produit du dégoût,
-pas de la peur.
+An effective work gives seventy percent to terror, twenty to horror, ten to
+revulsion. Inverting that ratio produces disgust, not fear.
 
-## 3. Construction de la menace
+## 3. Building the threat
 
-1. Normalité établie avec soin. Sans normalité crédible, aucune rupture n'est
+1. Normality established with care. Without credible normality, no rupture is
    perceptible.
-2. Anomalie mineure, explicable. Le lecteur explique à la place du personnage.
-3. Deuxième anomalie, incompatible avec la première explication.
-4. Confirmation partielle : quelqu'un d'autre voit.
-5. Règles apparentes de la menace, découvertes par les personnages.
-6. Rupture des règles : la menace fait ce qu'elle ne devrait pas.
-7. Prix payé, définitif.
+2. A minor anomaly, explicable. The reader explains it on the character's
+   behalf.
+3. A second anomaly, incompatible with the first explanation.
+4. Partial confirmation: someone else sees it.
+5. Apparent rules of the threat, discovered by the characters.
+6. The rules break: the threat does what it should not.
+7. A price paid, permanently.
 
 ## 4. Techniques
 
-- Économie de la monstration : ce qui est décrit entièrement cesse d'effrayer.
-  Donner une partie, laisser le lecteur compléter.
-- Le mauvais détail : un élément juste légèrement faux dans une scène normale.
-- Le silence anormal : la disparition d'un son de fond installé plus tôt.
-- La sécurité retirée : le lieu refuge devient hostile.
-- Le corps : la peur passe par la température, la respiration, la perception
-  rétrécie, jamais par le sang qui se glace.
-- Le témoin non fiable : ce qui a été vu ne peut être vérifié.
+- Economy of showing: what is fully described stops frightening. Give a part,
+  let the reader complete it.
+- The wrong detail: one element slightly false in an ordinary scene.
+- Abnormal silence: the disappearance of a background sound established
+  earlier.
+- Safety withdrawn: the place of refuge turns hostile.
+- The body: fear arrives through temperature, breathing, narrowed perception,
+  never through blood running cold.
+- The unreliable witness: what was seen cannot be verified.
 
-## 5. Le rythme de la peur
+## 5. The rhythm of fear
 
-La peur est une courbe, pas un plateau. Alterner :
+Fear is a curve, not a plateau. Alternate:
 
-- pression lente, chapitres calmes où quelque chose est déplacé ;
-- décharge brève, une page maximum ;
-- répit trompeur, obligatoire, où le lecteur croit que c'est fini.
+- slow pressure, quiet chapters in which something has been moved;
+- a brief shock, one page at most;
+- a deceptive respite, mandatory, where the reader believes it is over.
 
-Trois décharges maximum avant le climax. Au-delà, accoutumance.
+Three shocks at most before the climax. Beyond that, habituation.
 
-## 6. Personnages
+## 6. Characters
 
-- Les personnages doivent agir rationnellement. Une décision stupide détruit
-  la peur, car elle rassure le lecteur sur sa propre sécurité.
-- Justifier toute présence dans un lieu dangereux par une nécessité concrète.
-- Faire aimer avant de menacer : quinze pages de compétence ou de générosité
-  valent plus que trente pages de danger.
+- Characters must act rationally. A stupid decision destroys fear, because it
+  reassures the reader about their own safety.
+- Justify every presence in a dangerous place by a concrete necessity.
+- Make them loved before threatening them: fifteen pages of competence or
+  generosity are worth more than thirty pages of danger.
 
-## 7. Clichés à retourner ou proscrire
+## 7. Cliches to turn or prohibit
 
-- Le groupe qui se sépare sans raison.
-- Le miroir, le grenier, le sous-sol employés sans invention.
-- Le chat qui saute pour créer un faux effroi.
-- L'explication complète du surnaturel en fin de récit.
-- Le survivant unique qui raconte tout.
+- The group that splits up for no reason.
+- The mirror, the attic, the basement used with no invention.
+- The cat that jumps out for a false scare.
+- The complete explanation of the supernatural at the end.
+- The sole survivor who narrates everything.
 
-## 8. Contrôles de sortie
+## 8. Exit checks
 
-- La normalité occupe au moins les vingt premières pages.
-- Chaque décharge est suivie d'un répit.
-- La menace n'est jamais entièrement décrite.
-- Aucun personnage n'agit contre son intérêt sans motif.
-- La fin laisse une trace irréversible.
+- Normality occupies at least the first twenty pages.
+- Every shock is followed by a respite.
+- The threat is never fully described.
+- No character acts against their interest without a motive.
+- The ending leaves an irreversible trace.
 
 ## 9. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : qualité de la
-normalité initiale, économie de la monstration, rationalité des personnages,
-persistance de l'inquiétude après la dernière page.
+The eleven constitution axes, plus four genre axes: quality of the initial
+normality, economy of showing, character rationality, persistence of unease
+after the last page.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur économie de la monstration.
+Threshold: no axis below 3, average at least 4 on economy of showing.
 
 ## 10. Interfaces
 
-- Amont : `scene-builder`, `immersion-director`.
-- Voisins : `genres/dark-fantasy`, `genres/thriller`.
+- Upstream: `scene-builder`, `immersion-director`.
+- Neighbours: `genres/dark-fantasy`, `genres/thriller`.

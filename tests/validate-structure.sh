@@ -1,107 +1,130 @@
 #!/usr/bin/env bash
-# Vérifie la structure obligatoire de chaque skill de la suite.
-# Usage : bash tests/validate-structure.sh
+# Verifies the mandatory structure of every skill in the suite.
+# Usage: bash tests/validate-structure.sh
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-WRITING_CATEGORIES="core genres poetry quality"
-ENGINEERING_CATEGORIES="dev-skills delivery-skills devops-skills"
+
+# A skill group is a repository relative path holding skill directories. The
+# category recorded in a skill's metadata is the basename of its group.
+WRITING_GROUPS="writing/core writing/genres writing/poetry writing/quality"
+DOCUMENT_GROUPS="documents/documentation documents/administrative documents/publishing"
+ENGINEERING_GROUPS="engineering/dev-skills engineering/delivery-skills engineering/devops-skills"
+SHARED_GROUPS="shared"
+ALL_GROUPS="$WRITING_GROUPS $DOCUMENT_GROUPS $ENGINEERING_GROUPS $SHARED_GROUPS"
+
+# Groups whose skills must carry a numbered Protocol section and an Interfaces
+# section. These are the English, procedural trees. The writing tree names its
+# procedure in ways inherited from its own domain.
+PROCEDURAL_GROUPS="$DOCUMENT_GROUPS $ENGINEERING_GROUPS $SHARED_GROUPS"
+
 ERRORS=0
 SKILLS=0
+NAMES=""
 
 fail() {
-  printf 'ERREUR  %s\n' "$1"
+  printf 'ERROR   %s\n' "$1"
   ERRORS=$((ERRORS + 1))
 }
 
-# Le repository sépare deux arbres. Le nom de catégorie reste celui du dossier
-# de skills ; l'arbre n'est qu'un préfixe de chemin.
-tree_of() {
-  case "$1" in
-    core|genres|poetry|quality) printf 'writing' ;;
-    *) printf 'engineering' ;;
-  esac
+# Uses its own loop variable: the caller iterates over $group and a shared
+# name here would silently rewrite the outer loop.
+is_procedural() {
+  for candidate in $PROCEDURAL_GROUPS; do
+    [ "$candidate" = "$1" ] && return 0
+  done
+  return 1
 }
 
-for category in $WRITING_CATEGORIES $ENGINEERING_CATEGORIES; do
-  tree="$(tree_of "$category")"
-  if [ ! -d "$ROOT/$tree/$category" ]; then
-    fail "catégorie manquante : $tree/$category"
+for group in $ALL_GROUPS; do
+  category="$(basename "$group")"
+  if [ ! -d "$ROOT/$group" ]; then
+    fail "missing group: $group"
     continue
   fi
-  for skill in "$ROOT/$tree/$category"/*/; do
+  for skill in "$ROOT/$group"/*/; do
     [ -d "$skill" ] || continue
     name="$(basename "$skill")"
     SKILLS=$((SKILLS + 1))
 
-    [ -f "$skill/SKILL.md" ]  || fail "$category/$name : SKILL.md manquant"
-    [ -f "$skill/README.md" ] || fail "$category/$name : README.md manquant"
-    [ -d "$skill/examples" ]  || fail "$category/$name : dossier examples manquant"
-    [ -d "$skill/resources" ] || fail "$category/$name : dossier resources manquant"
+    # A flat installation target means two skills may never share a name.
+    case " $NAMES " in
+      *" $name "*) fail "$group/$name: duplicate skill name, would collide on install" ;;
+    esac
+    NAMES="$NAMES $name"
+
+    [ -f "$skill/SKILL.md" ]  || fail "$group/$name: SKILL.md missing"
+    [ -f "$skill/README.md" ] || fail "$group/$name: README.md missing"
+    [ -d "$skill/examples" ]  || fail "$group/$name: examples directory missing"
+    [ -d "$skill/resources" ] || fail "$group/$name: resources directory missing"
 
     if [ -d "$skill/examples" ] && [ -z "$(ls -A "$skill/examples" 2>/dev/null)" ]; then
-      fail "$category/$name : examples est vide"
+      fail "$group/$name: examples is empty"
     fi
     if [ -d "$skill/resources" ] && [ -z "$(ls -A "$skill/resources" 2>/dev/null)" ]; then
-      fail "$category/$name : resources est vide"
+      fail "$group/$name: resources is empty"
     fi
 
     if [ -f "$skill/SKILL.md" ]; then
       head -n 1 "$skill/SKILL.md" | grep -q '^---$' \
-        || fail "$category/$name : bloc de métadonnées absent"
+        || fail "$group/$name: metadata block missing"
       for key in name description license metadata; do
         grep -q "^$key:" "$skill/SKILL.md" \
-          || fail "$category/$name : clé de métadonnée manquante ($key)"
+          || fail "$group/$name: missing metadata key ($key)"
       done
       for key in category version depends_on outputs; do
         grep -q "^  $key:" "$skill/SKILL.md" \
-          || fail "$category/$name : clé de metadata manquante ($key)"
+          || fail "$group/$name: missing metadata subkey ($key)"
       done
       grep -q "^name: $name$" "$skill/SKILL.md" \
-        || fail "$category/$name : le champ name ne correspond pas au dossier"
+        || fail "$group/$name: the name field does not match the directory"
       grep -q "^  category: $category$" "$skill/SKILL.md" \
-        || fail "$category/$name : le champ category ne correspond pas au dossier"
+        || fail "$group/$name: the category field does not match the group"
       desc="$(grep -m1 '^description:' "$skill/SKILL.md" | cut -c14-)"
       [ "${#desc}" -ge 40 ] \
-        || fail "$category/$name : description trop courte pour être découverte"
+        || fail "$group/$name: description too short to be discoverable"
       grep -qi '^## .*[Aa]uto-critique' "$skill/SKILL.md" \
-        || fail "$category/$name : section Auto-critique absente"
-      # Les trois catégories d'ingénierie imposent en plus une section
-      # Protocol numérotée et une section Interfaces. Les skills d'écriture
-      # nomment leur procédure de façons variées, héritées de leur domaine.
-      case "$category" in
-        dev-skills|delivery-skills|devops-skills) engineering=1 ;;
-        *) engineering=0 ;;
-      esac
-      if [ "$engineering" -eq 1 ]; then
+        || fail "$group/$name: Auto-critique section missing"
+
+      if is_procedural "$group"; then
         grep -qE '^## [0-9]+\. Protocol' "$skill/SKILL.md" \
-          || fail "$category/$name : section Protocol numérotée absente"
+          || fail "$group/$name: numbered Protocol section missing"
         grep -qE '^## [0-9]+\. Interfaces' "$skill/SKILL.md" \
-          || fail "$category/$name : section Interfaces absente"
+          || fail "$group/$name: Interfaces section missing"
       fi
+    fi
+
+    if [ -f "$skill/README.md" ]; then
+      head -n 1 "$skill/README.md" | grep -q "^# $name$" \
+        || fail "$group/$name: the README title does not match the directory"
     fi
   done
 done
 
-for f in CLAUDE.md README.md CONTRIBUTING.md LICENSE; do
-  [ -f "$ROOT/$f" ] || fail "fichier racine manquant : $f"
+for f in README.md README.fr.md CONTRIBUTING.md CHANGELOG.md LICENSE install.sh; do
+  [ -f "$ROOT/$f" ] || fail "missing root file: $f"
 done
-for d in writing engineering documentation tests \
+for d in writing documents engineering shared documentation tests config \
          writing/resources writing/examples engineering/agents; do
-  [ -d "$ROOT/$d" ] || fail "dossier attendu manquant : $d"
+  [ -d "$ROOT/$d" ] || fail "missing expected directory: $d"
 done
-for f in writing/README.md engineering/README.md; do
-  [ -f "$ROOT/$f" ] || fail "index d'arbre manquant : $f"
+for f in writing/README.md documents/README.md engineering/README.md \
+         shared/README.md config/README.md \
+         config/writer-suite.config.example.yaml; do
+  [ -f "$ROOT/$f" ] || fail "missing index or template: $f"
 done
-for category in $WRITING_CATEGORIES $ENGINEERING_CATEGORIES; do
-  tree="$(tree_of "$category")"
-  [ -f "$ROOT/$tree/$category/README.md" ] \
-    || fail "index de catégorie manquant : $tree/$category/README.md"
+for group in $ALL_GROUPS; do
+  case "$group" in
+    shared) continue ;;   # the tree index doubles as the group index
+  esac
+  [ -f "$ROOT/$group/README.md" ] || fail "missing group index: $group/README.md"
 done
-for f in architecture.md skills-guide.md writing-rules.md workflow.md engineering-system.md delivery-system.md; do
-  [ -f "$ROOT/documentation/$f" ] || fail "documentation manquante : $f"
+for f in architecture.md skills-guide.md writing-rules.md workflow.md \
+         engineering-system.md delivery-system.md documents-system.md \
+         installation.md configuration.md agents.md; do
+  [ -f "$ROOT/documentation/$f" ] || fail "missing documentation: $f"
 done
 
-printf '\n%s skills contrôlés, %s erreurs.\n' "$SKILLS" "$ERRORS"
+printf '\n%s skills checked, %s errors.\n' "$SKILLS" "$ERRORS"
 [ "$ERRORS" -eq 0 ] || exit 1
-printf 'Structure conforme.\n'
+printf 'Structure valid.\n'

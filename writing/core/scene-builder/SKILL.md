@@ -1,124 +1,120 @@
 ---
 name: scene-builder
-description: Construit des scènes fortes : objectif du personnage, conflit en escalade, issue coûteuse, réaction, dilemme, décision. Ancrage spatial, sous-texte, rythme, irréversibilité. À utiliser pour écrire une scène, réparer une scène plate, ou vérifier qu'une scène change l'état du récit.
+description: Builds strong scenes: character objective, escalating conflict, costly outcome, reaction, dilemma, decision. Spatial anchoring, subtext, rhythm, irreversibility. Use to write a scene, repair a flat one, or verify that a scene changes the state of the narrative.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, chapter-architect]
-  outputs: [scenes-redigees, fiches-de-scene]
+  outputs: [written-scenes, scene-sheets]
 ---
 
 # Scene Builder
 
-Construit des scènes qui tiennent debout seules : objectif, conflit, coût,
-conséquence. Ce skill est l'unité de production principale du roman.
+Builds scenes that stand on their own: objective, conflict, cost, consequence.
+This skill is the main production unit of the novel.
 
-## 1. Définition de travail
+## 1. Working definition
 
-Une scène est un bloc continu de temps et de lieu où un personnage veut
-quelque chose, rencontre une résistance, et sort dans un état différent de
-celui où il est entré. Sans changement d'état, il n'y a pas de scène : il y a
-du remplissage.
+A scene is a continuous block of time and place in which a character wants
+something, meets resistance, and leaves in a different state from the one they
+entered. Without a change of state there is no scene, only filler.
 
-## 2. Structure canonique
+## 2. Canonical structure
 
-### Bloc d'action
+### Action block
 
-1. Objectif : ce que le personnage de point de vue veut obtenir ici et
-   maintenant, formulable en une phrase à l'infinitif.
-2. Conflit : ce qui s'y oppose, en escalade sur au moins trois paliers.
-3. Issue : échec, réussite coûteuse, ou réussite qui aggrave la situation.
-   La réussite simple est réservée à moins d'une scène sur six.
+1. Objective: what the point of view character wants to obtain here and now,
+   stateable in one sentence as an infinitive.
+2. Conflict: what opposes it, escalating across at least three stages.
+3. Outcome: failure, costly success, or success that makes the situation
+   worse. Plain success is reserved for fewer than one scene in six.
 
-### Bloc de réaction
+### Reaction block
 
-4. Réaction : réponse émotionnelle immédiate, corporelle avant d'être
-   mentale.
-5. Dilemme : deux options mauvaises, formulées explicitement ou non.
-6. Décision : nouvel objectif qui devient l'objectif de la scène suivante.
+4. Reaction: immediate emotional response, bodily before mental.
+5. Dilemma: two bad options, stated explicitly or not.
+6. Decision: a new objective, which becomes the objective of the next scene.
 
-Le bloc de réaction peut être resserré en trois lignes dans un thriller, ou
-occuper une scène complète dans un roman intime. Il n'est jamais supprimé,
-sinon les événements s'enchaînent sans être vécus.
+The reaction block can be compressed to three lines in a thriller, or occupy a
+whole scene in an intimate novel. It is never removed, or events follow one
+another without being lived.
 
-## 3. Protocole de rédaction
+## 3. Writing protocol
 
-### Étape 1 : fixer la valeur
+### Step 1: fix the value
 
-Écrire la valeur qui bascule et son signe : liberté vers captivité, confiance
-vers soupçon, dette vers acquittement. Une seule valeur par scène.
+Write the value that swings, and its sign: freedom to captivity, trust to
+suspicion, debt to settlement. One value per scene.
 
-### Étape 2 : entrer tard, sortir tôt
+### Step 2: enter late, leave early
 
-Commencer au plus proche du conflit. Couper l'arrivée, la salutation,
-l'installation. Terminer sur le dernier élément signifiant, sans épilogue de
-scène.
+Start as close to the conflict as possible. Cut the arrival, the greeting, the
+settling in. End on the last meaningful element, with no scene epilogue.
 
-### Étape 3 : ancrer l'espace en trois touches
+### Step 3: anchor the space in three touches
 
-Trois éléments concrets suffisent à installer un lieu : une matière, un son,
-une contrainte physique. La contrainte physique est la plus rentable, car elle
-crée du jeu : une porte qui ferme mal, une chaleur qui oblige à se lever, un
-sol qui rend le déplacement bruyant.
+Three concrete elements are enough to establish a place: a material, a sound,
+a physical constraint. The physical constraint pays best, because it creates
+play: a door that does not close properly, a heat that forces someone to
+stand, a floor that makes movement audible.
 
-### Étape 4 : distribuer les corps
+### Step 4: place the bodies
 
-Savoir à tout moment où se trouve chaque personnage, ce qu'il fait de ses
-mains, ce qu'il regarde. Une scène de dialogue sans blocage corporel devient
-deux voix dans le vide.
+Know at all times where each character is, what their hands are doing, what
+they are looking at. A dialogue scene with no physical blocking becomes two
+voices in a void.
 
-### Étape 5 : écrire en sous-texte
+### Step 5: write in subtext
 
-Ce que les personnages disent recouvre ce qu'ils veulent. Méthode : écrire
-d'abord la version explicite où tout est dit, puis la réécrire en supprimant
-toute phrase qui nomme directement l'enjeu, en la remplaçant par un objet,
-un geste ou un détour.
+What characters say covers what they want. Method: write the explicit version
+first, where everything is said, then rewrite it removing every sentence that
+names the stake directly, replacing it with an object, a gesture or a detour.
 
-### Étape 6 : régler le rythme interne
+### Step 6: set the internal rhythm
 
-- Phrases longues pour la durée, phrases brèves pour l'impact.
-- Réduire la longueur moyenne des paragraphes à mesure que la tension monte.
-- Insérer une respiration après un pic, jamais avant.
-- Éviter plus de deux paragraphes descriptifs consécutifs en scène tendue.
+- Long sentences for duration, short sentences for impact.
+- Reduce average paragraph length as tension rises.
+- Insert a breathing space after a peak, never before.
+- Avoid more than two consecutive descriptive paragraphs in a tense scene.
 
-### Étape 7 : vérifier l'irréversibilité
+### Step 7: verify irreversibility
 
-À la fin de la scène, quelque chose ne peut plus être défait : une parole
-prononcée, une porte franchie, une information reçue, un objet cassé. Sinon,
-la scène est réécrite ou fusionnée.
+At the end of the scene, something can no longer be undone: a word spoken, a
+door crossed, information received, an object broken. Otherwise the scene is
+rewritten or merged.
 
-## 4. Types de scènes et pièges
+## 4. Scene types and their traps
 
-| Type | Piège dominant | Correction |
+| Type | Dominant trap | Correction |
 |---|---|---|
-| Dialogue d'information | exposition frontale | donner l'information à contrecoeur |
-| Confrontation | montée linéaire | insérer une tentative de désescalade qui échoue |
-| Action | énumération de gestes | ancrer sur un objectif partiel toutes les cinq lignes |
-| Voyage | résumé sans enjeu | limiter à ce qui change une relation |
-| Retrouvailles | attendrissement | placer un désaccord préalable non résolu |
-| Révélation | discours explicatif | faire résister celui qui sait |
+| Information dialogue | frontal exposition | make the information given reluctantly |
+| Confrontation | linear escalation | insert a de-escalation attempt that fails |
+| Action | list of gestures | anchor on a partial objective every five lines |
+| Journey | summary with no stake | keep only what changes a relationship |
+| Reunion | sentimentality | place an unresolved prior disagreement |
+| Revelation | explanatory speech | make the one who knows resist |
 
-## 5. Contrôles de sortie
+## 5. Exit checks
 
-- La scène a un objectif formulable.
-- Le conflit escalade sur trois paliers au moins.
-- L'état final diffère de l'état initial.
-- Le lecteur sait où se trouvent les corps.
-- Aucun personnage ne dit ce qu'il pourrait montrer.
-- La constitution est respectée sur les dialogues et les flashbacks.
+- The scene has a stateable objective.
+- The conflict escalates across at least three stages.
+- The final state differs from the initial one.
+- The reader knows where the bodies are.
+- No character says what they could show.
+- The constitution is respected on dialogue and flashbacks.
 
 ## 6. Auto-critique
 
-Axes notés de 0 à 5 : clarté de l'objectif, escalade du conflit,
-irréversibilité, ancrage sensoriel, sous-texte, rythme, justesse des
-dialogues, économie, originalité de traitement, émotion produite.
+Score 0 to 5: clarity of objective, escalation of conflict, irreversibility,
+sensory anchoring, subtext, rhythm, accuracy of dialogue, economy, originality
+of treatment, emotion produced.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8. Toute scène sous le seuil est
-réécrite entièrement, pas retouchée.
+Threshold: no axis below 3, average at least 3.8. Any scene under the
+threshold is rewritten entirely, not patched.
 
 ## 7. Interfaces
 
-- Amont : `chapter-architect`, `character-psychologist`.
-- Latéral : `dialogue-master`, `immersion-director`, `narrator`.
-- Contrôle : `quality/self-critique-protocol`.
+- Upstream: `chapter-architect`, `character-psychologist`.
+- Lateral: `dialogue-master`, `immersion-director`, `narrator`.
+- Review: `quality/self-critique-protocol`.

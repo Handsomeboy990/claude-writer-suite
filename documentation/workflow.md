@@ -1,125 +1,130 @@
-# Workflow
+# Writing workflow
 
-## Vue générale
+## Overview
 
 ```
-1. Cadrage        demarrage-de-projet
-2. Documentation  research-director
-3. Monde          world-builder, immersion-director
-4. Personnages    character-psychologist
-5. Architecture   novel-architect, timeline-manager, saga-architect
-6. Découpage      chapter-architect
-7. Production     scene-builder, narrator, dialogue-master
-8. Contrôle       self-critique-protocol, continuity-manager
-9. Révision       story-doctor, rewriting-engine, literary-editor
-10. Finition      proofreader, beta-reader, literary-critic
-11. Validation    publication-review
+ 1. Framing        project-brief, demarrage-de-projet
+ 2. Research       research-director
+ 3. World          world-builder, immersion-director
+ 4. Characters     character-psychologist
+ 5. Architecture   novel-architect, timeline-manager, saga-architect
+ 6. Breakdown      chapter-architect
+ 7. Production     scene-builder, narrator, dialogue-master
+ 8. Control        self-critique-protocol, continuity-manager
+ 9. Revision       story-doctor, rewriting-engine, literary-editor
+10. Finishing      proofreader, beta-reader, literary-critic
+11. Validation     publication-review
 ```
 
-## Phase 1, cadrage
+## Phase 1, framing
 
-Remplir `resources/templates/demarrage-de-projet.md`. Aucun chapitre n'est
-écrit avant que la prémisse, la question dramatique et les trois promesses
-soient formulées.
+`shared/project-brief` frames the project: what will exist at the end, for
+whom, under which constraints, and what counts as finished. For a book, fill
+`writing/resources/templates/demarrage-de-projet.md` alongside it.
 
-Sortie : questionnaire complété.
+No chapter is written before the premise, the dramatic question and the three
+promises are stated.
 
-## Phase 2, documentation
+Output: the working agreement, and the completed questionnaire.
 
-`research-director` liste les besoins par chapitre, les classe en trois
-niveaux, et produit les fiches. Deux à quatre sujets de niveau 3 au maximum.
+## Phase 2, research
 
-Sortie : dossier documentaire.
+`research-director` lists the needs chapter by chapter, assigns each a depth
+level, and produces the source sheets. Two to four level 3 subjects at most.
 
-## Phase 3, monde
+Output: research dossier.
 
-`world-builder` part de la contrainte matérielle, jamais de la carte.
-`immersion-director` établit un dossier sensoriel par lieu majeur, trois
-lieux au maximum.
+## Phase 3, world
 
-Sortie : bible du monde, dossiers sensoriels, lexique.
+`world-builder` starts from the material constraint, never from the map.
+`immersion-director` builds a sensory dossier per major place, three places at
+most.
 
-## Phase 4, personnages
+Output: world bible, sensory dossiers, lexicon.
 
-`character-psychologist` produit le noyau en sept champs pour chaque
-personnage porteur, puis la cartographie relationnelle.
+## Phase 4, characters
 
-Sortie : fiches personnages, arcs.
+`character-psychologist` produces the seven field core for every carrying
+character, then the relational map.
+
+Output: character sheets, arcs.
 
 ## Phase 5, architecture
 
-`novel-architect` verrouille la structure et le calendrier des révélations.
-`timeline-manager` établit les deux chronologies. Pour une saga,
-`saga-architect` fixe la question de saga et la courbe des tomes.
+`novel-architect` locks the structure and the reveal schedule.
+`timeline-manager` establishes the two chronologies. For a saga,
+`saga-architect` fixes the saga question and the curve across volumes.
 
-Sortie : bible du roman, plan général, chronologies.
+Output: novel bible, master outline, chronologies.
 
-## Phase 6, découpage
+## Phase 6, breakdown
 
-`chapter-architect` produit une fiche par chapitre avec fonction, valeurs
-d'entrée et de sortie, point de vue et titre.
+`chapter-architect` produces one sheet per chapter with its function, entry and
+exit values, point of view and title.
 
-Sortie : fiches chapitre, table des matières provisoire.
+Output: chapter sheets, provisional table of contents.
 
 ## Phase 7, production
 
-Pour chaque chapitre :
+For each chapter:
 
-1. `scene-builder` établit les fiches de scène.
-2. `narrator` fixe la distance et le régime de voix.
-3. Rédaction.
-4. `dialogue-master` valide les dialogues.
-5. `immersion-director` calibre la densité sensorielle.
+1. `scene-builder` establishes the scene sheets.
+2. `narrator` fixes the distance and the voice regime.
+3. Writing.
+4. `dialogue-master` validates the dialogue.
+5. `immersion-director` calibrates the sensory density.
 
-Sortie : chapitre rédigé.
+Output: a written chapter.
 
-## Phase 8, contrôle immédiat
+## Phase 8, immediate control
 
-Après chaque chapitre, sans exception :
+After each chapter, without exception:
 
-1. `self-critique-protocol`, cinq passes, jusqu'à atteindre le seuil.
-2. `continuity-manager`, mise à jour des huit registres.
+1. `self-critique-protocol`, five passes, until the threshold is met.
+2. `continuity-manager`, the eight registers updated.
 
-Un chapitre non contrôlé ne compte pas comme écrit.
+An unchecked chapter does not count as written.
 
-## Phase 9, révision
+## Phase 9, revision
 
-Après le premier jet complet :
+After the complete first draft:
 
-1. `story-doctor` produit le diagnostic structurel.
-2. `rewriting-engine` applique le plan de réparation.
-3. `literary-editor` conduit les six passes de style.
+1. `story-doctor` produces the structural diagnosis.
+2. `rewriting-engine` applies the repair plan.
+3. `literary-editor` runs the six style passes.
 
-Ordre impératif : jamais d'édition stylistique avant la validation
-structurelle.
+The order is binding: never edit prose before the structure is validated.
 
-## Phase 10, finition
+## Phase 10, finishing
 
-1. `proofreader`, cinq passes de correction.
-2. `beta-reader`, trois profils minimum, quatre si une culture ou un métier
-   spécifique est représenté.
-3. `literary-critic`, grille pondérée et verdict.
+1. `proofreader`, five correction passes.
+2. `beta-reader`, three profiles minimum, four when a specific culture or
+   trade is represented.
+3. `literary-critic`, weighted grid and verdict.
 
 ## Phase 11, validation
 
-`publication-review` exécute les sept contrôles, constitue le dossier de
-publication et rend une décision écrite.
+`publication-review` runs the seven checks, assembles the publication dossier
+and issues a written decision.
 
-## Cadence recommandée
+`shared/self-critique` runs alongside it on the delivery as a whole, since its
+vision check is the one thing no domain reviewer performs: whether what was
+asked for is what was delivered.
 
-| Périodicité | Action |
+## Recommended cadence
+
+| Frequency | Action |
 |---|---|
-| Après chaque chapitre | auto-critique, mise à jour du registre |
-| Toutes les cinq chapitres | relecture de la chronologie |
-| À la fin de chaque partie | audit de continuité en huit passages |
-| À la fin du premier jet | diagnostic structurel complet |
-| Avant livraison | validation en sept contrôles |
+| After each chapter | self-critique, register update |
+| Every five chapters | reread the chronology |
+| At the end of each part | eight-pass continuity audit |
+| At the end of the first draft | full structural diagnosis |
+| Before delivery | seven-check validation |
 
-## Règles de non-régression
+## Non-regression rules
 
-- Ne jamais réviser le style d'un chapitre dont la structure n'est pas validée.
-- Ne jamais écrire le chapitre suivant avec un registre de continuité en
-  retard.
-- Ne jamais livrer sans grille d'auto-critique jointe.
-- Ne jamais dépasser trois cycles d'auto-critique : au troisième échec,
-  réécrire depuis la fiche.
+- Never revise the prose of a chapter whose structure is not validated.
+- Never write the next chapter with the continuity register behind.
+- Never deliver without the self-critique grid attached.
+- Never exceed three self-critique cycles: on the third failure, rewrite from
+  the sheet.

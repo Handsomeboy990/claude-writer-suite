@@ -1,121 +1,120 @@
 ---
 name: story-doctor
-description: Diagnostique un récit qui ne fonctionne pas : table symptôme vers cause, dix contrôles structurels, test de causalité, test du protagoniste passif, test de l'enjeu, prescriptions et plan de réparation. À utiliser quand le milieu est mou, la fin déçoit, ou le lecteur décroche.
+description: Diagnoses a narrative that does not work: a symptom to cause table, ten structural checks, the causality test, the passive protagonist test, the stakes test, prescriptions and a repair plan. Use when the middle sags, the ending disappoints, or the reader disengages.
 license: MIT
 metadata:
   category: quality
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, self-critique-protocol]
-  outputs: [diagnostic-structurel, plan-de-reparation]
+  outputs: [structural-diagnosis, repair-plan]
 ---
 
 # Story Doctor
 
-Analyse critique du récit au niveau structurel. Ce skill ne corrige pas les
-phrases : il identifie pourquoi une histoire ne fonctionne pas et prescrit
-une réparation.
+Critical analysis of the narrative at structural level. This skill does not
+fix sentences: it identifies why a story does not work and prescribes a
+repair.
 
-## 1. Méthode de diagnostic
+## 1. Diagnostic method
 
-Un problème ressenti à un endroit trouve presque toujours sa cause ailleurs,
-plus tôt. Ne jamais traiter le symptôme là où il apparaît.
+A problem felt in one place almost always has its cause somewhere else,
+earlier. Never treat the symptom where it appears.
 
-| Symptôme ressenti | Cause probable, en amont |
+| Symptom felt | Probable cause, upstream |
 |---|---|
-| L'acte 2 est mou | l'objectif du protagoniste n'est pas assez cher payé |
-| Le lecteur décroche au tiers | l'élément déclencheur est trop faible ou trop tardif |
-| La fin déçoit | les promesses posées au début ne sont pas celles qui sont soldées |
-| Le personnage principal est fade | il réagit au lieu d'agir, ou il n'a rien à perdre |
-| Le méchant est ridicule | il n'a pas de logique défendable de son point de vue |
-| Les scènes se ressemblent | une seule valeur bascule dans tout le roman |
-| Le rythme est monotone | tous les chapitres ont le même signe et la même longueur |
-| Les révélations tombent à plat | aucun indice n'a été planté, ou tous l'ont été |
-| Le lecteur ne s'attache pas | le protagoniste n'a pas été montré compétent ou généreux tôt |
-| Trop de personnages | plusieurs remplissent la même fonction dramatique |
+| Act 2 sags | the protagonist's objective is not paid for dearly enough |
+| The reader disengages at a third | the inciting incident is too weak or too late |
+| The ending disappoints | the promises made at the start are not the ones settled |
+| The lead is flat | they react instead of acting, or have nothing to lose |
+| The villain is ridiculous | they have no logic defensible from their own view |
+| The scenes feel alike | one single value swings across the whole novel |
+| The rhythm is monotonous | every chapter has the same sign and the same length |
+| Reveals fall flat | no clue was planted, or every clue was |
+| The reader does not attach | the protagonist was not shown competent or generous early |
+| Too many characters | several fill the same dramatic function |
 
-## 2. Les dix contrôles structurels
+## 2. The ten structural checks
 
-1. La question dramatique est-elle formulable en une phrase fermée ?
-2. L'élément déclencheur arrive-t-il avant douze pour cent du texte ?
-3. Le protagoniste prend-il au moins trois décisions qui aggravent sa
-   situation ?
-4. Chaque acte se termine-t-il par une perte, non par un gain ?
-5. Le point médian renverse-t-il l'information ou le rapport de force ?
-6. Le climax résout-il la question dramatique par une action du protagoniste ?
-7. Les trois promesses initiales sont-elles soldées ?
-8. Chaque sous-intrigue modifie-t-elle l'intrigue principale ?
-9. Existe-t-il un chapitre supprimable sans conséquence ? Si oui, le supprimer.
-10. La dernière scène répond-elle à la première image ?
+1. Is the dramatic question stateable as one closed sentence?
+2. Does the inciting incident arrive before twelve percent of the text?
+3. Does the protagonist take at least three decisions that worsen their
+   situation?
+4. Does each act end on a loss rather than a gain?
+5. Does the midpoint reverse the information or the balance of power?
+6. Does the climax resolve the dramatic question through an action of the
+   protagonist?
+7. Are the three initial promises settled?
+8. Does each subplot alter the main plot?
+9. Is there a chapter that can be removed with no consequence? If so, remove
+   it.
+10. Does the last scene answer the opening image?
 
-Un échec sur les contrôles 1, 6 ou 7 est bloquant.
+A failure on checks 1, 6 or 7 is blocking.
 
-## 3. Test de causalité
+## 3. Causality test
 
-Relier les chapitres par `donc` ou `mais`, jamais par `puis`. Parcourir le
-plan et vérifier la chaîne :
+Link chapters with `donc` or `mais`, never with `puis`. Walk the outline and
+check the chain:
 
 `Elle mesure la fissure, DONC elle rédige un rapport, MAIS le rapport
 disparaît, DONC elle va voir le chef de secteur.`
 
-Chaque `puis` détecté signale un maillon non causal, à réécrire ou à couper.
+Every `puis` detected marks a non-causal link, to be rewritten or cut.
 
-## 4. Test du protagoniste passif
+## 4. Passive protagonist test
 
-Compter les scènes où le protagoniste :
+Count the scenes in which the protagonist:
 
-- décide et agit ;
-- réagit à une action extérieure ;
-- reçoit une information sans rien faire.
+- decides and acts;
+- reacts to an external action;
+- receives information without doing anything.
 
-Si le troisième groupe dépasse vingt pour cent, ou si le premier est
-inférieur à quarante pour cent, le récit est porté par les événements et non
-par un personnage. Réparation : transformer des réceptions en recherches
-actives.
+If the third group exceeds twenty percent, or the first falls below forty
+percent, the narrative is carried by events rather than by a character.
+Repair: turn receptions into active searches.
 
-## 5. Test de l'enjeu
+## 5. Stakes test
 
-Trois questions, à poser à chaque acte :
+Three questions, asked of each act:
 
-- Que perd le protagoniste s'il échoue, concrètement ?
-- Le lecteur connaît-il cette perte, ou seulement le narrateur ?
-- La perte peut-elle survenir avant la fin, de façon partielle, pour prouver
-  qu'elle est réelle ?
+- What does the protagonist lose if they fail, concretely?
+- Does the reader know that loss, or only the narrator?
+- Can the loss occur before the end, partially, to prove it is real?
 
-Un enjeu jamais réalisé partiellement n'est pas cru.
+A stake never partially realised is not believed.
 
-## 6. Prescriptions courantes
+## 6. Common prescriptions
 
-| Diagnostic | Prescription |
+| Diagnosis | Prescription |
 |---|---|
-| Ventre mou | avancer une révélation de l'acte 3 au point médian |
-| Fin plate | payer une dette narrative ancienne dans la dernière scène |
-| Antagoniste faible | lui donner une victoire complète au premier tiers |
-| Trop de personnages | fusionner deux fonctions identiques en un personnage |
-| Manque de tension | ajouter une échéance concrète et visible |
-| Manque d'attachement | ajouter une scène de compétence et une scène de générosité |
-| Révélation prévisible | garder la révélation, changer le moment où le lecteur la comprend |
-| Structure illisible | réduire à une seule ligne temporelle pendant l'acte 1 |
+| Sagging middle | move a reveal from act 3 to the midpoint |
+| Flat ending | pay an old narrative debt in the final scene |
+| Weak antagonist | give them a complete victory in the first third |
+| Too many characters | merge two identical functions into one character |
+| Lack of tension | add a concrete, visible deadline |
+| Lack of attachment | add a competence scene and a generosity scene |
+| Predictable reveal | keep the reveal, change when the reader understands it |
+| Illegible structure | reduce to a single timeline through act 1 |
 
-## 7. Rapport de diagnostic
+## 7. Diagnostic report
 
-Le rapport comporte, dans cet ordre :
+The report contains, in this order:
 
-1. ce qui fonctionne, en trois points maximum, sans complaisance ;
-2. le diagnostic principal, un seul, formulé comme une cause ;
-3. les diagnostics secondaires, cinq au maximum ;
-4. le plan de réparation ordonné, avec les chapitres concernés ;
-5. l'estimation de l'effort : retouche, réécriture partielle, restructuration.
+1. what works, three points at most, without indulgence;
+2. the primary diagnosis, one only, stated as a cause;
+3. secondary diagnoses, five at most;
+4. the ordered repair plan, with the chapters concerned;
+5. the effort estimate: touch-up, partial rewrite, restructuring.
 
 ## 8. Auto-critique
 
-Axes notés de 0 à 5 : justesse du diagnostic principal, remontée aux causes,
-absence de prescription cosmétique, hiérarchisation, faisabilité du plan,
-respect de l'intention de l'auteur.
+Score 0 to 5: accuracy of the primary diagnosis, tracing back to causes,
+absence of cosmetic prescription, ranking, feasibility of the plan, respect
+for the author's intent.
 
-Seuil : aucun axe sous 4. Un diagnostic médiocre coûte plus cher qu'aucun
-diagnostic.
+Threshold: no axis below 4. A mediocre diagnosis costs more than none.
 
 ## 9. Interfaces
 
-- Amont : `novel-architect`, `chapter-architect`, manuscrit complet.
-- Aval : `literary-editor`, `rewriting-engine`.
+- Upstream: `novel-architect`, `chapter-architect`, the full manuscript.
+- Downstream: `literary-editor`, `rewriting-engine`.

@@ -1,114 +1,113 @@
 ---
 name: continuity-manager
-description: Tient la mémoire externe d'un projet long : huit registres (personnages, savoir, objets, lieux, temps, corps, règles, langue), mise à jour par chapitre, audit en huit passages, classement des incohérences. À utiliser quand on ne sait plus qui sait quoi, ou avant toute livraison.
+description: Holds the external memory of a long project: eight registers (characters, knowledge, objects, places, time, bodies, rules, language), updated per chapter, an eight-pass audit, and a severity ranking for inconsistencies. Use when you no longer know who knows what, or before any delivery.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [registre-de-continuite, rapport-d-incoherences]
+  outputs: [continuity-register, inconsistency-report]
 ---
 
 # Continuity Manager
 
-Maintien de la cohérence globale sur toute la longueur d'un roman ou d'une
-saga. Ce skill est un système de mémoire externe, tenu à jour en continu.
+Maintains global consistency across the length of a novel or a saga. This
+skill is an external memory system, kept current continuously.
 
 ## 1. Doctrine
 
-L'incohérence n'est pas une faute d'inattention, c'est une conséquence
-mécanique de la longueur. Au-delà de cent mille mots, aucune mémoire humaine
-ne suffit. Seul un registre tenu à jour à chaque chapitre garantit la
-cohérence.
+Inconsistency is not carelessness; it is a mechanical consequence of length.
+Beyond a hundred thousand words, no human memory is sufficient. Only a
+register updated at every chapter guarantees consistency.
 
-Règle : le registre est mis à jour immédiatement après la rédaction d'un
-chapitre, jamais en fin de manuscrit.
+Rule: the register is updated immediately after a chapter is written, never at
+the end of the manuscript.
 
-## 2. Les huit registres
+## 2. The eight registers
 
-### 2.1 Personnages
-Nom exact, orthographe, surnoms, âge à chaque date clé, apparence, cicatrices,
-langue parlée, métier, statut marital, parents, ce qu'il possède.
+### 2.1 Characters
+Exact name, spelling, nicknames, age at each key date, appearance, scars,
+languages spoken, trade, marital status, parents, what they own.
 
-### 2.2 Savoir
-Qui sait quoi, depuis quel chapitre, et par quel canal. Registre le plus
-critique : la majorité des incohérences graves viennent d'un personnage qui
-utilise une information qu'il ne peut pas détenir.
+### 2.2 Knowledge
+Who knows what, since which chapter, and through which channel. The most
+critical register: most serious inconsistencies come from a character using
+information they cannot hold.
 
-### 2.3 Objets
-Objets significatifs : où ils se trouvent, qui les détient, leur état. Un
-objet perdu au chapitre 12 ne reparaît pas au chapitre 30 sans explication.
+### 2.3 Objects
+Significant objects: where they are, who holds them, their condition. An
+object lost in chapter 12 does not reappear in chapter 30 without explanation.
 
-### 2.4 Lieux
-Distances, durées de trajet, description figée des lieux récurrents, état de
-destruction ou de réparation.
+### 2.4 Places
+Distances, travel times, fixed descriptions of recurring places, state of
+destruction or repair.
 
-### 2.5 Temps
-Voir `timeline-manager`. Le registre de continuité ne stocke que les
-conséquences : âges, saisons, blessures en cours de guérison, grossesses,
-récoltes.
+### 2.5 Time
+See `timeline-manager`. The continuity register stores only the consequences:
+ages, seasons, injuries still healing, pregnancies, harvests.
 
-### 2.6 Corps
-Blessures, maladies, fatigue, cheveux, vêtements. Une blessure infligée doit
-gêner pendant une durée cohérente.
+### 2.6 Bodies
+Injuries, illnesses, exhaustion, hair, clothing. An injury inflicted must
+hinder for a coherent length of time.
 
-### 2.7 Règles du monde
-Toute règle énoncée, même en passant, devient contraignante. Le registre
-enregistre la formulation exacte et le chapitre.
+### 2.7 World rules
+Every rule stated, even in passing, becomes binding. The register records the
+exact wording and the chapter.
 
-### 2.8 Langue et style
-Décisions typographiques, orthographe des noms propres, choix de traduction,
-système de dialogue retenu, temps de narration.
+### 2.8 Language and style
+Typographic decisions, spelling of proper nouns, translation choices, dialogue
+system adopted, narrative tense.
 
-## 3. Protocole de mise à jour
+## 3. Update protocol
 
-Après chaque chapitre :
+After each chapter:
 
-1. Extraire toute affirmation factuelle nouvelle.
-2. Vérifier qu'elle ne contredit aucune entrée existante.
-3. En cas de contradiction, trancher : corriger le chapitre, ou modifier le
-   registre et lister les chapitres à reprendre.
-4. Ajouter les nouvelles entrées avec numéro de chapitre.
-5. Marquer les promesses ouvertes, à tenir avant la fin.
+1. Extract every new factual assertion.
+2. Verify it contradicts no existing entry.
+3. On contradiction, decide: correct the chapter, or change the register and
+   list the chapters to revisit.
+4. Add the new entries with their chapter number.
+5. Mark open promises, to be kept before the end.
 
-## 4. Audit complet
+## 4. Full audit
 
-À effectuer à la fin de chaque partie et avant toute livraison.
+Run at the end of each part and before any delivery.
 
-- Passage 1, noms : orthographe, cohérence des surnoms selon les locuteurs.
-- Passage 2, âges et dates : recalcul complet.
-- Passage 3, savoir : simulation par personnage, chapitre par chapitre.
-- Passage 4, objets : suivi de chaque objet nommé plus de deux fois.
-- Passage 5, géographie : durées de trajet et distances.
-- Passage 6, corps : blessures et guérisons.
-- Passage 7, règles : toute règle énoncée est-elle respectée.
-- Passage 8, promesses : toute promesse ouverte est-elle tenue ou volontairement
-  laissée ouverte pour un tome suivant.
+- Pass 1, names: spelling, consistency of nicknames by speaker.
+- Pass 2, ages and dates: full recalculation.
+- Pass 3, knowledge: simulation per character, chapter by chapter.
+- Pass 4, objects: track every object named more than twice.
+- Pass 5, geography: travel times and distances.
+- Pass 6, bodies: injuries and healing.
+- Pass 7, rules: is every stated rule respected.
+- Pass 8, promises: is every open promise kept, or deliberately left open for
+  a following volume.
 
-## 5. Classement des incohérences
+## 5. Inconsistency ranking
 
-| Gravité | Définition | Traitement |
+| Severity | Definition | Handling |
 |---|---|---|
-| Bloquante | rend l'intrigue impossible ou la révélation caduque | correction avant toute autre tâche |
-| Majeure | un lecteur attentif la verra et perdra confiance | correction avant livraison |
-| Mineure | détail contredit, sans effet sur l'intrigue | correction au passage suivant |
-| Assumée | écart volontaire, justifié dans la bible | consigné, non corrigé |
+| Blocking | makes the plot impossible or the reveal void | fixed before any other task |
+| Major | an attentive reader will see it and lose trust | fixed before delivery |
+| Minor | a detail contradicted, no effect on the plot | fixed at the next pass |
+| Accepted | a deliberate deviation, justified in the bible | recorded, not fixed |
 
-## 6. Cas particulier des sagas
+## 6. Sagas
 
-Registre commun à tous les tomes, avec colonne de tome. Voir `saga-architect`.
-Toute reprise d'un élément d'un tome antérieur exige la relecture de l'entrée
-d'origine, pas du souvenir qu'on en a.
+One register shared across volumes, with a volume column. See
+`saga-architect`. Reusing an element from an earlier volume requires rereading
+the original entry, not the memory of it.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : exhaustivité du registre, fraîcheur de la mise à jour,
-détection des contradictions, rigueur du registre de savoir, suivi des objets,
-suivi des corps, gestion des promesses, traçabilité des écarts assumés.
+Score 0 to 5: completeness of the register, freshness of the update,
+detection of contradictions, rigour of the knowledge register, object
+tracking, body tracking, promise management, traceability of accepted
+deviations.
 
-Seuil : aucun axe sous 4. La continuité n'admet pas la moyenne.
+Threshold: no axis below 4. Continuity does not accept an average.
 
 ## 8. Interfaces
 
-- Amont : tous les skills de production.
-- Aval : `quality/publication-review`.
+- Upstream: every production skill.
+- Downstream: `quality/publication-review`.

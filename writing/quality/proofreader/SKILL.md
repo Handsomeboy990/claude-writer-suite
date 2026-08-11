@@ -1,115 +1,118 @@
 ---
 name: proofreader
-description: Corrige l'orthographe, la grammaire et la typographie française en cinq passes spécialisées : accords, temps, ponctuation, homogénéité, lecture inversée. Relevé de corrections et signalement des cas douteux. À utiliser en dernière relecture, sans toucher au style.
+description: Corrects French spelling, grammar and typography in five specialised passes: agreement, tense, punctuation, uniformity, reverse reading. Produces a correction log and flags doubtful cases. Use as the last read before publication, without touching style.
 license: MIT
 metadata:
   category: quality
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [texte-corrige, releve-de-corrections]
+  outputs: [corrected-text, correction-log]
 ---
 
 # Proofreader
 
-Correction orthographique, grammaticale et typographique. Dernière barrière
-avant publication. Le correcteur ne touche ni au style ni à la structure.
+Spelling, grammar and typographic correction. The last barrier before
+publication. The proofreader touches neither style nor structure.
 
-## 1. Périmètre
+This skill is specific to French output. Its passes and its rule tables are
+French grammar and French typography. When `language.creative_output` is set
+to another language, sections 3 and 4 are replaced by that language's own
+conventions and the skill says so rather than applying French rules silently.
 
-Relève de ce skill :
+## 1. Scope
 
-- orthographe lexicale et grammaticale ;
-- accords, conjugaisons, concordance des temps ;
-- ponctuation et typographie française ;
-- homogénéité des conventions ;
-- coquilles, doublons, mots manquants.
+Belongs to this skill:
 
-Ne relève pas de ce skill : le choix des mots, le rythme, les images, la
-structure. Toute suggestion stylistique est transmise à `literary-editor`,
-jamais appliquée directement.
+- lexical and grammatical spelling;
+- agreement, conjugation, sequence of tenses;
+- punctuation and French typography;
+- uniformity of conventions;
+- typos, duplicates, missing words.
 
-## 2. Passes de correction
+Does not belong to this skill: word choice, rhythm, images, structure. Any
+stylistic suggestion goes to `literary-editor`, never applied directly.
 
-Cinq passes, une seule catégorie d'erreur par passe. La lecture globale ne
-détecte rien : c'est la lecture spécialisée qui trouve.
+## 2. Correction passes
 
-1. Passe accords : sujet et verbe, participes passés, adjectifs.
-2. Passe temps : concordance, passé simple contre imparfait, subjonctif.
-3. Passe ponctuation et typographie.
-4. Passe homogénéité : noms propres, majuscules, nombres, italiques.
-5. Passe lecture inversée : lire les phrases de la fin vers le début, ce qui
-   neutralise l'anticipation et révèle les coquilles.
+Five passes, one category of error per pass. A global read detects nothing;
+the specialised read is what finds.
 
-## 3. Typographie française
+1. Agreement pass: subject and verb, past participles, adjectives.
+2. Tense pass: sequence of tenses, passé simple against imparfait,
+   subjunctive.
+3. Punctuation and typography pass.
+4. Uniformity pass: proper nouns, capitals, numbers, italics.
+5. Reverse reading pass: read the sentences from the end to the beginning,
+   which neutralises anticipation and reveals typos.
 
-| Signe | Règle |
+## 3. French typography
+
+| Mark | Rule |
 |---|---|
-| Deux-points, point-virgule, interrogation, exclamation | espace insécable avant |
-| Guillemets français | espace insécable à l'intérieur |
-| Virgule et point | pas d'espace avant, une espace après |
-| Points de suspension | trois points en un seul caractère, collés au mot |
-| Parenthèses et crochets | pas d'espace intérieure |
-| Pourcentage, unités | espace insécable entre le nombre et le symbole |
-| Apostrophe | apostrophe typographique courbe |
-| Majuscules accentuées | accentuées, y compris en tête de phrase |
+| Colon, semicolon, question, exclamation | non-breaking space before |
+| French guillemets | non-breaking space inside |
+| Comma and full stop | no space before, one space after |
+| Ellipsis | three dots as a single character, attached to the word |
+| Parentheses and brackets | no interior space |
+| Percentage, units | non-breaking space between number and symbol |
+| Apostrophe | curly typographic apostrophe |
+| Accented capitals | accented, including at the start of a sentence |
 
-Nombres : en toutes lettres jusqu'à seize, puis en chiffres, sauf dates,
-heures, mesures et pages. Les siècles s'écrivent en petites capitales
-romaines dans l'édition, à défaut en chiffres romains.
+Numbers: spelled out up to sixteen, then in figures, except dates, times,
+measurements and page numbers. Centuries are set in roman small capitals in
+publishing, otherwise in roman numerals.
 
-Italiques : titres d'oeuvres, mots étrangers non intégrés, flashbacks selon la
-constitution. Jamais pour l'emphase.
+Italics: work titles, unassimilated foreign words, flashbacks per the
+constitution. Never for emphasis.
 
-## 4. Pièges fréquents du français romanesque
+## 4. Frequent traps in French fiction
 
-- Participe passé avec avoir et complément d'objet direct antéposé.
-- Accord du participe passé des verbes pronominaux.
-- Concordance après un verbe au passé simple : imparfait, plus-que-parfait.
-- Emploi du passé simple à la première personne, correct mais à surveiller.
-- Confusions : quelque et quel que, quoique et quoi que, davantage et
-  d'avantage, plus tôt et plutôt.
-- Ellipses du sujet en enchaînement de propositions.
-- Traits d'union des nombres et des impératifs pronominaux.
+- Past participle with avoir and a preceding direct object.
+- Past participle agreement for pronominal verbs.
+- Sequence of tenses after a passé simple: imparfait, plus-que-parfait.
+- Passé simple in the first person, correct but worth watching.
+- Confusions: quelque and quel que, quoique and quoi que, davantage and
+  d'avantage, plus tôt and plutôt.
+- Elided subjects across chained clauses.
+- Hyphens in numbers and in pronominal imperatives.
 
-## 5. Homogénéité
+## 5. Uniformity
 
-Tenir un relevé unique pour tout le manuscrit :
+Keep a single record for the whole manuscript:
 
-- orthographe exacte des noms propres et lieux ;
-- majuscules des institutions et des titres ;
-- écriture des heures et des dates ;
-- termes du lexique du monde ;
-- système de dialogue retenu ;
-- traitement des langues étrangères.
+- exact spelling of proper nouns and places;
+- capitalisation of institutions and titles;
+- how times and dates are written;
+- terms from the world lexicon;
+- the dialogue system adopted;
+- treatment of foreign languages.
 
-Ce relevé est partagé avec `continuity-manager`.
+This record is shared with `continuity-manager`.
 
-## 6. Contrôles de conformité constitution
+## 6. Constitution conformity checks
 
-- [ ] Aucun emoji.
-- [ ] Aucun tiret cadratin, y compris dans les tableaux et les titres.
-- [ ] Tirets de dialogue en demi-cadratin.
-- [ ] Guillemets français uniquement.
-- [ ] Aucune majuscule d'emphase.
-- [ ] Points d'exclamation comptés, un par page maximum.
-- [ ] Italiques réservés aux usages autorisés.
+- [ ] No emoji.
+- [ ] No em dash, tables and headings included.
+- [ ] Dialogue dashes are en dashes.
+- [ ] French guillemets only.
+- [ ] No emphatic capitals.
+- [ ] Exclamation marks counted, one per page maximum.
+- [ ] Italics restricted to permitted uses.
 
-## 7. Relevé de corrections
+## 7. Correction log
 
-Chaque correction est consignée : page, forme initiale, forme corrigée,
-règle appliquée. Les cas douteux sont signalés à l'auteur, non tranchés
-d'autorité.
+Every correction is recorded: page, original form, corrected form, rule
+applied. Doubtful cases are flagged to the author, not decided unilaterally.
 
 ## 8. Auto-critique
 
-Axes notés de 0 à 5 : exhaustivité, exactitude des règles invoquées,
-homogénéité, respect du périmètre, signalement des cas douteux, absence de
-correction stylistique non demandée.
+Score 0 to 5: completeness, accuracy of the rules invoked, uniformity, scope
+respected, doubtful cases flagged, absence of unrequested stylistic
+correction.
 
-Seuil : aucun axe sous 4. Une correction fausse est plus grave qu'une
-correction manquée.
+Threshold: no axis below 4. A wrong correction is worse than a missed one.
 
 ## 9. Interfaces
 
-- Amont : `literary-editor`.
-- Aval : `publication-review`.
+- Upstream: `literary-editor`.
+- Downstream: `publication-review`.

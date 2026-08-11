@@ -1,102 +1,103 @@
 ---
 name: publication-review
-description: Valide un manuscrit avant publication : sept contrôles (conformité, continuité, promesses, documentation, représentation, correction, appareil du livre), contrôles techniques de fichier, décision écrite et dossier de publication. À utiliser en toute fin de processus.
+description: Validates a manuscript before publication: seven checks (conformity, continuity, promises, research, representation, correction, book apparatus), technical file checks, a written decision and a publication dossier. Run at the very end of the process.
 license: MIT
 metadata:
   category: quality
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, continuity-manager, proofreader]
-  outputs: [rapport-de-validation, decision-de-publication]
+  outputs: [validation-report, publication-decision]
 ---
 
 # Publication Review
 
-Validation finale avant publication. Ce skill ne juge pas la qualité
-littéraire, déjà traitée par `literary-critic` : il vérifie qu'aucun
-défaut objectif ne subsiste et prononce une décision.
+Final validation before publication. This skill does not judge literary
+quality, already handled by `literary-critic`: it verifies that no objective
+defect remains, and issues a decision.
 
-## 1. Position dans le processus
+## 1. Position in the process
 
-Ce skill intervient en dernier, après `literary-editor`, `proofreader` et
-`continuity-manager`. Il ne modifie rien. Il valide, ou il renvoie avec une
-liste fermée de corrections.
+This skill runs last, after `literary-editor`, `proofreader` and
+`continuity-manager`. It changes nothing. It validates, or it sends the text
+back with a closed list of corrections.
 
-## 2. Les sept contrôles
+## 2. The seven checks
 
-### Contrôle 1 : conformité constitution
-Grille complète de `core/writing-constitution/resources/grille-de-conformite.md`.
-Un seul manquement bloque.
+### Check 1: constitution conformity
+The full grid from
+`core/writing-constitution/resources/grille-de-conformite.md`. A single
+failure blocks.
 
-### Contrôle 2 : continuité
-Rapport d'audit en huit passages fourni par `continuity-manager`, sans
-incohérence bloquante ni majeure.
+### Check 2: continuity
+The eight-pass audit report from `continuity-manager`, with no blocking or
+major inconsistency.
 
-### Contrôle 3 : promesses
-Toutes les promesses ouvertes sont tenues, ou volontairement reportées à un
-tome suivant et consignées comme telles.
+### Check 3: promises
+Every open promise is kept, or deliberately deferred to a following volume and
+recorded as such.
 
-### Contrôle 4 : documentation
-Toute affirmation de niveau 3 est adossée à une fiche source. Aucun
-anachronisme non assumé.
+### Check 4: research
+Every level 3 assertion is backed by a source sheet. No unaccepted
+anachronism.
 
-### Contrôle 5 : représentation
-Aucune culture, condition ou communauté traitée en décor, en caricature ou en
-raccourci. Contrôle croisé avec le profil de lecture concerné de
-`beta-reader`.
+### Check 5: representation
+No culture, condition or community treated as scenery, caricature or
+shortcut. Cross-checked against the relevant `beta-reader` profile.
 
-### Contrôle 6 : correction
-Relevé de `proofreader` clos, cas douteux tranchés par l'auteur.
+### Check 6: correction
+The `proofreader` log is closed, and doubtful cases have been decided by the
+author.
 
-### Contrôle 7 : appareil du livre
-Titre, titres de chapitre, table des matières, exergue, dédicace, mentions
-légales, remerciements, cohérence des noms dans le paratexte.
+### Check 7: book apparatus
+Title, chapter titles, table of contents, epigraph, dedication, legal notices,
+acknowledgements, consistency of names in the paratext.
 
-## 3. Contrôles techniques de fichier
+## 3. Technical file checks
 
-- Encodage UTF-8.
-- Aucun caractère de contrôle résiduel.
-- Aucun double espace, aucune espace en fin de ligne.
-- Sauts de page conformes, un chapitre par page impaire si l'édition l'exige.
-- Numérotation continue, aucun chapitre manquant ni dupliqué.
-- Styles homogènes : corps, dialogue, italique, exergue.
+- UTF-8 encoding.
+- No residual control characters.
+- No double spaces, no trailing whitespace.
+- Page breaks correct, one chapter per odd page where the edition requires it.
+- Continuous numbering, no missing or duplicated chapter.
+- Uniform styles: body, dialogue, italic, epigraph.
 
-## 4. Décision
+## 4. Decision
 
-| Décision | Condition |
+| Decision | Condition |
 |---|---|
-| Validé | les sept contrôles sont passés |
-| Validé sous réserve | uniquement des points mineurs, listés, à corriger avant tirage |
-| Renvoyé | au moins un contrôle bloquant échoué |
-| Suspendu | doute documentaire ou de représentation nécessitant une expertise externe |
+| Approved | the seven checks pass |
+| Approved with reservations | minor points only, listed, to fix before printing |
+| Returned | at least one blocking check failed |
+| Suspended | doubt over research or representation requiring outside expertise |
 
-La décision est écrite, datée, et accompagnée de la liste exhaustive des
-points restants. Aucune décision orale, aucune validation implicite.
+The decision is written, dated, and accompanied by the exhaustive list of
+remaining points. No verbal decision, no implicit approval.
 
-## 5. Dossier de publication
+## 5. Publication dossier
 
-Le dossier livré contient :
+The delivered dossier contains:
 
-1. le manuscrit final ;
-2. le rapport de validation ;
-3. le registre de continuité clos ;
-4. le dossier documentaire ;
-5. les grilles d'auto-critique des chapitres de bascule ;
-6. le journal des coupes et le journal de réécriture ;
-7. la liste des écarts assumés.
+1. the final manuscript;
+2. the validation report;
+3. the closed continuity register;
+4. the research dossier;
+5. the self-critique grids for the turning-point chapters;
+6. the cut log and the rewrite log;
+7. the list of accepted deviations.
 
-Ce dossier constitue la mémoire du livre. Il sert au tome suivant, à
-l'adaptation, et à toute contestation éditoriale.
+This dossier is the memory of the book. It serves the next volume, the
+adaptation, and any editorial dispute.
 
 ## 6. Auto-critique
 
-Axes notés de 0 à 5 : exhaustivité des contrôles, netteté de la décision,
-exactitude de la liste de points restants, complétude du dossier, absence de
-validation complaisante.
+Score 0 to 5: completeness of the checks, clarity of the decision, accuracy of
+the remaining-points list, completeness of the dossier, absence of indulgent
+approval.
 
-Seuil : aucun axe sous 4.
+Threshold: no axis below 4.
 
 ## 7. Interfaces
 
-- Amont : `literary-editor`, `proofreader`, `continuity-manager`,
+- Upstream: `literary-editor`, `proofreader`, `continuity-manager`,
   `literary-critic`, `beta-reader`.
-- Aval : publication.
+- Downstream: publication.

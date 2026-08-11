@@ -1,100 +1,100 @@
 ---
 name: literary-critic
-description: Rend un jugement éditorial sévère : grille pondérée sur dix critères, barème de décision, cinq lectures, rapport avec citations, verdict et recommandation unique. À utiliser pour savoir si un manuscrit est publiable et ce qu'il faut corriger en priorité.
+description: Delivers a severe editorial judgement: weighted grid across ten criteria, decision scale, five reads, a report supported by quotations, a verdict and one single recommendation. Use to find out whether a manuscript is publishable and what to fix first.
 license: MIT
 metadata:
   category: quality
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [rapport-critique, verdict-editorial]
+  outputs: [critical-report, editorial-verdict]
 ---
 
 # Literary Critic
 
-Analyse éditoriale sévère. Ce skill ne cherche pas à encourager. Il évalue le
-texte comme le ferait un comité de lecture qui reçoit deux mille manuscrits
-par an et en retient quatre.
+Severe editorial analysis. This skill does not set out to encourage. It
+assesses the text as a reading committee would, one that receives two thousand
+manuscripts a year and keeps four.
 
-## 1. Posture
+## 1. Stance
 
-- La sévérité est un service. Un compliment non mérité coûte des années à un
-  auteur.
-- Aucune complaisance, aucune cruauté gratuite. Chaque reproche est étayé par
-  une citation.
-- Le critique juge le livre écrit, jamais le livre que l'auteur voulait écrire.
-- Le critique se prononce, toujours. Un rapport sans verdict est inutile.
+- Severity is a service. An unearned compliment costs an author years.
+- No indulgence, no gratuitous cruelty. Every criticism is supported by a
+  quotation.
+- The critic judges the book that was written, never the book the author meant
+  to write.
+- The critic always reaches a verdict. A report with no verdict is useless.
 
-## 2. Grille d'évaluation éditoriale
+## 2. Editorial grid
 
-Dix critères, notés de 0 à 5, pondérés.
+Ten criteria, scored 0 to 5, weighted.
 
-| Critère | Poids | Question |
+| Criterion | Weight | Question |
 |---|---|---|
-| Nécessité | 3 | Pourquoi ce livre, et pourquoi maintenant ? |
-| Voix | 3 | La reconnaîtrait-on entre dix manuscrits ? |
-| Structure | 2 | La forme sert-elle le propos ? |
-| Personnages | 2 | Restent-ils en mémoire une semaine après ? |
-| Tenue de la langue | 2 | Le style est-il maîtrisé ou seulement correct ? |
-| Rythme | 2 | Où le lecteur repose-t-il le livre ? |
-| Originalité | 2 | Qu'est-ce qui n'a pas déjà été fait ? |
-| Cohérence | 1 | Le monde tient-il ? |
-| Émotion | 2 | Le texte produit-il un effet ou décrit-il un effet ? |
-| Fin | 1 | La fin est-elle méritée ? |
+| Necessity | 3 | Why this book, and why now? |
+| Voice | 3 | Would it be recognised among ten manuscripts? |
+| Structure | 2 | Does the form serve the subject? |
+| Characters | 2 | Do they stay in memory a week later? |
+| Command of language | 2 | Is the prose mastered, or merely correct? |
+| Rhythm | 2 | Where does the reader put the book down? |
+| Originality | 2 | What has not already been done? |
+| Consistency | 1 | Does the world hold? |
+| Emotion | 2 | Does the text produce an effect, or describe one? |
+| Ending | 1 | Is the ending earned? |
 
-Note pondérée sur 100.
+Weighted score out of 100.
 
-## 3. Barème de décision
+## 3. Decision scale
 
-| Note | Verdict |
+| Score | Verdict |
 |---|---|
-| 85 et plus | publiable en l'état, travail éditorial léger |
-| 70 à 84 | publiable après travail structurel ciblé |
-| 55 à 69 | potentiel réel, réécriture d'un tiers nécessaire |
-| 40 à 54 | manuscrit d'apprentissage, refonte complète |
-| moins de 40 | ne pas retravailler ce texte, écrire le suivant |
+| 85 and above | publishable as it stands, light editorial work |
+| 70 to 84 | publishable after targeted structural work |
+| 55 to 69 | real potential, a third needs rewriting |
+| 40 to 54 | an apprenticeship manuscript, complete rework |
+| below 40 | do not rework this text, write the next one |
 
-Le dernier verdict est le plus difficile à formuler et parfois le plus utile.
+The last verdict is the hardest to state and sometimes the most useful.
 
-## 4. Analyse en cinq lectures
+## 4. Analysis in five reads
 
-1. Lecture de plaisir : où décroche-t-on, sans analyser, en marquant l'heure
-   et la page.
-2. Lecture de structure : plan reconstitué à partir du texte seul, comparé au
-   plan annoncé.
-3. Lecture de langue : trente pages prélevées au hasard, analysées phrase à
-   phrase.
-4. Lecture de personnages : suivre un secondaire du début à la fin.
-5. Lecture de fin : relire les vingt dernières pages, puis les vingt
-   premières. La fin répond-elle au début ?
+1. Pleasure read: where does attention drop, without analysing, marking the
+   time and the page.
+2. Structure read: the outline reconstructed from the text alone, compared to
+   the outline as declared.
+3. Language read: thirty pages sampled at random, analysed sentence by
+   sentence.
+4. Character read: follow one secondary character from beginning to end.
+5. Ending read: reread the last twenty pages, then the first twenty. Does the
+   ending answer the beginning?
 
-## 5. Contenu du rapport
+## 5. Report contents
 
-1. Résumé objectif du livre en dix lignes, sans jugement. S'il est impossible
-   à écrire, le livre a un problème de projet.
-2. Ce que le livre réussit, avec citations. Trois points au maximum.
-3. Ce qui empêche la publication, par ordre de gravité, avec citations.
-4. Comparaison éditoriale : à quel rayon appartient ce livre, à côté de quels
-   titres, et supporte-t-il la comparaison ?
-5. Note pondérée et verdict.
-6. Recommandation unique : la seule chose à faire en premier.
+1. An objective summary of the book in ten lines, without judgement. If it
+   cannot be written, the book has a problem at the project level.
+2. What the book achieves, with quotations. Three points at most.
+3. What prevents publication, in order of severity, with quotations.
+4. Editorial comparison: which shelf this book belongs to, next to which
+   titles, and whether it survives the comparison.
+5. Weighted score and verdict.
+6. One single recommendation: the one thing to do first.
 
-## 6. Reproches interdits
+## 6. Forbidden criticisms
 
-- Reprocher le sujet plutôt que son traitement.
-- Reprocher à un genre d'être ce genre.
-- Reprocher une intention non réalisée sans montrer où elle échoue.
-- Substituer ses propres préférences à un jugement de qualité.
-- Formuler un reproche sans citation.
+- Objecting to the subject rather than its treatment.
+- Objecting to a genre for being that genre.
+- Objecting to an unrealised intention without showing where it fails.
+- Substituting personal preference for a judgement of quality.
+- Making a criticism with no quotation.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : étaiement par citations, hiérarchisation, absence de
-préférence personnelle déguisée, netteté du verdict, utilité de la
-recommandation unique, respect du projet de l'auteur.
+Score 0 to 5: support by quotation, ranking, absence of disguised personal
+preference, clarity of the verdict, usefulness of the single recommendation,
+respect for the author's project.
 
-Seuil : aucun axe sous 4.
+Threshold: no axis below 4.
 
 ## 8. Interfaces
 
-- Amont : manuscrit complet, rapport de `story-doctor`.
-- Aval : `publication-review`, `rewriting-engine`.
+- Upstream: the complete manuscript, the `story-doctor` report.
+- Downstream: `publication-review`, `rewriting-engine`.

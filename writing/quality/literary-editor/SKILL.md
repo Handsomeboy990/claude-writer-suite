@@ -1,123 +1,123 @@
 ---
 name: literary-editor
-description: Améliore le style en six passes : paragraphes, verbes, adverbes et adjectifs, rythme, images, conformité. Table des corrections fréquentes, note éditoriale, journal des coupes. À utiliser pour resserrer un texte correct mais fade, sans détruire la voix de l'auteur.
+description: Improves prose in six passes: paragraphs, verbs, adverbs and adjectives, rhythm, images, conformity. Table of frequent corrections, editorial note, log of cuts. Use to tighten a text that is correct but flat, without destroying the author's voice.
 license: MIT
 metadata:
   category: quality
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, self-critique-protocol]
-  outputs: [texte-edite, note-editoriale, journal-des-coupes]
+  outputs: [edited-text, editorial-note, cut-log]
 ---
 
 # Literary Editor
 
-Amélioration du style au niveau de la phrase, du paragraphe et de la page.
-L'éditeur littéraire ne réécrit pas à sa place : il retire ce qui empêche le
-texte d'être lui-même.
+Improvement of style at the level of the sentence, the paragraph and the page.
+A literary editor does not rewrite in the author's place: they remove what
+prevents the text from being itself.
 
-## 1. Principe
+## 1. Principle
 
-Éditer, c'est enlever. Quatre-vingts pour cent des améliorations de style sont
-des suppressions. Une phrase améliorée par ajout doit être justifiée.
+Editing is removal. Eighty percent of style improvements are deletions. A
+sentence improved by addition must be justified.
 
-Second principe : préserver la voix. Toute intervention qui rend le texte plus
-correct et moins reconnaissable est une mauvaise intervention.
+Second principle: preserve the voice. Any intervention that makes the text
+more correct and less recognisable is a bad intervention.
 
-## 2. Passes d'édition
+## 2. Editing passes
 
-Six passes, dans cet ordre. Ne jamais mélanger deux passes.
+Six passes, in this order. Never mix two passes.
 
-### Passe 1 : structure du paragraphe
-- Le paragraphe a-t-il une unité ?
-- La première phrase engage-t-elle, la dernière relance-t-elle ?
-- Y a-t-il des paragraphes de plus de douze lignes en scène tendue ?
-- Peut-on couper le premier ou le dernier paragraphe de la scène ?
+### Pass 1: paragraph structure
+- Does the paragraph have unity?
+- Does the first sentence engage, and the last one relaunch?
+- Are there paragraphs longer than twelve lines in a tense scene?
+- Can the first or last paragraph of the scene be cut?
 
-### Passe 2 : verbes
-- Remplacer les constructions avec être et avoir par des verbes d'action
-  précis lorsque le sens le permet.
-- Supprimer les verbes de perception qui filtrent : il vit que, il sentit
-  que, il remarqua que.
-- Traquer les verbes faibles suivis d'un complément qui fait le travail :
-  faire un mouvement devient bouger, pousser un cri devient crier.
-- Préférer la voix active, sauf lorsque le passif place l'agent en fin de
-  phrase à dessein.
+### Pass 2: verbs
+- Replace constructions with être and avoir by precise action verbs where the
+  sense allows.
+- Remove perception verbs that filter: il vit que, il sentit que, il remarqua
+  que.
+- Hunt weak verbs followed by a complement doing the work: faire un mouvement
+  becomes bouger, pousser un cri becomes crier.
+- Prefer the active voice, except where the passive places the agent at the
+  end of the sentence deliberately.
 
-### Passe 3 : adverbes et adjectifs
-- Un adverbe en -ment par page au maximum.
-- Un seul adjectif par substantif, sauf effet recherché et rare.
-- Supprimer les intensifieurs : très, vraiment, tout à fait, absolument,
+### Pass 3: adverbs and adjectives
+- One adverb in -ment per page at most.
+- One adjective per noun, except for a rare deliberate effect.
+- Remove intensifiers: très, vraiment, tout à fait, absolument,
   littéralement.
-- Supprimer les modalisateurs de recul : un peu, presque, comme, semblait,
-  paraissait, lorsqu'ils affaiblissent une affirmation sans nuance utile.
+- Remove hedges: un peu, presque, comme, semblait, paraissait, when they
+  weaken a statement without adding a useful nuance.
 
-### Passe 4 : rythme
-- Lire à voix haute. Toute phrase qui oblige à reprendre son souffle au
-  mauvais endroit est coupée.
-- Varier les longueurs. Trois phrases consécutives de même longueur créent
-  une berceuse.
-- Vérifier les fins de paragraphe : le dernier mot est la position la plus
-  forte, il doit porter.
-- Éliminer les répétitions sonores involontaires et les rimes internes.
+### Pass 4: rhythm
+- Read aloud. Any sentence that forces a breath in the wrong place is cut.
+- Vary lengths. Three consecutive sentences of the same length create a
+  lullaby.
+- Check paragraph endings: the last word is the strongest position and must
+  carry.
+- Eliminate involuntary sound repetitions and internal rhymes.
 
-### Passe 5 : images
-- Une image par page, forte, plutôt que trois images correctes.
-- Vérifier la cohérence des métaphores filées : aucune image ne doit changer
-  de domaine en cours de route.
-- Supprimer les comparaisons qui expliquent au lieu de montrer.
-- Vérifier que l'image appartient au monde du personnage : un paysan ne
-  compare pas à un logiciel.
+### Pass 5: images
+- One strong image per page rather than three correct ones.
+- Check sustained metaphors for consistency: no image may change domain
+  midway.
+- Remove comparisons that explain instead of showing.
+- Check that the image belongs to the character's world: a farmer does not
+  compare something to a software release.
 
-### Passe 6 : conformité
-Appliquer la grille de la constitution : emoji, tiret cadratin, dialogues,
-flashbacks, titres, majuscules d'emphase, points d'exclamation.
+### Pass 6: conformity
+Apply the constitution grid: emoji, em dash, dialogue, flashbacks, titles,
+emphatic capitals, exclamation marks.
 
-## 3. Table des corrections fréquentes
+## 3. Table of frequent corrections
 
-| Défaut | Exemple | Correction |
+| Defect | Example | Correction |
 |---|---|---|
-| Filtre de perception | Il sentit que la pièce était froide. | La pièce était froide. |
-| Émotion nommée | Elle était en colère. | Elle rangea les couverts un par un, sans les regarder. |
-| Adverbe béquille | Il dit calmement. | Il dit, et reposa la tasse. |
-| Redondance | Il hocha la tête pour approuver. | Il hocha la tête. |
-| Intensifieur | C'était vraiment très difficile. | C'était difficile. |
-| Passif inutile | La lettre fut lue par Sabine. | Sabine lut la lettre. |
-| Métaphore usée | Un silence de mort. | Personne ne toucha à son verre. |
-| Sur-explication | Elle refusa, car elle avait peur d'être trahie. | Elle refusa. |
+| Perception filter | Il sentit que la pièce était froide. | La pièce était froide. |
+| Named emotion | Elle était en colère. | Elle rangea les couverts un par un, sans les regarder. |
+| Crutch adverb | Il dit calmement. | Il dit, et reposa la tasse. |
+| Redundancy | Il hocha la tête pour approuver. | Il hocha la tête. |
+| Intensifier | C'était vraiment très difficile. | C'était difficile. |
+| Useless passive | La lettre fut lue par Sabine. | Sabine lut la lettre. |
+| Worn metaphor | Un silence de mort. | Personne ne toucha à son verre. |
+| Over-explanation | Elle refusa, car elle avait peur d'être trahie. | Elle refusa. |
 
-## 4. Note éditoriale
+## 4. Editorial note
 
-Toute intervention est accompagnée d'une note à l'auteur comportant :
+Every intervention comes with a note to the author containing:
 
-1. la qualité dominante du texte, identifiée précisément ;
-2. les trois défauts récurrents, avec occurrences chiffrées ;
-3. les principes retenus pour les coupes ;
-4. les passages où l'éditeur s'est abstenu, et pourquoi.
+1. the dominant quality of the text, identified precisely;
+2. the three recurring defects, with counted occurrences;
+3. the principles applied when cutting;
+4. the passages where the editor held back, and why.
 
-## 5. Journal des coupes
+## 5. Cut log
 
-Toute suppression supérieure à un paragraphe est consignée avec sa
-justification. L'auteur doit pouvoir restaurer en connaissance de cause.
+Every deletion longer than a paragraph is recorded with its justification. The
+author must be able to restore it knowingly.
 
-## 6. Limites de l'intervention
+## 6. Limits of the intervention
 
-L'éditeur n'a pas autorité sur :
+The editor has no authority over:
 
-- les choix structurels, qui relèvent de `story-doctor` ;
-- la véracité documentaire, qui relève de `research-director` ;
-- l'orthographe et la typographie fine, qui relèvent de `proofreader`.
+- structural choices, which belong to `story-doctor`;
+- factual accuracy, which belongs to `research-director`;
+- spelling and fine typography, which belong to `proofreader`.
 
-Il ne modifie jamais un dialogue sans vérifier la fiche du personnage.
+They never modify a line of dialogue without checking the character sheet.
 
 ## 7. Auto-critique
 
-Axes notés de 0 à 5 : gain de clarté, préservation de la voix, taux de
-suppression pertinent, absence de normalisation, justesse des images
-conservées, conformité, qualité de la note éditoriale.
+Score 0 to 5: gain in clarity, voice preserved, appropriate deletion rate,
+absence of normalisation, accuracy of the images kept, conformity, quality of
+the editorial note.
 
-Seuil : aucun axe sous 4 sur l'axe préservation de la voix.
+Threshold: no axis below 4 on the voice preservation axis.
 
 ## 8. Interfaces
 
-- Amont : `story-doctor`, texte révisé par `self-critique-protocol`.
-- Aval : `proofreader`, `publication-review`.
+- Upstream: `story-doctor`, a text already through
+  `self-critique-protocol`.
+- Downstream: `proofreader`, `publication-review`.

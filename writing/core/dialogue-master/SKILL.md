@@ -1,25 +1,30 @@
 ---
 name: dialogue-master
-description: Écrit et valide les dialogues aux standards de l'édition française : guillemets, tirets demi-cadratin, incises, attribution par l'action, conflit d'objectifs, sous-texte, différenciation des voix. À utiliser pour écrire un dialogue, corriger sa typographie, ou quand tous les personnages parlent pareil.
+description: Writes and validates dialogue to French publishing standards: guillemets, en dashes, incises, attribution by action, conflict of objectives, subtext, voice differentiation, multilingual handling. Use to write dialogue, correct its typography, or when every character speaks alike.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [dialogues-conformes, rapport-de-voix]
+  outputs: [conformant-dialogue, voice-report]
 ---
 
 # Dialogue Master
 
-Écriture et validation des dialogues selon les standards de l'édition
-française. Ce skill a autorité sur toute réplique produite par la suite.
+Writing and validating dialogue to French publishing standards. This skill has
+authority over every line of speech produced by the tree.
 
-## 1. Typographie du dialogue
+Sections 1 and 2 are French typographic conventions. Sections 3, 4 and 6 are
+structural and apply in any output language. When
+`language.creative_output` is not French, replace sections 1 and 2 with the
+target language's own conventions, stated explicitly rather than assumed.
 
-### 1.1 Système principal
+## 1. Dialogue typography
 
-Guillemets français en ouverture et en fermeture du dialogue, tiret demi
-cadratin en tête de chaque réplique suivante, un alinéa par locuteur.
+### 1.1 Main system
+
+French guillemets to open and close the dialogue, an en dash at the head of
+each following line, one paragraph per speaker.
 
 ```
 « Tu as vu l'heure ?
@@ -28,128 +33,126 @@ cadratin en tête de chaque réplique suivante, un alinéa par locuteur.
 – Je suis rentré quand même. »
 ```
 
-Espaces insécables à l'intérieur des guillemets et avant les signes doubles.
+Non-breaking spaces inside the guillemets and before double punctuation marks.
 
-### 1.2 Système allégé
+### 1.2 Light system
 
-Tirets seuls, sans guillemets. Autorisé, mais tenu sur l'intégralité du
-manuscrit. Aucun mélange des deux systèmes.
+Dashes alone, without guillemets. Permitted, but held across the whole
+manuscript. The two systems are never mixed.
 
-### 1.3 Interdits
+### 1.3 Prohibitions
 
-- Guillemets droits ou anglais.
-- Tiret cadratin.
-- Deux locuteurs dans le même paragraphe.
-- Réplique ouverte par une majuscule après une incise qui n'a pas fermé la
-  phrase.
+- Straight or English quotation marks.
+- Em dash.
+- Two speakers in the same paragraph.
+- A line opened with a capital after an incise that did not end the sentence.
 
 ## 2. Incises
 
-### 2.1 Forme
+### 2.1 Form
 
-Entre virgules, avec inversion du sujet et du verbe.
+Between commas, with subject and verb inverted.
 
 ```
 « Je pars demain, dit-elle.
 – Demain, répéta-t-il, comme si le mot appartenait à une autre langue.
 ```
 
-Ponctuation : si la réplique se termine par un point d'interrogation ou
-d'exclamation, ces signes remplacent la virgule mais l'incise reste en
-minuscule.
+Punctuation: if the line ends with a question or exclamation mark, that mark
+replaces the comma but the incise stays lowercase.
 
 ```
 « Tu pars ? demanda-t-il.
 ```
 
-### 2.2 Économie
+### 2.2 Economy
 
-- Verbes neutres dans quatre cas sur cinq : dit, répondit, demanda, reprit,
+- Neutral verbs in four cases out of five: dit, répondit, demanda, reprit,
   ajouta.
-- Aucun adverbe de manière accolé au verbe de parole.
-- Aucun verbe impossible : on ne sourit pas une phrase, on ne hausse pas une
-  réplique.
-- Une incise sur trois répliques au plus.
+- No manner adverb attached to a speech verb.
+- No impossible verb: one does not smile a sentence, nor shrug a line.
+- One incise per three lines at most.
 
-### 2.3 Attribution par l'action
+### 2.3 Attribution by action
 
-Remplacer l'incise par un geste porteur d'information. Le geste doit modifier
-la scène, pas la meubler. Un personnage qui hoche la tête n'apporte rien, un
-personnage qui repose sa tasse sans avoir bu apporte tout.
+Replace the incise with a gesture that carries information. The gesture must
+change the scene, not furnish it. A character who nods adds nothing; a
+character who sets down their cup without having drunk adds everything.
 
-## 3. Construction dramatique du dialogue
+## 3. Dramatic construction
 
-### 3.1 Loi fondamentale
+### 3.1 Fundamental law
 
-Un dialogue est un conflit d'objectifs mené par la parole. Chaque personnage
-veut obtenir quelque chose de l'autre. Si les deux veulent la même chose et
-sont d'accord, la scène n'a pas lieu d'être écrite.
+A dialogue is a conflict of objectives conducted through speech. Each
+character wants something from the other. If both want the same thing and
+agree, the scene does not need to be written.
 
 ### 3.2 Techniques
 
-- Esquive : répondre à côté de la question. Trois esquives consécutives créent
-  une tension immédiate.
-- Retard : différer l'information attendue par une action ou une digression.
-- Reprise : reprendre le mot de l'autre pour le retourner.
-- Interruption : couper avant la fin, marquée par une suspension.
-- Silence : la ligne de narration remplace la réponse. Le silence est une
-  réplique.
-- Asymétrie : un personnage parle par phrases longues, l'autre par monosyllabes.
+- Evasion: answering beside the question. Three consecutive evasions create
+  immediate tension.
+- Delay: deferring the expected information with an action or a digression.
+- Pickup: taking the other's word and turning it around.
+- Interruption: cutting before the end, marked by a suspension.
+- Silence: a line of narration replaces the answer. Silence is a reply.
+- Asymmetry: one character speaks in long sentences, the other in
+  monosyllables.
 
-### 3.3 Ce qu'il faut couper
+### 3.3 What to cut
 
-Salutations, présentations, confirmations, répétitions de ce que le lecteur
-sait, politesses sans enjeu, appels du prénom en début de réplique.
+Greetings, introductions, confirmations, repetitions of what the reader knows,
+courtesies with no stake, first names used at the head of a line.
 
-## 4. Différenciation des voix
+## 4. Voice differentiation
 
-Sept leviers, à choisir par personnage et à consigner :
+Seven levers, chosen per character and recorded:
 
-1. longueur de phrase ;
-2. registre, du soutenu au familier, sans transcription phonétique ;
-3. champ lexical professionnel ou social ;
-4. rapport à la question : pose des questions ou n'en pose jamais ;
-5. rapport au conditionnel et à la politesse ;
-6. tic de syntaxe, discret, employé au plus une fois par page ;
-7. rythme, sec ou ample.
+1. sentence length;
+2. register, from formal to familiar, without phonetic transcription;
+3. professional or social vocabulary;
+4. relation to questions: asks them, or never does;
+5. relation to the conditional and to politeness;
+6. a syntactic tic, discreet, used at most once per page;
+7. rhythm, clipped or ample.
 
-Test obligatoire : masquer les incises. Si l'attribution devient impossible,
-la différenciation a échoué.
+Mandatory test: mask the incises. If attribution becomes impossible, the
+differentiation has failed.
 
-## 5. Multilinguisme
+## 5. Multilingual dialogue
 
-- Une phrase en langue étrangère doit être comprise par le contexte immédiat.
-- Pas de traduction entre parenthèses.
-- Pas d'italique systématique si la langue est celle du milieu représenté :
-  l'italique exotise.
-- Un personnage qui pense dans une langue et parle dans une autre le montre
-  par la syntaxe, pas par des mots isolés.
+- A sentence in a foreign language must be understood from its immediate
+  context.
+- No translation in parentheses.
+- No systematic italic when the language is that of the milieu represented:
+  the italic exoticises it.
+- A character who thinks in one language and speaks another shows it through
+  syntax, not through isolated words.
 
-## 6. Monologue et discours long
+## 6. Monologue and long speech
 
-Un discours de plus de dix lignes doit être interrompu au moins une fois par
-une réaction physique de l'auditoire, un changement de lieu, ou une objection.
-Sinon, il devient une tribune et le lecteur décroche.
+A speech longer than ten lines must be interrupted at least once by a physical
+reaction from the listeners, a change of place, or an objection. Otherwise it
+becomes a platform and the reader disengages.
 
-## 7. Contrôles de sortie
+## 7. Exit checks
 
-- Typographie conforme.
-- Un alinéa par locuteur.
-- Verbe de parole neutre majoritaire.
-- Aucun adverbe de manière sur verbe de parole.
-- Test de voix passé.
-- Aucune information transmise uniquement pour le lecteur.
-- Chaque réplique modifie l'équilibre de la scène.
+- Typography conformant.
+- One paragraph per speaker.
+- Neutral speech verbs in the majority.
+- No manner adverb on a speech verb.
+- Voice test passed.
+- No information delivered solely for the reader.
+- Every line shifts the balance of the scene.
 
 ## 8. Auto-critique
 
-Axes notés de 0 à 5 : conformité typographique, différenciation des voix,
-sous-texte, économie, rythme, crédibilité orale, absence d'exposition,
-justesse des incises, tension, mémorabilité d'au moins une réplique.
+Score 0 to 5: typographic conformity, voice differentiation, subtext, economy,
+rhythm, spoken credibility, absence of exposition, accuracy of incises,
+tension, at least one memorable line.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8.
+Threshold: no axis below 3, average at least 3.8.
 
 ## 9. Interfaces
 
-- Amont : `character-psychologist`, `scene-builder`.
-- Contrôle : `quality/proofreader`, `quality/literary-editor`.
+- Upstream: `character-psychologist`, `scene-builder`.
+- Review: `quality/proofreader`, `quality/literary-editor`.

@@ -11,6 +11,19 @@ request contents.
 - Depends on: engineering-core.
 - Downstream: release-readiness, project-continuity.
 
-Author is always `Handsomeboy990 <lauretchacha@gmail.com>`. No
-`Co-authored-by`, no generator mention, no assistant mention, anywhere in the
-history or the pull request.
+## Configuration
+
+| Field | Required | Effect when missing |
+|---|---|---|
+| `identity.author_name` | yes | the skill stops and names the field |
+| `identity.author_email` | yes | the skill stops and names the field |
+| `git.commit_convention` | no | defaults to `conventional` |
+| `git.branch_convention` | no | defaults to `type/short-kebab-description` |
+| `git.default_branch` | no | defaults to `main` |
+
+Set them with `bash install.sh --configure`. Field reference in
+`config/README.md`. A repository that already has conventions of its own wins
+over the last three: the skill reads `git log` before it reads the file.
+
+No `Co-authored-by`, no generator mention, no assistant mention, anywhere in
+the history or the pull request. That rule is not configurable.

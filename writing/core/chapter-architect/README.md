@@ -1,10 +1,21 @@
 # chapter-architect
 
-Découpage d'un roman en chapitres : fonction dramatique, valeurs d'entrée et
-de sortie, ouvertures, clôtures, longueur, alternance des points de vue,
-titres travaillés.
+Breaking a novel into chapters: dramatic function, entry and exit values,
+openings, closings, length, point of view alternation, worked titles.
 
-- Entrées : plan général, calendrier des révélations, points de vue autorisés.
-- Sorties : découpage en chapitres, fiches chapitre, titres.
-- Dépendances : writing-constitution, novel-architect.
-- Aval : scene-builder, narrator.
+- Inputs: master outline, reveal schedule, permitted points of view.
+- Outputs: chapter breakdown, chapter sheets, titles.
+- Depends on: `writing-constitution`, `novel-architect`.
+- Downstream: `scene-builder`, `narrator`.
+
+## When to use
+
+To organise chapters, decide where to cut, or replace generic titles.
+
+## When not to use
+
+Before the master outline exists. Run `novel-architect` first.
+
+## Configuration
+
+`language.creative_output` sets the output language.

@@ -1,164 +1,160 @@
 ---
 name: novel-architect
-description: Construit l'architecture globale d'un roman : prémisse, question dramatique, promesses de lecture, structure et points de bascule, arcs des personnages, sous-intrigues, calendrier des révélations, plan chapitre par chapitre. À utiliser au démarrage d'un roman, ou quand un manuscrit en cours perd sa direction.
+description: Builds the global architecture of a novel: premise, dramatic question, reading promises, structure and turning points, character arcs, subplots, reveal schedule, chapter by chapter outline. Use at the start of a novel, or when a manuscript in progress has lost its direction.
 license: MIT
 metadata:
   category: core
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution]
-  outputs: [bible-du-roman, plan-general, arc-des-personnages, calendrier-des-revelations]
+  outputs: [novel-bible, master-outline, character-arcs, reveal-schedule]
 ---
 
 # Novel Architect
 
-Responsable de la construction globale d'un roman : de la prémisse au plan
-chapitre par chapitre. Ce skill décide de la forme avant que la moindre ligne
-de prose ne soit écrite.
+Owns the global construction of a novel, from premise to chapter by chapter
+outline. This skill decides the shape before a single line of prose is
+written.
 
-## 1. Quand l'utiliser
+## 1. When to use it
 
-- Au démarrage d'un projet long.
-- Quand un manuscrit en cours perd sa direction.
-- Avant toute décision de restructuration majeure.
+- At the start of a long project.
+- When a manuscript in progress has lost its direction.
+- Before any major restructuring decision.
 
-## 2. Entrées requises
+## 2. Required inputs
 
-Si l'une de ces entrées manque, la produire avant d'aller plus loin.
+If any of these is missing, produce it before going further.
 
-- Prémisse en une phrase.
-- Genre et sous-genre visés.
-- Longueur cible en signes ou en mots.
-- Public visé et niveau d'exigence.
-- Ton dominant et modèle de comparaison éditoriale.
+- Premise, in one sentence.
+- Genre and subgenre.
+- Target length in characters or words.
+- Intended readership and level of demand.
+- Dominant tone, and an editorial comparison title.
 
-## 3. Protocole
+## 3. Protocol
 
-### Étape 1 : verrouiller la prémisse
+### Step 1: lock the premise
 
-Format imposé : `Quand [élément déclencheur], [protagoniste caractérisé] doit
-[objectif concret] sous peine de [conséquence irréversible], mais [obstacle
-structurel].`
+Required form: `When [inciting element], [characterised protagonist] must
+[concrete objective] or [irreversible consequence], but [structural
+obstacle].`
 
-Une prémisse est valide si elle contient un désir mesurable, une échéance et
-un antagonisme non accidentel. Si elle tient sans le protagoniste nommé, elle
-est trop générique.
+A premise is valid if it contains a measurable desire, a deadline and a
+non-accidental antagonism. If it still stands with the protagonist unnamed, it
+is too generic.
 
-### Étape 2 : établir la promesse de lecture
+### Step 2: establish the reading promise
 
-Écrire les trois promesses faites au lecteur dans les cinquante premières
-pages : promesse d'intrigue, promesse émotionnelle, promesse de monde.
-Toute fin qui ne solde pas ces trois promesses sera perçue comme une trahison,
-quelle que soit sa qualité intrinsèque.
+Write the three promises made to the reader in the first fifty pages: plot
+promise, emotional promise, world promise. Any ending that fails to settle all
+three will be felt as a betrayal, whatever its intrinsic quality.
 
-### Étape 3 : formuler la question dramatique
+### Step 3: formulate the dramatic question
 
-Une seule question, fermée, à laquelle le dernier chapitre répond par oui ou
-par non. Exemple : `Nkusu retrouvera-t-il le nom de son père avant que la
-concession soit vendue ?` Toutes les sous-intrigues sont ensuite évaluées à
-l'aune de cette question.
+One closed question, which the final chapter answers yes or no. For example:
+`Nkusu retrouvera-t-il le nom de son père avant que la concession soit
+vendue ?` Every subplot is then judged against that question.
 
-### Étape 4 : choisir la structure
+### Step 4: choose the structure
 
-| Structure | Usage recommandé | Risque principal |
+| Structure | Recommended for | Main risk |
 |---|---|---|
-| Trois actes | intrigue orientée objectif | milieu mou |
-| Quatre parties | thriller, mystère | mécanique visible |
-| Kishotenketsu | récit contemplatif, littérature blanche | absence de tension |
-| Structure en spirale | saga, retour cyclique des motifs | répétition perçue |
-| Récit enchâssé | mémoire, transmission, enquête intime | perte du fil principal |
-| Chronologie éclatée | trauma, révélation différée | confusion du lecteur |
+| Three acts | goal-driven plot | soft middle |
+| Four parts | thriller, mystery | visible machinery |
+| Kishotenketsu | contemplative narrative, literary fiction | absence of tension |
+| Spiral | saga, cyclical return of motifs | perceived repetition |
+| Frame narrative | memory, transmission, intimate investigation | loss of the main thread |
+| Fractured chronology | trauma, delayed revelation | reader confusion |
 
-Le choix est écrit et justifié dans la bible. Il n'est pas révisable sans
-passage par `quality/story-doctor`.
+The choice is written down and justified in the bible. It is not revisable
+without going through `quality/story-doctor`.
 
-### Étape 5 : poser les points de bascule
+### Step 5: place the turning points
 
-Six points obligatoires, situés en pourcentage de la longueur totale :
+Six mandatory points, positioned as a percentage of total length:
 
-1. Image d'ouverture et état initial : 0 à 3 pour cent.
-2. Élément déclencheur : 8 à 12 pour cent.
-3. Franchissement du seuil, le retour devient impossible : 20 à 25 pour cent.
-4. Point médian, renversement de l'information ou du rapport de force :
-   50 pour cent.
-5. Effondrement, le protagoniste perd ce qu'il croyait acquis : 70 à 75 pour cent.
-6. Climax et résolution de la question dramatique : 88 à 96 pour cent.
+1. Opening image and initial state: 0 to 3 percent.
+2. Inciting incident: 8 to 12 percent.
+3. Crossing the threshold, return becomes impossible: 20 to 25 percent.
+4. Midpoint, reversal of information or of the balance of power: 50 percent.
+5. Collapse, the protagonist loses what they believed secured: 70 to 75
+   percent.
+6. Climax and resolution of the dramatic question: 88 to 96 percent.
 
-Tout écart supérieur à cinq points de pourcentage doit être justifié par le
+Any deviation greater than five percentage points must be justified by the
 genre.
 
-### Étape 6 : construire l'arc du protagoniste
+### Step 6: build the protagonist arc
 
-Renseigner les huit champs suivants :
+Fill in the following eight fields:
 
-- désir conscient ;
-- besoin inconscient ;
-- blessure fondatrice ;
-- mensonge que le personnage tient pour vrai ;
-- preuve du mensonge dans le monde du récit ;
-- scène de coût, où le mensonge lui fait perdre quelque chose ;
-- scène de choix, où il peut abandonner le mensonge ;
-- état final, gagnant ou perdant, mais transformé.
+- conscious desire;
+- unconscious need;
+- founding wound;
+- the lie the character holds as true;
+- the proof of the lie inside the world of the narrative;
+- the cost scene, where the lie makes them lose something;
+- the choice scene, where they can abandon the lie;
+- final state, winning or losing, but transformed.
 
-L'arc de l'antagoniste est construit avec les mêmes champs. Un antagoniste
-sans besoin propre est un obstacle, pas un personnage.
+The antagonist arc uses the same eight fields. An antagonist with no need of
+their own is an obstacle, not a character.
 
-### Étape 7 : cartographier les sous-intrigues
+### Step 7: map the subplots
 
-Trois à cinq sous-intrigues au maximum pour un roman standard. Chacune est
-définie par : porteur, objectif, point de contact avec l'intrigue principale,
-chapitre de résolution. Une sous-intrigue qui ne modifie jamais l'intrigue
-principale est supprimée ou fusionnée.
+Three to five subplots at most for a standard novel. Each is defined by:
+carrier, objective, point of contact with the main plot, chapter of
+resolution. A subplot that never alters the main plot is cut or merged.
 
-### Étape 8 : établir le calendrier des révélations
+### Step 8: build the reveal schedule
 
-Tableau à quatre colonnes : information, personnage qui la détient, lecteur
-informé au chapitre N, personnage informé au chapitre M. Le décalage entre N
-et M produit soit du suspense, soit de la surprise. Le choix est délibéré,
-jamais subi.
+A four column table: information, character who holds it, reader informed at
+chapter N, character informed at chapter M. The gap between N and M produces
+either suspense or surprise. The choice is deliberate, never accidental.
 
-### Étape 9 : découper en chapitres
+### Step 9: break into chapters
 
-Produire une ligne par chapitre : numéro, titre provisoire, point de vue,
-lieu, date interne, fonction dramatique, valeur d'entrée et valeur de sortie,
-révélation éventuelle. Un chapitre dont la valeur d'entrée égale la valeur de
-sortie est un chapitre mort.
+Produce one line per chapter: number, provisional title, point of view, place,
+internal date, dramatic function, entry value and exit value, reveal if any. A
+chapter whose entry value equals its exit value is a dead chapter.
 
-### Étape 10 : contrôle de densité
+### Step 10: density check
 
-Compter les chapitres par acte, la moyenne de scènes par chapitre et le
-nombre de retournements. Un acte central qui contient moins d'un retournement
-tous les cinq chapitres produira un ventre mou.
+Count chapters per act, the average number of scenes per chapter, and the
+number of reversals. A central act with fewer than one reversal every five
+chapters will produce a soft middle.
 
-## 4. Livrables
+## 4. Deliverables
 
-- `bible-du-roman.md` : prémisse, promesses, structure, thème, règles internes.
-- `plan-general.md` : tableau des chapitres.
-- `arcs.md` : arcs du protagoniste, de l'antagoniste et des secondaires.
-- `revelations.md` : calendrier des informations.
+- `bible-du-roman.md`: premise, promises, structure, theme, internal rules.
+- `plan-general.md`: the chapter table.
+- `arcs.md`: protagonist, antagonist and secondary arcs.
+- `revelations.md`: the reveal schedule.
 
-Les gabarits sont dans `resources/`.
+Templates are in `resources/`, in French, since they are filled in the output
+language.
 
-## 5. Erreurs fréquentes
+## 5. Common errors
 
-- Confondre l'intrigue et la succession d'événements. Une succession n'est pas
-  une intrigue tant qu'aucun événement n'est causé par le précédent.
-- Repousser l'élément déclencheur au-delà du chapitre 4.
-- Multiplier les points de vue pour compenser un protagoniste faible.
-- Écrire un plan si détaillé qu'il ne reste plus de découverte à l'écriture.
-- Résoudre le climax par une information que le lecteur n'avait pas.
+- Confusing plot with a sequence of events. A sequence is not a plot until an
+  event is caused by the one before it.
+- Pushing the inciting incident past chapter 4.
+- Multiplying points of view to compensate for a weak protagonist.
+- Writing an outline so detailed that nothing remains to be discovered in the
+  writing.
+- Resolving the climax with information the reader never had.
 
 ## 6. Auto-critique
 
-Notation de 0 à 5 sur : clarté de la prémisse, force de la question dramatique,
-tenue de la structure, nécessité causale, arc du protagoniste, utilité des
-sous-intrigues, gestion des révélations, densité de l'acte central,
-originalité, promesse tenue.
+Score 0 to 5: clarity of the premise, strength of the dramatic question,
+structure held, causal necessity, protagonist arc, usefulness of the subplots,
+handling of reveals, density of the central act, originality, promise kept.
 
-Seuil : aucun axe sous 3, moyenne minimale 3,8. En dessous, reprendre à
-l'étape concernée avant toute rédaction de prose.
+Threshold: no axis below 3, average at least 3.8. Below that, return to the
+step concerned before writing any prose.
 
 ## 7. Interfaces
 
-- Amont : `research-director`, `world-builder`, `character-psychologist`.
-- Aval : `timeline-manager`, `chapter-architect`, `saga-architect`.
-- Contrôle : `quality/story-doctor`.
+- Upstream: `research-director`, `world-builder`, `character-psychologist`.
+- Downstream: `timeline-manager`, `chapter-architect`, `saga-architect`.
+- Review: `quality/story-doctor`.

@@ -16,19 +16,32 @@ to a reader who was not there.
 
 ## 1. Author identity
 
-Every commit produced under this suite carries exactly:
+Every commit carries a real person, taken from the suite configuration:
 
 ```
-Name   Handsomeboy990
-Email  lauretchacha@gmail.com
+identity.author_name
+identity.author_email
 ```
 
-Verified before committing:
+Both are required and neither has a default. Resolve them, then verify the
+repository agrees, before staging anything:
 
 ```bash
 git config user.name
 git config user.email
 ```
+
+| Situation | Action |
+|---|---|
+| Both configuration fields present, repository matches | commit |
+| Both present, repository differs | set the repository values, then commit |
+| Either field missing or empty | stop, name the missing field, run `bash install.sh --configure` |
+| Repository deliberately uses a different identity | follow the repository, and say so once |
+
+An identity is never invented, never inferred from the last commit, and never
+filled with a placeholder to get past this step. A history whose author cannot
+be traced to a person is not auditable, which is the entire point of a history.
+The field reference is in `config/README.md`.
 
 Forbidden in commit messages, trailers, author fields, committer fields, pull
 request bodies and branch names:
@@ -43,7 +56,37 @@ This rule overrides any default trailer behaviour of the tooling. A commit
 that has already been made with a forbidden trailer is amended before it is
 pushed.
 
-## 2. Atomic commits
+## 2. What you are allowed to do
+
+Read the `delegation` section of the configuration before acting. It decides
+which of the steps below you perform and which you prepare and hand over.
+
+| Field | Value | Behaviour |
+|---|---|---|
+| `commits` | `yes` | commit normally |
+| | `stage-only` | stage the change, give the message you would have used, stop |
+| | `no` | leave the tree ready, list the atomic commits in order with a message each, stop |
+| `branches` | `no` | do not create a branch; ask which one to use |
+| `push` | `yes` | push |
+| | `branch-only` | push feature branches, never a protected branch |
+| | `no` | commit locally and stop |
+| `pull_requests` | `draft` | open it as a draft, do not mark it ready |
+| | `no` | write the description into the branch and stop |
+
+`git.protected_branches` names what never receives a direct push. Anything
+other than `none` means the pull request path, always.
+
+When a step is not yours, say so in one line, state exactly what is waiting,
+and give the command. Do not perform it anyway because it would be faster, and
+do not stay silent about it: a step nobody was told about is a step nobody
+does. The full list lives in `writer-suite-manual-tasks.md` next to the
+configuration file.
+
+Missing configuration is not permission. If the file has no `delegation`
+section, use the defaults in `config/README.md` and say which ones you
+applied.
+
+## 3. Atomic commits
 
 One commit contains one change, and nothing else.
 
@@ -61,7 +104,7 @@ unrelated? If not, it is two commits.
 The other test: does the message need the word `and`? If yes, it is two
 commits.
 
-## 3. Message format
+## 4. Message format
 
 ```
 <type>: <imperative summary under about seventy characters>
@@ -103,7 +146,7 @@ WIP                               not a commit, use a local stash or amend
 Various improvements              a diff nobody will read again
 ```
 
-## 4. Before every commit
+## 5. Before every commit
 
 ```bash
 git status                # nothing unexpected staged
@@ -122,7 +165,7 @@ Checked in the staged diff:
 Reading the staged diff before committing is not optional. It is the last
 point at which a secret can be kept out of history cheaply.
 
-## 5. Ignore rules
+## 6. Ignore rules
 
 Verify the repository ignores, at minimum:
 
@@ -149,7 +192,7 @@ records that decision instead of following the default blindly.
 A secret already committed is not solved by a later ignore rule or a
 subsequent deletion. It is reported for rotation.
 
-## 6. Branches
+## 7. Branches
 
 Read the convention from the repository before creating anything:
 
@@ -171,7 +214,7 @@ Never commit directly to the default branch when the project uses branches.
 Never force push a shared branch. When history must be rewritten on a personal
 branch, use the force with lease form so a concurrent push is not destroyed.
 
-## 7. Pull requests
+## 8. Pull requests
 
 ```markdown
 ## Summary
@@ -202,7 +245,7 @@ Named, with why it was not done here.
 Sections that do not apply are removed, not filled with none. A pull request
 that only says what the diff already says has added nothing.
 
-## 8. History hygiene
+## 9. History hygiene
 
 - Rebase a personal branch on the default branch rather than merging it back
   and forth, when that is the project's habit.
@@ -214,29 +257,37 @@ that only says what the diff already says has added nothing.
   because it is faster.
 - After any conflict resolution, run the tests before committing the merge.
 
-## 9. Protocol
+## 10. Protocol
 
-1. Verify the author identity.
-2. Verify the ignore rules, fix them first when they are wrong.
-3. Group the work into atomic changes.
-4. Stage one change, read the staged diff completely.
-5. Commit with a message that follows section 3.
-6. Repeat.
-7. Verify the log: author, order, message quality.
-8. Push. On rejection, diagnose before retrying.
-9. Open the pull request with the sections of section 7 that apply.
+1. Read the `delegation` section. Know which steps below are yours before
+   starting any of them.
+2. Verify the author identity.
+3. Verify the ignore rules, fix them first when they are wrong.
+4. Group the work into atomic changes.
+5. Stage one change, read the staged diff completely.
+6. Commit with a message that follows section 4, or stop at the boundary set
+   by `delegation.commits` and hand over the message.
+7. Repeat.
+8. Verify the log: author, order, message quality.
+9. Push, within the limits of `delegation.push` and
+   `git.protected_branches`. On rejection, diagnose before retrying.
+10. Open the pull request with the sections of section 8 that apply, within
+    the limits of `delegation.pull_requests`.
+11. Report every step you stopped at, in one line each, with its command.
 
-## 10. Auto-critique
+## 11. Auto-critique
 
 Score from 0 to 5: identity correct, no forbidden attribution, atomicity,
 message quality, staged diff actually read, ignore rules correct, no secret,
-branch convention followed, pull request usefulness.
+branch convention followed, pull request usefulness, delegation boundaries
+respected and the handover stated.
 
 Threshold: no axis below 3, average at least 4. A secret in a commit or a
 forbidden attribution is an automatic failure, and the commit is amended
-before any push.
+before any push. Performing a step the configuration reserved for the user is
+also an automatic failure, and so is stopping at one without saying so.
 
-## 11. Interfaces
+## 12. Interfaces
 
 - Upstream: every skill that produces a change.
 - Downstream: `release-readiness`, `project-continuity`.

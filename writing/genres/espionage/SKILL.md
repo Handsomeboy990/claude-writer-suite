@@ -1,97 +1,96 @@
 ---
 name: espionage
-description: Écrit un roman d'espionnage : métier documenté, tension d'exposition, scènes de surveillance et de contre-surveillance, arbre des loyautés, trahison rétrospectivement cohérente, fin ambiguë. À utiliser pour un récit d'agents, de sources ou de services secrets.
+description: Writes espionage fiction: a researched trade, tension of exposure, surveillance and counter-surveillance scenes, the loyalty tree, betrayal that is coherent in retrospect, an ambiguous ending. Use for narratives of agents, sources or intelligence services.
 license: MIT
 metadata:
   category: genres
-  version: 1.0.0
+  version: 2.0.0
   depends_on: [writing-constitution, thriller, research-director]
-  outputs: [dossier-d-operation, arbre-des-loyautes]
+  outputs: [operation-dossier, loyalty-tree]
 ---
 
 # Espionage
 
-Le roman d'espionnage traite de la loyauté et de son coût. L'action y est
-rare, la patience y est constante, et la trahison y est une conséquence
-logique, jamais une surprise gratuite.
+Espionage fiction is about loyalty and its cost. Action is rare, patience is
+constant, and betrayal is a logical consequence, never a free surprise.
 
-## 1. Contrat de lecture
+## 1. Reading contract
 
-Le lecteur exige : un métier documenté, une tension d'information plus que
-d'action, des loyautés composées, et une fin où la victoire est ambiguë.
+The reader demands: a researched trade, tension of information rather than
+action, composite loyalties, and an ending where victory is ambiguous.
 
-## 2. Métier
+## 2. The trade
 
-Documenter au niveau 3 : recrutement d'une source, traitement, boîte aux
-lettres, contre-surveillance, exfiltration, compartimentage, hiérarchie des
-services, contrôle politique.
+Research at level 3: recruiting a source, handling, dead drops,
+counter-surveillance, exfiltration, compartmentalisation, the hierarchy of
+services, political oversight.
 
-Réalités à respecter :
+Realities to respect:
 
-- La majorité du travail est administrative et lente.
-- Une source se recrute par un besoin, rarement par l'argent seul : dette,
-  idéologie, rancune, ego, protection d'un proche.
-- Le traitant est responsable de la vie de sa source, ce qui crée le noeud
-  moral du genre.
-- Le compartimentage empêche quiconque de tout savoir, y compris le lecteur.
-- Une opération réussie ne se sait pas.
+- Most of the work is administrative and slow.
+- A source is recruited through a need, rarely through money alone: debt,
+  ideology, resentment, ego, protecting someone.
+- The handler is responsible for their source's life, which creates the moral
+  knot of the genre.
+- Compartmentalisation prevents anyone from knowing everything, the reader
+  included.
+- A successful operation is never known.
 
 ## 3. Tension
 
-- La menace n'est pas le combat, c'est l'exposition. Être vu, être reconnu,
-  être signalé.
-- La surveillance et la contre-surveillance sont des scènes à part entière :
-  itinéraires, temps morts, points de contrôle.
-- L'attente est le rythme naturel du genre. Elle se remplit de procédure, de
-  vérification et de doute.
-- Le doute sur un allié doit rester ouvert longtemps et se résoudre par un
-  fait vérifiable.
+- The threat is not combat, it is exposure. Being seen, being recognised,
+  being reported.
+- Surveillance and counter-surveillance are scenes in their own right: routes,
+  dead time, checkpoints.
+- Waiting is the natural rhythm of the genre. It fills with procedure,
+  verification and doubt.
+- Doubt about an ally must stay open for a long time and resolve through a
+  verifiable fact.
 
-## 4. Loyautés
+## 4. Loyalties
 
-Construire un arbre des loyautés : chaque personnage sert plusieurs entités,
-un service, un pays, une famille, une idée, une personne. La trahison naît de
-la hiérarchie entre ces loyautés, pas d'un revirement de caractère.
+Build a loyalty tree: every character serves several entities, a service, a
+country, a family, an idea, a person. Betrayal arises from the ranking among
+those loyalties, not from a change of character.
 
-Règle : le lecteur doit pouvoir relire le roman et voir que le traître était
-cohérent depuis la première page.
+Rule: the reader must be able to reread the novel and see that the traitor was
+coherent from the first page.
 
 ## 5. Structure
 
-- Ouverture sur une opération de routine qui échoue légèrement.
-- Le protagoniste est chargé d'une tâche subalterne qui révèle une anomalie.
-- Enquête interne, compartimentée, avec obstruction hiérarchique.
-- Point médian : l'anomalie touche quelqu'un de proche.
-- Dernier tiers : choix entre deux loyautés, sans option propre.
-- Fin : coût humain, gain institutionnel, ou l'inverse.
+- Open on a routine operation that fails slightly.
+- The protagonist is given a subordinate task that reveals an anomaly.
+- Internal investigation, compartmentalised, with obstruction from above.
+- Midpoint: the anomaly touches someone close.
+- Final third: a choice between two loyalties, with no clean option.
+- Ending: human cost, institutional gain, or the reverse.
 
-## 6. Clichés à retourner ou proscrire
+## 6. Cliches to turn or prohibit
 
-- L'agent séducteur invincible.
-- Le gadget qui résout la scène.
-- La taupe révélée par un indice cosmétique.
-- La poursuite en voiture comme point culminant.
-- Le service ennemi entièrement incompétent.
-- Le patriotisme comme seule motivation.
+- The invincible seductive agent.
+- The gadget that resolves the scene.
+- The mole revealed by a cosmetic clue.
+- The car chase as the climax.
+- The entirely incompetent opposing service.
+- Patriotism as the sole motivation.
 
-## 7. Contrôles de sortie
+## 7. Exit checks
 
-- Le compartimentage est respecté dans le récit lui-même.
-- Chaque source a un besoin identifié.
-- La trahison est rétrospectivement cohérente.
-- Au moins deux scènes de surveillance techniquement exactes.
-- La fin ne rend pas la victoire pure.
+- Compartmentalisation is respected by the narrative itself.
+- Every source has an identified need.
+- The betrayal is coherent in retrospect.
+- At least two technically accurate surveillance scenes.
+- The ending does not make the victory clean.
 
 ## 8. Auto-critique
 
-Onze axes de la constitution, plus quatre axes de genre : exactitude
-professionnelle, tenue du compartimentage, cohérence de la trahison, ambiguïté
-finale.
+The eleven constitution axes, plus four genre axes: professional accuracy,
+compartmentalisation held, coherence of the betrayal, final ambiguity.
 
-Seuil : aucun axe sous 3, moyenne minimale 4 sur exactitude professionnelle et
-cohérence de la trahison.
+Threshold: no axis below 3, average at least 4 on professional accuracy and
+coherence of the betrayal.
 
 ## 9. Interfaces
 
-- Amont : `thriller`, `research-director`.
-- Voisins : `genres/political-fiction`, `genres/detective`.
+- Upstream: `thriller`, `research-director`.
+- Neighbours: `genres/political-fiction`, `genres/detective`.

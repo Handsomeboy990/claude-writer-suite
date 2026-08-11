@@ -76,14 +76,14 @@ git log --format='%h %an <%ae> %s' -8
 ```
 
 ```
-a91f0c2 Handsomeboy990 <lauretchacha@gmail.com> docs: document the invitation flow and its expiry policy
-7c1a904 Handsomeboy990 <lauretchacha@gmail.com> test: cover invitation duplicates, quota and concurrency
-b2f8e11 Handsomeboy990 <lauretchacha@gmail.com> fix: return focus to the trigger when a dialog closes
-4f1c8a2 Handsomeboy990 <lauretchacha@gmail.com> feat: add invitation dialog to the members page
-2a9d7b1 Handsomeboy990 <lauretchacha@gmail.com> feat: add team invitation endpoints
-8c1e2f4 Handsomeboy990 <lauretchacha@gmail.com> feat: add invitation service with expiry and quota rules
-3d81ba0 Handsomeboy990 <lauretchacha@gmail.com> feat: add invitations table with a partial unique index
-5e0c7a6 Handsomeboy990 <lauretchacha@gmail.com> chore: add rate limiter helper on the existing redis client
+a91f0c2 A. Mercier <a.mercier@example.org> docs: document the invitation flow and its expiry policy
+7c1a904 A. Mercier <a.mercier@example.org> test: cover invitation duplicates, quota and concurrency
+b2f8e11 A. Mercier <a.mercier@example.org> fix: return focus to the trigger when a dialog closes
+4f1c8a2 A. Mercier <a.mercier@example.org> feat: add invitation dialog to the members page
+2a9d7b1 A. Mercier <a.mercier@example.org> feat: add team invitation endpoints
+8c1e2f4 A. Mercier <a.mercier@example.org> feat: add invitation service with expiry and quota rules
+3d81ba0 A. Mercier <a.mercier@example.org> feat: add invitations table with a partial unique index
+5e0c7a6 A. Mercier <a.mercier@example.org> chore: add rate limiter helper on the existing redis client
 ```
 
 ```bash
