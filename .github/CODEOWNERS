@@ -1,0 +1,33 @@
+# Code owners.
+#
+# GitHub requests a review from the owners of every file a pull request
+# touches. Combined with the branch protection rule "Require review from Code
+# Owners", this makes the owner's approval mandatory before a merge into a
+# protected branch.
+#
+# CODEOWNERS is read from the base branch of the pull request, not from the
+# branch proposing the change. A change to this file only takes effect once it
+# is merged into the branch it is meant to protect.
+#
+# Setup that makes this file binding: documentation/branch-protection.md
+
+# Everything, by default.
+*    @Handsomeboy990
+
+# Authorized reviewers, added as the project grows. Uncomment and extend:
+# *  @Handsomeboy990 @second-reviewer
+
+# Per-area owners, if ownership ever needs to split. Uncomment and fill:
+# /writing/        @Handsomeboy990
+# /documents/      @Handsomeboy990
+# /engineering/    @Handsomeboy990
+# /shared/         @Handsomeboy990
+# /tests/          @Handsomeboy990
+# /config/         @Handsomeboy990
+
+# These four govern the whole repository. Keep them owned by a maintainer
+# whatever else is delegated.
+/LICENSE             @Handsomeboy990
+/.github/CODEOWNERS  @Handsomeboy990
+/install.sh          @Handsomeboy990
+/CLAUDE.md           @Handsomeboy990
