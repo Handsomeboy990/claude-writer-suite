@@ -69,54 +69,63 @@ Required once, by a repository administrator. Two routes.
 
 ### With the GitHub CLI
 
-Install `gh` first, then authenticate:
+Install `gh`, then authenticate. The default web flow grants the `repo`
+scope, which is what this endpoint needs.
 
 ```bash
 gh auth login
+gh auth status
 ```
 
-`dev`:
+The endpoint takes a JSON body with nested objects and a `restrictions` field
+that must be present and may be null. Passing that with repeated `-F` flags
+does not work reliably; send a file.
 
 ```bash
-gh api -X PUT repos/Handsomeboy990/claude-writer-suite/branches/dev/protection \
-  -H "Accept: application/vnd.github+json" \
-  -F required_pull_request_reviews[required_approving_review_count]=1 \
-  -F required_pull_request_reviews[require_code_owner_reviews]=true \
-  -F required_pull_request_reviews[dismiss_stale_reviews]=true \
-  -F required_status_checks[strict]=true \
-  -F required_status_checks[contexts][]="structure, rules, orchestration" \
-  -F enforce_admins=false \
-  -F restrictions=null \
-  -F allow_force_pushes=false \
-  -F allow_deletions=false \
-  -F required_linear_history=true \
-  -F required_conversation_resolution=true
+cat > /tmp/protection.json <<'JSON'
+{
+  "required_status_checks": {
+    "strict": true,
+    "contexts": ["structure, rules, orchestration"]
+  },
+  "enforce_admins": false,
+  "required_pull_request_reviews": {
+    "dismiss_stale_reviews": true,
+    "require_code_owner_reviews": true,
+    "required_approving_review_count": 1
+  },
+  "restrictions": null,
+  "required_linear_history": true,
+  "allow_force_pushes": false,
+  "allow_deletions": false,
+  "required_conversation_resolution": true
+}
+JSON
+
+for branch in main dev; do
+  gh api -X PUT \
+    "repos/Handsomeboy990/claude-writer-suite/branches/$branch/protection" \
+    -H "Accept: application/vnd.github+json" \
+    --input /tmp/protection.json
+done
+
+rm /tmp/protection.json
 ```
 
-`main`, same rule with `enforce_admins` left off so a maintainer can still
-perform a release merge, and force pushes refused:
+The required check is named after the job's `name:` in
+`.github/workflows/validate.yml`. It must have run at least once before
+GitHub will accept it as a context. If it has not, apply everything else
+first, let one pull request run the workflow, then add the check.
+
+Verify, per branch:
 
 ```bash
-gh api -X PUT repos/Handsomeboy990/claude-writer-suite/branches/main/protection \
-  -H "Accept: application/vnd.github+json" \
-  -F required_pull_request_reviews[required_approving_review_count]=1 \
-  -F required_pull_request_reviews[require_code_owner_reviews]=true \
-  -F required_pull_request_reviews[dismiss_stale_reviews]=true \
-  -F required_status_checks[strict]=true \
-  -F required_status_checks[contexts][]="structure, rules, orchestration" \
-  -F enforce_admins=false \
-  -F restrictions=null \
-  -F allow_force_pushes=false \
-  -F allow_deletions=false \
-  -F required_linear_history=true \
-  -F required_conversation_resolution=true
-```
-
-Verify:
-
-```bash
-gh api repos/Handsomeboy990/claude-writer-suite/branches/main/protection
-gh api repos/Handsomeboy990/claude-writer-suite/branches/dev/protection
+gh api repos/Handsomeboy990/claude-writer-suite/branches/main/protection --jq '
+  "approvals            : \(.required_pull_request_reviews.required_approving_review_count)",
+  "code owner review    : \(.required_pull_request_reviews.require_code_owner_reviews)",
+  "required check       : \(.required_status_checks.contexts | join(", "))",
+  "force pushes allowed : \(.allow_force_pushes.enabled)",
+  "applies to admins    : \(.enforce_admins.enabled)"'
 ```
 
 ### Through the web interface
@@ -144,17 +153,42 @@ For each of `main` and `dev`:
 ### The one setting to think about
 
 `Do not allow bypassing the above settings`, called `enforce_admins` in the
-API, decides whether the rule also applies to you.
+API, decides whether the rule also applies to repository administrators.
 
-| Value | Consequence |
-|---|---|
-| off, recommended to start | you can still merge a release or fix an emergency without disabling protection |
-| on | nobody bypasses, including you; you need a second maintainer for every merge, since GitHub does not let you approve your own pull request |
+Its real behaviour, verified by attempting a direct push to both protected
+branches:
 
-With a single maintainer, `on` locks you out of your own repository: you
-cannot approve your own pull request, and with bypass disabled you cannot
-merge without an approval. Leave it off until there is a second reviewer, then
-turn it on.
+| Value | A contributor pushes directly | An administrator pushes directly |
+|---|---|---|
+| off | rejected | **allowed**, logged as `Bypassed rule violations` |
+| on | rejected | rejected |
+
+This is worth reading twice. With `enforce_admins` off, protection does not
+stop you. It stops everyone else. The server prints the rules that were
+violated and accepts the push anyway:
+
+```
+remote: Bypassed rule violations for refs/heads/main:
+remote: - Changes must be made through a pull request.
+remote: - Required status check "structure, rules, orchestration" is expected.
+```
+
+That is the intended configuration here: contributors go through a pull
+request, the owner keeps a way to publish a release or fix an emergency.
+
+Turning it on with a single maintainer locks you out of your own repository:
+GitHub does not allow approving your own pull request, so with bypass disabled
+there is no path to a merge. Leave it off until `.github/CODEOWNERS` names a
+second reviewer, then turn it on:
+
+```bash
+gh api -X POST \
+  repos/Handsomeboy990/claude-writer-suite/branches/main/protection/enforce_admins
+```
+
+If you want the branch closed even to yourself before then, the honest option
+is not `enforce_admins` but `lock_branch`, which makes the branch read only
+for everyone and has to be lifted deliberately.
 
 ## Making the reviewer requirement real
 
@@ -179,12 +213,34 @@ git show main:.github/CODEOWNERS
 Removing a reviewer is the same operation in reverse. Nothing about
 authorisation lives outside that file and the repository's collaborator list.
 
+## Current state
+
+Both branches are protected, verified by reading the rule back and by
+attempting a direct push to each.
+
+| Setting | main | dev |
+|---|---|---|
+| Pull request required | yes | yes |
+| Approvals required | 1 | 1 |
+| Code owner review required | yes | yes |
+| Stale approvals dismissed | yes | yes |
+| Required check | `structure, rules, orchestration` | same |
+| Branch must be up to date | yes | yes |
+| Conversations resolved | yes | yes |
+| Linear history | yes | yes |
+| Force pushes | refused | refused |
+| Deletions | refused | refused |
+| Applies to administrators | no | no |
+
 ## What is still not enforced
 
-- The hook only exists in clones where `core.hooksPath` was set. A fresh
-  clone has no hook until the command is run.
-- A repository administrator can always disable protection. That is by design;
-  the audit trail is in the repository's security log.
+- **The owner is not blocked.** `enforce_admins` is off, so an administrator
+  push to `main` or `dev` succeeds with a logged bypass. Contributors are
+  blocked. See the table above for why it is set this way.
+- The hook only exists in clones where `core.hooksPath` was set. A fresh clone
+  has no hook until the command is run.
+- A repository administrator can always disable protection entirely. That is
+  by design; the audit trail is in the repository's security log.
 - Nothing prevents a maintainer from merging their own pull request while
-  `enforce_admins` is off. That is the trade-off accepted above, and it is
-  recorded here rather than left implicit.
+  `enforce_admins` is off. That is the trade-off accepted above, recorded here
+  rather than left implicit.

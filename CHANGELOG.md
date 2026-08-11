@@ -66,6 +66,12 @@ now require the configuration file instead of embedded defaults.
     with an empty author. Enabled with
     `git config core.hooksPath .githooks`, with a documented maintainer
     override for a deliberate release push.
+  - Branch protection applied to both branches through the GitHub API: pull
+    request required, one approving review, code owner review required, stale
+    approvals dismissed, `structure, rules, orchestration` as a required
+    status check, branch up to date, conversations resolved, linear history,
+    no force pushes, no deletions. `enforce_admins` deliberately off, so the
+    owner keeps a release path while contributors are blocked.
 - An Author section in both READMEs, and the copyright holder named in
   `LICENSE`.
 - `validate-orchestration.sh` checks 12 and 13: the document pipeline, and the

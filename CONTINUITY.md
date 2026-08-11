@@ -39,6 +39,11 @@ Session 4, this one:
   release branch, `.github/CODEOWNERS`, a pull request template, a `validate`
   workflow, and a `pre-push` hook. Setup and its limits in
   `documentation/branch-protection.md`.
+- Branch protection applied to `main` and `dev` through the GitHub API: pull
+  request required, one approving review, code owner review required, stale
+  approvals dismissed, `structure, rules, orchestration` as a required check,
+  branch up to date, conversations resolved, linear history, no force pushes,
+  no deletions. Read back and verified by attempting a direct push to each.
 - `LICENSE` names the copyright holder, and both READMEs carry an Author
   section.
 
@@ -101,16 +106,11 @@ Looks finished and is not:
 
 ## Remaining
 
-- **Branch protection is not configured on GitHub.** Everything the repository
-  can enforce is in place; the server side rule is not, because `gh` is not
-  installed on this machine and no API token was available. Until it is set,
-  `.github/CODEOWNERS` only requests a review rather than requiring one, and
-  nothing stops a direct push from a clone without the hook. First step: the
-  two `gh api` commands in `documentation/branch-protection.md`, or the web
-  interface table in the same file.
-- With a single maintainer, leave `enforce_admins` off. GitHub does not allow
-  approving your own pull request, so turning it on with no second reviewer
-  locks the repository. The trade-off is recorded in
+- `enforce_admins` is off on both branches, so the owner is not blocked from
+  pushing directly; contributors are. Turn it on the day
+  `.github/CODEOWNERS` names a second reviewer, and not before: GitHub does
+  not allow approving your own pull request, so enabling it with one
+  maintainer removes every path to a merge. Command in
   `documentation/branch-protection.md`.
 - No demonstration project for the delivery system, equivalent to
   `writing/examples/saga-les-cendres-de-kivu/`. First step: run the fourteen
@@ -183,5 +183,11 @@ Looks finished and is not:
   erroring. That cost the installer every skill it was meant to copy, and the
   scripts passed `bash -n` throughout. The lesson generalises: these scripts
   are verified by running them against a sandbox target, not by reading them.
+- Do not test branch protection by pushing to the protected branch. With
+  `enforce_admins` off the push succeeds, and undoing it needs a force push,
+  which the protection then refuses. It happened during setup: a probe commit
+  reached `main` and `dev` and had to be removed by a revert, which is why
+  `4c6f7bd` and `be42bb7` sit in the history. Test from an account without
+  admin rights, or trust the read-back of the rule.
 - After moving any directory, run all three scripts: two of them resolve paths
   and fail cleanly by naming what is missing.
