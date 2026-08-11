@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Vérifie les interdits de la constitution sur tous les fichiers Markdown.
-# Usage : bash tests/validate-rules.sh
+# Verifies the repository wide prohibitions on every Markdown file.
+# Usage: bash tests/validate-rules.sh
 set -u
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -8,39 +8,70 @@ ERRORS=0
 WARNINGS=0
 
 files() {
-  find "$ROOT" -type f -name '*.md' -not -path '*/.git/*' | sort
+  find "$ROOT" -type f -name '*.md' -not -path '*/.git/*' -not -path '*/dist/*' | sort
 }
 
 report_error() {
-  printf 'ERREUR  %s\n' "$1"
+  printf 'ERROR   %s\n' "$1"
   ERRORS=$((ERRORS + 1))
 }
 
 report_warning() {
-  printf 'AVERTIR %s\n' "$1"
+  printf 'WARN    %s\n' "$1"
   WARNINGS=$((WARNINGS + 1))
 }
 
-printf 'Contrôle 1 : tiret cadratin\n'
+printf 'Check 1: em dash\n'
 while IFS= read -r file; do
   hits="$(grep -n $'—' "$file" 2>/dev/null | head -n 3)"
   if [ -n "$hits" ]; then
-    report_error "tiret cadratin dans ${file#"$ROOT"/}"
+    report_error "em dash in ${file#"$ROOT"/}"
     printf '%s\n' "$hits" | sed 's/^/        /'
   fi
 done < <(files)
 
-printf 'Contrôle 2 : emoji et pictogrammes\n'
+printf 'Check 2: emoji and pictograms\n'
 while IFS= read -r file; do
   hits="$(grep -nP '[\x{1F000}-\x{1FAFF}\x{2190}-\x{21FF}\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{FE0F}]' "$file" 2>/dev/null | head -n 3)"
   if [ -n "$hits" ]; then
-    report_error "emoji ou pictogramme dans ${file#"$ROOT"/}"
+    report_error "emoji or pictogram in ${file#"$ROOT"/}"
     printf '%s\n' "$hits" | sed 's/^/        /'
   fi
 done < <(files)
 
-# Lignes de prose : hors blocs de code délimités, où les guillemets droits
-# sont une syntaxe et non une faute de typographie.
+printf 'Check 3: no credential shaped string anywhere\n'
+while IFS= read -r file; do
+  hits="$(grep -nE 'BEGIN [A-Z ]*PRIVATE KEY|sk_live_[A-Za-z0-9]{8}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10}|ghp_[A-Za-z0-9]{20}' \
+    "$file" 2>/dev/null | head -n 2)"
+  if [ -n "$hits" ]; then
+    report_error "credential shaped string in ${file#"$ROOT"/}"
+    printf '%s\n' "$hits" | sed 's/^/        /'
+  fi
+done < <(files)
+
+printf 'Check 4: no personal identity hardcoded in a skill\n'
+# Skills read the author identity from the configuration. An address that is
+# not a reserved documentation domain means a real person was written into a
+# reusable skill.
+while IFS= read -r file; do
+  case "$file" in
+    */writing/examples/*) continue ;;
+  esac
+  # Reserved documentation domains are allowed: RFC 2606 and RFC 6761 name
+  # example.com, example.org, example.net and the .test, .example, .invalid
+  # and .localhost top level domains for exactly this purpose.
+  hits="$(grep -nEo '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' "$file" 2>/dev/null \
+    | grep -viE '@([A-Za-z0-9.-]+\.)?example\.(org|com|net)$|\.(test|example|invalid|localhost)$' \
+    | head -n 2)"
+  if [ -n "$hits" ]; then
+    report_error "hardcoded email address in ${file#"$ROOT"/}"
+    printf '%s\n' "$hits" | sed 's/^/        /'
+  fi
+done < <(find "$ROOT/writing" "$ROOT/documents" "$ROOT/engineering" "$ROOT/shared" \
+  -type f -name '*.md' 2>/dev/null | sort)
+
+# Prose lines only: outside fenced code blocks, where straight quotes are
+# syntax rather than a typographic fault.
 prose() {
   awk '
     {
@@ -58,28 +89,30 @@ prose() {
   ' "$1" 2>/dev/null
 }
 
-printf 'Contrôle 3 : guillemets droits hors contre-exemples\n'
+# French typography only. The rest of the repository is written in English,
+# where the straight quote is correct rather than a defect.
+printf 'Check 5: straight quotes in French prose\n'
 while IFS= read -r file; do
   case "$file" in
-    *"/examples/"*|*"/tests/"*) continue ;;
+    *"/examples/"*) continue ;;
   esac
   hits="$(prose "$file" | grep '"' | grep -v '`' | head -n 2)"
   if [ -n "$hits" ]; then
-    report_warning "guillemets droits dans ${file#"$ROOT"/}"
+    report_warning "straight quotes in ${file#"$ROOT"/}"
     printf '%s\n' "$hits" | sed 's/^/        /'
   fi
-done < <(files)
+done < <(find "$ROOT/writing" -type f -name '*.md' | sort)
 
-printf 'Contrôle 4 : points d exclamation multiples\n'
+printf 'Check 6: repeated exclamation marks\n'
 while IFS= read -r file; do
   case "$file" in
     *"/examples/"*) continue ;;
   esac
   if grep -q '!!' "$file" 2>/dev/null; then
-    report_warning "exclamations multiples dans ${file#"$ROOT"/}"
+    report_warning "repeated exclamation marks in ${file#"$ROOT"/}"
   fi
 done < <(files)
 
-printf '\n%s erreurs, %s avertissements.\n' "$ERRORS" "$WARNINGS"
+printf '\n%s errors, %s warnings.\n' "$ERRORS" "$WARNINGS"
 [ "$ERRORS" -eq 0 ] || exit 1
-printf 'Règles de la constitution respectées.\n'
+printf 'Repository rules respected.\n'
