@@ -1,68 +1,70 @@
 # genres
 
-Spécialisations de genre. 15 skills. Chacun hérite de
-`core/writing-constitution` et ajoute un contrat de lecture, des codes, des
-interdits et des axes d'auto-critique propres.
+Genre specialisations. 15 skills. Each inherits `core/writing-constitution` and
+adds its own reading contract, codes, prohibitions and self-critique axes.
 
-Un skill de genre ne remplace jamais `core` : il s'y superpose. On construit
-d'abord avec `novel-architect` et `scene-builder`, puis on applique le genre.
+A genre skill never replaces `core`: it layers on top. Build first with
+`novel-architect` and `scene-builder`, then apply the genre.
 
-## Les skills
+## The skills
 
-| Skill | Contrat de lecture | Exigence dominante |
+| Skill | Reading contract | Dominant requirement |
 |---|---|---|
-| [thriller](thriller/) | menace, échéance, accélération | pression temporelle |
-| [mystery](mystery/) | énigme équitable | équité des indices |
-| [detective](detective/) | méthode, milieu, coût de la vérité | exactitude procédurale |
-| [horror](horror/) | perte de sécurité | économie de la monstration |
-| [fantasy](fantasy/) | monde tenu, impossible cohérent | nécessité du fantastique |
-| [dark-fantasy](dark-fantasy/) | monde qui ne récompense pas la vertu | absence de complaisance |
-| [science-fiction](science-fiction/) | hypothèse menée jusqu'au bout | profondeur des conséquences |
-| [cyberpunk](cyberpunk/) | asymétrie de pouvoir, corps, dette | densité matérielle |
-| [historical-fiction](historical-fiction/) | époque tenue, mentalités justes | exactitude documentaire |
-| [romance](romance/) | transformation par la rencontre | force de l'obstacle interne |
-| [adventure](adventure/) | territoire, attrition, retour | cohérence de l'attrition |
-| [dystopian](dystopian/) | système qui fonctionne | crédibilité du système |
-| [political-fiction](political-fiction/) | fabrique de la décision | absence de manichéisme |
-| [espionage](espionage/) | loyautés et leur coût | cohérence de la trahison |
-| [magical-realism](magical-realism/) | merveilleux non expliqué | tenue du non-étonnement |
+| [thriller](thriller/) | threat, deadline, acceleration | temporal pressure |
+| [mystery](mystery/) | a fair puzzle | fairness of the clues |
+| [detective](detective/) | method, milieu, cost of the truth | procedural accuracy |
+| [horror](horror/) | loss of safety | economy of showing |
+| [fantasy](fantasy/) | a world that holds, a coherent impossible | necessity of the fantastic |
+| [dark-fantasy](dark-fantasy/) | a world that does not reward virtue | absence of complacency |
+| [science-fiction](science-fiction/) | a hypothesis followed to the end | depth of consequences |
+| [cyberpunk](cyberpunk/) | asymmetry of power, body, debt | material density |
+| [historical-fiction](historical-fiction/) | a period held, accurate mentalities | documentary accuracy |
+| [romance](romance/) | transformation through meeting | strength of the internal obstacle |
+| [adventure](adventure/) | territory, attrition, return | consistency of attrition |
+| [dystopian](dystopian/) | a system that works | credibility of the system |
+| [political-fiction](political-fiction/) | how a decision is manufactured | absence of manicheism |
+| [espionage](espionage/) | loyalties and their cost | coherence of the betrayal |
+| [magical-realism](magical-realism/) | an unexplained marvellous | non-astonishment held |
 
-## Familles et voisinages
+## Families and neighbours
 
-Les genres proches partagent des mécaniques et se citent mutuellement dans
-leur section Interfaces.
+Adjacent genres share mechanics and cite each other in their Interfaces
+section.
 
 ```
 Tension            thriller, espionage, detective
-Énigme             mystery, detective
-Peur               horror, dark-fantasy
-Monde secondaire   fantasy, dark-fantasy, science-fiction
-Anticipation       science-fiction, cyberpunk, dystopian
-Pouvoir            political-fiction, dystopian, espionage
-Époque             historical-fiction, adventure
-Sentiment          romance, magical-realism
+Puzzle             mystery, detective
+Fear               horror, dark-fantasy
+Secondary world    fantasy, dark-fantasy, science-fiction
+Near future        science-fiction, cyberpunk, dystopian
+Power              political-fiction, dystopian, espionage
+Period             historical-fiction, adventure
+Feeling            romance, magical-realism
 ```
 
-Un projet croise souvent deux genres. Dans ce cas, un seul porte le contrat de
-lecture dominant, l'autre fournit des codes. Choisir lequel est une décision
-d'architecture, pas de goût.
+A project often crosses two genres. When it does, one carries the dominant
+reading contract and the other supplies codes. Deciding which is an
+architectural decision, not a matter of taste.
 
-## Combien de skills charger
+## How many skills to load
 
-Un, en principe. Deux quand le projet est explicitement hybride. Trois est le
-signe que la promesse de lecture n'a pas été décidée.
+One, as a rule. Two when the project is explicitly hybrid. Three is a sign
+that the reading promise has not been decided.
 
-## Documentation associée
+## Research
 
-Chaque skill de genre exige une documentation proportionnée. Pour tout récit
-situé dans un lieu réel, un métier réel ou une époque réelle, passer d'abord
-par `core/research-director`.
+Every genre skill demands proportionate research. For any narrative set in a
+real place, trade or period, go through `core/research-director` first.
 
-`historical-fiction` porte en plus la règle du présent et la traque des
-anachronismes.
+`historical-fiction` additionally carries the rule of the present and the
+anachronism hunt.
 
-## Sortie
+## Output
 
-Auto-critique du genre, puis `quality/self-critique-protocol`. Les deux ne se
-remplacent pas : le premier vérifie le contrat de lecture, le second la
-qualité générale.
+The genre self-critique, then `quality/self-critique-protocol`. Neither
+replaces the other: the first checks the reading contract, the second the
+general quality.
+
+## Configuration
+
+`language.creative_output` sets the output language for every skill here.

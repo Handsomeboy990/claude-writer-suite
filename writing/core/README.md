@@ -1,52 +1,52 @@
 # core
 
-Fondations et production. 14 skills. `writing-constitution` domine toute la
-suite ; tous les autres y renvoient sans jamais la recopier.
+Foundations and production. 14 skills. `writing-constitution` governs the whole
+tree; every other skill refers to it and none restates it.
 
-## Les skills
+## The skills
 
 ### Constitution
 
-| Skill | Ce qu'il fait |
+| Skill | What it does |
 |---|---|
-| [writing-constitution](writing-constitution/) | règles communes non négociables, grille de conformité |
+| [writing-constitution](writing-constitution/) | shared non-negotiable rules, conformity grid |
 
-À charger en premier, avant toute écriture de fiction ou de poésie.
+Load it first, before any fiction or poetry.
 
-### Architecture du récit
+### Narrative architecture
 
-| Skill | Entrées | Sorties |
+| Skill | Inputs | Outputs |
 |---|---|---|
-| [novel-architect](novel-architect/) | prémisse, genre, longueur | bible, plan, arcs, calendrier des révélations |
-| [chapter-architect](chapter-architect/) | plan général | fiches chapitre, titres travaillés |
-| [scene-builder](scene-builder/) | fiche chapitre | scènes rédigées, fiches de scène |
-| [saga-architect](saga-architect/) | bible du tome 1 | bible de saga, registre inter-tomes |
-| [screenwriter](screenwriter/) | pitch ou roman source | traitement, séquencier, continuité dialoguée |
+| [novel-architect](novel-architect/) | premise, genre, length | bible, outline, arcs, reveal schedule |
+| [chapter-architect](chapter-architect/) | master outline | chapter sheets, worked titles |
+| [scene-builder](scene-builder/) | chapter sheet | written scenes, scene sheets |
+| [saga-architect](saga-architect/) | bible of volume 1 | saga bible, cross-volume register |
+| [screenwriter](screenwriter/) | pitch or source novel | treatment, breakdown, screenplay |
 
-### Voix et personnages
+### Voice and characters
 
-| Skill | Entrées | Sorties |
+| Skill | Inputs | Outputs |
 |---|---|---|
-| [narrator](narrator/) | bible | charte de narration, point de vue tenu |
-| [dialogue-master](dialogue-master/) | fiches personnages | dialogues aux normes françaises |
-| [character-psychologist](character-psychologist/) | contexte, bible | fiches, arcs, cartographie relationnelle |
+| [narrator](narrator/) | bible | narration charter, voice held |
+| [dialogue-master](dialogue-master/) | character sheets | dialogue to French standards |
+| [character-psychologist](character-psychologist/) | context, bible | sheets, arcs, relational map |
 
-### Monde et documentation
+### World and research
 
-| Skill | Entrées | Sorties |
+| Skill | Inputs | Outputs |
 |---|---|---|
-| [world-builder](world-builder/) | genre, dossier documentaire | bible du monde, lexique |
-| [immersion-director](immersion-director/) | bible du monde | dossiers sensoriels et culturels |
-| [research-director](research-director/) | plan, époque, lieux | dossier documentaire, fiches sources |
+| [world-builder](world-builder/) | genre, research dossier | world bible, lexicon |
+| [immersion-director](immersion-director/) | world bible | sensory and cultural dossiers |
+| [research-director](research-director/) | outline, period, places | research dossier, source sheets |
 
-### Cohérence
+### Consistency
 
-| Skill | Entrées | Sorties |
+| Skill | Inputs | Outputs |
 |---|---|---|
-| [continuity-manager](continuity-manager/) | chapitres rédigés | registre en huit volets, rapport d'incohérences |
-| [timeline-manager](timeline-manager/) | plan, chapitres | chronologies, table des flashbacks |
+| [continuity-manager](continuity-manager/) | written chapters | eight-register record, inconsistency report |
+| [timeline-manager](timeline-manager/) | outline, chapters | chronologies, flashback table |
 
-## Ordre d'usage
+## Order of use
 
 ```
 writing-constitution
@@ -58,26 +58,32 @@ writing-constitution
   -> continuity-manager
 ```
 
-`research-director` avant d'écrire sur un métier, une époque ou un lieu réel.
-`continuity-manager` et `timeline-manager` tournent en continu, pas une fois à
-la fin.
+`research-director` before writing about a real trade, period or place.
+`continuity-manager` and `timeline-manager` run continuously, not once at the
+end.
 
-## Quel skill ouvrir
+## Which skill to open
 
 | Situation | Skill |
 |---|---|
-| Je démarre un roman | `novel-architect` |
-| Je ne sais pas où couper mes chapitres | `chapter-architect` |
-| Ma scène est plate | `scene-builder` |
-| Tous mes personnages parlent pareil | `dialogue-master` |
-| Mon protagoniste est fade | `character-psychologist` |
-| Mon décor sonne comme un dépliant | `immersion-director` |
-| Je perds le fil des dates | `timeline-manager` |
-| Je ne sais plus qui sait quoi | `continuity-manager` |
-| Je lance un tome 2 | `saga-architect` |
-| J'adapte un roman à l'écran | `screenwriter` |
+| I am starting a novel | `novel-architect` |
+| I do not know where to cut my chapters | `chapter-architect` |
+| My scene is flat | `scene-builder` |
+| Every character speaks alike | `dialogue-master` |
+| My protagonist is dull | `character-psychologist` |
+| My setting reads like a brochure | `immersion-director` |
+| I have lost track of the dates | `timeline-manager` |
+| I no longer know who knows what | `continuity-manager` |
+| I am starting volume 2 | `saga-architect` |
+| I am adapting a novel for the screen | `screenwriter` |
 
-## Sortie
+## Output
 
-Aucun texte produit par un skill `core` n'est terminé avant le passage par
+No text produced by a `core` skill is finished before it has passed
 `quality/self-critique-protocol`.
+
+## Configuration
+
+`language.creative_output` sets the output language for every skill here.
+Templates and reference material in each `resources/` directory are French, as
+is the prose these skills produce by default.

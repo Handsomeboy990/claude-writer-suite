@@ -1,32 +1,48 @@
 # writing
 
-Suite d'écriture professionnelle. 42 skills en quatre catégories, plus les
-ressources partagées et un projet de démonstration complet.
+Creative writing. 42 skills in four categories, plus shared resources and a
+complete demonstration project.
 
-Langue : français. Gouvernée par `core/writing-constitution`.
+Skill language: English. Default output language: French, set by
+`language.creative_output`. Governed by `core/writing-constitution`.
 
-## Catégories
+## Categories
 
-| Catégorie | Skills | Objet |
+| Category | Skills | Purpose |
 |---|---|---|
-| [core](core/) | 14 | fondations et production |
-| [genres](genres/) | 15 | spécialisations de genre |
-| [poetry](poetry/) | 5 | formes poétiques |
-| [quality](quality/) | 8 | contrôle et révision |
+| [core](core/) | 14 | foundations and production |
+| [genres](genres/) | 15 | genre specialisations |
+| [poetry](poetry/) | 5 | poetic forms |
+| [quality](quality/) | 8 | review and revision |
 
-Chacune possède son index. Commencer par
-[core/writing-constitution](core/writing-constitution/), qui domine toute la
-suite.
+Each has its own index. Start with
+[core/writing-constitution](core/writing-constitution/), which governs the
+whole tree.
 
-## Ressources partagées
+## Why the skills are English and the output is French
 
-- [resources/](resources/) : typographie française, structures narratives,
-  lexiques, gabarits de démarrage et de suivi. Un skill y renvoie, il n'en
-  recopie jamais le contenu.
-- [examples/](examples/) : `saga-les-cendres-de-kivu`, un projet de
-  démonstration complet, de la bible au rapport de validation.
+The craft encoded here is French: dialogue typography, incise inversion,
+alexandrine scansion, agreement rules, the cliche list. Writing those
+instructions in English makes the system usable by anyone; writing the output
+in French is what the expertise is for.
 
-## Workflow recommandé
+Set `language.creative_output` to another language and the structural rules
+still apply in full. The typographic and prosodic rules are French
+conventions, and the affected skills say so and require the target language's
+own rules rather than approximating from French.
+
+The material in `resources/` and in each skill's `resources/` and `examples/`
+stays French. It is reference data and worked samples of French prose, which
+is what the skills produce rather than how they are instructed.
+
+## Shared resources
+
+- [resources/](resources/): French typography, narrative structures, lexicons,
+  project templates. A skill refers to them and never copies their content.
+- [examples/](examples/): `saga-les-cendres-de-kivu`, a complete demonstration
+  project, from the bible to the validation report.
+
+## Recommended workflow
 
 ```
 research-director  ->  world-builder  ->  character-psychologist
@@ -38,59 +54,63 @@ research-director  ->  world-builder  ->  character-psychologist
         ->  beta-reader  ->  literary-critic  ->  publication-review
 ```
 
-Le détail des onze phases figure dans `documentation/workflow.md`.
+The eleven phases are detailed in `documentation/workflow.md`.
 
-Règle d'or : aucun texte n'est terminé avant le passage par
-`quality/self-critique-protocol`, puis par au moins un skill de révision.
+Golden rule: no text is finished before it has passed
+`quality/self-critique-protocol` and then at least one revision skill.
 
-## Chaîne minimale pour un chapitre
+## Minimum chain for one chapter
 
 ```
 chapter-architect -> scene-builder -> dialogue-master
     -> self-critique-protocol -> continuity-manager
 ```
 
-## Règles communes
+## Shared rules
 
-Non négociables, définies dans `core/writing-constitution/SKILL.md` :
+Non-negotiable, defined in `core/writing-constitution/SKILL.md`:
 
-aucun emoji, aucun tiret cadratin, dialogues conformes aux standards des
-romans publiés en français, flashbacks en italique et clairement séparés de la
-ligne principale, chronologie toujours compréhensible, titres de chapitres
-travaillés, personnages cohérents, style naturel, refus des clichés, montrer
-plutôt qu'expliquer, priorité à l'émotion incarnée, respect des cultures
-représentées, aucune incohérence tolérée.
+no emoji, no em dash, dialogue conforming to French publishing standards,
+flashbacks in italic and clearly separated from the main line, a chronology the
+reader can always follow, worked chapter titles, consistent characters, natural
+prose, cliches refused, show rather than explain, embodied emotion, respect for
+the cultures represented, no tolerated inconsistency.
 
-Les deux premières s'appliquent à tous les fichiers du repository, y compris à
-l'arbre `engineering`.
+The first two apply to every file in this repository, the engineering tree
+included.
 
-Chaque skill de production se termine par une auto-évaluation en onze axes,
-avec seuil de livraison chiffré.
+Every production skill ends with an eleven-axis self-assessment and a numeric
+delivery threshold.
 
-## Choisir un skill
+## Choosing a skill
 
-| Situation | Skill à ouvrir |
+| Situation | Skill to open |
 |---|---|
-| Je démarre un projet | `resources/templates/demarrage-de-projet.md`, puis `core/novel-architect` |
-| Je ne sais pas comment couper mes chapitres | `core/chapter-architect` |
-| Ma scène est plate | `core/scene-builder` |
-| Mes dialogues se ressemblent | `core/dialogue-master` |
-| Mon milieu de roman n'avance pas | `quality/story-doctor` |
-| Je perds le fil des dates | `core/timeline-manager` |
-| Je ne sais plus qui sait quoi | `core/continuity-manager` |
-| Mon texte est correct mais fade | `quality/literary-editor` |
-| Je veux savoir si c'est publiable | `quality/literary-critic` |
+| I am starting a project | `resources/templates/demarrage-de-projet.md`, then `core/novel-architect` |
+| I do not know where to cut my chapters | `core/chapter-architect` |
+| My scene is flat | `core/scene-builder` |
+| My dialogue all sounds the same | `core/dialogue-master` |
+| My middle does not move | `quality/story-doctor` |
+| I have lost track of the dates | `core/timeline-manager` |
+| I no longer know who knows what | `core/continuity-manager` |
+| My text is correct but flat | `quality/literary-editor` |
+| I want to know whether it is publishable | `quality/literary-critic` |
 
-La table complète figure dans `documentation/skills-guide.md`.
+The full table is in `documentation/skills-guide.md`.
 
 ## Installation
 
-```
-bash install.sh --writing     les 42 skills d'écriture seulement
+```bash
+bash install.sh --writing     the 42 writing skills, plus the shared pair
 ```
 
-## Relation avec l'arbre engineering
+## Relation to the other trees
 
-Aucune. Aucun skill d'écriture ne dépend d'un skill d'ingénierie, et
-réciproquement. Les deux arbres partagent la structure de skill, les tests et
-les règles Git, rien d'autre.
+None, beyond the two typographic prohibitions and the shared Git rules. No
+writing skill depends on an engineering or a documents skill, and the reverse
+holds.
+
+The two cross domain skills apply here as everywhere: `shared/project-brief`
+frames a book project, and `shared/self-critique` delegates to
+`quality/self-critique-protocol` for creative text, because these axes and
+thresholds are more demanding than any general panel.

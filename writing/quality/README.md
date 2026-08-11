@@ -1,69 +1,79 @@
 # quality
 
-Contrôle et révision. 8 skills. `self-critique-protocol` est obligatoire en
-sortie de tout skill de production.
+Review and revision. 8 skills. `self-critique-protocol` is mandatory on the
+output of every production skill.
 
-## Les skills
+## The skills
 
-| Skill | Rôle | Position |
+| Skill | Role | Position |
 |---|---|---|
-| [self-critique-protocol](self-critique-protocol/) | auto-évaluation en onze axes, seuils chiffrés | après chaque production |
-| [story-doctor](story-doctor/) | diagnostic structurel, symptôme vers cause | après un premier jet complet |
-| [rewriting-engine](rewriting-engine/) | réécriture méthodique en six modes | après diagnostic |
-| [literary-editor](literary-editor/) | style, phrase, paragraphe, six passes | après structure validée |
-| [proofreader](proofreader/) | orthographe, grammaire, typographie, cinq passes | après édition |
-| [beta-reader](beta-reader/) | simulation de lecture réelle, points de décrochage | sur manuscrit complet |
-| [literary-critic](literary-critic/) | jugement éditorial sévère, grille pondérée | avant décision |
-| [publication-review](publication-review/) | validation finale, sept contrôles | en dernier |
+| [self-critique-protocol](self-critique-protocol/) | eleven-axis self-assessment, numeric thresholds | after every production |
+| [story-doctor](story-doctor/) | structural diagnosis, symptom to cause | after a complete first draft |
+| [rewriting-engine](rewriting-engine/) | methodical rewriting in six modes | after diagnosis |
+| [literary-editor](literary-editor/) | style, sentence, paragraph, six passes | after the structure is settled |
+| [proofreader](proofreader/) | spelling, grammar, typography, five passes | after editing |
+| [beta-reader](beta-reader/) | simulated real reading, drop-off points | on a complete manuscript |
+| [literary-critic](literary-critic/) | severe editorial judgement, weighted grid | before deciding |
+| [publication-review](publication-review/) | final validation, seven checks | last |
 
-## Ordre de révision
+## Order of revision
 
-L'ordre compte. Corriger le style d'une scène que le diagnostic va supprimer
-est du travail perdu.
+The order matters. Polishing the prose of a scene the diagnosis will delete is
+wasted work.
 
 ```
-self-critique-protocol          à chaque production, sans exception
+self-critique-protocol          on every production, without exception
         |
-story-doctor                    la structure tient-elle
+story-doctor                    does the structure hold
         |
-rewriting-engine                réparer ce que le diagnostic a désigné
+rewriting-engine                repair what the diagnosis identified
         |
-literary-editor                 resserrer le style, une fois la structure sûre
+literary-editor                 tighten the prose, once the structure is safe
         |
-proofreader                     orthographe et typographie, en dernier ressort
+proofreader                     spelling and typography, last
         |
-beta-reader                     où décroche un lecteur réel
+beta-reader                     where a real reader disengages
         |
-literary-critic                 est-ce publiable, et que corriger d'abord
+literary-critic                 is it publishable, and what to fix first
         |
-publication-review              validation finale et dossier de publication
+publication-review              final validation and publication dossier
 ```
 
-## Diagnostic avant correction
+## Diagnosis before correction
 
-| Symptôme | Skill |
+| Symptom | Skill |
 |---|---|
-| Le milieu est mou, la fin déçoit | `story-doctor` |
-| La correction ne suffit plus | `rewriting-engine` |
-| Le texte est correct mais fade | `literary-editor` |
-| Il reste des fautes et des coquilles | `proofreader` |
-| Je ne sais pas où le lecteur décroche | `beta-reader` |
-| Je veux savoir si c'est publiable | `literary-critic` |
-| Je livre | `publication-review` |
+| The middle sags, the ending disappoints | `story-doctor` |
+| Correction is no longer enough | `rewriting-engine` |
+| The text is correct but flat | `literary-editor` |
+| Errors and typos remain | `proofreader` |
+| I do not know where the reader disengages | `beta-reader` |
+| I want to know whether it is publishable | `literary-critic` |
+| I am delivering | `publication-review` |
 
-## Le rôle de beta-reader
+## The role of beta-reader
 
-Il collecte des symptômes, il ne prescrit pas. Un rapport de bêta-lecture qui
-propose des solutions a dépassé sa fonction : les solutions viennent de
-`story-doctor` ou de `literary-editor`, après diagnostic.
+It collects symptoms; it does not prescribe. A beta reading report that
+proposes solutions has exceeded its function: solutions come from
+`story-doctor` or `literary-editor`, after diagnosis.
 
-## Anti-complaisance
+## Anti-complacency
 
-`self-critique-protocol` et `literary-critic` portent des règles explicites
-contre l'auto-indulgence : notation avec preuves citées, seuils chiffrés,
-verdict unique. Un texte sous le seuil est réécrit, pas annoté d'excuses.
+`self-critique-protocol` and `literary-critic` carry explicit rules against
+self-indulgence: scores backed by quoted evidence, numeric thresholds, a single
+verdict. A text under the threshold is rewritten, not annotated with excuses.
 
-## Sortie
+## Relation to shared/self-critique
 
-`publication-review` produit une décision écrite et un dossier de publication.
-C'est le seul skill autorisé à déclarer un manuscrit terminé.
+`shared/self-critique` is the cross-domain skill: it selects professional
+perspectives for any artefact and enforces the review loop. For fiction,
+poetry and screenplay it delegates to `self-critique-protocol` here, because
+these axes and thresholds are more demanding than any general panel.
+
+Use this category directly for creative text. Use the shared skill when the
+artefact is code, a document, a plan or a deployment.
+
+## Output
+
+`publication-review` produces a written decision and a publication dossier. It
+is the only skill allowed to declare a manuscript finished.
