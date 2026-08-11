@@ -22,6 +22,7 @@ language.
 | `agents.md` | skill against agent against orchestration, the fourteen public contracts |
 | `writing-rules.md` | the writing rules, operational form |
 | `workflow.md` | the writing workflow, eleven phases, cadence, non-regression |
+| `branch-protection.md` | who may write to main and dev, how to configure it, what is still not enforced |
 
 ## Elsewhere
 

@@ -18,6 +18,58 @@ bash tests/validate-rules.sh
 bash tests/validate-orchestration.sh
 ```
 
+## Branches
+
+**Branch from `dev`. Never from `main`, and never target `main`.**
+
+```
+main    release branch. Receives only pull requests from dev, opened by a
+        maintainer. Never written to directly.
+
+dev     integration branch. Every contribution targets it.
+
+<type>/<short-description>
+        where your work happens. Branched from dev, merged back into dev.
+```
+
+```bash
+git switch dev
+git pull
+git switch -c feat/my-change
+# work, commit
+git push -u origin feat/my-change
+# open a pull request into dev
+```
+
+Branch names are English, kebab-case, and name the change rather than the
+person or the ticket alone: `feat/team-invitations`,
+`fix/expired-session-redirect`, `docs/pdf-verification-steps`.
+
+Enable the local guard once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+It refuses a direct push to `main` or `dev`, refuses a commit attributed to a
+tool, and refuses a commit with an empty author. It is a convenience, not the
+rule: the server side rule is in `documentation/branch-protection.md`.
+
+## Review
+
+Both `main` and `dev` require a pull request and an approval from a code
+owner. Owners are listed in `.github/CODEOWNERS`.
+
+A pull request is mergeable when:
+
+- the `validate` workflow is green, meaning all three scripts pass;
+- a code owner has approved it;
+- every conversation is resolved;
+- the branch is up to date with its base.
+
+Adding an authorized reviewer is an edit to `.github/CODEOWNERS`, merged into
+both `dev` and `main`. Nothing about authorisation lives anywhere else.
+
 ## Language
 
 | Layer | Language |
@@ -150,6 +202,7 @@ rotation.
 
 ## Before opening a pull request
 
+- [ ] The base branch is `dev`.
 - [ ] The three validation scripts pass.
 - [ ] The staged diff was read in full.
 - [ ] No secret, no `.env`, no local configuration.
@@ -163,8 +216,9 @@ rotation.
 
 ## Pull request contents
 
-Summary, what changed and why. Implementation, including what was rejected.
-Tests, what was run and observed. Risks, what could break and how it would
-show. Follow up, named, with why it was not done here.
+`.github/pull_request_template.md` fills itself in when you open one. Summary,
+what changed and why. Implementation, including what was rejected. Validation,
+the last line of each of the three scripts. Risks, what could break and how it
+would show. Follow up, named, with why it was not done here.
 
 Remove the sections that do not apply rather than filling them with none.

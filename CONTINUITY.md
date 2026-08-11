@@ -35,6 +35,12 @@ Session 4, this one:
   `CLAUDE.md`: rewritten in English.
 - Three validation scripts rewritten and extended: 13 orchestration checks, 6
   rule checks, duplicate name detection.
+- Repository governance: `dev` as the integration branch, `main` as the
+  release branch, `.github/CODEOWNERS`, a pull request template, a `validate`
+  workflow, and a `pre-push` hook. Setup and its limits in
+  `documentation/branch-protection.md`.
+- `LICENSE` names the copyright holder, and both READMEs carry an Author
+  section.
 
 ## Current state
 
@@ -95,10 +101,17 @@ Looks finished and is not:
 
 ## Remaining
 
-- Convert `documentation/writing-rules.md`, `workflow.md`,
-  `engineering-system.md` and `delivery-system.md` to English. First step:
-  `engineering-system.md`, since it describes an English tree and is the most
-  read of the four.
+- **Branch protection is not configured on GitHub.** Everything the repository
+  can enforce is in place; the server side rule is not, because `gh` is not
+  installed on this machine and no API token was available. Until it is set,
+  `.github/CODEOWNERS` only requests a review rather than requiring one, and
+  nothing stops a direct push from a clone without the hook. First step: the
+  two `gh api` commands in `documentation/branch-protection.md`, or the web
+  interface table in the same file.
+- With a single maintainer, leave `enforce_admins` off. GitHub does not allow
+  approving your own pull request, so turning it on with no second reviewer
+  locks the repository. The trade-off is recorded in
+  `documentation/branch-protection.md`.
 - No demonstration project for the delivery system, equivalent to
   `writing/examples/saga-les-cendres-de-kivu/`. First step: run the fourteen
   phases on a small real application repository.

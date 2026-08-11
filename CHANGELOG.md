@@ -50,7 +50,24 @@ now require the configuration file instead of embedded defaults.
     every step the user kept, with its command.
 - `README.fr.md`: complete French entry point, equivalent to `README.md`.
 - `documentation/installation.md`, `configuration.md`, `agents.md`,
-  `documents-system.md`.
+  `documents-system.md`, `branch-protection.md`.
+- Repository governance. `dev` becomes the integration branch every
+  contribution targets; `main` becomes the release branch, receiving only pull
+  requests from `dev`.
+  - `.github/CODEOWNERS`: the maintainer owns everything by default, with
+    commented lines for adding authorized reviewers and per-area owners.
+  - `.github/pull_request_template.md`: base branch check, the three
+    validation results, and the attribution prohibition.
+  - `.github/workflows/validate.yml`: runs the three scripts plus a shell
+    syntax check on every pull request, and fails a pull request whose commits
+    attribute the work to a tool. Meant to be a required status check.
+  - `.githooks/pre-push`: refuses a direct push to `main` or `dev`, refuses
+    their deletion, refuses a commit attributed to a tool, refuses a commit
+    with an empty author. Enabled with
+    `git config core.hooksPath .githooks`, with a documented maintainer
+    override for a deliberate release push.
+- An Author section in both READMEs, and the copyright holder named in
+  `LICENSE`.
 - `validate-orchestration.sh` checks 12 and 13: the document pipeline, and the
   independence of `shared/`.
 - `validate-rules.sh` checks 3 and 4: credential-shaped strings anywhere, and

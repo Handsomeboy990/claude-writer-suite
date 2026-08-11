@@ -121,8 +121,12 @@ for group in $ALL_GROUPS; do
 done
 for f in architecture.md skills-guide.md writing-rules.md workflow.md \
          engineering-system.md delivery-system.md documents-system.md \
-         installation.md configuration.md agents.md; do
+         installation.md configuration.md agents.md branch-protection.md; do
   [ -f "$ROOT/documentation/$f" ] || fail "missing documentation: $f"
+done
+for f in .github/CODEOWNERS .github/pull_request_template.md \
+         .github/workflows/validate.yml .githooks/pre-push; do
+  [ -f "$ROOT/$f" ] || fail "missing governance file: $f"
 done
 
 printf '\n%s skills checked, %s errors.\n' "$SKILLS" "$ERRORS"
