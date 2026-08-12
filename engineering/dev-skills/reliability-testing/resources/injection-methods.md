@@ -80,9 +80,10 @@ Cheap, deterministic, and it finds the defects that survive every stub.
 ## Rules
 
 ```
-one failure at a time, so the result attributes to a cause
-inject at more than one point in the same operation
-record the exact injection, so the finding is reproducible
+one failure per run, so the result attributes to a cause
+across runs, move the injection point through the same operation: before the
+  write, during it, and after it. Three runs, never three simultaneous faults
+record the exact injection and its point, so the finding is reproducible
 remove every injection, and verify normal behaviour afterwards
 never let an injection mechanism reach a shipped code path
 never inject where the contract forbids it
