@@ -101,7 +101,7 @@ for group in $ALL_GROUPS; do
   done
 done
 
-for f in README.md README.fr.md CONTRIBUTING.md CHANGELOG.md LICENSE install.sh; do
+for f in README.md README.fr.md AGENTS.md CONTRIBUTING.md CHANGELOG.md LICENSE install.sh; do
   [ -f "$ROOT/$f" ] || fail "missing root file: $f"
 done
 for d in writing documents engineering shared documentation tests config \

@@ -120,11 +120,15 @@ Looks finished and is not:
   `branch-only`, `deployments` and `database_operations` to `no`. The reason is
   that a wrong default here is expensive and silent, whereas an over-cautious
   one costs one prompt.
-- **`CLAUDE.md` stays tracked.** It is the public memory and the agent entry
-  point, contains no secret, and the exception is now recorded in the file
-  itself as `git-workflow` section 6 requires. It was also cut down to a
-  pointer, since it had already drifted: it carried a directory tree from
-  before the 1.3.0 reorganisation.
+- **`CLAUDE.md` was untracked and replaced by `AGENTS.md`.** Earlier sessions
+  kept it tracked as a documented exception. That exception is withdrawn: a
+  file named after an agent runtime is machine local configuration, and the
+  repository now carries a vendor neutral `AGENTS.md` instead. The content is
+  identical in purpose. `tests/validate-rules.sh` check 7 fails the build if
+  `CLAUDE.md`, `.claude/` or any equivalent is ever tracked again, and
+  `tests/validate-structure.sh` now requires `AGENTS.md` to exist. A local
+  `CLAUDE.md` may still exist on a contributor's machine, ignored, containing
+  a pointer to `AGENTS.md`.
 - **The quality system is nine skills, not seventeen.** The brief listed
   exploratory testing, bug hunting and UX testing as three; usability findings
   live inside `exploratory-testing` because they are produced by the same
@@ -141,7 +145,7 @@ Looks finished and is not:
   either too wide for a small change or silent about the risk that mattered.
 - Earlier decisions stand: agents tracked in the repository rather than in
   `.claude/`, engineering content in English, `code-review-protocol` suffixed
-  to avoid a name collision, `CLAUDE.md` tracked as the public entry point.
+  to avoid a name collision.
 
 ## Remaining
 

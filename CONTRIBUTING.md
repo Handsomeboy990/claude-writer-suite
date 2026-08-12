@@ -189,13 +189,15 @@ configuration and stops if either is missing, rather than inventing one.
 ```
 .env and .env.*
 private keys, certificates, credential files
-local agent and editor configuration, .claude/, *.local
+local agent and editor configuration: .claude/, CLAUDE.md, .cursor/, *.local
 build output, dist/
 ```
 
-`.gitignore` covers these. `CLAUDE.md` is the one deliberate exception and it
-records why, in its own last section: it is the public memory of the project
-and contains no secret.
+`.gitignore` covers these, and `tests/validate-rules.sh` check 7 fails the
+build if one of them is ever tracked, including a file named after an agent
+runtime. The public entry point for an agent is `AGENTS.md`, which is
+versioned because it is documentation rather than machine local
+configuration.
 
 A secret already committed is not fixed by deleting it. Report it for
 rotation.
