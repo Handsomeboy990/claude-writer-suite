@@ -3,6 +3,69 @@
 Every notable change to this project is recorded here. The format follows
 semantic versioning.
 
+## 2.1.0
+
+Quality engineering as a system rather than a single skill, and the lifecycle
+gaps closed: contracts, schemas, change management, asynchronous work, money,
+files, locales, search, design language, privacy, infrastructure and
+incidents. 92 skills to 119, 14 agents to 16, 20 task categories to 36.
+
+### Added
+
+- Quality subsystem, 9 skills in `dev-skills`:
+  - `quality-engineering`: discovery, one batch of questions, the testing
+    contract, strategy by product type, discipline selection, campaign order,
+    the twelve point quality gate and one verdict.
+  - `exploratory-testing`: charters, time boxes, nine tours, usability
+    findings attached to reproducible behaviour.
+  - `bug-hunting`: nine families of adversarial interaction, minimal
+    reproductions with a stated frequency.
+  - `api-testing`: the contract past the first 200, forty five endpoint cases,
+    error shape coherence, idempotency and concurrency.
+  - `regression-testing`: impact analysis from the diff, five selection tiers,
+    baseline comparison, honest exclusion.
+  - `accessibility-testing`: keyboard first, scanner last, criteria map,
+    findings mapped to a barrier and a person.
+  - `security-testing`: authorized dynamic verification inside a written
+    boundary, role matrix, object level access, tenant isolation.
+  - `reliability-testing`: nine failure modes per dependency, four properties
+    per injection, injection at more than one point per operation.
+  - `test-reporting`: finding records, severity scale, defect lifecycle,
+    evidence and redaction, campaign report in Markdown or self contained HTML.
+- Domain surfaces, 11 skills in `dev-skills`: `api-design`,
+  `database-design`, `caching-strategy`, `background-jobs`,
+  `realtime-systems`, `file-handling`, `payment-engineering`,
+  `internationalization`, `seo-engineering`, `design-system`, `data-privacy`.
+- Change and continuity, 5 skills in `dev-skills`: `refactoring`,
+  `legacy-code`, `migration-engineering`, `technical-debt`,
+  `decision-records`.
+- Operations, 2 skills in `devops-skills`: `infrastructure-as-code`,
+  `incident-response`.
+- Agents: `principal-engineer` for a multi surface request and its gates,
+  `incident-responder` for a degraded production system and its postmortem.
+- Sixteen task categories: QUALITY_CAMPAIGN, ACCESSIBILITY, REGRESSION,
+  MIGRATION, LEGACY, INCIDENT, INFRASTRUCTURE, PAYMENTS, JOBS, REALTIME,
+  FILES, I18N, SEO, DESIGN_SYSTEM, PRIVACY, CACHING, each with a canonical
+  plan and routing rows.
+
+### Changed
+
+- `testing-quality`: a requirement to case section before the mandatory cases,
+  and a suite review section with `resources/test-suite-review.md`. Sections
+  renumbered.
+- `playwright-automation`: interactive browser CLI mode, console and network
+  audits, recording and evidence rules, a failure diagnosis order, and
+  `resources/playwright-cli-protocol.md`. Command surfaces are verified
+  against the installed tool rather than reproduced from memory.
+- Execution plans: `ARCHITECTURE`, `FRONTEND`, `FULLSTACK`, `DATABASE`, `API`,
+  `SECURITY`, `PERFORMANCE`, `UI_UX`, `TESTING`, `BROWSER_AUTOMATION`,
+  `RELEASE`, `REFACTORING` and `DEPENDENCY` extended with the new skills.
+- Delivery phases 04, 08, 09 and 11 extended.
+- Nine agent definitions now cite the skills that cover their new surfaces.
+- `tests/validate-orchestration.sh`: 36 categories, 16 agents, and check 4
+  encodes the one deliberate exception to the exploration first rule, since
+  an INCIDENT plan restores service before it explores.
+
 ## 2.0.0
 
 Two new trees, an English-first skill language, and a configuration system
