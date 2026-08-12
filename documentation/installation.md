@@ -256,7 +256,7 @@ can be removed deliberately.
 
 ```bash
 ls ~/.claude/skills | wc -l      # 44 writing, 9 documents, 70 dev, 119 all
-ls ~/.claude/agents | wc -l      # 14, with the engineering tree
+ls ~/.claude/agents | wc -l      # 16, with the engineering tree
 cat ~/.claude/writer-suite.config.yaml
 ```
 
