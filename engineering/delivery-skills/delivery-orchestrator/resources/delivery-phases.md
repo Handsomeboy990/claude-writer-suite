@@ -43,7 +43,7 @@ and the trade-off accepted.
 
 phase: 04
 name: architecture-proposal
-skills: architecture-proposal, architecture-design
+skills: architecture-proposal, architecture-design, api-design, database-design, decision-records
 gate: none
 
 The nine section proposal, sized to the project, written as the technical
@@ -82,7 +82,7 @@ silent scope growth, no silent architectural drift.
 
 phase: 08
 name: integration-verification
-skills: fullstack-engineering, testing-quality, playwright-automation
+skills: fullstack-engineering, quality-engineering, testing-quality, api-testing, playwright-automation, accessibility-testing
 gate: verification
 
 The layers are exercised together, including the failure paths. A feature that
@@ -92,7 +92,7 @@ was never run end to end is not integrated.
 
 phase: 09
 name: devops
-skills: devops-core, environment-management, secrets-management, containerization, ci-cd-pipelines
+skills: devops-core, environment-management, secrets-management, infrastructure-as-code, containerization, ci-cd-pipelines
 gate: verification
 
 Environments, configuration, pipeline. The pipeline runs and fails correctly
@@ -112,7 +112,7 @@ first production deployment and any destructive migration are irreversible.
 
 phase: 11
 name: production-verification
-skills: production-verification, observability, backup-recovery
+skills: production-verification, observability, backup-recovery, incident-response
 gate: verification
 
 The deployed system answers real requests. A successful deploy command is not
