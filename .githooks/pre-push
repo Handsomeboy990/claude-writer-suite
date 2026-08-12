@@ -66,10 +66,19 @@ while read -r local_ref local_sha remote_ref remote_sha; do
       ;;
   esac
 
-  # Range of commits about to be pushed.
+  # Range of commits about to be pushed. A new branch has no remote counterpart,
+  # so the range is everything this push adds that no origin branch already
+  # holds. Scanning shared history instead would refuse a push because of a
+  # commit somebody else already merged, which the author of this push cannot
+  # fix without rewriting a protected branch.
   if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
-    range="$local_sha"
-    limit="--max-count=50"
+    if [ -n "$(git for-each-ref --count=1 --format='%(refname)' refs/remotes/origin 2>/dev/null)" ]; then
+      range="$local_sha --not --remotes=origin"
+      limit=""
+    else
+      range="$local_sha"
+      limit="--max-count=50"
+    fi
   else
     range="$remote_sha..$local_sha"
     limit=""
