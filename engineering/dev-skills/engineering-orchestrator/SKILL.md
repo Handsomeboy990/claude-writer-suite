@@ -81,6 +81,8 @@ own failure modes and its own plan.
 | DESIGN_SYSTEM | tokens, component library, theme, visual consistency |
 | PRIVACY | personal data, retention, erasure, consent, export |
 | CACHING | cache, invalidation, CDN, stale data |
+| ANALYTICS | events, funnels, conversion, product measurement |
+| FEATURE_FLAGS | toggle, gradual rollout, kill switch, experiment |
 
 Misclassification is cheap to fix and expensive to ignore. When two categories
 compete, take the one with the stricter gates.

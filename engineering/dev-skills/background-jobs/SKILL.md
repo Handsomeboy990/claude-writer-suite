@@ -1,6 +1,6 @@
 ---
 name: background-jobs
-description: Designs and operates asynchronous work: what belongs out of the request, queue and scheduler selection, job payloads and idempotency, retries with backoff, dead letter handling, ordering and concurrency limits, scheduled work that must not overlap or silently skip, and the visibility that makes a queue operable. Use for any queue, worker, cron, webhook consumer or long running operation.
+description: Designs and operates asynchronous work: what belongs out of the request, queue and scheduler selection, job payloads and idempotency, retries with backoff, dead letter handling, ordering and concurrency limits, scheduled work that must not overlap or silently skip, and the visibility that makes a queue operable. Use for any queue, worker, cron, webhook consumer, notification or mail send, or long running operation.
 license: MIT
 metadata:
   category: dev-skills
