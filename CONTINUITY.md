@@ -58,10 +58,11 @@ Session 5, quality and lifecycle coverage:
   `exploratory-testing`, `bug-hunting`, `api-testing`, `regression-testing`,
   `accessibility-testing`, `security-testing`, `reliability-testing`,
   `test-reporting`.
-- Domain surfaces, 11 skills: `api-design`, `database-design`,
+- Domain surfaces, 13 skills: `api-design`, `database-design`,
   `caching-strategy`, `background-jobs`, `realtime-systems`, `file-handling`,
   `payment-engineering`, `internationalization`, `seo-engineering`,
-  `design-system`, `data-privacy`.
+  `design-system`, `data-privacy`, `analytics-instrumentation`,
+  `feature-flags`.
 - Change and continuity, 5 skills: `refactoring`, `legacy-code`,
   `migration-engineering`, `technical-debt`, `decision-records`.
 - Operations, 2 skills: `infrastructure-as-code`, `incident-response`.
@@ -69,14 +70,17 @@ Session 5, quality and lifecycle coverage:
 - `testing-quality` and `playwright-automation` extended, the second with an
   interactive browser CLI protocol whose commands are verified against the
   installed tool rather than reproduced from memory.
-- Sixteen new task categories with their plans, routing rows and gate triggers.
-- Counts updated everywhere: 119 skills, 16 agents, 36 categories.
+- Eighteen new task categories with their plans, routing rows and gate
+  triggers.
+- `CLAUDE.md` untracked, `AGENTS.md` created as the vendor neutral entry
+  point, and check 7 added to `validate-rules.sh` to keep it that way.
+- Counts updated everywhere: 121 skills, 16 agents, 38 categories.
 
 ## Current state
 
 Working today:
 
-- the three scripts pass: 119 skills, 0 errors, 1 pre-existing warning on a
+- the three scripts pass: 121 skills, 0 errors, 1 pre-existing warning on a
   deliberate typographic counter-example;
 - `install.sh` works in every mode, and `--configure` was exercised end to end
   under a pseudo-terminal, producing both the configuration file and the

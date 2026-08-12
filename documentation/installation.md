@@ -30,8 +30,8 @@ bash install.sh
 ```
   1) Creative writing        42 skills   novels, poetry, screenplay, editing
   2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
-  3) Software engineering    68 skills   plus 16 agents
-  4) Everything             119 skills   plus 16 agents
+  3) Software engineering    70 skills   plus 16 agents
+  4) Everything             121 skills   plus 16 agents
   5) Individual skills, chosen by name
 
 Choice [1]:
@@ -49,7 +49,7 @@ everything.
 ```bash
 bash install.sh --writing      42 creative writing skills
 bash install.sh --documents     7 professional document skills
-bash install.sh --dev          68 engineering skills and 16 agents
+bash install.sh --dev          70 engineering skills and 16 agents
 bash install.sh --all          everything
 bash install.sh --shared        the 2 cross domain skills only
 bash install.sh --agents        the 16 agents only
@@ -91,7 +91,7 @@ bash install.sh --group devops-skills     operations only
 | `documentation` | 4 | documents |
 | `administrative` | 1 | documents |
 | `publishing` | 2 | documents |
-| `dev-skills` | 45 | engineering |
+| `dev-skills` | 47 | engineering |
 | `delivery-skills` | 10 | engineering |
 | `devops-skills` | 13 | engineering |
 | `shared` | 2 | shared |
@@ -255,7 +255,7 @@ can be removed deliberately.
 ## Verifying the installation
 
 ```bash
-ls ~/.claude/skills | wc -l      # 44 writing, 9 documents, 70 dev, 119 all
+ls ~/.claude/skills | wc -l      # 44 writing, 9 documents, 72 dev, 121 all
 ls ~/.claude/agents | wc -l      # 16, with the engineering tree
 cat ~/.claude/writer-suite.config.yaml
 ```

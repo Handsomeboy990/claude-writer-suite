@@ -13,14 +13,14 @@ are ignored. See `Why this file exists` at the end.
 
 ## What this repository is
 
-Claude Writer Suite: 119 skills and 16 agents, in four trees.
+Claude Writer Suite: 121 skills and 16 agents, in four trees.
 
 | Tree | Contents | Constitution |
 |---|---|---|
 | `shared/` | 2 cross domain skills | none, they depend on nothing |
 | `writing/` | 42 creative writing skills | `writing/core/writing-constitution` |
 | `documents/` | 7 professional document skills | `documents/documentation/document-core` |
-| `engineering/` | 68 software skills, 16 agents | `engineering/dev-skills/engineering-core` and `engineering/devops-skills/devops-core` |
+| `engineering/` | 70 software skills, 16 agents | `engineering/dev-skills/engineering-core` and `engineering/devops-skills/devops-core` |
 
 Full picture: `README.md`. Architecture: `documentation/architecture.md`.
 
@@ -62,7 +62,7 @@ skill. Never run a whole chain by reflex: compose the smallest complete plan.
 
 1. No emoji, in any file or any output.
 2. No em dash. The en dash is for dialogue only.
-3. Skill language is English, for all 119 skills and all 16 agents. Output
+3. Skill language is English, for all 121 skills and all 16 agents. Output
    language is the recipient's, set in the configuration. The three layers are
    defined in `documentation/configuration.md`.
 4. Commits are atomic, in English, with no mention of an AI, an assistant or

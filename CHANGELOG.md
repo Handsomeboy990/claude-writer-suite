@@ -8,7 +8,7 @@ semantic versioning.
 Quality engineering as a system rather than a single skill, and the lifecycle
 gaps closed: contracts, schemas, change management, asynchronous work, money,
 files, locales, search, design language, privacy, infrastructure and
-incidents. 92 skills to 119, 14 agents to 16, 20 task categories to 36.
+incidents. 92 skills to 121, 14 agents to 16, 20 task categories to 38.
 
 ### Added
 
@@ -32,10 +32,18 @@ incidents. 92 skills to 119, 14 agents to 16, 20 task categories to 36.
     per injection, injection at more than one point per operation.
   - `test-reporting`: finding records, severity scale, defect lifecycle,
     evidence and redaction, campaign report in Markdown or self contained HTML.
-- Domain surfaces, 11 skills in `dev-skills`: `api-design`,
+- Domain surfaces, 13 skills in `dev-skills`: `api-design`,
   `database-design`, `caching-strategy`, `background-jobs`,
   `realtime-systems`, `file-handling`, `payment-engineering`,
-  `internationalization`, `seo-engineering`, `design-system`, `data-privacy`.
+  `internationalization`, `seo-engineering`, `design-system`, `data-privacy`,
+  `analytics-instrumentation`, `feature-flags`.
+  - `analytics-instrumentation`: the questions before the events, a typed
+    schema, identity without personal data, definitions in one register,
+    consent, validation and deprecation.
+  - `feature-flags`: flag types and their lifespans, fail safe evaluation,
+    gradual rollout against a written threshold, both sides tested, stale
+    detection, and the removal that closes the loop. An entitlement is
+    authorization, not a flag.
 - Change and continuity, 5 skills in `dev-skills`: `refactoring`,
   `legacy-code`, `migration-engineering`, `technical-debt`,
   `decision-records`.
@@ -43,10 +51,11 @@ incidents. 92 skills to 119, 14 agents to 16, 20 task categories to 36.
   `incident-response`.
 - Agents: `principal-engineer` for a multi surface request and its gates,
   `incident-responder` for a degraded production system and its postmortem.
-- Sixteen task categories: QUALITY_CAMPAIGN, ACCESSIBILITY, REGRESSION,
+- Eighteen task categories: QUALITY_CAMPAIGN, ACCESSIBILITY, REGRESSION,
   MIGRATION, LEGACY, INCIDENT, INFRASTRUCTURE, PAYMENTS, JOBS, REALTIME,
-  FILES, I18N, SEO, DESIGN_SYSTEM, PRIVACY, CACHING, each with a canonical
-  plan and routing rows.
+  FILES, I18N, SEO, DESIGN_SYSTEM, PRIVACY, CACHING, ANALYTICS,
+  FEATURE_FLAGS, each with a canonical plan and routing rows.
+- `AGENTS.md`, the vendor neutral entry point an agent reads first.
 
 ### Changed
 
@@ -62,9 +71,21 @@ incidents. 92 skills to 119, 14 agents to 16, 20 task categories to 36.
   `RELEASE`, `REFACTORING` and `DEPENDENCY` extended with the new skills.
 - Delivery phases 04, 08, 09 and 11 extended.
 - Nine agent definitions now cite the skills that cover their new surfaces.
-- `tests/validate-orchestration.sh`: 36 categories, 16 agents, and check 4
+- `tests/validate-orchestration.sh`: 38 categories, 16 agents, and check 4
   encodes the one deliberate exception to the exploration first rule, since
   an INCIDENT plan restores service before it explores.
+- `tests/validate-rules.sh`: check 7 fails the build if a runtime specific
+  agent file, a local agent directory or a secret file is ever tracked, and if
+  `AGENTS.md` is absent.
+- `tests/validate-structure.sh`: `AGENTS.md` added to the required root files.
+
+### Removed
+
+- `CLAUDE.md` is no longer tracked. A file named after an agent runtime is
+  machine local configuration; the entry point moved to `AGENTS.md` with the
+  same purpose and a neutral name. `.gitignore` now covers `CLAUDE.md`,
+  `.cursor/`, `.cursorrules`, `.windsurfrules` and `.aider*` alongside
+  `.claude/`.
 
 ## 2.0.0
 
