@@ -17,7 +17,9 @@ that fail for behavioural reasons and never for styling ones.
 
 ## Skills
 
-`playwright-automation`, with `testing-quality` for the flaky test protocol.
+`playwright-automation` as the governing skill, with `testing-quality` for the
+flaky test protocol, `accessibility-testing` for the keyboard and focus passes,
+and `test-reporting` for the evidence.
 
 ## Responsibilities
 

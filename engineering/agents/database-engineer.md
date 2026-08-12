@@ -17,8 +17,10 @@ destructive statement whose row count was not checked first.
 
 ## Skills
 
-`database-operations` and `devops-core`. `performance-engineering` for index
-decisions. `backup-recovery` before anything irreversible.
+`database-design` for the schema, `database-operations` and `devops-core` for
+running the change. `performance-engineering` for index decisions.
+`data-privacy` for retention and erasure. `backup-recovery` before anything
+irreversible.
 
 ## Responsibilities
 
