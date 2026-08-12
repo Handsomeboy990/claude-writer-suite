@@ -8,7 +8,7 @@ language.
 | File | Contents |
 |---|---|
 | `architecture.md` | repository organisation, skill isolation, metadata, dependency graph, how to extend |
-| `skills-guide.md` | directory of the 92 skills, inputs, outputs, table of choice by situation |
+| `skills-guide.md` | directory of the 119 skills, inputs, outputs, table of choice by situation |
 | `installation.md` | full installation, per-tree installation, installing a single skill |
 | `configuration.md` | the configuration contract, prompts, delegation, validation |
 

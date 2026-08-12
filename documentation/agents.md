@@ -1,6 +1,6 @@
 # Agents
 
-Fourteen agent definitions, for a runtime that supports subagents.
+Sixteen agent definitions, for a runtime that supports subagents.
 
 This document explains the difference between a skill, an agent and
 orchestration, and gives the public contract of each agent. The definitions
@@ -24,8 +24,10 @@ Duplicating a skill into an agent produces two documents that drift, and the
 one the agent reads is the stale one.
 
 Orchestration is sequencing. `delivery-orchestrator` owns a project across
-fourteen phases and holds four approval gates. `engineering-orchestrator` owns
-a single task and composes the smallest complete plan for it.
+fourteen phases and holds four approval gates. `principal-engineer` owns a
+request that spans several surfaces without being a full delivery.
+`engineering-orchestrator` owns a single task and composes the smallest
+complete plan for it.
 
 ## When you do not need agents
 
@@ -36,11 +38,12 @@ handoff.
 For a single task, the skills alone are enough. Install with `--no-agents` and
 let `engineering-orchestrator` sequence the skills in one context.
 
-## The fourteen
+## The sixteen
 
 | Agent | Owns | Runs after | Hands to |
 |---|---|---|---|
 | `delivery-orchestrator` | the project and its gates | the brief | every other agent |
+| `principal-engineer` | one multi surface request and its gates | a request larger than one task | the specialist agents |
 | `requirements-analyst` | requirements into a specification | the brief | `software-architect` |
 | `software-architect` | architecture and technology decisions | requirements | the validation gate, then implementation |
 | `frontend-engineer` | client implementation | approved architecture, fixed contract | `qa-engineer` |
@@ -54,6 +57,7 @@ let `engineering-orchestrator` sequence the skills in one context.
 | `performance-engineer` | measured performance work | a measurement or a symptom | `qa-engineer` |
 | `documentation-engineer` | documentation matching the code | behaviour change | `release-engineer` |
 | `release-engineer` | whether it ships, and how | every gate passed | production verification |
+| `incident-responder` | a degraded production system | an alert or a report | `debugging`, `qa-engineer`, the action items |
 
 ## The contract of every agent
 
@@ -113,7 +117,7 @@ agents reach at the end of their work.
 - Nothing verifies at runtime that a review gate between two agents was
   actually held. `tests/validate-orchestration.sh` verifies the definitions
   are coherent, not that an execution respected them.
-- The fourteen cover software delivery. There is no agent for the writing tree
+- The sixteen cover software delivery. There is no agent for the writing tree
   or the documents tree: both are sequential, single-context work where an
   agent boundary would add a handoff and remove nothing.
 

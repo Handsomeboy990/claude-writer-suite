@@ -1,6 +1,6 @@
 # dev-skills
 
-Senior full-stack engineering skill system. Twenty skills that let an agent
+Senior full-stack engineering skill system. Forty five skills that let an agent
 work on a production codebase the way an experienced engineer does: read
 before writing, verify before claiming, and finish the whole vertical slice
 rather than the part that demonstrates well.
@@ -66,6 +66,48 @@ no em dash.
 | `project-continuity` | a handoff the next session can resume from |
 | `git-workflow` | identity, atomic commits, history hygiene, pull requests |
 | `release-readiness` | nine gates and a go or no go verdict |
+
+### Domain surfaces
+
+Loaded when the request names one of them, and left alone otherwise.
+
+| Skill | Responsibility |
+|---|---|
+| `api-design` | the contract, before the endpoint exists |
+| `database-design` | schema, constraints and indexes from access patterns |
+| `caching-strategy` | whether to cache at all, then where and how it expires |
+| `background-jobs` | queues, retries, idempotency, scheduled work |
+| `realtime-systems` | live features that survive a real network |
+| `file-handling` | uploads, storage, processing, delivery |
+| `payment-engineering` | flows that stay correct when money moves |
+| `internationalization` | more than one language and region |
+| `seo-engineering` | the technical half of search visibility |
+| `design-system` | tokens, component contracts, themes, adoption |
+| `data-privacy` | what is held, for how long, and deletion that works |
+
+### Change and continuity
+
+| Skill | Responsibility |
+|---|---|
+| `refactoring` | structure changed, behaviour proven unchanged |
+| `legacy-code` | safe change in code nobody trusts |
+| `migration-engineering` | moving a running system in reversible steps |
+| `technical-debt` | debt measured, ranked, paid inside real work |
+| `decision-records` | why the system is built this way, immutably |
+
+### Quality
+
+| Skill | Responsibility |
+|---|---|
+| `quality-engineering` | coordinates a campaign and issues the verdict |
+| `api-testing` | the contract, verified past the first 200 |
+| `exploratory-testing` | designed exploration under a charter |
+| `bug-hunting` | systematic adversarial testing of a working feature |
+| `regression-testing` | what to re-run, and what was excluded |
+| `accessibility-testing` | keyboard first, scanner last |
+| `security-testing` | authorized dynamic testing of the real controls |
+| `reliability-testing` | behaviour when a dependency fails |
+| `test-reporting` | findings, severity, evidence, one verdict |
 
 ## How the system runs
 
