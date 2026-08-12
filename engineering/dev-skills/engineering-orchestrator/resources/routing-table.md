@@ -42,6 +42,11 @@ obvious. When several rows match, the row with the stricter gates wins.
 | tokens, component library, theme, dark mode, consistency | DESIGN_SYSTEM | UI_UX |
 | personal data, GDPR, retention, delete my account, export my data | PRIVACY | SECURITY, DATABASE |
 | cache it, invalidation, CDN, stale data | CACHING | PERFORMANCE |
+| track this, events, funnel, conversion, product metrics | ANALYTICS | PRIVACY |
+| feature flag, toggle, gradual rollout, kill switch, A/B test | FEATURE_FLAGS | RELEASE |
+| visual regression, screenshot diff, has the layout moved | BROWSER_AUTOMATION | UI_UX |
+| notification, transactional mail, push, digest | JOBS | BACKEND |
+| terraform, kubernetes, helm, provision the cluster | INFRASTRUCTURE | SECURITY |
 
 ## Surface detection
 
@@ -80,6 +85,8 @@ category.
 | work is moved out of the request | `background-jobs` |
 | a response is cached, at any layer | `caching-strategy` |
 | a user visible string is added | `internationalization`, where locales exist |
+| an event is emitted for measurement | `analytics-instrumentation`, `data-privacy` |
+| a conditional ships disabled | `feature-flags`, with an owner and a date |
 | an interactive element is added or changed | `accessibility-testing` |
 | a public URL changes | `seo-engineering`, redirect map |
 | a dependency is added or bumped | `dependency-selection`, `security-audit` |

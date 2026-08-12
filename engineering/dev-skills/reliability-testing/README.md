@@ -14,6 +14,7 @@ communicates, stays consistent, recovers.
 - Downstream: backend-engineering, testing-quality, test-reporting,
   production-verification.
 
-Failures are injected at more than one point in the same operation, because
-failing before, during and after a write produces three different defects. The
-data is checked, not only the absence of an exception.
+One failure per run. The same operation is then rerun with the injection moved
+to a different point, because failing before, during and after a write
+produces three different defects. The data is checked, not only the absence of
+an exception.

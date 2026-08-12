@@ -1,6 +1,6 @@
 # dev-skills
 
-Senior full-stack engineering skill system. Forty five skills that let an agent
+Senior full-stack engineering skill system. Forty seven skills that let an agent
 work on a production codebase the way an experienced engineer does: read
 before writing, verify before claiming, and finish the whole vertical slice
 rather than the part that demonstrates well.
@@ -84,6 +84,8 @@ Loaded when the request names one of them, and left alone otherwise.
 | `seo-engineering` | the technical half of search visibility |
 | `design-system` | tokens, component contracts, themes, adoption |
 | `data-privacy` | what is held, for how long, and deletion that works |
+| `analytics-instrumentation` | product measurement designed before it is emitted |
+| `feature-flags` | flags with a lifecycle, and the removal that closes it |
 
 ### Change and continuity
 

@@ -1,6 +1,6 @@
 # Skills guide
 
-Directory of the 119 skills. One line each: what it does, and when to open it.
+Directory of the 121 skills. One line each: what it does, and when to open it.
 
 Every skill's own `README.md` carries its inputs, outputs, dependencies and
 configuration in four lines. This file is the index; the READMEs are the
@@ -36,6 +36,8 @@ contracts.
 | The public pages must be found | `seo-engineering` |
 | Every screen looks slightly different | `design-system` |
 | We hold personal data | `data-privacy` |
+| Nobody can answer a question from our data | `analytics-instrumentation` |
+| This must ship disabled, or needs a kill switch | `feature-flags` |
 | We must provision infrastructure | `infrastructure-as-code` |
 | Production is down | `incident-response` |
 | I am starting a novel | `novel-architect` |
@@ -151,9 +153,9 @@ Depend on nothing. Callable from any tree, usable alone.
 | `document-design` | publishing | hierarchy, typography, tables, page furniture, metadata |
 | `pdf-production` | publishing | engine selection, generation, render verification |
 
-## engineering, 68 skills
+## engineering, 70 skills
 
-### dev-skills, 45
+### dev-skills, 47
 
 | Skill | What it does |
 |---|---|
@@ -193,6 +195,8 @@ Depend on nothing. Callable from any tree, usable alone.
 | `seo-engineering` | the technical half of search visibility |
 | `design-system` | tokens, component contracts, themes, adoption |
 | `data-privacy` | what is held, for how long, and deletion that works |
+| `analytics-instrumentation` | events designed from the questions they answer |
+| `feature-flags` | flag types, rollout, stale detection, removal |
 | `quality-engineering` | coordinates a whole quality campaign and its verdict |
 | `api-testing` | an HTTP surface against its contract, past the 200 |
 | `exploratory-testing` | designed exploration under a charter and a time box |

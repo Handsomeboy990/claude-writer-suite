@@ -10,11 +10,16 @@ drafts-prives/
 
 dist/
 
-# Configuration locale d'un agent, propre à une machine.
-# CLAUDE.md reste versionné : c'est la mémoire publique du projet, exigée par
-# tests/validate-structure.sh, et elle ne contient aucun secret.
+# Configuration locale d'un agent, propre a une machine. Jamais versionnee.
+# Le point d'entree public du depot est AGENTS.md, qui lui est versionne.
+# tests/validate-rules.sh check 7 verifie qu'aucun de ces chemins n'est suivi.
 .claude/
 .claude.json
+CLAUDE.md
+.cursor/
+.cursorrules
+.aider*
+.windsurfrules
 *.local
 
 # Secrets et informations d'identification, jamais versionnés.

@@ -113,6 +113,25 @@ while IFS= read -r file; do
   fi
 done < <(files)
 
+printf 'Check 7: no tracked local agent configuration or secret file\n'
+# Rule 6 of AGENTS.md: a file named after an agent runtime is machine local
+# configuration and is never versioned. The public entry point is AGENTS.md.
+if command -v git >/dev/null 2>&1 &&
+   git -C "$ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  while IFS= read -r tracked; do
+    [ -n "$tracked" ] || continue
+    report_error "tracked file that must never be versioned: $tracked"
+  done < <(git -C "$ROOT" ls-files \
+    'CLAUDE.md' '**/CLAUDE.md' '.claude/**' '.claude.json' \
+    '.cursorrules' '.cursor/**' '.windsurfrules' '.aider*' \
+    '.env' '.env.*' '*.pem' '*.key' 'credentials.json' 2>/dev/null \
+    | grep -v '\.env\.example$')
+  git -C "$ROOT" ls-files --error-unmatch AGENTS.md >/dev/null 2>&1 \
+    || report_error "AGENTS.md is missing from version control"
+else
+  report_warning "git unavailable, check 7 skipped"
+fi
+
 printf '\n%s errors, %s warnings.\n' "$ERRORS" "$WARNINGS"
 [ "$ERRORS" -eq 0 ] || exit 1
 printf 'Repository rules respected.\n'
