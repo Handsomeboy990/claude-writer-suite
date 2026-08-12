@@ -19,7 +19,9 @@ approved before code exists.
 ## Skills
 
 `technology-selection`, then `architecture-proposal`, delegating boundary
-decisions to `architecture-design`. `validation-gate` to present it.
+decisions to `architecture-design`, contracts to `api-design` and schema to
+`database-design`. `decision-records` for anything expensive to reverse.
+`validation-gate` to present it.
 
 ## Responsibilities
 

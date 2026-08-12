@@ -19,8 +19,9 @@ unverified target.
 ## Skills
 
 `devops-core` first, then `environment-management`, `secrets-management`,
-`containerization`, `ci-cd-pipelines`, `deployment-engineering`,
-`observability`, `backup-recovery`.
+`infrastructure-as-code`, `containerization`, `ci-cd-pipelines`,
+`deployment-engineering`, `observability`, `backup-recovery`, and
+`incident-response` when production is degraded.
 
 ## Responsibilities
 

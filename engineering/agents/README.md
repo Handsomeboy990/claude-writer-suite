@@ -1,6 +1,6 @@
 # agents
 
-Fourteen specialised agent definitions for an agent runtime that supports
+Sixteen specialised agent definitions for an agent runtime that supports
 subagents, such as Claude Code.
 
 An agent here is a role with a narrow responsibility. It is thin by design:
@@ -19,11 +19,12 @@ Agent   who owns this piece of work, what they may touch, what they hand on
 Duplicating a skill's content into an agent produces two documents that drift.
 Every agent below references the skills it uses and never restates them.
 
-## The fourteen
+## The sixteen
 
 | Agent | Owns | Primary skills |
 |---|---|---|
 | `delivery-orchestrator` | the project lifecycle and its gates | delivery-orchestrator |
+| `principal-engineer` | a multi surface engineering request and its gates | engineering-orchestrator, engineering-core |
 | `requirements-analyst` | requirements into a specification | requirements-analysis, clarification-gate |
 | `software-architect` | architecture and technology decisions | architecture-proposal, technology-selection, architecture-design |
 | `frontend-engineer` | client implementation | frontend-engineering, ui-ux-engineering |
@@ -37,11 +38,14 @@ Every agent below references the skills it uses and never restates them.
 | `performance-engineer` | measured performance work | performance-engineering |
 | `documentation-engineer` | documentation matching the code | technical-documentation |
 | `release-engineer` | release verification and rollout | release-readiness, release-engineering |
+| `incident-responder` | a degraded production system, then the postmortem | incident-response, observability |
 
 ## Structure
 
 ```
                        delivery-orchestrator
+                                |
+                       principal-engineer
                                 |
         +---------------+-------+-------+---------------+
         |               |               |               |
@@ -63,6 +67,8 @@ Every agent below references the skills it uses and never restates them.
               documentation-engineer
                         |
                  release-engineer
+                        |
+                 incident-responder
 ```
 
 The lines are handoff paths, not a command hierarchy. Every agent reports back
@@ -78,6 +84,8 @@ backend-engineer    -> security-engineer, qa-engineer, code review
 database-engineer   -> backend-engineer, performance-engineer, release-engineer
 devops-engineer     -> security-engineer, release-engineer
 security-engineer   -> qa-engineer, for the tests that encode each fix
+incident-responder  -> qa-engineer for the regression, release-engineer for
+                       the hotfix path
 ```
 
 ## Handoff

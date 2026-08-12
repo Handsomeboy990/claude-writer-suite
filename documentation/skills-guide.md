@@ -1,6 +1,6 @@
 # Skills guide
 
-Directory of the 92 skills. One line each: what it does, and when to open it.
+Directory of the 119 skills. One line each: what it does, and when to open it.
 
 Every skill's own `README.md` carries its inputs, outputs, dependencies and
 configuration in four lines. This file is the index; the READMEs are the
@@ -12,6 +12,32 @@ contracts.
 |---|---|
 | I am starting anything significant | `project-brief` |
 | I finished something and want it checked | `self-critique` |
+| I must validate a whole product before launch | `quality-engineering` |
+| I need to know what to re-run after a fix | `regression-testing` |
+| The API works and I do not trust it | `api-testing` |
+| I want the defects tests do not find | `exploratory-testing`, `bug-hunting` |
+| Someone asked whether it is accessible | `accessibility-testing` |
+| I am authorised to test the security of a running system | `security-testing` |
+| I want to know what happens when a provider fails | `reliability-testing` |
+| I have findings and need a report | `test-reporting` |
+| I am designing an endpoint anyone else will call | `api-design` |
+| I am about to create a table | `database-design` |
+| The structure fights me every time I change it | `refactoring` |
+| I inherited a codebase with no tests | `legacy-code` |
+| We must move off this framework, database or provider | `migration-engineering` |
+| Everyone complains about the code and nobody agrees | `technical-debt` |
+| This choice will be questioned in two years | `decision-records` |
+| It is slow and someone said cache it | `caching-strategy` |
+| This work does not belong in the request | `background-jobs` |
+| It must update live | `realtime-systems` |
+| Users upload files | `file-handling` |
+| Money moves | `payment-engineering` |
+| We are launching in a second language | `internationalization` |
+| The public pages must be found | `seo-engineering` |
+| Every screen looks slightly different | `design-system` |
+| We hold personal data | `data-privacy` |
+| We must provision infrastructure | `infrastructure-as-code` |
+| Production is down | `incident-response` |
 | I am starting a novel | `novel-architect` |
 | I do not know where to cut my chapters | `chapter-architect` |
 | My scene is flat | `scene-builder` |
@@ -125,9 +151,9 @@ Depend on nothing. Callable from any tree, usable alone.
 | `document-design` | publishing | hierarchy, typography, tables, page furniture, metadata |
 | `pdf-production` | publishing | engine selection, generation, render verification |
 
-## engineering, 41 skills
+## engineering, 68 skills
 
-### dev-skills, 20
+### dev-skills, 45
 
 | Skill | What it does |
 |---|---|
@@ -151,6 +177,31 @@ Depend on nothing. Callable from any tree, usable alone.
 | `project-continuity` | leaves the project resumable by someone else |
 | `git-workflow` | identity, atomic commits, delegation boundaries, pull requests |
 | `release-readiness` | nine gates, then a go or no go verdict |
+| `api-design` | the contract before the endpoint exists |
+| `database-design` | schema, constraints, indexes from access patterns |
+| `refactoring` | structure changed, behaviour proven unchanged |
+| `legacy-code` | safe change in code nobody trusts |
+| `migration-engineering` | moving a running system, in reversible steps |
+| `technical-debt` | debt measured, ranked and paid inside real work |
+| `decision-records` | why the system is built this way, immutably |
+| `caching-strategy` | whether to cache, where, keyed by what, invalidated how |
+| `background-jobs` | queues, retries, idempotency, scheduled work |
+| `realtime-systems` | live features that survive a real network |
+| `file-handling` | uploads, storage, processing and delivery, safely |
+| `payment-engineering` | flows that stay correct when money moves |
+| `internationalization` | more than one language and region, done properly |
+| `seo-engineering` | the technical half of search visibility |
+| `design-system` | tokens, component contracts, themes, adoption |
+| `data-privacy` | what is held, for how long, and deletion that works |
+| `quality-engineering` | coordinates a whole quality campaign and its verdict |
+| `api-testing` | an HTTP surface against its contract, past the 200 |
+| `exploratory-testing` | designed exploration under a charter and a time box |
+| `bug-hunting` | systematic adversarial testing of a working feature |
+| `regression-testing` | what to re-run, and what was deliberately excluded |
+| `accessibility-testing` | keyboard first, scanner last |
+| `security-testing` | authorized dynamic testing of the real controls |
+| `reliability-testing` | what happens when a dependency fails |
+| `test-reporting` | findings, severity, evidence, lifecycle, one verdict |
 
 ### delivery-skills, 10
 
@@ -167,7 +218,7 @@ Depend on nothing. Callable from any tree, usable alone.
 | `scope-and-change-control` | protects an approved scope from silent drift |
 | `client-handover` | the delivery package another team can take over |
 
-### devops-skills, 11
+### devops-skills, 13
 
 | Skill | What it does |
 |---|---|
@@ -182,14 +233,17 @@ Depend on nothing. Callable from any tree, usable alone.
 | `backup-recovery` | a backup is untested until a restore has been performed |
 | `production-verification` | proves a deployed system works, by exercising it |
 | `release-engineering` | versioning, tagging, changelog, rollout, hotfix path |
+| `infrastructure-as-code` | infrastructure in code, state, plans, drift |
+| `incident-response` | declaration to postmortem, mitigation before diagnosis |
 
-### agents, 14
+### agents, 16
 
-`delivery-orchestrator`, `requirements-analyst`, `software-architect`,
-`frontend-engineer`, `backend-engineer`, `database-engineer`,
-`security-engineer`, `qa-engineer`, `playwright-engineer`, `ui-ux-engineer`,
-`devops-engineer`, `performance-engineer`, `documentation-engineer`,
-`release-engineer`.
+`delivery-orchestrator`, `principal-engineer`, `requirements-analyst`,
+`software-architect`, `frontend-engineer`, `backend-engineer`,
+`database-engineer`, `security-engineer`, `qa-engineer`,
+`playwright-engineer`, `ui-ux-engineer`, `devops-engineer`,
+`performance-engineer`, `documentation-engineer`, `release-engineer`,
+`incident-responder`.
 
 Public contracts in `agents.md`. An agent is a role: it names the skills it
 uses and restates none of them.

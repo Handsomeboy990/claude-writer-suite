@@ -4,7 +4,7 @@ Quatre systèmes d'expertise pour un agent, dans un seul dépôt : **écrire**,
 **produire des documents**, **construire des logiciels**, et **relire son
 propre travail**.
 
-92 skills et 14 agents. Pas des prompts : des protocoles numérotés, des
+119 skills et 16 agents. Pas des prompts : des protocoles numérotés, des
 critères de décision, des grilles d'évaluation et des procédures de révision,
 chacun avec un seuil chiffré de ce qui compte comme terminé.
 
@@ -15,7 +15,7 @@ claude-writer-suite/
 ├── shared/           2 skills transversaux, appelés par tous les arbres
 ├── writing/         42 skills d'écriture créative
 ├── documents/        7 skills de document professionnel
-├── engineering/     41 skills d'ingénierie et 14 agents
+├── engineering/     68 skills d'ingénierie et 16 agents
 ├── config/           valeurs propres à l'utilisateur, rien n'est codé en dur
 ├── documentation/    documentation technique des quatre arbres
 └── tests/            trois scripts de validation
@@ -37,7 +37,7 @@ Le dépôt sépare trois langues que l'on confond couramment.
 
 | Couche | De quoi il s'agit | Valeur |
 |---|---|---|
-| Langue des skills | les instructions elles-mêmes | anglais, pour les 92 skills |
+| Langue des skills | les instructions elles-mêmes | anglais, pour les 119 skills |
 | Langue du système | chemins, identifiants, clés de configuration, commits | anglais |
 | Langue de sortie | ce que reçoit le lecteur | la sienne, réglée par projet |
 
@@ -106,10 +106,10 @@ en production.
 
 | Catégorie | Skills | Question à laquelle elle répond |
 |---|---|---|
-| [dev-skills](engineering/dev-skills/) | 20 | comment une modification est faite correctement |
+| [dev-skills](engineering/dev-skills/) | 45 | comment une modification est faite correctement |
 | [delivery-skills](engineering/delivery-skills/) | 10 | quoi construire, dans quel ordre, avec quelle approbation |
-| [devops-skills](engineering/devops-skills/) | 11 | comment le système tourne, se déploie et se restaure |
-| [agents](engineering/agents/) | 14 | qui possède quoi, et ce qui est transmis |
+| [devops-skills](engineering/devops-skills/) | 13 | comment le système tourne, se déploie et se restaure |
+| [agents](engineering/agents/) | 16 | qui possède quoi, et ce qui est transmis |
 
 Agnostique de la pile et de la plateforme : le système lit le projet qu'on lui
 confie plutôt que d'en présupposer la forme.
@@ -134,8 +134,8 @@ reçoit jamais l'arbre d'ingénierie.
 ```
   1) Creative writing        42 skills   romans, poésie, scénario, édition
   2) Professional documents   7 skills   guides, manuels, rapports, lettres, PDF
-  3) Software engineering    41 skills   plus 14 agents
-  4) Everything              92 skills   plus 14 agents
+  3) Software engineering    68 skills   plus 16 agents
+  4) Everything             119 skills   plus 16 agents
   5) Individual skills, chosen by name
 
 Choice [1]:
@@ -154,10 +154,10 @@ bash install.sh --configure
 ```bash
 bash install.sh --writing      les 42 skills d'écriture
 bash install.sh --documents     les 7 skills de document
-bash install.sh --dev          les 41 skills d'ingénierie et les 14 agents
+bash install.sh --dev          les 68 skills d'ingénierie et les 16 agents
 bash install.sh --all          tout
 bash install.sh --shared        les 2 skills transversaux seulement
-bash install.sh --agents        les 14 agents seulement
+bash install.sh --agents        les 16 agents seulement
 bash install.sh --no-agents     les skills sans les agents
 bash install.sh --zip           construit aussi une archive par skill dans dist/
 bash install.sh --remove        désinstalle la portée choisie
@@ -191,9 +191,9 @@ bash install.sh --group devops-skills     l'exploitation seule
 | `documentation` | 4 | documents |
 | `administrative` | 1 | documents |
 | `publishing` | 2 | documents |
-| `dev-skills` | 20 | engineering |
+| `dev-skills` | 45 | engineering |
 | `delivery-skills` | 10 | engineering |
-| `devops-skills` | 11 | engineering |
+| `devops-skills` | 13 | engineering |
 | `shared` | 2 | shared |
 
 Tout se combine, et le résultat est dédoublonné :
@@ -408,7 +408,7 @@ Deux interdits s'appliquent à tous les fichiers du dépôt, y compris celui-ci 
 ## Validation
 
 ```bash
-bash tests/validate-structure.sh      structure et métadonnées des 92 skills
+bash tests/validate-structure.sh      structure et métadonnées des 119 skills
 bash tests/validate-rules.sh          emoji, tiret cadratin, secrets, identité codée en dur
 bash tests/validate-orchestration.sh  plans, phases, agents, renvois croisés
 ```
@@ -421,7 +421,7 @@ Les trois doivent passer avant tout commit. Détail dans
 | Fichier | Contenu |
 |---|---|
 | [documentation/architecture.md](documentation/architecture.md) | organisation, isolation des skills, métadonnées |
-| [documentation/skills-guide.md](documentation/skills-guide.md) | répertoire des 92 skills |
+| [documentation/skills-guide.md](documentation/skills-guide.md) | répertoire des 119 skills |
 | [documentation/installation.md](documentation/installation.md) | installation complète et par skill |
 | [documentation/configuration.md](documentation/configuration.md) | le contrat de configuration |
 | [documentation/agents.md](documentation/agents.md) | skill, agent, orchestration |

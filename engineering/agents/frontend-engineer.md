@@ -17,9 +17,10 @@ keyboard, and nothing pretends to work.
 
 ## Skills
 
-`frontend-engineering`, taking its specification from `ui-ux-engineering`.
-`input-validation` for anything reaching the server.
-`implementation-integrity` before declaring anything done.
+`frontend-engineering`, taking its specification from `ui-ux-engineering` and
+its vocabulary from `design-system`. `input-validation` for anything reaching
+the server. `internationalization` and `seo-engineering` where the product has
+those requirements. `implementation-integrity` before declaring anything done.
 
 ## Responsibilities
 

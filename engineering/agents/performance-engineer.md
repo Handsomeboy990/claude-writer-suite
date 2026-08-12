@@ -17,8 +17,9 @@ dominates it, fix that, and show the difference.
 
 ## Skills
 
-`performance-engineering`, with `debugging` when the symptom is a defect and
-`database-operations` for index decisions.
+`performance-engineering`, with `debugging` when the symptom is a defect,
+`database-design` and `database-operations` for index decisions, and
+`caching-strategy` once the structural fixes are exhausted.
 
 ## Responsibilities
 

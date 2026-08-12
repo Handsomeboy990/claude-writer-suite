@@ -17,8 +17,10 @@ only a human with console access can do.
 
 ## Skills
 
-`security-audit` as the governing skill, `input-validation` for the boundary
-half, `secrets-management` for credentials, `debugging` for exploitability.
+`security-audit` as the governing skill, `security-testing` for the authorized
+dynamic pass against a running system, `input-validation` for the boundary
+half, `secrets-management` for credentials, `data-privacy` for personal data,
+`debugging` for exploitability.
 
 ## Responsibilities
 

@@ -1,7 +1,8 @@
 # devops-skills
 
-Operations system. Eleven skills covering how a system is configured, built,
-deployed, observed, recovered and released.
+Operations system. Thirteen skills covering how a system is provisioned,
+configured, built, deployed, observed, recovered, released, and repaired when
+it breaks.
 
 Where `dev-skills` governs how code is written, this category governs how it
 runs and what happens when it does not.
@@ -25,6 +26,7 @@ constitution applies to every file: no emoji, no em dash.
 
 | Skill | Responsibility |
 |---|---|
+| `infrastructure-as-code` | infrastructure in code: state, plans, drift, imports |
 | `containerization` | whether a container is warranted, and building it correctly |
 | `ci-cd-pipelines` | a pipeline that fails for the right reasons |
 | `deployment-engineering` | getting a verified artefact running, on any platform |
@@ -38,6 +40,7 @@ constitution applies to every file: no emoji, no em dash.
 | `backup-recovery` | a backup is untested until a restore has been performed |
 | `production-verification` | proving the deployed system works by exercising it |
 | `release-engineering` | versioning, tagging, changelog, rollout, hotfix path |
+| `incident-response` | declaration to postmortem, mitigation before diagnosis |
 
 ## The rules that govern the family
 
@@ -66,6 +69,8 @@ Observability exists before the first production deployment
 | `observability` | an alert with no written response |
 | `backup-recovery` | reporting backups as in place with no rehearsal |
 | `production-verification` | reporting success without exercising a path |
+| `infrastructure-as-code` | applying a plan nobody read |
+| `incident-response` | debugging before mitigating, or naming a person as a cause |
 | `release-engineering` | a breaking change released as a minor version |
 
 ## Two distinctions worth holding
