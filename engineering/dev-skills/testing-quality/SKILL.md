@@ -4,7 +4,7 @@ description: Chooses the right test layer and writes tests that catch real defec
 license: MIT
 metadata:
   category: dev-skills
-  version: 1.0.0
+  version: 1.1.0
   depends_on: [engineering-core, project-exploration]
   outputs: [test-plan, tests, coverage-gaps, execution-log]
 ---
@@ -30,7 +30,28 @@ The pyramid is a budget, not a dogma. Most defects that reach production are
 integration defects, so a project with a thousand unit tests and no
 integration test is not well tested; it is well decorated.
 
-## 2. Mandatory cases
+## 2. From requirement to case
+
+Before choosing cases, state what the feature is supposed to do. A test suite
+derived from the implementation only proves the implementation is consistent
+with itself.
+
+```
+1 the requirement or the acceptance criterion, in one sentence
+2 the happy path it describes
+3 the unhappy paths: what the user can do wrong
+4 the edge cases: empty, first, last, largest, oldest, concurrent
+5 the invalid states: what must never be reachable
+6 the recovery paths: after a failure, what must still work
+7 the business rules the feature exists to enforce
+```
+
+When no requirement exists, the sentence is written from the code and marked
+as an assumption, so a reviewer can contradict it. A test that asserts current
+behaviour without knowing whether it is correct is documentation, not
+verification.
+
+## 3. Mandatory cases
 
 For every meaningful feature, these exist or their absence is justified in
 writing.
@@ -51,7 +72,7 @@ writing.
 Cases 5, 6 and 7 are the ones most often skipped and the ones that catch the
 defects that matter. A feature with only case 1 is untested.
 
-## 3. Writing a test that can fail
+## 4. Writing a test that can fail
 
 ```
 Arrange   the smallest state that makes the behaviour reachable
@@ -72,7 +93,7 @@ Rules:
   on wall clock time;
 - independent: any test can run alone, in any order, twice in a row.
 
-## 4. Test data
+## 5. Test data
 
 - Build data with a factory or a helper, so that adding a required field does
   not break fifty tests.
@@ -83,7 +104,7 @@ Rules:
 - Clean up, or use a transaction rollback per test, decided once for the
   project.
 
-## 5. Doubles
+## 6. Doubles
 
 | Double | Use when |
 |---|---|
@@ -100,7 +121,7 @@ External providers are stubbed at the network boundary, with the real client
 code exercised. Stubbing the client library instead means the request the
 client actually builds is never tested.
 
-## 6. Flaky tests
+## 7. Flaky tests
 
 A flaky test is a defect with two possible locations: the test, or the code.
 Deleting or retrying it hides which.
@@ -112,7 +133,28 @@ unseeded random source, a network call, an animation not awaited.
 The fix is the cause. `retries: 3` is a way to keep a race condition in
 production and stop hearing about it.
 
-## 7. Prohibitions
+## 8. Reviewing the tests themselves
+
+A suite is code, and it decays faster than the code it protects. Review it
+with the same severity, using `resources/test-suite-review.md`.
+
+```
+weak assertions       passes for the wrong reason, or asserts nothing useful
+missing assertions    exercises a path and checks only that it did not throw
+duplicate tests       three tests covering one behaviour, none covering another
+brittle selectors     coupled to markup or classes rather than to meaning
+hidden dependencies   passes only after another test ran
+shared state          a fixture mutated across tests
+poor cleanup          leaves rows, files or sessions behind
+timing hacks          sleeps, arbitrary waits, retries hiding a race
+slowest tests         the few that cost more than the rest combined
+skipped tests         with no reason and no owner
+```
+
+A suite with high coverage and weak assertions is more dangerous than no suite,
+because it produces confidence without protection.
+
+## 9. Prohibitions
 
 - Never modify a test to make it pass without deciding which of the test or
   the code is wrong, and saying which.
@@ -126,19 +168,20 @@ production and stop hearing about it.
 - Never leave a test skipped without a reason and an owner.
 - Never test a framework's behaviour instead of the project's.
 
-## 8. Protocol
+## 10. Protocol
 
 1. Read the project test setup: framework, layout, naming, run commands.
-2. List the behaviours the change introduces or modifies.
+2. State the requirement, then list the behaviours the change introduces or
+   modifies.
 3. Map each behaviour to the lowest layer that can observe it.
-4. Write the mandatory cases from section 2 that apply.
+4. Write the mandatory cases from section 3 that apply.
 5. Run the new tests and watch them fail for the right reason.
 6. Implement or fix.
 7. Run them again and watch them pass.
 8. Run the full suite and confirm nothing else broke.
 9. Report the gaps that remain, with reasons.
 
-## 9. Report format
+## 11. Report format
 
 ```
 Added 14 tests across 3 files.
@@ -162,7 +205,7 @@ Gaps
   environment has no mail sandbox. Recorded in continuity notes.
 ```
 
-## 10. Auto-critique
+## 12. Auto-critique
 
 Score from 0 to 5: layer choice, mandatory case coverage, tests observed
 failing first, determinism, independence, quality of assertions, honesty about
@@ -171,10 +214,12 @@ gaps, no test weakened.
 Threshold: no axis below 3, average at least 4. A suite with no unauthorized
 access case on a feature that has authorization is an automatic failure.
 
-## 11. Interfaces
+## 13. Interfaces
 
-- Upstream: every implementation skill, `debugging` for regression tests.
-- Lateral: `playwright-automation` for the browser layer,
-  `input-validation` for the adversarial matrix.
-- Downstream: `code-review-protocol`, `release-readiness`,
-  `project-continuity`.
+- Upstream: every implementation skill, `debugging` for regression tests,
+  `quality-engineering` when this runs inside a campaign.
+- Lateral: `playwright-automation` for the browser layer, `api-testing` for
+  the contract layer, `input-validation` for the adversarial matrix,
+  `reliability-testing` for stubbed dependency failure.
+- Downstream: `regression-testing` for what to re-run, `code-review-protocol`,
+  `release-readiness`, `project-continuity`, `test-reporting`.
