@@ -1,12 +1,12 @@
 ---
 name: playwright-automation
-description: Drives a real browser for end to end journeys, visual verification, responsive checks, screenshots and error state proof. Uses role and label based selectors, never brittle ones, and never captures secrets. Use when a change has a browser surface and Playwright is available or justified.
+description: Drives a real browser for end to end journeys, visual verification, responsive checks, screenshots, console and network audits and error state proof, through the project test runner or through an interactive browser CLI. Uses role and label based selectors, never brittle ones, and never captures secrets. Use when a change has a browser surface and browser tooling is available or justified.
 license: MIT
 metadata:
   category: dev-skills
-  version: 1.0.0
+  version: 1.1.0
   depends_on: [engineering-core, testing-quality]
-  outputs: [journey-tests, screenshots, responsive-report, visual-evidence]
+  outputs: [journey-tests, screenshots, responsive-report, visual-evidence, console-audit, network-audit]
 ---
 
 # Playwright Automation
@@ -119,38 +119,138 @@ run an automated accessibility scan where the project has one configured
 An automated scan catches a minority of issues. It is a floor, never a
 verdict.
 
-## 9. Failure diagnosis
+## 9. Driving a browser interactively
+
+Two modes exist, and they answer different questions.
+
+| Mode | Use for |
+|---|---|
+| the project test runner | permanent journeys, CI, regression |
+| an interactive browser CLI | exploration, a QA campaign, reproducing a defect, capturing evidence, debugging a failing test |
+
+The interactive mode is a tool for a session, not a substitute for tests.
+Anything worth protecting ends up in the runner.
+
+Before using any command, verify it against the installed tool rather than
+from memory: check that the binary exists, read its help output, and take the
+flags from there. Command surfaces change between versions, and an invented
+flag wastes a session. The verification protocol, the installation sequence
+and the capability list are in `resources/playwright-cli-protocol.md`.
+
+Working rules for interactive mode:
+
+```
+snapshot first     take an accessibility snapshot and act on the element
+                   references it returns, not on coordinates
+coordinates last   only for canvas, maps and widgets with no accessible
+                   identity, and say so in the notes
+verify after       after every interaction, assert the resulting state. A
+                   command that returned successfully proves the command ran,
+                   not that the application did anything
+sessions           use a named or isolated session per role, so two roles can
+                   be exercised without signing in and out
+credentials        supplied through the environment or a stored state file,
+                   never typed into a page that is being recorded
+cleanup            close what you opened, and leave no stored session behind
+```
+
+## 10. Console and network audit
+
+Both are part of a browser pass, not extras.
+
+Console:
+
+```
+collect errors and warnings across every page visited
+for each one: origin, whether it reproduces, what it affects
+classify: defect, expected noise from a dependency, or deprecation to schedule
+a page whose console is clean is worth recording as such
+```
+
+Never report every warning as a defect, and never dismiss an error because the
+page looked fine. An unhandled rejection with no visible effect today is a
+visible effect after the next change.
+
+Network:
+
+```
+failed requests, and whether the interface noticed
+unexpected 4xx and 5xx, including the ones the interface swallows
+duplicate requests for one intent
+requests made without credentials that should carry them, and the reverse
+oversized payloads and assets that fail to load
+redirect chains, and any request to an unexpected host
+responses carrying more data than the page displays
+```
+
+The last line finds real data exposure: a list endpoint returning fields the
+interface never shows.
+
+## 11. Recording and evidence
+
+```
+record when the evidence is a sequence, not a state
+keep recordings short and chaptered by phase, so a reviewer can skip
+capture the failure states, not only the successes
+name files by state, not by number
+no recording of a page holding real personal data or a real credential
+```
+
+Deliberate cursor movement and pauses belong to a demonstration recording.
+They have no place in an automated regression run, where the only goals are
+determinism and speed.
+
+## 12. Failure diagnosis
 
 On failure, collect the trace, the screenshot and the video where the project
 records them, and read them before changing anything. Then apply the flaky
 test guide from `testing-quality`.
 
+Diagnosis order for a failing browser test:
+
+```
+1 run the single failing test, alone
+2 read the assertion that failed, and what it received
+3 open the trace or the snapshot at the failing step
+4 read the console and the network at that moment
+5 decide: application defect, test defect, or environment
+6 fix the cause, never the timeout
+7 rerun the test, then rerun it a second time
+```
+
 Never add a retry to make a browser test pass. Browser flakiness is
 disproportionately caused by real races in the application.
 
-## 10. Protocol
+## 13. Protocol
 
-1. Confirm the tooling exists, or decide it is justified.
+1. Confirm the tooling exists, or decide it is justified. Verify the version
+   and the available commands rather than assuming them.
 2. Choose the journeys, no more than the critical ones.
 3. Write each journey with role based selectors and condition based waits.
 4. Add the error state and the empty state checks the journey passes through.
 5. Verify responsive widths and keyboard operability.
-6. Run headed once while developing, headless in the suite.
-7. Capture screenshots only where they carry information.
-8. Run the suite twice to detect flakiness before it reaches the pipeline.
+6. Audit the console and the network on every page the journey crosses.
+7. Run headed once while developing, headless in the suite.
+8. Capture screenshots only where they carry information.
+9. Run the suite twice to detect flakiness before it reaches the pipeline.
 
-## 11. Auto-critique
+## 14. Auto-critique
 
 Score from 0 to 5: journeys chosen well and kept few, selector quality, no
-duration based waits, isolation, determinism, screenshot hygiene including
-absence of sensitive data, responsive and keyboard coverage, stability across
-two consecutive runs.
+duration based waits, isolation, determinism, state verified after every
+interaction, console and network audited, screenshot hygiene including absence
+of sensitive data, responsive and keyboard coverage, stability across two
+consecutive runs.
 
 Threshold: no axis below 3, average at least 4. A single fragile selector or
 one `waitForTimeout` sends the work back.
 
-## 12. Interfaces
+## 15. Interfaces
 
-- Upstream: `frontend-engineering`, `ui-ux-engineering`, `testing-quality`.
+- Upstream: `frontend-engineering`, `ui-ux-engineering`, `testing-quality`,
+  `quality-engineering` when this runs inside a campaign.
+- Lateral: `accessibility-testing` for the keyboard and assistive technology
+  passes, `exploratory-testing` and `bug-hunting` for what to reproduce,
+  `dependency-selection` before introducing browser tooling.
 - Downstream: `code-review-protocol`, `technical-documentation` for
-  screenshots, `release-readiness`.
+  screenshots, `test-reporting` for evidence, `release-readiness`.

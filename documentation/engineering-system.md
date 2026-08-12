@@ -24,14 +24,14 @@ technical documentation, all in English by rule 6 of `engineering-core`.
 Writing the instructions in the language of their output removes a permanent
 translation and a source of error.
 
-Since version 2.0.0 that is no longer specific to this tree: all 92 skills are
+Since version 2.0.0 that is no longer specific to this tree: all 119 skills are
 written in English, and the output language is a configuration decision. See
 `configuration.md`.
 
 Rules 1 and 2 of the writing constitution still apply to every file: no emoji,
 no em dash.
 
-## 3. The twenty skills
+## 3. The forty five skills
 
 ### Foundation
 
@@ -78,6 +78,46 @@ no em dash.
 | `git-workflow` | identity, delegation boundaries, atomic commits, history hygiene |
 | `release-readiness` | nine gates and a go or no go verdict |
 
+### Domain surfaces
+
+| Skill | Responsibility |
+|---|---|
+| `api-design` | the contract before the endpoint exists |
+| `database-design` | schema, constraints, indexes from access patterns |
+| `caching-strategy` | whether to cache, where, keyed by what |
+| `background-jobs` | queues, retries, idempotency, schedules |
+| `realtime-systems` | live features that survive a real network |
+| `file-handling` | uploads, storage, processing, delivery |
+| `payment-engineering` | correctness when money moves |
+| `internationalization` | more than one language and region |
+| `seo-engineering` | the technical half of search visibility |
+| `design-system` | tokens, component contracts, themes |
+| `data-privacy` | inventory, retention, erasure that works |
+
+### Change and continuity
+
+| Skill | Responsibility |
+|---|---|
+| `refactoring` | structure changed, behaviour proven unchanged |
+| `legacy-code` | safe change without a trusted suite |
+| `migration-engineering` | moving a running system in reversible steps |
+| `technical-debt` | measured, ranked, paid inside real work |
+| `decision-records` | the reasoning, kept immutable |
+
+### Quality
+
+| Skill | Responsibility |
+|---|---|
+| `quality-engineering` | the campaign, its disciplines and its verdict |
+| `api-testing` | the contract, past the first 200 |
+| `exploratory-testing` | charter, time box, reproducible findings |
+| `bug-hunting` | nine families of adversarial interaction |
+| `regression-testing` | impact analysis and honest exclusion |
+| `accessibility-testing` | keyboard first, scanner last |
+| `security-testing` | authorized dynamic verification of controls |
+| `reliability-testing` | injected failure, and the four properties |
+| `test-reporting` | severity, evidence, lifecycle, one verdict |
+
 ## 4. Execution chain
 
 ```
@@ -115,12 +155,26 @@ existing test, executed, red before and green after, satisfies the test gate.
 
 ## 6. Task categories
 
-Twenty classification categories, each with a canonical plan in
-`engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md`:
+Thirty six classification categories, each with a canonical plan in
+`engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md`.
+
+The twenty general categories:
 
 EXPLORATION, ARCHITECTURE, FRONTEND, BACKEND, FULLSTACK, DATABASE, API,
 AUTHENTICATION, SECURITY, VALIDATION, DEBUGGING, PERFORMANCE, UI_UX, TESTING,
 BROWSER_AUTOMATION, DOCUMENTATION, GIT, RELEASE, REFACTORING, DEPENDENCY.
+
+The sixteen surface categories, each naming a domain with its own failure
+modes:
+
+QUALITY_CAMPAIGN, ACCESSIBILITY, REGRESSION, MIGRATION, LEGACY, INCIDENT,
+INFRASTRUCTURE, PAYMENTS, JOBS, REALTIME, FILES, I18N, SEO, DESIGN_SYSTEM,
+PRIVACY, CACHING.
+
+Every plan begins with `project-exploration`, with one deliberate exception:
+INCIDENT begins with `incident-response`, because production is restored
+before the codebase is understood. `tests/validate-orchestration.sh` check 4
+encodes that exception rather than tolerating it.
 
 The plan format is machine readable, which is what allows
 `tests/validate-orchestration.sh` to verify their coherence.
@@ -146,11 +200,20 @@ engineering-core
       |                                |
       +-- input-validation ------------+
       |                                |
-      +-- security-audit               |
+      +-- security-audit -- security-testing
       +-- debugging                    |
       +-- testing-quality -------------+
       |         |                      |
-      |         +-- playwright-automation
+      |         +-- playwright-automation -- accessibility-testing
+      |         +-- api-testing        |
+      |         +-- reliability-testing|
+      |                                |
+      +-- quality-engineering ---------+
+      |         |                      |
+      |         +-- exploratory-testing
+      |         +-- bug-hunting        |
+      |         +-- regression-testing |
+      |         +-- test-reporting     |
       |                                |
       +-- performance-engineering -----+
                                        |
@@ -170,7 +233,7 @@ delegates the depth here.
 ## 8. Validation
 
 ```bash
-bash tests/validate-structure.sh      structure and metadata of the 92 skills
+bash tests/validate-structure.sh      structure and metadata of the 119 skills
 bash tests/validate-rules.sh          the repository-wide prohibitions
 bash tests/validate-orchestration.sh  plans, references and scenarios
 ```

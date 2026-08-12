@@ -1,4 +1,4 @@
-# Continuity, 2026-08-11
+# Continuity, 2026-08-12
 
 State of the repository for whoever takes it over, human or agent. Written to
 `engineering/dev-skills/project-continuity/resources/continuity-template.md`.
@@ -52,11 +52,31 @@ Session 4, this one:
   combined and deduplicated scopes, and bootstraps itself from a clone when
   run through a pipe.
 
+Session 5, quality and lifecycle coverage:
+
+- Quality subsystem in `dev-skills`, 9 skills: `quality-engineering`,
+  `exploratory-testing`, `bug-hunting`, `api-testing`, `regression-testing`,
+  `accessibility-testing`, `security-testing`, `reliability-testing`,
+  `test-reporting`.
+- Domain surfaces, 11 skills: `api-design`, `database-design`,
+  `caching-strategy`, `background-jobs`, `realtime-systems`, `file-handling`,
+  `payment-engineering`, `internationalization`, `seo-engineering`,
+  `design-system`, `data-privacy`.
+- Change and continuity, 5 skills: `refactoring`, `legacy-code`,
+  `migration-engineering`, `technical-debt`, `decision-records`.
+- Operations, 2 skills: `infrastructure-as-code`, `incident-response`.
+- Two agents: `principal-engineer`, `incident-responder`.
+- `testing-quality` and `playwright-automation` extended, the second with an
+  interactive browser CLI protocol whose commands are verified against the
+  installed tool rather than reproduced from memory.
+- Sixteen new task categories with their plans, routing rows and gate triggers.
+- Counts updated everywhere: 119 skills, 16 agents, 36 categories.
+
 ## Current state
 
 Working today:
 
-- the three scripts pass: 92 skills, 0 errors, 1 pre-existing warning on a
+- the three scripts pass: 119 skills, 0 errors, 1 pre-existing warning on a
   deliberate typographic counter-example;
 - `install.sh` works in every mode, and `--configure` was exercised end to end
   under a pseudo-terminal, producing both the configuration file and the
@@ -105,9 +125,23 @@ Looks finished and is not:
   itself as `git-workflow` section 6 requires. It was also cut down to a
   pointer, since it had already drifted: it carried a directory tree from
   before the 1.3.0 reorganisation.
+- **The quality system is nine skills, not seventeen.** The brief listed
+  exploratory testing, bug hunting and UX testing as three; usability findings
+  live inside `exploratory-testing` because they are produced by the same
+  session and the same evidence rule. Performance testing stayed inside
+  `performance-engineering` rather than becoming a second skill with the same
+  method. Browser CLI work extended `playwright-automation` instead of
+  creating a second browser skill that would have drifted from it.
+- **INCIDENT is the one plan that does not begin with exploration.** Mitigation
+  precedes understanding during an outage. The exception is encoded in check 4
+  of `tests/validate-orchestration.sh` rather than tolerated informally.
+- **Sixteen surface categories rather than one generic one.** Each names a
+  domain with distinct failure modes and a distinct plan. The alternative,
+  routing everything through BACKEND or FULLSTACK, produced plans that were
+  either too wide for a small change or silent about the risk that mattered.
 - Earlier decisions stand: agents tracked in the repository rather than in
   `.claude/`, engineering content in English, `code-review-protocol` suffixed
-  to avoid a name collision.
+  to avoid a name collision, `CLAUDE.md` tracked as the public entry point.
 
 ## Remaining
 

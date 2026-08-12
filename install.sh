@@ -8,13 +8,13 @@
 #   bash install.sh                ask what to install
 #   bash install.sh --writing      creative writing, 42 skills
 #   bash install.sh --documents    professional documents, 7 skills
-#   bash install.sh --dev          software engineering, 41 skills and 14 agents
+#   bash install.sh --dev          software engineering, 68 skills and 16 agents
 #   bash install.sh --shared       the 2 cross domain skills only
-#   bash install.sh --all          everything, 92 skills and 14 agents
+#   bash install.sh --all          everything, 119 skills and 16 agents
 #   bash install.sh --group a,b    only these categories
 #   bash install.sh --skill a,b    only these skills, with their dependencies
 #   bash install.sh --list         print every installable skill and exit
-#   bash install.sh --agents       the 14 agents only
+#   bash install.sh --agents       the 16 agents only
 #   bash install.sh --no-agents    skills without agents
 #   bash install.sh --configure    ask for the user specific values only
 #   bash install.sh --zip          also build one archive per skill in dist/
@@ -384,8 +384,8 @@ interactive_select() {
     printf 'Nothing is installed until you choose. Pick what you actually do.\n\n'
     printf '  1) Creative writing        %2s skills   novels, poetry, screenplay, editing\n' "$writing"
     printf '  2) Professional documents  %2s skills   guides, manuals, reports, letters, PDF\n' "$documents"
-    printf '  3) Software engineering    %2s skills   plus 14 agents\n' "$engineering"
-    printf '  4) Everything              %2s skills   plus 14 agents\n' "$total"
+    printf '  3) Software engineering    %2s skills   plus 16 agents\n' "$engineering"
+    printf '  4) Everything              %2s skills   plus 16 agents\n' "$total"
     printf '  5) Individual skills, chosen by name\n'
     printf '  6) One or more categories, for example genres only\n\n'
     printf 'Every choice also installs the 2 cross domain skills, self-critique and\n'

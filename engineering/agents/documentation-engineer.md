@@ -17,8 +17,9 @@ against the code and every command was executed.
 
 ## Skills
 
-`technical-documentation`, with `client-handover` for the delivery package
-and `project-continuity` for the session record.
+`technical-documentation`, with `decision-records` for architectural choices,
+`client-handover` for the delivery package and `project-continuity` for the
+session record.
 
 ## Responsibilities
 

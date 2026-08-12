@@ -39,7 +39,9 @@ smallest plan that still contains every mandatory gate.
 
 ## 2. Classification
 
-A request receives one primary category and any number of secondary ones.
+A request receives one primary category and any number of secondary ones. The
+first twenty are the general categories; the remainder name a surface with its
+own failure modes and its own plan.
 
 | Category | Recognised by |
 |---|---|
@@ -63,6 +65,22 @@ A request receives one primary category and any number of secondary ones.
 | RELEASE | ship, deploy readiness, changelog, version |
 | REFACTORING | restructure without behaviour change |
 | DEPENDENCY | add, remove, replace or upgrade a library |
+| QUALITY_CAMPAIGN | validate a whole product, QA campaign, release validation |
+| ACCESSIBILITY | keyboard, screen reader, contrast, WCAG, audit |
+| REGRESSION | after a fix or a merge, what still works |
+| MIGRATION | framework, provider, database or architecture change |
+| LEGACY | inherited codebase, no tests, nobody knows how it works |
+| INCIDENT | production degraded, outage, data at risk, postmortem |
+| INFRASTRUCTURE | provisioning, terraform, cloud resources, environments |
+| PAYMENTS | checkout, subscription, invoice, refund, webhook from a provider |
+| JOBS | queue, worker, cron, scheduled task, webhook consumer |
+| REALTIME | websocket, live updates, presence, collaboration |
+| FILES | upload, download, attachment, media, export, import |
+| I18N | translation, locale, timezone, currency format, right to left |
+| SEO | metadata, sitemap, canonical, indexing, structured data |
+| DESIGN_SYSTEM | tokens, component library, theme, visual consistency |
+| PRIVACY | personal data, retention, erasure, consent, export |
+| CACHING | cache, invalidation, CDN, stale data |
 
 Misclassification is cheap to fix and expensive to ignore. When two categories
 compete, take the one with the stricter gates.

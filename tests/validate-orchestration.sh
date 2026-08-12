@@ -31,12 +31,16 @@ ERRORS=0
 
 CATEGORIES="EXPLORATION ARCHITECTURE FRONTEND BACKEND FULLSTACK DATABASE API
 AUTHENTICATION SECURITY VALIDATION DEBUGGING PERFORMANCE UI_UX TESTING
-BROWSER_AUTOMATION DOCUMENTATION GIT RELEASE REFACTORING DEPENDENCY"
+BROWSER_AUTOMATION DOCUMENTATION GIT RELEASE REFACTORING DEPENDENCY
+QUALITY_CAMPAIGN ACCESSIBILITY REGRESSION MIGRATION LEGACY INCIDENT
+INFRASTRUCTURE PAYMENTS JOBS REALTIME FILES I18N SEO DESIGN_SYSTEM PRIVACY
+CACHING"
 
-AGENT_NAMES="delivery-orchestrator requirements-analyst software-architect
-frontend-engineer backend-engineer database-engineer security-engineer
-qa-engineer playwright-engineer ui-ux-engineer devops-engineer
-performance-engineer documentation-engineer release-engineer"
+AGENT_NAMES="delivery-orchestrator principal-engineer requirements-analyst
+software-architect frontend-engineer backend-engineer database-engineer
+security-engineer qa-engineer playwright-engineer ui-ux-engineer
+devops-engineer performance-engineer documentation-engineer release-engineer
+incident-responder"
 
 fail() {
   printf 'ERROR   %s\n' "$1"
@@ -140,9 +144,16 @@ printf 'Check 4: mandatory gates in plans\n'
 for category in $CATEGORIES; do
   plan="$(plan_of "$category")"
   [ -n "$plan" ] || continue
-  case "$(steps_of "$plan" | head -n 1)" in
-    project-exploration) ;;
-    *) fail "plan $category: does not begin with project-exploration" ;;
+  # Every plan begins with exploration, except INCIDENT: production is
+  # restored before the codebase is understood.
+  first_step="$(steps_of "$plan" | head -n 1)"
+  case "$category" in
+    INCIDENT)
+      [ "$first_step" = "incident-response" ] \
+        || fail "plan INCIDENT: does not begin with incident-response" ;;
+    *)
+      [ "$first_step" = "project-exploration" ] \
+        || fail "plan $category: does not begin with project-exploration" ;;
   esac
 
   implements=0

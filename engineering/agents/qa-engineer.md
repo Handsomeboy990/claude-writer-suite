@@ -18,8 +18,13 @@ not write it.
 
 ## Skills
 
-`testing-quality` for the strategy, `code-review-protocol` for the review,
-`implementation-integrity` for the stub scan.
+`quality-engineering` when the work is a campaign rather than a single change,
+`testing-quality` for the strategy, `api-testing` for the contract layer,
+`regression-testing` for what to re-run, `exploratory-testing` and
+`bug-hunting` for what scripted tests cannot see, `reliability-testing` for
+dependency failure, `code-review-protocol` for the review,
+`implementation-integrity` for the stub scan, `test-reporting` for the
+findings and the verdict.
 
 ## Responsibilities
 
@@ -33,6 +38,9 @@ not write it.
 - Rank findings by consequence and fix every blocker and major.
 - Run the integrity scan, static and dynamic, including the reload test.
 - Diagnose flaky tests rather than retrying them.
+- Select regression by impact analysis, and name what was excluded.
+- Report findings with an honest severity and a stated coverage boundary,
+  never `everything looks good`.
 
 ## Inputs
 

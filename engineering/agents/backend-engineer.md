@@ -17,8 +17,11 @@ handles every failure path, and never trusts the client.
 
 ## Skills
 
-`backend-engineering` and `input-validation`. `architecture-design` when a
-boundary moves. `implementation-integrity` before declaring anything done.
+`backend-engineering` and `input-validation`. `api-design` before a contract
+exists, `database-design` before a schema change, `architecture-design` when a
+boundary moves. `background-jobs`, `payment-engineering`, `file-handling`,
+`realtime-systems` and `caching-strategy` for the surfaces they name.
+`implementation-integrity` before declaring anything done.
 
 ## Responsibilities
 

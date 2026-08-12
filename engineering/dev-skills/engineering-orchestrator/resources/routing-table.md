@@ -26,6 +26,22 @@ obvious. When several rows match, the row with the stricter gates wins.
 | ship it, release, deploy, version | RELEASE | TESTING, SECURITY |
 | clean up, restructure, extract, rename | REFACTORING | TESTING |
 | use library X, replace X, upgrade X | DEPENDENCY | SECURITY, PERFORMANCE |
+| test the whole thing, QA the product, validate before launch | QUALITY_CAMPAIGN | TESTING, SECURITY |
+| keyboard, screen reader, contrast, WCAG, a11y | ACCESSIBILITY | UI_UX |
+| did anything else break, after the fix, before merging | REGRESSION | TESTING |
+| upgrade the framework, move to X, replace provider Y | MIGRATION | DEPENDENCY, DATABASE |
+| inherited project, no tests, nobody knows this code | LEGACY | EXPLORATION, REFACTORING |
+| production is down, outage, incident, postmortem | INCIDENT | DEBUGGING |
+| provision, terraform, cloud resources, new environment | INFRASTRUCTURE | SECURITY |
+| checkout, subscription, refund, invoice, payment webhook | PAYMENTS | BACKEND, SECURITY |
+| queue, worker, cron, background task, webhook consumer | JOBS | BACKEND |
+| live updates, websocket, presence, collaborative editing | REALTIME | FULLSTACK |
+| upload, attachment, media, import, export a file | FILES | VALIDATION, SECURITY |
+| translate, locale, timezone, currency, right to left | I18N | FRONTEND |
+| metadata, sitemap, canonical, ranking, indexing | SEO | FRONTEND, PERFORMANCE |
+| tokens, component library, theme, dark mode, consistency | DESIGN_SYSTEM | UI_UX |
+| personal data, GDPR, retention, delete my account, export my data | PRIVACY | SECURITY, DATABASE |
+| cache it, invalidation, CDN, stale data | CACHING | PERFORMANCE |
 
 ## Surface detection
 
@@ -58,6 +74,14 @@ category.
 | a template or DOM sink receives user content | `security-audit`, XSS |
 | a URL from user input is fetched server side | `security-audit`, SSRF |
 | a shell command or path is built from input | `security-audit`, injection |
+| a file is accepted from a client | `file-handling`, `input-validation` |
+| an amount, a plan or a discount is involved | `payment-engineering`, `security-audit` |
+| personal data is collected, copied or exported | `data-privacy` |
+| work is moved out of the request | `background-jobs` |
+| a response is cached, at any layer | `caching-strategy` |
+| a user visible string is added | `internationalization`, where locales exist |
+| an interactive element is added or changed | `accessibility-testing` |
+| a public URL changes | `seo-engineering`, redirect map |
 | a dependency is added or bumped | `dependency-selection`, `security-audit` |
 | a migration is added | `code-review-protocol`, reversibility check |
 | any behaviour changes | `testing-quality` |
