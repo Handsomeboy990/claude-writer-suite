@@ -2,7 +2,7 @@
 
 ## Overview
 
-Claude Writer Suite is a library of 119 skills in ten groups across four trees,
+Claude Writer Suite is a library of 121 skills in ten groups across four trees,
 plus sixteen agents, shared resources, the configuration contract,
 documentation, a demonstration project and validation scripts.
 
@@ -27,8 +27,8 @@ claude-writer-suite/
 │   ├── documentation/      4
 │   ├── administrative/     1
 │   └── publishing/         2
-├── engineering/           68 skills and 16 agents
-│   ├── dev-skills/        45
+├── engineering/           70 skills and 16 agents
+│   ├── dev-skills/        47
 │   ├── delivery-skills/   10
 │   ├── devops-skills/     13
 │   └── agents/            16 role definitions
@@ -120,7 +120,7 @@ Three layers, kept apart.
 
 | Layer | Value |
 |---|---|
-| Skill language | English, all 119 skills and all 16 agents |
+| Skill language | English, all 121 skills and all 16 agents |
 | System language | English: paths, identifiers, config keys, commits, technical documentation |
 | Output language | the recipient's, set per project in the configuration |
 

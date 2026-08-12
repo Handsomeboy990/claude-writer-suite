@@ -1,6 +1,6 @@
 ---
 name: infrastructure-as-code
-description: Defines infrastructure in version controlled code rather than in a console: whether it is warranted at all, state management and locking, module boundaries and environment separation, the plan and apply discipline, drift detection, secrets kept out of state, destructive change protection, and importing what already exists. Tool agnostic, and applies to declarative provisioning of any kind. Use before creating cloud resources by hand a second time.
+description: Defines infrastructure in version controlled code rather than in a console: whether it is warranted at all, state management and locking, module boundaries and environment separation, the plan and apply discipline, drift detection, secrets kept out of state, destructive change protection, and importing what already exists. Tool agnostic: applies to declarative provisioning of any kind, including Terraform, Kubernetes manifests, Helm and cloud native templates. Use before creating cloud resources by hand a second time.
 license: MIT
 metadata:
   category: devops-skills

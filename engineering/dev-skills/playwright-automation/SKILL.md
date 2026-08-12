@@ -1,6 +1,6 @@
 ---
 name: playwright-automation
-description: Drives a real browser for end to end journeys, visual verification, responsive checks, screenshots, console and network audits and error state proof, through the project test runner or through an interactive browser CLI. Uses role and label based selectors, never brittle ones, and never captures secrets. Use when a change has a browser surface and browser tooling is available or justified.
+description: Drives a real browser for end to end journeys, visual verification, responsive checks, screenshots, visual regression baselines, console and network audits and error state proof, through the project test runner or through an interactive browser CLI. Uses role and label based selectors, never brittle ones, and never captures secrets. Use when a change has a browser surface and browser tooling is available or justified.
 license: MIT
 metadata:
   category: dev-skills

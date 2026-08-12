@@ -3,7 +3,7 @@
 Four expertise systems for an agent, in one repository: **write**,
 **produce documents**, **build software**, and **review your own work**.
 
-119 skills and 16 agents. Not prompts: numbered protocols, decision criteria,
+121 skills and 16 agents. Not prompts: numbered protocols, decision criteria,
 scoring grids and review procedures, each with a stated threshold for what
 counts as finished.
 
@@ -14,7 +14,7 @@ claude-writer-suite/
 ├── shared/           2 cross domain skills, called by every tree
 ├── writing/         42 creative writing skills
 ├── documents/        7 professional document skills
-├── engineering/     68 software skills and 16 agents
+├── engineering/     70 software skills and 16 agents
 ├── config/           user specific values, nothing hardcoded
 ├── documentation/    technical documentation of the four trees
 └── tests/            three validation scripts
@@ -36,7 +36,7 @@ The repository separates three languages that are routinely confused.
 
 | Layer | What it is | Value |
 |---|---|---|
-| Skill language | the instructions themselves | English, all 119 skills |
+| Skill language | the instructions themselves | English, all 121 skills |
 | System language | paths, identifiers, config keys, commits | English |
 | Output language | what the reader receives | theirs, set per project |
 
@@ -102,7 +102,7 @@ verified in production.
 
 | Category | Skills | Question it answers |
 |---|---|---|
-| [dev-skills](engineering/dev-skills/) | 45 | how a change is made correctly |
+| [dev-skills](engineering/dev-skills/) | 47 | how a change is made correctly |
 | [delivery-skills](engineering/delivery-skills/) | 10 | what to build, in what order, with what approval |
 | [devops-skills](engineering/devops-skills/) | 13 | how the system runs, deploys and restores |
 | [agents](engineering/agents/) | 16 | who owns what, and what is handed on |
@@ -129,8 +129,8 @@ novelist's toolkit, and a novelist is never given the engineering tree.
 ```
   1) Creative writing        42 skills   novels, poetry, screenplay, editing
   2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
-  3) Software engineering    68 skills   plus 16 agents
-  4) Everything             119 skills   plus 16 agents
+  3) Software engineering    70 skills   plus 16 agents
+  4) Everything             121 skills   plus 16 agents
   5) Individual skills, chosen by name
 
 Choice [1]:
@@ -149,7 +149,7 @@ bash install.sh --configure
 ```bash
 bash install.sh --writing      42 creative writing skills
 bash install.sh --documents     7 professional document skills
-bash install.sh --dev          68 engineering skills and 16 agents
+bash install.sh --dev          70 engineering skills and 16 agents
 bash install.sh --all          everything
 bash install.sh --shared        the 2 cross domain skills only
 bash install.sh --agents        the 16 agents only
@@ -184,7 +184,7 @@ bash install.sh --group devops-skills     operations only
 | `documentation` | 4 | documents |
 | `administrative` | 1 | documents |
 | `publishing` | 2 | documents |
-| `dev-skills` | 45 | engineering |
+| `dev-skills` | 47 | engineering |
 | `delivery-skills` | 10 | engineering |
 | `devops-skills` | 13 | engineering |
 | `shared` | 2 | shared |
@@ -397,7 +397,7 @@ Two prohibitions apply to every file in the repository, including this one:
 ## Validation
 
 ```bash
-bash tests/validate-structure.sh      structure and metadata of 119 skills
+bash tests/validate-structure.sh      structure and metadata of 121 skills
 bash tests/validate-rules.sh          emoji, em dash, secrets, hardcoded identity
 bash tests/validate-orchestration.sh  plans, phases, agents, cross references
 ```
@@ -410,7 +410,7 @@ All three must pass before any commit. Detail in
 | File | Contents |
 |---|---|
 | [documentation/architecture.md](documentation/architecture.md) | organisation, skill isolation, metadata |
-| [documentation/skills-guide.md](documentation/skills-guide.md) | directory of the 119 skills |
+| [documentation/skills-guide.md](documentation/skills-guide.md) | directory of the 121 skills |
 | [documentation/installation.md](documentation/installation.md) | full and per-skill installation |
 | [documentation/configuration.md](documentation/configuration.md) | the configuration contract |
 | [documentation/agents.md](documentation/agents.md) | skill, agent, orchestration |

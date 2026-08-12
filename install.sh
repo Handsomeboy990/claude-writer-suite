@@ -8,9 +8,9 @@
 #   bash install.sh                ask what to install
 #   bash install.sh --writing      creative writing, 42 skills
 #   bash install.sh --documents    professional documents, 7 skills
-#   bash install.sh --dev          software engineering, 68 skills and 16 agents
+#   bash install.sh --dev          software engineering, 70 skills and 16 agents
 #   bash install.sh --shared       the 2 cross domain skills only
-#   bash install.sh --all          everything, 119 skills and 16 agents
+#   bash install.sh --all          everything, 121 skills and 16 agents
 #   bash install.sh --group a,b    only these categories
 #   bash install.sh --skill a,b    only these skills, with their dependencies
 #   bash install.sh --list         print every installable skill and exit

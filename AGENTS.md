@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 Entry point for an agent working on this repository. Read it before any
 modification.
@@ -7,16 +7,20 @@ This file is deliberately short and holds no duplicated content. It points at
 the canonical documents and states only the rules an agent must know before it
 touches anything.
 
+It is named `AGENTS.md` rather than after any single vendor. No file named
+after an agent runtime is tracked here: those are local configuration and they
+are ignored. See `Why this file exists` at the end.
+
 ## What this repository is
 
-Claude Writer Suite: 119 skills and 16 agents, in four trees.
+Claude Writer Suite: 121 skills and 16 agents, in four trees.
 
 | Tree | Contents | Constitution |
 |---|---|---|
 | `shared/` | 2 cross domain skills | none, they depend on nothing |
 | `writing/` | 42 creative writing skills | `writing/core/writing-constitution` |
 | `documents/` | 7 professional document skills | `documents/documentation/document-core` |
-| `engineering/` | 68 software skills, 16 agents | `engineering/dev-skills/engineering-core` and `engineering/devops-skills/devops-core` |
+| `engineering/` | 70 software skills, 16 agents | `engineering/dev-skills/engineering-core` and `engineering/devops-skills/devops-core` |
 
 Full picture: `README.md`. Architecture: `documentation/architecture.md`.
 
@@ -33,6 +37,8 @@ skill. Never run a whole chain by reflex: compose the smallest complete plan.
 | A single coding task: feature, bug, review, refactor | `engineering-orchestrator` |
 | A specification, brief or client request | `delivery-orchestrator` |
 | Environment, pipeline, deployment, production database, secret | `devops-core` |
+| Validating a whole product, or a QA campaign | `quality-engineering` |
+| A degraded production system | `incident-response` |
 | Anything just finished | `self-critique` |
 
 `engineering-orchestrator` loads `engineering-core` then selects the rest.
@@ -49,18 +55,23 @@ skill. Never run a whole chain by reflex: compose the smallest complete plan.
 - Project: no production code before `validation-gate`, scaffolding included.
 - Deployment: nothing is announced as delivered before
   `production-verification`.
+- Campaign: no product is declared ready before the twelve point gate of
+  `quality-engineering`.
 
 ## Permanent rules
 
 1. No emoji, in any file or any output.
 2. No em dash. The en dash is for dialogue only.
-3. Skill language is English, for all 119 skills and all 16 agents. Output
+3. Skill language is English, for all 121 skills and all 16 agents. Output
    language is the recipient's, set in the configuration. The three layers are
    defined in `documentation/configuration.md`.
 4. Commits are atomic, in English, with no mention of an AI, an assistant or
    `Co-authored-by`. Full procedure in `git-workflow`.
 5. Never commit a `.env`, a private key, a certificate or a credential.
-6. Never hardcode a user specific value. It belongs in the configuration; the
+6. Never commit local agent configuration: `.claude/`, `CLAUDE.md`, or any
+   equivalent named after a runtime. `tests/validate-rules.sh` check 7
+   enforces it.
+7. Never hardcode a user specific value. It belongs in the configuration; the
    field reference is `config/README.md`.
 
 ## Delegation
@@ -88,12 +99,16 @@ Before any modification:
 Contribution rules and the pre-pull-request checklist: `CONTRIBUTING.md`.
 State of the repository for whoever takes over: `CONTINUITY.md`.
 
-## Why this file is committed
+## Why this file exists, and why it is not named after a runtime
 
-It is the public memory of the project and the entry point an agent reads
-first. It contains no secret and no local machine configuration, which is what
-`.gitignore` excludes. That exception is deliberate and recorded here rather
-than left implicit, as `git-workflow` section 6 requires.
+An agent needs one file to read first. That file belongs in version control:
+it is the public memory of the project, it contains no secret and no machine
+local setting, and every contributor benefits from it.
 
-Local agent configuration, `.claude/`, `*.local` and every secret pattern stay
-ignored.
+Files named after a specific agent runtime are the opposite: they are local
+configuration, they differ per machine and per user, and rule 6 forbids
+tracking them. A local file of that kind may exist on a contributor's machine
+and should contain nothing more than a pointer to this document.
+
+Ignored, and never tracked: `.claude/`, `CLAUDE.md`, `*.local`, and every
+secret pattern listed in `.gitignore`.
