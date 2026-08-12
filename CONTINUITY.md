@@ -58,10 +58,11 @@ Session 5, quality and lifecycle coverage:
   `exploratory-testing`, `bug-hunting`, `api-testing`, `regression-testing`,
   `accessibility-testing`, `security-testing`, `reliability-testing`,
   `test-reporting`.
-- Domain surfaces, 11 skills: `api-design`, `database-design`,
+- Domain surfaces, 13 skills: `api-design`, `database-design`,
   `caching-strategy`, `background-jobs`, `realtime-systems`, `file-handling`,
   `payment-engineering`, `internationalization`, `seo-engineering`,
-  `design-system`, `data-privacy`.
+  `design-system`, `data-privacy`, `analytics-instrumentation`,
+  `feature-flags`.
 - Change and continuity, 5 skills: `refactoring`, `legacy-code`,
   `migration-engineering`, `technical-debt`, `decision-records`.
 - Operations, 2 skills: `infrastructure-as-code`, `incident-response`.
@@ -69,14 +70,17 @@ Session 5, quality and lifecycle coverage:
 - `testing-quality` and `playwright-automation` extended, the second with an
   interactive browser CLI protocol whose commands are verified against the
   installed tool rather than reproduced from memory.
-- Sixteen new task categories with their plans, routing rows and gate triggers.
-- Counts updated everywhere: 119 skills, 16 agents, 36 categories.
+- Eighteen new task categories with their plans, routing rows and gate
+  triggers.
+- `CLAUDE.md` untracked, `AGENTS.md` created as the vendor neutral entry
+  point, and check 7 added to `validate-rules.sh` to keep it that way.
+- Counts updated everywhere: 121 skills, 16 agents, 38 categories.
 
 ## Current state
 
 Working today:
 
-- the three scripts pass: 119 skills, 0 errors, 1 pre-existing warning on a
+- the three scripts pass: 121 skills, 0 errors, 1 pre-existing warning on a
   deliberate typographic counter-example;
 - `install.sh` works in every mode, and `--configure` was exercised end to end
   under a pseudo-terminal, producing both the configuration file and the
@@ -120,11 +124,15 @@ Looks finished and is not:
   `branch-only`, `deployments` and `database_operations` to `no`. The reason is
   that a wrong default here is expensive and silent, whereas an over-cautious
   one costs one prompt.
-- **`CLAUDE.md` stays tracked.** It is the public memory and the agent entry
-  point, contains no secret, and the exception is now recorded in the file
-  itself as `git-workflow` section 6 requires. It was also cut down to a
-  pointer, since it had already drifted: it carried a directory tree from
-  before the 1.3.0 reorganisation.
+- **`CLAUDE.md` was untracked and replaced by `AGENTS.md`.** Earlier sessions
+  kept it tracked as a documented exception. That exception is withdrawn: a
+  file named after an agent runtime is machine local configuration, and the
+  repository now carries a vendor neutral `AGENTS.md` instead. The content is
+  identical in purpose. `tests/validate-rules.sh` check 7 fails the build if
+  `CLAUDE.md`, `.claude/` or any equivalent is ever tracked again, and
+  `tests/validate-structure.sh` now requires `AGENTS.md` to exist. A local
+  `CLAUDE.md` may still exist on a contributor's machine, ignored, containing
+  a pointer to `AGENTS.md`.
 - **The quality system is nine skills, not seventeen.** The brief listed
   exploratory testing, bug hunting and UX testing as three; usability findings
   live inside `exploratory-testing` because they are produced by the same
@@ -141,7 +149,7 @@ Looks finished and is not:
   either too wide for a small change or silent about the risk that mattered.
 - Earlier decisions stand: agents tracked in the repository rather than in
   `.claude/`, engineering content in English, `code-review-protocol` suffixed
-  to avoid a name collision, `CLAUDE.md` tracked as the public entry point.
+  to avoid a name collision.
 
 ## Remaining
 

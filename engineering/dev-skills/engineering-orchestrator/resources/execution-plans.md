@@ -284,3 +284,21 @@ plan: project-exploration -> performance-engineering -> caching-strategy -> back
 
 `performance-engineering` runs first and often ends the plan: most caching
 requests are answered by an index or a smaller payload.
+
+## ANALYTICS
+
+category: ANALYTICS
+plan: project-exploration -> analytics-instrumentation -> data-privacy -> backend-engineering -> frontend-engineering -> testing-quality -> code-review-protocol -> technical-documentation -> project-continuity -> git-workflow
+
+`data-privacy` is never dropped here: an analytics event is personal data
+until proven otherwise. Business figures are emitted server side, which is why
+`backend-engineering` precedes the client work.
+
+## FEATURE_FLAGS
+
+category: FEATURE_FLAGS
+plan: project-exploration -> feature-flags -> backend-engineering -> frontend-engineering -> testing-quality -> regression-testing -> release-engineering -> code-review-protocol -> technical-documentation -> project-continuity -> git-workflow
+
+`release-engineering` owns the rollout steps and their thresholds.
+`regression-testing` runs on flag removal as well as on flag introduction,
+since deleting a branch changes behaviour for whoever was on it.

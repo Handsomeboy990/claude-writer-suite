@@ -24,14 +24,14 @@ technical documentation, all in English by rule 6 of `engineering-core`.
 Writing the instructions in the language of their output removes a permanent
 translation and a source of error.
 
-Since version 2.0.0 that is no longer specific to this tree: all 119 skills are
+Since version 2.0.0 that is no longer specific to this tree: all 121 skills are
 written in English, and the output language is a configuration decision. See
 `configuration.md`.
 
 Rules 1 and 2 of the writing constitution still apply to every file: no emoji,
 no em dash.
 
-## 3. The forty five skills
+## 3. The forty seven skills
 
 ### Foundation
 
@@ -93,6 +93,8 @@ no em dash.
 | `seo-engineering` | the technical half of search visibility |
 | `design-system` | tokens, component contracts, themes |
 | `data-privacy` | inventory, retention, erasure that works |
+| `analytics-instrumentation` | measurement designed before emission |
+| `feature-flags` | flag lifecycle, rollout, and removal |
 
 ### Change and continuity
 
@@ -155,7 +157,7 @@ existing test, executed, red before and green after, satisfies the test gate.
 
 ## 6. Task categories
 
-Thirty six classification categories, each with a canonical plan in
+Thirty eight classification categories, each with a canonical plan in
 `engineering/dev-skills/engineering-orchestrator/resources/execution-plans.md`.
 
 The twenty general categories:
@@ -164,12 +166,12 @@ EXPLORATION, ARCHITECTURE, FRONTEND, BACKEND, FULLSTACK, DATABASE, API,
 AUTHENTICATION, SECURITY, VALIDATION, DEBUGGING, PERFORMANCE, UI_UX, TESTING,
 BROWSER_AUTOMATION, DOCUMENTATION, GIT, RELEASE, REFACTORING, DEPENDENCY.
 
-The sixteen surface categories, each naming a domain with its own failure
+The eighteen surface categories, each naming a domain with its own failure
 modes:
 
 QUALITY_CAMPAIGN, ACCESSIBILITY, REGRESSION, MIGRATION, LEGACY, INCIDENT,
 INFRASTRUCTURE, PAYMENTS, JOBS, REALTIME, FILES, I18N, SEO, DESIGN_SYSTEM,
-PRIVACY, CACHING.
+PRIVACY, CACHING, ANALYTICS, FEATURE_FLAGS.
 
 Every plan begins with `project-exploration`, with one deliberate exception:
 INCIDENT begins with `incident-response`, because production is restored
@@ -233,7 +235,7 @@ delegates the depth here.
 ## 8. Validation
 
 ```bash
-bash tests/validate-structure.sh      structure and metadata of the 119 skills
+bash tests/validate-structure.sh      structure and metadata of the 121 skills
 bash tests/validate-rules.sh          the repository-wide prohibitions
 bash tests/validate-orchestration.sh  plans, references and scenarios
 ```

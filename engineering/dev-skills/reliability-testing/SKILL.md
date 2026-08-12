@@ -105,12 +105,13 @@ For each critical operation:
 4  remove the failure
 5  retry the operation the way a user would
 6  verify the final state: exactly one effect, correct content
-7  repeat with the failure injected at a different point in the operation
+7  repeat the whole sequence with the failure injected at a different point
 ```
 
-Step 7 is what separates this from a smoke test. The same operation failing
-before the write, during the write and after the write produces three
-different defects.
+One failure per run, always. Step 7 reruns the operation with the injection
+moved, and that is what separates this from a smoke test: failing before the
+write, during the write and after the write produces three different defects.
+Injecting them together produces one result nobody can attribute.
 
 ## 6. The consistency questions
 
@@ -176,7 +177,7 @@ behaviour under failure, in an environment the campaign is allowed to break.
 2. Choose the critical operations, from the testing contract.
 3. Select the applicable failure modes per dependency.
 4. Choose the least invasive injection method for each.
-5. Run the recovery protocol, injecting at more than one point per operation.
+5. Run the recovery protocol once per injection point, one failure per run.
 6. Check the four properties every time, especially consistency.
 7. Ask the consistency questions of section 6 wherever two writes coexist.
 8. Verify timeouts, retry limits and backoff by reaching them.
@@ -186,12 +187,12 @@ behaviour under failure, in an environment the campaign is allowed to break.
 ## 12. Auto-critique
 
 Score from 0 to 5: inventory completeness, mode coverage per dependency,
-injection at more than one point per operation, the four properties checked
+injection points varied across runs, the four properties checked
 including data consistency, retry and idempotency verified, environment
 restored, findings reproducible as automated tests.
 
-Threshold: no axis below 3, average at least 4. A session where every failure
-was injected at the same point in the operation covers one third of what the
+Threshold: no axis below 3, average at least 4. A session where every run
+injected at the same point in the operation covers one third of what the
 discipline exists for and is rerun.
 
 ## 13. Interfaces
