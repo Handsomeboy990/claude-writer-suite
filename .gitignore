@@ -8,6 +8,12 @@ Thumbs.db
 node_modules/
 drafts-prives/
 
+__pycache__/
+*.pyc
+
+test-results/
+playwright-report/
+
 dist/
 
 # Configuration locale d'un agent, propre a une machine. Jamais versionnee.

@@ -1,11 +1,12 @@
 # tests
 
-Three scripts, no external dependency. All three must pass before any commit.
+Four scripts, no external dependency. All four must pass before any commit.
 
 ```bash
 bash tests/validate-structure.sh
 bash tests/validate-rules.sh
 bash tests/validate-orchestration.sh
+bash tests/validate-plugins.sh
 ```
 
 `install.sh` runs the first one itself and refuses to install a repository
@@ -13,7 +14,7 @@ that does not pass it.
 
 ## validate-structure.sh
 
-Verifies the mandatory shape of all 121 skills across the four trees.
+Verifies the mandatory shape of all 152 skills across the eight trees.
 
 Per skill:
 
@@ -81,16 +82,33 @@ Thirteen checks on internal coherence.
 | 12 | the document pipeline: `document-core` declared, design before production |
 | 13 | `shared/` depends on nothing, so every tree can call it |
 
-Checks 8 and 9 resolve skill names across all four trees, which is what allows
+Checks 8 and 9 resolve skill names across all eight trees, which is what allows
 a documents skill to reference an engineering skill in its `Interfaces`
 section without breaking.
 
 Check 13 is the one that keeps `shared/` shared. A dependency added there
 would make two trees depend on a third by transitivity.
 
+## validate-plugins.sh
+
+Verifies that the per-domain plugin bundles under `plugins/` are in sync with
+the canonical skill trees, and that the marketplace and manifests are well
+formed.
+
+| Check | What it verifies |
+|---|---|
+| 1 | `marketplace.json` and every `plugin.json` are valid JSON |
+| 2 | every marketplace source path exists and has a manifest |
+| 3 | each plugin's skill set matches what its scope would install, regenerated into a sandbox and compared |
+| 4 | the engineering plugin carries the 16 agents |
+
+Check 3 is the one that catches drift: add a skill to a tree and forget to run
+`bash plugins/build.sh`, and this fails, naming the domain to rebuild. The trees
+are the source of truth; the bundles are generated from them.
+
 ## Adding a skill
 
-The three scripts are the acceptance criteria. A new skill passes when:
+The four scripts are the acceptance criteria. A new skill passes when:
 
 1. it has the four mandatory elements;
 2. its metadata matches its directory and its group;
@@ -110,5 +128,5 @@ the same change as the file.
 
 ## After moving anything
 
-Run all three. Two of them resolve paths and fail cleanly by naming what is
+Run all four. Some of them resolve paths and fail cleanly by naming what is
 missing.

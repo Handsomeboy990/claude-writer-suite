@@ -24,7 +24,7 @@ technical documentation, all in English by rule 6 of `engineering-core`.
 Writing the instructions in the language of their output removes a permanent
 translation and a source of error.
 
-Since version 2.0.0 that is no longer specific to this tree: all 121 skills are
+Since version 2.0.0 that is no longer specific to this tree: all 152 skills are
 written in English, and the output language is a configuration decision. See
 `configuration.md`.
 
@@ -235,12 +235,12 @@ delegates the depth here.
 ## 8. Validation
 
 ```bash
-bash tests/validate-structure.sh      structure and metadata of the 121 skills
+bash tests/validate-structure.sh      structure and metadata of the 152 skills
 bash tests/validate-rules.sh          the repository-wide prohibitions
 bash tests/validate-orchestration.sh  plans, references and scenarios
 ```
 
-The third script covers the four trees and the agents. It verifies that every
+The third script covers the eight trees and the agents. It verifies that every
 task category has a plan, that every step names an existing skill, that the
 mandatory gates appear where they are required, that plan ordering is
 coherent, that no engineering skill is orphaned, that `depends_on` and cross
@@ -272,4 +272,4 @@ Adding an engineering skill:
    `Interfaces` section;
 5. add it to at least one execution plan, or check 7 reports it as an orphan;
 6. update `engineering/dev-skills/README.md`, `skills-guide.md` and this file;
-7. run the three validation scripts.
+7. run the four validation scripts.

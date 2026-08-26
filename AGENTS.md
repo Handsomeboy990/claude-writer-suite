@@ -13,7 +13,8 @@ are ignored. See `Why this file exists` at the end.
 
 ## What this repository is
 
-Claude Writer Suite: 121 skills and 16 agents, in four trees.
+Claude Skill Suite: 152 skills and 16 agents, in eight trees. The repository is
+named `claude-writer-suite` for its history; the suite reaches past writing.
 
 | Tree | Contents | Constitution |
 |---|---|---|
@@ -21,6 +22,10 @@ Claude Writer Suite: 121 skills and 16 agents, in four trees.
 | `writing/` | 42 creative writing skills | `writing/core/writing-constitution` |
 | `documents/` | 7 professional document skills | `documents/documentation/document-core` |
 | `engineering/` | 70 software skills, 16 agents | `engineering/dev-skills/engineering-core` and `engineering/devops-skills/devops-core` |
+| `security/` | 10 defensive security skills | `security/secure-development/security-core` |
+| `research/` | 5 general research skills | `research/research-core` |
+| `career/` | 7 job search and application skills | `career/career-core` |
+| `opportunity/` | 9 ideation, hackathon and business skills | `opportunity/ideation/opportunity-core` |
 
 Full picture: `README.md`. Architecture: `documentation/architecture.md`.
 
@@ -39,6 +44,13 @@ skill. Never run a whole chain by reflex: compose the smallest complete plan.
 | Environment, pipeline, deployment, production database, secret | `devops-core` |
 | Validating a whole product, or a QA campaign | `quality-engineering` |
 | A degraded production system | `incident-response` |
+| Threat modeling, a security audit, or hardening | `security-core` |
+| Active testing under written authorization | `authorized-pentesting` |
+| Researching a question with real, cited sources | `research-core` |
+| A job search, CV, cover letter or interview prep | `career-core` |
+| Generating and evaluating ideas | `opportunity-core` |
+| Finding or winning a hackathon | `hackathon-discovery` |
+| Finding clients or sizing a market | `client-discovery` |
 | Anything just finished | `self-critique` |
 
 `engineering-orchestrator` loads `engineering-core` then selects the rest.
@@ -57,12 +69,19 @@ skill. Never run a whole chain by reflex: compose the smallest complete plan.
   `production-verification`.
 - Campaign: no product is declared ready before the twelve point gate of
   `quality-engineering`.
+- Security: no offensive action without written, specific, in-scope
+  authorization on record; no audit concludes a system is secure. `security-core`.
+- Opportunity: no long list is a deliverable; discover, evaluate, then
+  recommend a ranked few with reasoning. `opportunity-core`.
+- Research and career: a source, a listing, a deadline or a market figure is
+  cited from a live source or withheld, never invented. `research-core`,
+  `career-core`.
 
 ## Permanent rules
 
 1. No emoji, in any file or any output.
 2. No em dash. The en dash is for dialogue only.
-3. Skill language is English, for all 121 skills and all 16 agents. Output
+3. Skill language is English, for all 152 skills and all 16 agents. Output
    language is the recipient's, set in the configuration. The three layers are
    defined in `documentation/configuration.md`.
 4. Commits are atomic, in English, with no mention of an AI, an assistant or
@@ -93,7 +112,8 @@ Before any modification:
 3. Check consistency with `documentation/architecture.md`, and with the
    system document for the tree: `documents-system.md`,
    `engineering-system.md`, `delivery-system.md`.
-4. Run the three scripts in `tests/`.
+4. Run the four scripts in `tests/`. If you changed a skill tree, run
+   `bash plugins/build.sh` so the plugin bundles stay in sync.
 5. Commit atomically, in English.
 
 Contribution rules and the pre-pull-request checklist: `CONTRIBUTING.md`.

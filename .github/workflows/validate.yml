@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   validate:
-    name: structure, rules, orchestration
+    name: structure, rules, orchestration, plugins
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,9 +31,22 @@ jobs:
       - name: Orchestration coherence
         run: bash tests/validate-orchestration.sh
 
+      - name: Plugin bundles in sync with the trees
+        run: bash tests/validate-plugins.sh
+
+      - name: Control Center parses, runs and passes its advisor tests
+        run: |
+          python3 -c "import ast; ast.parse(open('control-center/reader.py').read())"
+          python3 -c "import ast; ast.parse(open('control-center/server.py').read())"
+          python3 -c "import ast; ast.parse(open('control-center/advisor.py').read())"
+          python3 control-center/reader.py --json > /dev/null
+          python3 control-center/advisor.py > /dev/null
+          python3 control-center/test_advisor.py
+          python3 tests/check-app-js.py
+
       - name: Shell syntax
         run: |
-          for script in install.sh tests/*.sh .githooks/*; do
+          for script in install.sh plugins/build.sh tests/*.sh .githooks/*; do
             [ -f "$script" ] || continue
             bash -n "$script"
           done

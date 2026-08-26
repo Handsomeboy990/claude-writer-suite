@@ -1,0 +1,11 @@
+{
+  "name": "writer-suite-engineering",
+  "version": "2.0.0",
+  "description": "Software engineering and delivery: dev, delivery and operations skills plus 16 role agents. Stack and platform agnostic; no task is finished before code review with a test run.",
+  "author": {
+    "name": "Lauret Chacha"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Handsomeboy990/claude-writer-suite",
+  "keywords": ["engineering","code-review","devops","testing","architecture","claude-skill"]
+}

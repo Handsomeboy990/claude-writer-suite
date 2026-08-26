@@ -1,4 +1,4 @@
-# Continuity, 2026-08-12
+# Continuity, 2026-08-26
 
 State of the repository for whoever takes it over, human or agent. Written to
 `engineering/dev-skills/project-continuity/resources/continuity-template.md`.
@@ -76,18 +76,54 @@ Session 5, quality and lifecycle coverage:
   point, and check 7 added to `validate-rules.sh` to keep it that way.
 - Counts updated everywhere: 121 skills, 16 agents, 38 categories.
 
+Session 6, domain expansion, plugins and the Control Center:
+
+- Four new trees, 31 skills, each with a constitution that depends on nothing:
+  - `security/` 10: `security-core`, `threat-modeling`,
+    `security-architecture`, `authentication-security`, `authorization-design`,
+    `session-security`, `dependency-security`, `security-headers`,
+    `vulnerability-assessment`, `authorized-pentesting`.
+  - `research/` 5: `research-core`, `source-research`, `source-verification`,
+    `competitive-analysis`, `synthesis-reporting`.
+  - `career/` 7: `career-core`, `career-profile`, `job-search`,
+    `cv-engineering`, `cover-letter`, `interview-preparation`,
+    `company-research`.
+  - `opportunity/` 9: `opportunity-core`, `ideation-engine`, `idea-evaluation`,
+    `hackathon-discovery`, `hackathon-strategy`, `pitch-and-demo`,
+    `client-discovery`, `lead-research`, `market-research`.
+- `control-center/`: a zero-dependency local dashboard, `server.py` (stdlib
+  HTTP, loopback only, free-port detection), `reader.py` (reads the transcripts,
+  installed skills and configuration, invents nothing), `app.html` (one
+  self-contained page, inline CSS and hand-authored SVG). `install.sh
+  --control-center` and `--report`.
+- Per-domain plugins: `.claude-plugin/marketplace.json`, seven `plugin.json`
+  manifests, and `plugins/build.sh` that generates each bundle from the trees by
+  running the installer into the plugin's `skills/`. `tests/validate-plugins.sh`
+  keeps them in sync.
+- Installer extended with `--security --research --career --opportunity`,
+  `--control-center`, `--report`, and a ten-option menu, all combining and
+  deduplicating as before.
+- `career` configuration section added to the template and `config/README.md`.
+- Counts updated everywhere: 152 skills, 16 agents, eight trees, four
+  validators. Product repositioned as the Claude Skill Suite; the repository
+  keeps the name `claude-writer-suite`.
+
 ## Current state
 
 Working today:
 
-- the three scripts pass: 121 skills, 0 errors, 1 pre-existing warning on a
+- the four scripts pass: 152 skills, 0 errors, 1 pre-existing warning on a
   deliberate typographic counter-example;
-- `install.sh` works in every mode, and `--configure` was exercised end to end
-  under a pseudo-terminal, producing both the configuration file and the
-  manual task list;
+- `install.sh` works in every mode, including the four new scopes, verified
+  against a sandbox target through `CLAUDE_SKILLS_DIR`;
+- the Control Center serves its page and `/api/data` with real local figures;
+  a headless Playwright pass across desktop, mobile, light and dark reported
+  zero console errors and no horizontal overflow;
+- the plugin bundles match what each scope installs, verified by
+  `validate-plugins.sh`;
 - no skill contains a hardcoded personal identity, verified by check 4;
 - every declared dependency and every `Interfaces` cross reference resolves
-  across all four trees.
+  across all eight trees.
 
 Looks finished and is not:
 
@@ -254,5 +290,5 @@ Looks finished and is not:
   reached `main` and `dev` and had to be removed by a revert, which is why
   `4c6f7bd` and `be42bb7` sit in the history. Test from an account without
   admin rights, or trust the read-back of the rule.
-- After moving any directory, run all three scripts: two of them resolve paths
+- After moving any directory, run all four scripts: some of them resolve paths
   and fail cleanly by naming what is missing.

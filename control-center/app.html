@@ -1,0 +1,1373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control Center</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --panel-2: #eef1f5;
+    --panel-3: #e6eaf0;
+    --border: #dfe3ea;
+    --border-strong: #c8cfda;
+    --text: #171a1f;
+    --text-2: #3d434d;
+    --muted: #5c6572;
+    --accent: #2f6feb;
+    --accent-2: #1b5fd9;
+    --accent-soft: #dce8ff;
+    --good: #1a9d5f;
+    --good-soft: #d6f2e3;
+    --warn: #a9760c;
+    --warn-soft: #fbecd0;
+    --bad: #c73d31;
+    --bad-soft: #fbe0dc;
+    --info: #4a5568;
+    --bar: #2f6feb;
+    --bar-2: #7aa5f2;
+    --bar-3: #9db8ee;
+    --grid: #e9edf3;
+    --shadow-sm: 0 1px 2px rgba(20, 24, 33, 0.06);
+    --shadow: 0 1px 3px rgba(20, 24, 33, 0.09), 0 1px 2px rgba(20, 24, 33, 0.05);
+    --shadow-lg: 0 10px 30px rgba(20, 24, 33, 0.16);
+    --radius: 11px;
+    --radius-sm: 7px;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --sev-critical: #c73d31;
+    --sev-high: #d1662a;
+    --sev-medium: #a9760c;
+    --sev-low: #2f6feb;
+    --sev-informational: #5c6572;
+    --t-fast: 120ms;
+    --t-med: 220ms;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  :root[data-theme="dark"], :root.dark {
+    --bg: #12151a;
+    --panel: #1a1e25;
+    --panel-2: #222732;
+    --panel-3: #2a3040;
+    --border: #2b313c;
+    --border-strong: #3a4150;
+    --text: #e9ebef;
+    --text-2: #c3c8d1;
+    --muted: #9aa4b2;
+    --accent: #5b8cff;
+    --accent-2: #6f9bff;
+    --accent-soft: #22314f;
+    --good: #45c489;
+    --good-soft: #17352a;
+    --warn: #e0ad4a;
+    --warn-soft: #3a2f16;
+    --bad: #ea6a5c;
+    --bad-soft: #3a1f1c;
+    --info: #9aa4b2;
+    --bar: #5b8cff;
+    --bar-2: #3a5488;
+    --bar-3: #2c3f66;
+    --grid: #262c37;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.42);
+    --shadow-lg: 0 12px 34px rgba(0, 0, 0, 0.55);
+    --sev-critical: #ea6a5c;
+    --sev-high: #e08a4a;
+    --sev-medium: #e0ad4a;
+    --sev-low: #5b8cff;
+    --sev-informational: #9aa4b2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151a;
+      --panel: #1a1e25;
+      --panel-2: #222732;
+      --panel-3: #2a3040;
+      --border: #2b313c;
+      --border-strong: #3a4150;
+      --text: #e9ebef;
+      --text-2: #c3c8d1;
+      --muted: #9aa4b2;
+      --accent: #5b8cff;
+      --accent-2: #6f9bff;
+      --accent-soft: #22314f;
+      --good: #45c489;
+      --good-soft: #17352a;
+      --warn: #e0ad4a;
+      --warn-soft: #3a2f16;
+      --bad: #ea6a5c;
+      --bad-soft: #3a1f1c;
+      --info: #9aa4b2;
+      --bar: #5b8cff;
+      --bar-2: #3a5488;
+      --bar-3: #2c3f66;
+      --grid: #262c37;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.42);
+      --shadow-lg: 0 12px 34px rgba(0, 0, 0, 0.55);
+      --sev-critical: #ea6a5c;
+      --sev-high: #e08a4a;
+      --sev-medium: #e0ad4a;
+      --sev-low: #5b8cff;
+      --sev-informational: #9aa4b2;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 15px; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    transition: background var(--t-med) var(--ease), color var(--t-med) var(--ease);
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1, h2, h3 { margin: 0; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  header.top {
+    position: sticky; top: 0; z-index: 30;
+    background: var(--panel); border-bottom: 1px solid var(--border);
+    padding: 12px 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  header.top .brand { display: flex; align-items: baseline; gap: 10px; }
+  header.top h1 { font-size: 16px; font-weight: 660; letter-spacing: -0.01em; }
+  header.top .sub { color: var(--muted); font-size: 12.5px; }
+  header.top .spacer { flex: 1; }
+  header.top .stamp { color: var(--muted); font-size: 11.5px; font-family: var(--mono); }
+  .ctrl {
+    appearance: none; border: 1px solid var(--border-strong); background: var(--panel-2);
+    color: var(--text-2); font: inherit; font-size: 12.5px; padding: 6px 11px;
+    border-radius: var(--radius-sm); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+  }
+  .ctrl:hover { border-color: var(--accent); color: var(--accent); }
+  .ctrl:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ctrl svg { width: 15px; height: 15px; }
+
+  nav.tabs {
+    display: flex; gap: 2px; flex-wrap: wrap; padding: 6px 16px 0;
+    background: var(--panel); border-bottom: 1px solid var(--border);
+    position: sticky; top: 52px; z-index: 29;
+  }
+  nav.tabs button {
+    appearance: none; border: 0; background: transparent; color: var(--muted);
+    font: inherit; font-size: 13.5px; padding: 9px 13px; cursor: pointer;
+    border-bottom: 2px solid transparent; border-radius: 6px 6px 0 0;
+    transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+  }
+  nav.tabs button:hover { color: var(--text); background: var(--panel-2); }
+  nav.tabs button[aria-selected="true"] {
+    color: var(--accent); border-bottom-color: var(--accent); font-weight: 620;
+  }
+  nav.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  main { padding: 22px; max-width: 1220px; margin: 0 auto; }
+  section.tabpanel { display: none; }
+  section.tabpanel.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  section.tabpanel.active { animation: fadeUp var(--t-med) var(--ease); }
+
+  .grid { display: grid; gap: 14px; }
+  .tiles { grid-template-columns: repeat(auto-fill, minmax(184px, 1fr)); margin-bottom: 18px; }
+  .tile {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 15px 16px; box-shadow: var(--shadow-sm);
+    transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast), border-color var(--t-fast);
+  }
+  .tile:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--border-strong); }
+  .tile .label { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+  .tile .value { font-size: 25px; font-weight: 680; margin-top: 6px; letter-spacing: -0.02em; }
+  .tile .value.na { color: var(--muted); font-size: 16px; font-weight: 600; }
+  .tile .value small { font-size: 13px; font-weight: 500; color: var(--muted); }
+  .tile .note { color: var(--muted); font-size: 11.5px; margin-top: 3px; }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow-sm); margin-bottom: 16px;
+  }
+  .panel > h2 { font-size: 14px; font-weight: 640; display: flex; align-items: center; gap: 8px; }
+  .panel .desc { color: var(--muted); font-size: 12.5px; margin: 4px 0 14px; }
+  .panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .panel-head h2 { font-size: 14px; font-weight: 640; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.03em; }
+  td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  tbody tr { transition: background var(--t-fast); }
+  tbody tr:hover { background: var(--panel-2); }
+  tr:last-child td { border-bottom: 0; }
+  tr.clickable { cursor: pointer; }
+  tr.clickable:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  td.truncate { max-width: 520px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-2); }
+  @media (max-width: 820px) { td.truncate { max-width: 200px; } }
+  .scroll { overflow-x: auto; }
+
+  .bars { display: flex; flex-direction: column; gap: 7px; }
+  .barrow { display: grid; grid-template-columns: 160px 1fr 78px; align-items: center; gap: 10px; font-size: 13px; }
+  .barrow .name { color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bartrack { background: var(--panel-2); border-radius: 5px; height: 15px; overflow: hidden; }
+  .barfill { background: var(--bar); height: 100%; border-radius: 5px; min-width: 2px; transition: width var(--t-med) var(--ease); }
+  .barrow .val { text-align: right; font-family: var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .chip { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .chip.cat { background: var(--panel-2); color: var(--muted); }
+  .pill { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .sev { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; padding: 2px 9px; border-radius: 999px; }
+  .sev::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .sev.critical { color: var(--sev-critical); background: var(--bad-soft); }
+  .sev.high { color: var(--sev-high); background: var(--warn-soft); }
+  .sev.medium { color: var(--sev-medium); background: var(--warn-soft); }
+  .sev.low { color: var(--sev-low); background: var(--accent-soft); }
+  .sev.informational { color: var(--sev-informational); background: var(--panel-2); }
+
+  .empty { color: var(--muted); font-size: 13.5px; padding: 22px; text-align: center; border: 1px dashed var(--border-strong); border-radius: var(--radius); }
+  .na-badge { color: var(--warn); font-weight: 600; font-size: 12px; background: var(--warn-soft); padding: 2px 8px; border-radius: 6px; }
+
+  .health-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .health-row:last-child { border-bottom: 0; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .dot.ok { background: var(--good); } .dot.no { background: var(--muted); } .dot.warn { background: var(--warn); }
+  .health-row .h-label { flex: 1; } .health-row .h-val { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .filter { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .filter input, .filter select {
+    background: var(--panel-2); border: 1px solid var(--border-strong); color: var(--text);
+    border-radius: var(--radius-sm); padding: 7px 10px; font: inherit; font-size: 13px;
+  }
+  .filter input[type=search] { min-width: 190px; }
+  .filter input:focus-visible, .filter select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .seg { display: inline-flex; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); overflow: hidden; }
+  .seg button { appearance: none; border: 0; background: var(--panel-2); color: var(--muted); font: inherit; font-size: 12.5px; padding: 6px 11px; cursor: pointer; border-right: 1px solid var(--border); transition: background var(--t-fast), color var(--t-fast); }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  button.action {
+    appearance: none; border: 1px solid var(--border-strong); background: var(--panel-2);
+    color: var(--text); font: inherit; font-size: 13px; padding: 8px 14px; border-radius: var(--radius-sm);
+    cursor: pointer; transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+  }
+  button.action:hover { border-color: var(--accent); color: var(--accent); }
+  button.action.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.action.primary:hover { background: var(--accent-2); color: #fff; }
+  button.action:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .finding { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; background: var(--panel); transition: border-color var(--t-fast), box-shadow var(--t-fast); }
+  .finding:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .finding .fhead { display: flex; align-items: center; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
+  .finding .ftitle { font-weight: 620; font-size: 14px; }
+  .finding .fbody { margin-top: 9px; font-size: 13px; color: var(--text-2); }
+  .finding .fblock { margin-top: 9px; }
+  .finding .fblock .flabel { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); font-weight: 700; margin-bottom: 2px; }
+  .finding .evidence { font-family: var(--mono); font-size: 12px; background: var(--panel-2); border-radius: var(--radius-sm); padding: 8px 10px; color: var(--text-2); overflow-x: auto; }
+  .finding .example { border-left: 3px solid var(--accent); padding-left: 11px; }
+
+  .score-ring { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .score-ring svg { flex: none; }
+  .score-ring .score-num { font-size: 30px; font-weight: 720; letter-spacing: -0.02em; }
+  .score-ring .score-meta { font-size: 12.5px; color: var(--muted); max-width: 460px; }
+
+  /* Modal */
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(10, 13, 18, 0.55); z-index: 50; display: none; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; }
+  .modal-backdrop.open { display: flex; animation: fadeIn var(--t-fast) var(--ease); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal { background: var(--panel); border: 1px solid var(--border-strong); border-radius: 14px; box-shadow: var(--shadow-lg); width: 100%; max-width: 760px; padding: 0; animation: modalIn var(--t-med) var(--ease); }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(14px) scale(0.99); } to { opacity: 1; transform: none; } }
+  .modal .mhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--panel); border-radius: 14px 14px 0 0; }
+  .modal .mhead h3 { font-size: 15px; font-weight: 660; }
+  .modal .mbody { padding: 18px 20px; }
+  .modal .mclose { appearance: none; border: 0; background: var(--panel-2); color: var(--text-2); width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 18px; line-height: 1; }
+  .modal .mclose:hover { color: var(--bad); }
+  .modal .mclose:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--bad); color: var(--text); padding: 11px 16px; border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index: 60; font-size: 13px; max-width: 90vw; display: none; }
+  .toast.show { display: block; animation: fadeUp var(--t-fast) var(--ease); }
+
+  svg .axis { stroke: var(--border-strong); }
+  svg .gridline { stroke: var(--grid); }
+  svg text { fill: var(--muted); font-family: var(--sans); }
+  svg .col { fill: var(--bar); transition: fill var(--t-fast); }
+  svg .col:hover { fill: var(--accent-2); }
+
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--muted); margin-top: 8px; flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .note-foot { color: var(--muted); font-size: 12px; text-align: center; padding: 22px 0 8px; }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: 13px; }
+  .kv dt { color: var(--muted); } .kv dd { margin: 0; font-family: var(--mono); }
+
+  @media (max-width: 820px) {
+    .two-col { grid-template-columns: 1fr; }
+    .barrow { grid-template-columns: 116px 1fr 62px; }
+    header.top { padding: 11px 15px; } main { padding: 15px; }
+    nav.tabs { top: 49px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  /* Print / PDF report. Hidden on screen; the only thing shown when printing. */
+  #print-report { display: none; }
+  @media print {
+    @page { size: A4; margin: 18mm 16mm; }
+    header.top, nav.tabs, main, .modal-backdrop, .toast { display: none !important; }
+    #print-report { display: block !important; color: #000; background: #fff; font-size: 11pt; }
+    #print-report h1 { font-size: 20pt; margin-bottom: 2mm; }
+    #print-report h2 { font-size: 13pt; margin: 8mm 0 2mm; border-bottom: 1px solid #999; padding-bottom: 1mm; page-break-after: avoid; }
+    #print-report h3 { font-size: 11pt; margin: 4mm 0 1mm; page-break-after: avoid; }
+    #print-report .rmeta { color: #444; font-size: 9pt; }
+    #print-report table { width: 100%; border-collapse: collapse; font-size: 9pt; page-break-inside: auto; }
+    #print-report th, #print-report td { border: 1px solid #bbb; padding: 3px 5px; text-align: left; }
+    #print-report tr { page-break-inside: avoid; }
+    #print-report .rfinding { border: 1px solid #ccc; padding: 3mm; margin: 2mm 0; page-break-inside: avoid; }
+    #print-report .rsev { font-weight: bold; text-transform: uppercase; font-size: 8pt; }
+    #print-report .rfoot { margin-top: 6mm; font-size: 8pt; color: #555; border-top: 1px solid #999; padding-top: 2mm; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1 data-i18n="app.title">Skill Suite</h1>
+    <span class="sub" data-i18n="app.subtitle">Control Center</span>
+  </div>
+  <span class="spacer"></span>
+  <span class="stamp" id="stamp"></span>
+  <button class="ctrl" id="btn-export" data-i18n-aria="controls.export" aria-label="Export">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 12l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+    <span data-i18n="controls.export">Export</span>
+  </button>
+  <button class="ctrl" id="btn-lang" aria-label="Language">
+    <span id="lang-label">EN</span>
+  </button>
+  <button class="ctrl" id="btn-theme" data-i18n-aria="controls.theme" aria-label="Toggle theme">
+    <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4 12H2m20 0h-2m-2.5-7.5L16 6M6 18l-1.5 1.5M18 18l1.5 1.5M6 6 4.5 4.5"/></svg>
+  </button>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections" id="tabs"></nav>
+
+<main>
+  <section class="tabpanel active" id="tab-dashboard" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-sessions" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-analytics" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-optimization" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-usage" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-projects" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-skills" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-health" role="tabpanel" tabindex="0"></section>
+  <section class="tabpanel" id="tab-privacy" role="tabpanel" tabindex="0"></section>
+  <p class="note-foot" data-i18n="app.footer">All figures are read from local files on this machine. Nothing is sent anywhere. Token counts are the real usage figures recorded in your transcripts.</p>
+</main>
+
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal" id="modal">
+    <div class="mhead">
+      <h3 id="modal-title"></h3>
+      <button class="mclose" id="modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="mbody" id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+<div id="print-report" aria-hidden="true"></div>
+
+<script>
+"use strict";
+
+/* ---------------- i18n ---------------- */
+const I18N = {
+  en: {
+    "app.title": "Skill Suite", "app.subtitle": "Control Center",
+    "app.footer": "All figures are read from local files on this machine. Nothing is sent anywhere. Token counts are the real usage figures recorded in your transcripts.",
+    "controls.export": "Export", "controls.theme": "Toggle theme",
+    "tab.dashboard": "Dashboard", "tab.sessions": "Sessions", "tab.analytics": "Analytics",
+    "tab.optimization": "Optimization", "tab.usage": "Usage", "tab.projects": "Projects",
+    "tab.skills": "Skills", "tab.health": "System health", "tab.privacy": "Privacy",
+    "stamp.updated": "updated {time}",
+    "na": "Not available", "na.nodata": "No data available", "na.notcollected": "Not collected",
+    "empty.generic": "Nothing to show.", "empty.nodata": "No session data found. This is not an error; the suite works without it. Once you use the tools locally, activity appears here.",
+    "tile.sessions": "Sessions", "tile.fresh_input": "Fresh input", "tile.cache_read": "Cache read", "tile.cache_creation": "Cache creation",
+    "tile.output": "Output tokens", "tile.messages": "Assistant messages", "tile.skills_installed": "Skills installed", "tile.agents_installed": "Agents installed",
+    "tile.cache_reuse": "Cache reuse", "tile.avg_session": "Avg / session", "tile.median_session": "Median / session", "tile.opt_score": "Optimization score",
+    "note.incl_cache": "incl. cache", "note.fresh": "new, non-cached", "note.reused": "reused context", "note.generated": "generated", "note.real": "real usage",
+    "note.of_input": "of input reused from cache",
+    "panel.models": "Models used", "panel.models.desc": "By number of assistant messages.",
+    "panel.top_tools": "Top tools", "panel.top_tools.desc": "Tool calls across all sessions.",
+    "panel.tokens_day": "Tokens per day", "panel.tokens_day.desc": "Output plus fresh input per day, from the transcript timestamps.",
+    "panel.token_breakdown": "Token breakdown", "panel.token_breakdown.desc": "The four real components. Cache read is context reused cheaply and is shown apart so it does not inflate the headline.",
+    "col.project": "Project", "col.branch": "Branch", "col.started": "Started", "col.duration": "Duration",
+    "col.messages": "Msgs", "col.tools": "Tools", "col.input": "In", "col.output": "Out", "col.total": "Total",
+    "col.date": "Date", "col.score": "Score", "col.tokens": "Tokens", "col.category": "Category", "col.skill": "Skill", "col.description": "Description",
+    "col.sessions": "Sessions", "col.severity": "Severity", "col.count": "Count", "col.findings": "Findings",
+    "sessions.title": "Sessions", "sessions.desc": "{count} sessions, newest first. Durations are the span between the first and last recorded message. Select a row for detail.",
+    "filter.search": "Filter by project or branch...", "filter.project": "All projects", "filter.severity": "All severities", "filter.range": "Range",
+    "range.all": "All", "range.today": "Today", "range.7d": "7 days", "range.30d": "30 days", "range.month": "This month",
+    "usage.tools.title": "Tool calls", "usage.tools.desc": "Every tool used, across all sessions.",
+    "usage.skills.title": "Skill invocations", "usage.skills.desc": "Skills explicitly invoked through the Skill tool.",
+    "usage.skills.none": "No skill invocations recorded. Skills used implicitly are not counted here; only explicit Skill-tool calls are. This is not the same as no skills being used.",
+    "projects.title": "Token use by project", "projects.desc": "Output plus fresh input per project.",
+    "projects.all": "All projects",
+    "analytics.input.title": "Fresh input tokens per day", "analytics.output.title": "Output tokens per day", "analytics.messages.title": "Assistant messages per day",
+    "analytics.table": "Daily table", "analytics.legend.input": "fresh input", "analytics.legend.output": "output",
+    "skills.by_cat": "Installed skills by category", "skills.all": "All installed skills", "skills.agents": "Installed agents",
+    "skills.filter": "Filter skills...", "skills.none": "No skills installed. Run install.sh to add some.",
+    "health.title": "System health", "health.desc": "What the Control Center can see on this machine.",
+    "health.skills": "Skills installed", "health.agents": "Agents installed", "health.config": "Configuration written",
+    "health.data": "Session data readable", "health.config.absent": "run install.sh --configure",
+    "health.config.section": "Configuration", "health.config.section.desc": "Read from the configuration file. Secrets are never stored here or shown.",
+    "privacy.title": "Privacy", "privacy.p1": "The Control Center is local-first. It binds to 127.0.0.1 only, reads your transcripts and configuration live, and keeps no separate store of its own. Nothing it shows leaves this machine, and it saves nothing you did not already have.",
+    "privacy.p2": "Session history lives in your transcript files. The Control Center only reads them. To clear history, delete those files yourself; the button below confirms the Control Center holds nothing of its own to clear.",
+    "privacy.clear": "Clear Control Center analytics", "privacy.sources": "Where the data comes from",
+    "privacy.clear_result": "The Control Center keeps no separate analytics store; it reads your transcripts live and saves nothing of its own. To remove session history, delete the transcript files yourself:",
+    "privacy.src.transcripts": "Session transcripts (read-only)", "privacy.src.config": "Configuration (read-only, no secrets)",
+    "opt.title": "Optimization score", "opt.none": "No sessions to analyse yet. The advisor needs recorded activity to find opportunities, and it never invents findings.",
+    "opt.score.na": "Not available", "opt.score.na.desc": "There is no analysable session data, so no score is computed. Absence of data is not evidence of efficiency.",
+    "opt.patterns": "Recurring patterns", "opt.patterns.desc": "How often each kind of opportunity appears across your sessions.",
+    "opt.top": "Top opportunities", "opt.top.desc": "The highest-leverage findings first. Most token findings are medium or lower; that is expected.",
+    "opt.by_session": "By session", "opt.by_session.desc": "Sessions with the most findings first. Select one for the full detail.",
+    "opt.methodology": "Methodology", "opt.no_findings": "No optimization findings. On the evidence available, these sessions show no repeated exploration, edit churn, command repetition or other flagged pattern above the thresholds.",
+    "opt.finding": "Finding", "opt.observed": "Observed", "opt.recommendation": "Recommendation", "opt.example": "Concrete example", "opt.benefit": "Potential benefit", "opt.evidence": "Evidence",
+    "opt.session_score": "session score", "opt.findings_in": "{n} findings",
+    "sev.critical": "Critical", "sev.high": "High", "sev.medium": "Medium", "sev.low": "Low", "sev.informational": "Informational",
+    "detail.title": "Session detail", "detail.summary": "Summary", "detail.evidence": "Evidence", "detail.findings": "Optimization findings",
+    "detail.no_findings": "No optimization findings for this session.",
+    "detail.tokens_total": "Total tokens", "detail.fresh_input": "Fresh input", "detail.cache_read": "Cache read", "detail.cache_creation": "Cache creation",
+    "detail.output": "Output", "detail.messages": "Messages", "detail.tool_calls": "Tool calls", "detail.duration": "Duration",
+    "detail.reads": "Files read", "detail.edits": "File edits", "detail.bash": "Shell commands", "detail.score": "Session score",
+    "skill.view": "View", "skill.purpose": "What it is for", "skill.depends": "Depends on", "skill.no_deps": "Nothing. It works on its own.", "skill.outputs": "Produces",
+    "export.title": "Export a report", "export.scope": "Scope", "export.format": "Format", "export.generate": "Generate",
+    "export.scope.full": "Complete report", "export.scope.optimization": "Optimization report", "export.scope.usage": "Usage report",
+    "export.fmt.html": "HTML", "export.fmt.json": "JSON", "export.fmt.csv": "CSV (sessions)", "export.fmt.pdf": "PDF (via print)",
+    "export.pdf_hint": "PDF uses your browser's print dialog: choose Save as PDF. This produces a real PDF with no external dependency.",
+    "report.title": "Skill Suite usage and optimization report", "report.generated": "Generated", "report.period": "Period", "report.sources": "Data sources",
+    "report.usage": "Usage statistics", "report.optimization": "Optimization findings", "report.methodology": "Methodology", "report.limitations": "Data limitations", "report.privacy": "Privacy",
+    "report.privacy.text": "This report is generated locally from your own transcripts. It contains aggregate statistics and finding summaries, not raw transcript content.",
+    "report.limitations.text": "Only metrics with a reliable local source are reported. Agent-level, resource-level and quality-audit telemetry are not currently collected and are omitted rather than estimated. Token counts include cache reads where the runtime recorded them, shown separately.",
+    "report.sources.text": "Local session transcripts and the installed skill and agent directories.",
+    "toast.load_fail": "Could not load local data from the server.",
+    "toast.export_fail": "Could not generate the export.",
+    "unit.sessions": "sessions",
+  },
+  fr: {
+    "app.title": "Skill Suite", "app.subtitle": "Control Center",
+    "app.footer": "Tous les chiffres sont lus depuis des fichiers locaux de cette machine. Rien n'est envoyé ailleurs. Les comptes de tokens sont les chiffres réels enregistrés dans vos transcriptions.",
+    "controls.export": "Exporter", "controls.theme": "Basculer le thème",
+    "tab.dashboard": "Tableau de bord", "tab.sessions": "Sessions", "tab.analytics": "Analytique",
+    "tab.optimization": "Optimisation", "tab.usage": "Utilisation", "tab.projects": "Projets",
+    "tab.skills": "Skills", "tab.health": "État du système", "tab.privacy": "Confidentialité",
+    "stamp.updated": "mis à jour {time}",
+    "na": "Non disponible", "na.nodata": "Aucune donnée disponible", "na.notcollected": "Non collecté",
+    "empty.generic": "Rien à afficher.", "empty.nodata": "Aucune donnée de session trouvée. Ce n'est pas une erreur ; la suite fonctionne sans. Dès que vous utilisez les outils localement, l'activité apparaît ici.",
+    "tile.sessions": "Sessions", "tile.fresh_input": "Entrée nouvelle", "tile.cache_read": "Cache lu", "tile.cache_creation": "Cache créé",
+    "tile.output": "Tokens de sortie", "tile.messages": "Messages assistant", "tile.skills_installed": "Skills installés", "tile.agents_installed": "Agents installés",
+    "tile.cache_reuse": "Réutilisation cache", "tile.avg_session": "Moy. / session", "tile.median_session": "Médiane / session", "tile.opt_score": "Score d'optimisation",
+    "note.incl_cache": "cache inclus", "note.fresh": "nouveau, hors cache", "note.reused": "contexte réutilisé", "note.generated": "généré", "note.real": "usage réel",
+    "note.of_input": "de l'entrée réutilisée depuis le cache",
+    "panel.models": "Modèles utilisés", "panel.models.desc": "Par nombre de messages assistant.",
+    "panel.top_tools": "Principaux outils", "panel.top_tools.desc": "Appels d'outils sur toutes les sessions.",
+    "panel.tokens_day": "Tokens par jour", "panel.tokens_day.desc": "Sortie plus entrée nouvelle par jour, d'après les horodatages.",
+    "panel.token_breakdown": "Répartition des tokens", "panel.token_breakdown.desc": "Les quatre composantes réelles. Le cache lu est du contexte réutilisé à moindre coût, montré à part pour ne pas gonfler le total.",
+    "col.project": "Projet", "col.branch": "Branche", "col.started": "Début", "col.duration": "Durée",
+    "col.messages": "Msgs", "col.tools": "Outils", "col.input": "Entrée", "col.output": "Sortie", "col.total": "Total",
+    "col.date": "Date", "col.score": "Score", "col.tokens": "Tokens", "col.category": "Catégorie", "col.skill": "Skill", "col.description": "Description",
+    "col.sessions": "Sessions", "col.severity": "Sévérité", "col.count": "Nombre", "col.findings": "Constats",
+    "sessions.title": "Sessions", "sessions.desc": "{count} sessions, la plus récente d'abord. La durée est l'écart entre le premier et le dernier message. Sélectionnez une ligne pour le détail.",
+    "filter.search": "Filtrer par projet ou branche...", "filter.project": "Tous les projets", "filter.severity": "Toutes sévérités", "filter.range": "Période",
+    "range.all": "Tout", "range.today": "Aujourd'hui", "range.7d": "7 jours", "range.30d": "30 jours", "range.month": "Ce mois",
+    "usage.tools.title": "Appels d'outils", "usage.tools.desc": "Chaque outil utilisé, sur toutes les sessions.",
+    "usage.skills.title": "Invocations de skills", "usage.skills.desc": "Skills invoqués explicitement via l'outil Skill.",
+    "usage.skills.none": "Aucune invocation de skill enregistrée. Les skills utilisés implicitement ne sont pas comptés ici ; seuls les appels explicites de l'outil Skill le sont. Cela ne signifie pas qu'aucun skill n'a été utilisé.",
+    "projects.title": "Tokens par projet", "projects.desc": "Sortie plus entrée nouvelle par projet.",
+    "projects.all": "Tous les projets",
+    "analytics.input.title": "Entrée nouvelle par jour", "analytics.output.title": "Sortie par jour", "analytics.messages.title": "Messages assistant par jour",
+    "analytics.table": "Tableau journalier", "analytics.legend.input": "entrée nouvelle", "analytics.legend.output": "sortie",
+    "skills.by_cat": "Skills installés par catégorie", "skills.all": "Tous les skills installés", "skills.agents": "Agents installés",
+    "skills.filter": "Filtrer les skills...", "skills.none": "Aucun skill installé. Lancez install.sh pour en ajouter.",
+    "skill.view": "Voir", "skill.purpose": "À quoi ça sert", "skill.depends": "Dépend de", "skill.no_deps": "Rien. Il fonctionne seul.", "skill.outputs": "Produit",
+    "health.title": "État du système", "health.desc": "Ce que le Control Center voit sur cette machine.",
+    "health.skills": "Skills installés", "health.agents": "Agents installés", "health.config": "Configuration écrite",
+    "health.data": "Données de session lisibles", "health.config.absent": "lancez install.sh --configure",
+    "health.config.section": "Configuration", "health.config.section.desc": "Lue depuis le fichier de configuration. Aucun secret n'y est stocké ni affiché.",
+    "privacy.title": "Confidentialité", "privacy.p1": "Le Control Center est local d'abord. Il n'écoute que sur 127.0.0.1, lit vos transcriptions et votre configuration en direct, et ne garde aucun stockage propre. Rien de ce qu'il montre ne quitte cette machine.",
+    "privacy.p2": "L'historique des sessions vit dans vos fichiers de transcription. Le Control Center ne fait que les lire. Pour effacer l'historique, supprimez ces fichiers vous-même ; le bouton ci-dessous confirme qu'il n'a rien en propre à effacer.",
+    "privacy.clear": "Effacer l'analytique du Control Center", "privacy.sources": "D'où viennent les données",
+    "privacy.clear_result": "Le Control Center ne garde aucun stockage d'analytique propre ; il lit vos transcriptions en direct et n'enregistre rien. Pour effacer l'historique, supprimez vous-même les fichiers de transcription :",
+    "privacy.src.transcripts": "Transcriptions de session (lecture seule)", "privacy.src.config": "Configuration (lecture seule, sans secrets)",
+    "opt.title": "Score d'optimisation", "opt.none": "Aucune session à analyser pour l'instant. L'advisor a besoin d'activité enregistrée pour trouver des opportunités, et il n'invente jamais de constat.",
+    "opt.score.na": "Non disponible", "opt.score.na.desc": "Aucune donnée de session analysable, donc aucun score. L'absence de données n'est pas une preuve d'efficacité.",
+    "opt.patterns": "Motifs récurrents", "opt.patterns.desc": "Fréquence de chaque type d'opportunité sur vos sessions.",
+    "opt.top": "Principales opportunités", "opt.top.desc": "Les constats à plus fort levier d'abord. La plupart des constats sont moyens ou moins ; c'est attendu.",
+    "opt.by_session": "Par session", "opt.by_session.desc": "Les sessions avec le plus de constats d'abord. Sélectionnez-en une pour le détail complet.",
+    "opt.methodology": "Méthodologie", "opt.no_findings": "Aucun constat d'optimisation. Sur les preuves disponibles, ces sessions ne montrent ni ré-exploration, ni churn d'édition, ni répétition de commande au-delà des seuils.",
+    "opt.finding": "Constat", "opt.observed": "Observé", "opt.recommendation": "Recommandation", "opt.example": "Exemple concret", "opt.benefit": "Bénéfice potentiel", "opt.evidence": "Preuve",
+    "opt.session_score": "score de session", "opt.findings_in": "{n} constats",
+    "sev.critical": "Critique", "sev.high": "Élevé", "sev.medium": "Moyen", "sev.low": "Faible", "sev.informational": "Informatif",
+    "detail.title": "Détail de session", "detail.summary": "Résumé", "detail.evidence": "Preuves", "detail.findings": "Constats d'optimisation",
+    "detail.no_findings": "Aucun constat d'optimisation pour cette session.",
+    "detail.tokens_total": "Tokens totaux", "detail.fresh_input": "Entrée nouvelle", "detail.cache_read": "Cache lu", "detail.cache_creation": "Cache créé",
+    "detail.output": "Sortie", "detail.messages": "Messages", "detail.tool_calls": "Appels d'outils", "detail.duration": "Durée",
+    "detail.reads": "Fichiers lus", "detail.edits": "Éditions", "detail.bash": "Commandes shell", "detail.score": "Score de session",
+    "export.title": "Exporter un rapport", "export.scope": "Portée", "export.format": "Format", "export.generate": "Générer",
+    "export.scope.full": "Rapport complet", "export.scope.optimization": "Rapport d'optimisation", "export.scope.usage": "Rapport d'utilisation",
+    "export.fmt.html": "HTML", "export.fmt.json": "JSON", "export.fmt.csv": "CSV (sessions)", "export.fmt.pdf": "PDF (via impression)",
+    "export.pdf_hint": "Le PDF passe par la boîte d'impression du navigateur : choisissez Enregistrer au format PDF. Cela produit un vrai PDF sans dépendance externe.",
+    "report.title": "Rapport d'utilisation et d'optimisation Skill Suite", "report.generated": "Généré le", "report.period": "Période", "report.sources": "Sources de données",
+    "report.usage": "Statistiques d'utilisation", "report.optimization": "Constats d'optimisation", "report.methodology": "Méthodologie", "report.limitations": "Limites des données", "report.privacy": "Confidentialité",
+    "report.privacy.text": "Ce rapport est généré localement depuis vos propres transcriptions. Il contient des statistiques agrégées et des résumés de constats, pas le contenu brut des transcriptions.",
+    "report.limitations.text": "Seules les métriques avec une source locale fiable sont rapportées. La télémétrie par agent, par ressource et d'audit qualité n'est pas collectée et est omise plutôt qu'estimée. Les comptes de tokens incluent le cache lu là où le runtime l'a enregistré, montré séparément.",
+    "report.sources.text": "Transcriptions de session locales et répertoires des skills et agents installés.",
+    "toast.load_fail": "Impossible de charger les données locales depuis le serveur.",
+    "toast.export_fail": "Impossible de générer l'export.",
+    "unit.sessions": "sessions",
+  },
+};
+
+/* Advisor finding templates: title, observed, recommendation, example, benefit.
+   Placeholders {file},{count},{sessions},... are filled from real evidence. */
+const FINDINGS_I18N = {
+  en: {
+    "repeated-exploration": {
+      title: "Repeated exploration of the same files",
+      observed: "One file was read {top_count} times in this session ({reads_total} reads over {reads_unique} files). Top: {file_list}.",
+      recommendation: "Capture what these files establish once, in a short project or architecture map, and reference it instead of re-reading.",
+      example: "Create docs/architecture.md describing the modules and their boundaries, then point later tasks at it rather than re-opening the same files.",
+      benefit: "Less repeated context loading and fewer exploratory reads on the next task in this project.",
+    },
+    "edit-churn": {
+      title: "High edit churn on a file",
+      observed: "One file was edited {top_count} times ({edits_total} edits total). Top: {file_list}.",
+      recommendation: "A clearer specification or acceptance criteria before editing tends to reduce correction cycles on the same file.",
+      example: "Before implementing, write the acceptance checks the change must satisfy, then edit once against them instead of iterating.",
+      benefit: "Fewer correction iterations, which is where much of a session's tokens are spent.",
+    },
+    "command-repetition": {
+      title: "The same command shape repeated",
+      observed: "A command of the form '{signature}' ran {top_count} times ({bash_total} shell commands total).",
+      recommendation: "Wrap a repeated command sequence in a small script, or set a working directory once, so it is issued once rather than many times.",
+      example: "If 'cd <dir> && ...' repeats, run the shell from that directory, or add a Makefile target that encapsulates the sequence.",
+      benefit: "Fewer near-identical tool calls and the context they carry.",
+    },
+    "low-cache-reuse": {
+      title: "Low context reuse",
+      observed: "Cache reuse was {cache_reuse_ratio} for this session ({cache_creation} tokens of context created against {cache_read} reused).",
+      recommendation: "Context that changes often is re-cached rather than reused. Keeping the working set and instructions stable across a task improves reuse.",
+      example: "Settle the file set and the plan before deep work, so the cached context stays stable and is reused rather than rebuilt.",
+      benefit: "More of the context is reused cheaply instead of being recreated.",
+    },
+    "large-output": {
+      title: "Several large outputs",
+      observed: "{large_outputs} responses exceeded the large-output threshold (largest {output_max} tokens, median output {output_median}).",
+      recommendation: "This is informational, not a fault: a large output can be exactly what the task required. Where a concise answer would satisfy the task, asking for one reduces output tokens.",
+      example: "For a summary or a decision, request the conclusion and the key evidence rather than an exhaustive write-up.",
+      benefit: "Lower output tokens where brevity does not cost information. Judge by the task, not by size alone.",
+    },
+    "broad-scope": {
+      title: "Broad single session",
+      observed: "This session ran {messages} messages across {tool_types} tool types and {files_touched} distinct files.",
+      recommendation: "A single very broad session mixing architecture, implementation, testing and documentation is harder to keep efficient. A phased workflow with a checkpoint between phases helps.",
+      example: "Split into: design and agree the plan, then implement, then test, then document, each as its own focused pass.",
+      benefit: "Tighter context per phase and fewer wide, exploratory passes.",
+    },
+    "missing-project-context": {
+      title: "A project re-explored across sessions",
+      observed: "The project '{project}' was explored from scratch in {sessions} separate sessions, each with substantial reads.",
+      recommendation: "Maintain project-level documentation or memory so the architecture and conventions do not have to be rediscovered each session.",
+      example: "Keep a short docs/architecture.md and a conventions note, and reference them at the start of a session in this project.",
+      benefit: "Less repeated rediscovery of the same project structure across sessions.",
+    },
+  },
+  fr: {
+    "repeated-exploration": {
+      title: "Ré-exploration des mêmes fichiers",
+      observed: "Un fichier a été lu {top_count} fois dans cette session ({reads_total} lectures sur {reads_unique} fichiers). En tête : {file_list}.",
+      recommendation: "Consignez une fois ce que ces fichiers établissent, dans une courte carte de projet ou d'architecture, et référez-vous-y au lieu de relire.",
+      example: "Créez docs/architecture.md décrivant les modules et leurs frontières, puis pointez-y les tâches suivantes plutôt que de rouvrir les mêmes fichiers.",
+      benefit: "Moins de chargement répété de contexte et moins de lectures exploratoires à la prochaine tâche de ce projet.",
+    },
+    "edit-churn": {
+      title: "Fort churn d'édition sur un fichier",
+      observed: "Un fichier a été édité {top_count} fois ({edits_total} éditions au total). En tête : {file_list}.",
+      recommendation: "Une spécification plus claire ou des critères d'acceptation avant d'éditer réduisent souvent les cycles de correction sur le même fichier.",
+      example: "Avant d'implémenter, écrivez les vérifications que le changement doit satisfaire, puis éditez une fois contre elles au lieu d'itérer.",
+      benefit: "Moins d'itérations de correction, là où une grande part des tokens d'une session est dépensée.",
+    },
+    "command-repetition": {
+      title: "Même forme de commande répétée",
+      observed: "Une commande de la forme '{signature}' a été lancée {top_count} fois ({bash_total} commandes shell au total).",
+      recommendation: "Encapsulez une séquence répétée dans un petit script, ou fixez un répertoire de travail une fois, pour ne l'émettre qu'une fois.",
+      example: "Si 'cd <dir> && ...' se répète, lancez le shell depuis ce répertoire, ou ajoutez une cible Makefile qui encapsule la séquence.",
+      benefit: "Moins d'appels d'outils quasi identiques et du contexte qu'ils portent.",
+    },
+    "low-cache-reuse": {
+      title: "Faible réutilisation du contexte",
+      observed: "La réutilisation du cache était de {cache_reuse_ratio} pour cette session ({cache_creation} tokens de contexte créés contre {cache_read} réutilisés).",
+      recommendation: "Un contexte qui change souvent est re-caché plutôt que réutilisé. Garder l'ensemble de travail et les instructions stables améliore la réutilisation.",
+      example: "Fixez l'ensemble des fichiers et le plan avant le travail de fond, pour que le contexte caché reste stable et soit réutilisé plutôt que reconstruit.",
+      benefit: "Une plus grande part du contexte est réutilisée à moindre coût au lieu d'être recréée.",
+    },
+    "large-output": {
+      title: "Plusieurs sorties volumineuses",
+      observed: "{large_outputs} réponses ont dépassé le seuil de grande sortie (max {output_max} tokens, sortie médiane {output_median}).",
+      recommendation: "C'est informatif, pas un défaut : une grande sortie peut être exactement ce que la tâche exigeait. Quand une réponse concise suffit, la demander réduit les tokens de sortie.",
+      example: "Pour un résumé ou une décision, demandez la conclusion et les preuves clés plutôt qu'un exposé exhaustif.",
+      benefit: "Moins de tokens de sortie là où la concision ne coûte pas d'information. Jugez par la tâche, pas par la taille seule.",
+    },
+    "broad-scope": {
+      title: "Session unique très large",
+      observed: "Cette session a compté {messages} messages sur {tool_types} types d'outils et {files_touched} fichiers distincts.",
+      recommendation: "Une seule session très large mêlant architecture, implémentation, tests et documentation est plus difficile à garder efficace. Un flux par phases avec un point de contrôle entre phases aide.",
+      example: "Découpez en : concevoir et valider le plan, puis implémenter, puis tester, puis documenter, chacun en une passe ciblée.",
+      benefit: "Un contexte plus serré par phase et moins de larges passes exploratoires.",
+    },
+    "missing-project-context": {
+      title: "Un projet ré-exploré d'une session à l'autre",
+      observed: "Le projet '{project}' a été exploré de zéro dans {sessions} sessions distinctes, chacune avec des lectures substantielles.",
+      recommendation: "Maintenez une documentation ou une mémoire de projet pour que l'architecture et les conventions n'aient pas à être redécouvertes à chaque session.",
+      example: "Gardez un court docs/architecture.md et une note de conventions, et référez-vous-y au début d'une session sur ce projet.",
+      benefit: "Moins de redécouverte répétée de la même structure de projet d'une session à l'autre.",
+    },
+  },
+};
+
+let LANG = "en";
+function t(key, vars) {
+  let s = (I18N[LANG] && I18N[LANG][key]) || (I18N.en[key]) || key;
+  if (vars) for (const k in vars) s = s.replace(new RegExp("\\{" + k + "\\}", "g"), vars[k]);
+  return s;
+}
+function findingText(cat) {
+  return (FINDINGS_I18N[LANG] && FINDINGS_I18N[LANG][cat]) || FINDINGS_I18N.en[cat] || null;
+}
+
+/* ---------------- state ---------------- */
+const TABS = ["dashboard", "sessions", "analytics", "optimization", "usage", "projects", "skills", "health", "privacy"];
+let DATA = null;
+const state = { tab: "dashboard", range: "all", sevFilter: "", projFilter: "", sessionSearch: "" };
+
+/* ---------------- storage (guarded) ---------------- */
+function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+/* ---------------- dom helper ---------------- */
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    // No innerHTML sink: elements are built from text nodes only, so a project
+    // name, branch or file path from the transcripts can never inject markup.
+    if (k === "class") e.className = attrs[k];
+    else if (k.startsWith("on") && typeof attrs[k] === "function") e.addEventListener(k.slice(2), attrs[k]);
+    else if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  }
+  if (children != null) (Array.isArray(children) ? children : [children]).forEach(c => {
+    if (c == null || c === false) return;
+    e.appendChild(typeof c === "string" || typeof c === "number" ? document.createTextNode(String(c)) : c);
+  });
+  return e;
+}
+function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+
+/* ---------------- formatters ---------------- */
+function fmt(n) {
+  n = Number(n) || 0;
+  if (n >= 1e9) return (n / 1e9).toFixed(1) + "B";
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + "K";
+  return new Intl.NumberFormat(LANG).format(n);
+}
+function fmtInt(n) { return new Intl.NumberFormat(LANG).format(Number(n) || 0); }
+function fmtDur(s) {
+  if (s == null) return "-";
+  if (s < 60) return s + "s";
+  if (s < 3600) return Math.round(s / 60) + "m";
+  return (s / 3600).toFixed(1) + "h";
+}
+function fmtDate(iso) {
+  if (!iso) return "-";
+  try { return new Date(iso).toLocaleString(LANG, { dateStyle: "medium", timeStyle: "short" }); }
+  catch (e) { return iso; }
+}
+function fmtDay(iso) { try { return new Date(iso).toLocaleDateString(LANG, { month: "short", day: "numeric" }); } catch (e) { return iso; } }
+function pct(x) { return x == null ? t("na") : Math.round(x * 100) + "%"; }
+
+/* ---------------- reusable components ---------------- */
+function tile(label, valueNode, note) {
+  return el("div", { class: "tile" }, [
+    el("div", { class: "label" }, label),
+    el("div", { class: "value" + (valueNode && valueNode.na ? " na" : "") }, valueNode && valueNode.na ? valueNode.text : valueNode),
+    note ? el("div", { class: "note" }, note) : null,
+  ]);
+}
+function naValue(text) { return { na: true, text: text || t("na") }; }
+
+function barlist(rows, opts) {
+  opts = opts || {};
+  if (!rows.length) return el("div", { class: "empty" }, t("empty.generic"));
+  const max = Math.max.apply(null, rows.map(r => r.value)) || 1;
+  return el("div", { class: "bars", role: "list" }, rows.map(r => {
+    const w = Math.max(2, Math.round((r.value / max) * 100));
+    return el("div", { class: "barrow", role: "listitem", "aria-label": r.name + ": " + fmtInt(r.value) }, [
+      el("div", { class: "name", title: r.name }, r.name),
+      el("div", { class: "bartrack" }, el("div", { class: "barfill", style: "width:" + w + "%" })),
+      el("div", { class: "val" }, opts.raw ? fmtInt(r.value) : fmt(r.value)),
+    ]);
+  }));
+}
+
+// Hand-authored SVG bar chart with an accessible table alternative.
+function barChart(series, opts) {
+  opts = opts || {};
+  if (!series.length) return el("div", { class: "empty" }, t("empty.generic"));
+  const W = 320, H = 130, padB = 18, padL = 4, padT = 6;
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  svg.setAttribute("width", "100%"); svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("role", "img"); svg.setAttribute("aria-label", opts.label || "chart");
+  svg.style.height = "150px"; svg.style.display = "block";
+  const max = Math.max.apply(null, series.map(d => d.a || 0)) || 1;
+  const n = series.length, slot = (W - padL * 2) / n, bw = Math.min(slot * 0.62, 22);
+  // gridlines
+  for (let g = 1; g <= 3; g++) {
+    const y = padT + ((H - padB - padT) * g / 4);
+    const ln = document.createElementNS(NS, "line");
+    ln.setAttribute("x1", padL); ln.setAttribute("x2", W - padL);
+    ln.setAttribute("y1", y); ln.setAttribute("y2", y);
+    ln.setAttribute("class", "gridline"); ln.setAttribute("stroke-width", "0.5");
+    svg.appendChild(ln);
+  }
+  series.forEach((d, i) => {
+    const x = padL + i * slot + slot / 2;
+    const h = ((d.a || 0) / max) * (H - padB - padT);
+    const r = document.createElementNS(NS, "rect");
+    r.setAttribute("x", x - bw / 2); r.setAttribute("y", H - padB - h);
+    r.setAttribute("width", bw); r.setAttribute("height", Math.max(0.5, h));
+    r.setAttribute("rx", "1.5"); r.setAttribute("class", "col");
+    const ti = document.createElementNS(NS, "title");
+    ti.textContent = d.label + ": " + fmtInt(d.a || 0);
+    r.appendChild(ti); svg.appendChild(r);
+  });
+  const base = document.createElementNS(NS, "line");
+  base.setAttribute("x1", padL); base.setAttribute("x2", W - padL);
+  base.setAttribute("y1", H - padB); base.setAttribute("y2", H - padB);
+  base.setAttribute("class", "axis"); base.setAttribute("stroke-width", "0.6");
+  svg.appendChild(base);
+  // accessible table alternative
+  const wrap = el("div", null, [svg, el("table", { class: "visually-hidden" }, [
+    el("caption", null, opts.label || "chart"),
+    el("tbody", null, series.map(d => el("tr", null, [el("th", null, d.label), el("td", null, fmtInt(d.a || 0))]))),
+  ])]);
+  return wrap;
+}
+
+function panel(titleText, descText, body) {
+  return el("div", { class: "panel" }, [
+    el("h2", null, titleText),
+    descText ? el("p", { class: "desc" }, descText) : null,
+    body,
+  ]);
+}
+function sevBadge(sev) { return el("span", { class: "sev " + sev }, t("sev." + sev)); }
+
+/* ---------------- date range filtering ---------------- */
+function inRange(iso) {
+  if (state.range === "all" || !iso) return true;
+  const d = new Date(iso); const now = new Date();
+  if (state.range === "today") return d.toDateString() === now.toDateString();
+  if (state.range === "7d") return (now - d) <= 7 * 864e5;
+  if (state.range === "30d") return (now - d) <= 30 * 864e5;
+  if (state.range === "month") return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  return true;
+}
+function filteredSessions() {
+  const u = DATA.usage;
+  return (u.sessions || []).filter(s => inRange(s.end));
+}
+function filteredDays() {
+  return (DATA.usage.days || []).filter(d => inRange(d.date + "T12:00:00"));
+}
+
+function rangeControl(onChange) {
+  const ranges = ["all", "today", "7d", "30d", "month"];
+  const seg = el("div", { class: "seg", role: "group", "aria-label": t("filter.range") },
+    ranges.map(r => el("button", {
+      "aria-pressed": state.range === r ? "true" : "false",
+      onclick: () => { state.range = r; onChange(); },
+    }, t("range." + r))));
+  return seg;
+}
+
+/* ---------------- renderers ---------------- */
+function renderDashboard() {
+  const root = document.getElementById("tab-dashboard"); clear(root);
+  const u = DATA.usage, inst = DATA.installed, adv = DATA.advisor, tot = u.totals || {};
+  if (!u.available) { root.appendChild(panel(t("tab.dashboard"), "", el("div", { class: "empty" }, t("empty.nodata")))); return; }
+  const ov = u.overview || {};
+  const scoreNode = (adv && adv.score != null) ? String(adv.score) : naValue(t("na"));
+  root.appendChild(el("div", { class: "grid tiles" }, [
+    tile(t("tile.sessions"), String(u.session_count), t("note.real")),
+    tile(t("tile.output"), fmt(tot.output_tokens), t("note.generated")),
+    tile(t("tile.fresh_input"), fmt(tot.input_tokens), t("note.fresh")),
+    tile(t("tile.cache_read"), fmt(tot.cache_read_tokens), t("note.reused")),
+    tile(t("tile.opt_score"), typeof scoreNode === "string" ? scoreNode : scoreNode, (adv && adv.score != null) ? "/ 100" : t("na.nodata")),
+    tile(t("tile.cache_reuse"), ov.cache_reuse_ratio != null ? pct(ov.cache_reuse_ratio) : naValue(t("na")), t("note.of_input")),
+    tile(t("tile.skills_installed"), String(inst.skill_count)),
+    tile(t("tile.agents_installed"), String(inst.agent_count)),
+  ]));
+  root.appendChild(el("div", { class: "two-col" }, [
+    panel(t("panel.models"), t("panel.models.desc"), barlist((u.models || []).map(m => ({ name: m[0], value: m[1] })), { raw: true })),
+    panel(t("panel.top_tools"), t("panel.top_tools.desc"), barlist((u.tools || []).slice(0, 8).map(x => ({ name: x[0], value: x[1] })), { raw: true })),
+  ]));
+  root.appendChild(panel(t("panel.tokens_day"), t("panel.tokens_day.desc"),
+    barChart((u.days || []).map(d => ({ label: fmtDay(d.date), a: (d.tokens_out || 0) + (d.fresh_in || 0) })), { label: t("panel.tokens_day") })));
+}
+
+function renderSessions() {
+  const root = document.getElementById("tab-sessions"); clear(root);
+  const u = DATA.usage;
+  if (!u.available || !u.sessions.length) { root.appendChild(panel(t("sessions.title"), "", el("div", { class: "empty" }, t("na.nodata")))); return; }
+  const projects = Array.from(new Set(u.sessions.map(s => s.project))).sort();
+  const search = el("input", { type: "search", "aria-label": t("filter.search"), placeholder: t("filter.search"), value: state.sessionSearch });
+  const projSel = el("select", { "aria-label": t("filter.project") },
+    [el("option", { value: "" }, t("filter.project"))].concat(projects.map(p => el("option", { value: p, selected: state.projFilter === p ? "selected" : null }, p))));
+  const tblWrap = el("div", { class: "scroll" });
+  function draw() {
+    const q = (search.value || "").toLowerCase();
+    const rows = filteredSessions().filter(s =>
+      (!q || (s.project || "").toLowerCase().includes(q) || (s.branch || "").toLowerCase().includes(q)) &&
+      (!projSel.value || s.project === projSel.value));
+    clear(tblWrap);
+    const table = el("table", null, [
+      el("thead", null, el("tr", null, [
+        el("th", null, t("col.project")), el("th", null, t("col.branch")), el("th", null, t("col.started")),
+        el("th", { class: "num" }, t("col.duration")), el("th", { class: "num" }, t("col.messages")),
+        el("th", { class: "num" }, t("col.input")), el("th", { class: "num" }, t("col.output")), el("th", { class: "num" }, t("col.total")),
+      ])),
+      el("tbody", null, rows.map(s => el("tr", {
+        class: "clickable", tabindex: "0", role: "button", "aria-label": s.project + " " + fmtDate(s.start),
+        onclick: () => openSession(s.id),
+        onkeydown: (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openSession(s.id); } },
+      }, [
+        el("td", null, s.project),
+        el("td", null, s.branch ? el("span", { class: "pill" }, s.branch) : "-"),
+        el("td", null, fmtDate(s.start)),
+        el("td", { class: "num" }, fmtDur(s.duration_seconds)),
+        el("td", { class: "num" }, fmtInt(s.messages)),
+        el("td", { class: "num" }, fmt(s.fresh_in)),
+        el("td", { class: "num" }, fmt(s.tokens_out)),
+        el("td", { class: "num" }, fmt(s.work_tokens)),
+      ]))),
+    ]);
+    tblWrap.appendChild(table);
+    if (!rows.length) tblWrap.appendChild(el("div", { class: "empty" }, t("empty.generic")));
+  }
+  search.addEventListener("input", () => { state.sessionSearch = search.value; draw(); });
+  projSel.addEventListener("change", () => { state.projFilter = projSel.value; draw(); });
+  const head = el("div", { class: "panel-head" }, [
+    el("h2", null, t("sessions.title")),
+    el("div", { class: "filter" }, [search, projSel, rangeControl(draw)]),
+  ]);
+  const p = el("div", { class: "panel" }, [head, el("p", { class: "desc" }, t("sessions.desc", { count: u.session_count })), tblWrap]);
+  root.appendChild(p); draw();
+}
+
+function renderAnalytics() {
+  const root = document.getElementById("tab-analytics"); clear(root);
+  const u = DATA.usage;
+  if (!u.available || !u.days.length) { root.appendChild(panel(t("tab.analytics"), "", el("div", { class: "empty" }, t("na.nodata")))); return; }
+  const tot = u.totals || {};
+  root.appendChild(panel(t("panel.token_breakdown"), t("panel.token_breakdown.desc"),
+    el("div", null, [
+      barlist([
+        { name: t("tile.output"), value: tot.output_tokens },
+        { name: t("tile.fresh_input"), value: tot.input_tokens },
+        { name: t("tile.cache_creation"), value: tot.cache_creation_tokens },
+        { name: t("tile.cache_read"), value: tot.cache_read_tokens },
+      ], { raw: true }),
+    ])));
+  const controls = el("div", { class: "panel-head" }, [el("h2", null, t("tab.analytics")), rangeControl(renderAnalytics)]);
+  root.appendChild(el("div", { class: "panel" }, [controls, el("p", { class: "desc" }, t("panel.tokens_day.desc"))]));
+  const days = filteredDays();
+  root.appendChild(panel(t("analytics.input.title"), "", barChart(days.map(d => ({ label: fmtDay(d.date), a: d.fresh_in })), { label: t("analytics.input.title") })));
+  root.appendChild(panel(t("analytics.output.title"), "", barChart(days.map(d => ({ label: fmtDay(d.date), a: d.tokens_out })), { label: t("analytics.output.title") })));
+  root.appendChild(panel(t("analytics.messages.title"), "", barChart(days.map(d => ({ label: fmtDay(d.date), a: d.messages })), { label: t("analytics.messages.title") })));
+  const table = el("div", { class: "scroll" }, el("table", null, [
+    el("thead", null, el("tr", null, [el("th", null, t("col.date")), el("th", { class: "num" }, t("col.sessions")), el("th", { class: "num" }, t("col.messages")), el("th", { class: "num" }, t("col.input")), el("th", { class: "num" }, t("col.output"))])),
+    el("tbody", null, days.slice().reverse().map(d => el("tr", null, [
+      el("td", null, d.date), el("td", { class: "num" }, fmtInt(d.sessions)), el("td", { class: "num" }, fmtInt(d.messages)),
+      el("td", { class: "num" }, fmt(d.fresh_in)), el("td", { class: "num" }, fmt(d.tokens_out)),
+    ]))),
+  ]));
+  root.appendChild(panel(t("analytics.table"), "", table));
+}
+
+function buildFinding(f) {
+  const tpl = findingText(f.category);
+  const ev = f.evidence || {};
+  const vars = Object.assign({}, ev);
+  if (ev.files) vars.file_list = ev.files.map(x => x.file + " (" + x.count + ")").join(", ");
+  if (ev.file) vars.file = ev.file;
+  if (ev.commands) vars.signature = ev.commands[0] ? ev.commands[0].signature : "";
+  const node = el("div", { class: "finding" });
+  node.appendChild(el("div", { class: "fhead" }, [
+    el("div", { class: "ftitle" }, tpl ? tpl.title : f.category),
+    sevBadge(f.severity),
+  ]));
+  if (tpl) {
+    node.appendChild(el("div", { class: "fblock" }, [el("div", { class: "flabel" }, t("opt.observed")), el("div", { class: "fbody" }, t2(tpl.observed, vars))]));
+    node.appendChild(el("div", { class: "fblock" }, [el("div", { class: "flabel" }, t("opt.recommendation")), el("div", { class: "fbody" }, tpl.recommendation)]));
+    node.appendChild(el("div", { class: "fblock" }, [el("div", { class: "flabel" }, t("opt.example")), el("div", { class: "fbody example" }, tpl.example)]));
+    node.appendChild(el("div", { class: "fblock" }, [el("div", { class: "flabel" }, t("opt.benefit")), el("div", { class: "fbody" }, tpl.benefit)]));
+  }
+  return node;
+}
+function t2(str, vars) { let s = str; if (vars) for (const k in vars) s = s.replace(new RegExp("\\{" + k + "\\}", "g"), vars[k]); return s; }
+
+function renderOptimization() {
+  const root = document.getElementById("tab-optimization"); clear(root);
+  const adv = DATA.advisor;
+  if (!adv || !adv.available) { root.appendChild(panel(t("opt.title"), "", el("div", { class: "empty" }, t("opt.none")))); return; }
+  // score ring
+  const score = adv.score;
+  const ring = el("div", { class: "panel" });
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg"); svg.setAttribute("width", "88"); svg.setAttribute("height", "88"); svg.setAttribute("viewBox", "0 0 88 88"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", t("opt.title") + ": " + (score == null ? t("na") : score));
+  const bg = document.createElementNS(NS, "circle"); bg.setAttribute("cx", "44"); bg.setAttribute("cy", "44"); bg.setAttribute("r", "38"); bg.setAttribute("fill", "none"); bg.setAttribute("stroke", "var(--panel-2)"); bg.setAttribute("stroke-width", "9");
+  svg.appendChild(bg);
+  if (score != null) {
+    const c = 2 * Math.PI * 38; const off = c * (1 - score / 100);
+    const fg = document.createElementNS(NS, "circle"); fg.setAttribute("cx", "44"); fg.setAttribute("cy", "44"); fg.setAttribute("r", "38"); fg.setAttribute("fill", "none");
+    fg.setAttribute("stroke", score >= 80 ? "var(--good)" : score >= 55 ? "var(--warn)" : "var(--bad)");
+    fg.setAttribute("stroke-width", "9"); fg.setAttribute("stroke-linecap", "round");
+    fg.setAttribute("stroke-dasharray", c.toFixed(1)); fg.setAttribute("stroke-dashoffset", off.toFixed(1));
+    fg.setAttribute("transform", "rotate(-90 44 44)");
+    svg.appendChild(fg);
+  }
+  ring.appendChild(el("h2", null, t("opt.title")));
+  ring.appendChild(el("div", { class: "score-ring" }, [
+    svg,
+    el("div", null, [
+      el("div", { class: "score-num" }, score == null ? t("opt.score.na") : String(score)),
+      el("div", { class: "score-meta" }, score == null ? t("opt.score.na.desc") : (t("opt.session_score") + ": " + adv.sessions_analysed + " " + t("unit.sessions") + ". " + adv.score_method)),
+    ]),
+  ]));
+  root.appendChild(ring);
+
+  if (adv.findings_total === 0) { root.appendChild(el("div", { class: "empty" }, t("opt.no_findings"))); return; }
+
+  // patterns
+  root.appendChild(panel(t("opt.patterns"), t("opt.patterns.desc"),
+    barlist((adv.patterns || []).map(p => ({ name: (findingText(p.category) || {}).title || p.category, value: p.count })), { raw: true })));
+
+  // top opportunities
+  const topWrap = el("div", null, (adv.top_opportunities || []).map(buildFinding));
+  root.appendChild(panel(t("opt.top"), t("opt.top.desc"), topWrap));
+
+  // by session
+  const sessRows = (adv.session_reports || []).filter(r => r.findings.length).sort((a, b) => b.findings.length - a.findings.length);
+  const table = el("div", { class: "scroll" }, el("table", null, [
+    el("thead", null, el("tr", null, [el("th", null, t("col.project")), el("th", { class: "num" }, t("col.score")), el("th", { class: "num" }, t("col.findings")), el("th", { class: "num" }, t("col.tokens"))])),
+    el("tbody", null, sessRows.map(r => el("tr", {
+      class: "clickable", tabindex: "0", role: "button",
+      onclick: () => openSession(r.session_id),
+      onkeydown: (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openSession(r.session_id); } },
+    }, [
+      el("td", null, r.project), el("td", { class: "num" }, String(r.score)), el("td", { class: "num" }, String(r.findings.length)), el("td", { class: "num" }, fmt(r.tokens_total)),
+    ]))),
+  ]));
+  root.appendChild(panel(t("opt.by_session"), t("opt.by_session.desc"), table));
+
+  // methodology
+  const th = adv.thresholds || {};
+  root.appendChild(panel(t("opt.methodology"), "", el("dl", { class: "kv" }, [
+    el("dt", null, "score"), el("dd", null, adv.score_method),
+    el("dt", null, "repeated_read_min"), el("dd", null, String(th.repeated_read_min)),
+    el("dt", null, "edit_churn_min"), el("dd", null, String(th.edit_churn_min)),
+    el("dt", null, "bash_repeat_min"), el("dd", null, String(th.bash_repeat_min)),
+    el("dt", null, "large_output_min"), el("dd", null, String(th.large_output_min)),
+    el("dt", null, "low_cache_ratio"), el("dd", null, String(th.low_cache_ratio)),
+  ])));
+}
+
+function renderUsage() {
+  const root = document.getElementById("tab-usage"); clear(root);
+  const u = DATA.usage;
+  if (!u.available) { root.appendChild(panel(t("tab.usage"), "", el("div", { class: "empty" }, t("na.nodata")))); return; }
+  root.appendChild(panel(t("usage.tools.title"), t("usage.tools.desc"), barlist((u.tools || []).slice(0, 20).map(x => ({ name: x[0], value: x[1] })), { raw: true })));
+  const skills = u.skills || [];
+  root.appendChild(panel(t("usage.skills.title"), skills.length ? t("usage.skills.desc") : "",
+    skills.length ? barlist(skills.map(x => ({ name: x[0], value: x[1] })), { raw: true }) : el("div", { class: "empty" }, t("usage.skills.none"))));
+}
+
+function renderProjects() {
+  const root = document.getElementById("tab-projects"); clear(root);
+  const u = DATA.usage;
+  if (!u.available || !u.projects.length) { root.appendChild(panel(t("tab.projects"), "", el("div", { class: "empty" }, t("na.nodata")))); return; }
+  root.appendChild(panel(t("projects.title"), t("projects.desc"), barlist(u.projects.map(p => ({ name: p.name, value: (p.tokens_out || 0) + (p.fresh_in || 0) })), { raw: true })));
+  const table = el("div", { class: "scroll" }, el("table", null, [
+    el("thead", null, el("tr", null, [el("th", null, t("col.project")), el("th", { class: "num" }, t("col.sessions")), el("th", { class: "num" }, t("col.messages")), el("th", { class: "num" }, t("col.input")), el("th", { class: "num" }, t("col.output"))])),
+    el("tbody", null, u.projects.map(p => el("tr", null, [
+      el("td", null, p.name), el("td", { class: "num" }, String(p.sessions)), el("td", { class: "num" }, fmtInt(p.messages)), el("td", { class: "num" }, fmt(p.fresh_in)), el("td", { class: "num" }, fmt(p.tokens_out)),
+    ]))),
+  ]));
+  root.appendChild(panel(t("projects.all"), "", table));
+}
+
+function renderSkills() {
+  const root = document.getElementById("tab-skills"); clear(root);
+  const inst = DATA.installed;
+  if (!inst.skills.length) { root.appendChild(panel(t("skills.all"), "", el("div", { class: "empty" }, t("skills.none")))); return; }
+  const byCat = {};
+  inst.skills.forEach(s => { (byCat[s.category || "other"] = byCat[s.category || "other"] || []).push(s); });
+  const cats = Object.keys(byCat).sort();
+  root.appendChild(panel(t("skills.by_cat"), inst.skill_count + " / " + inst.skills_dir, el("div", { class: "grid tiles" }, cats.map(c => tile(c, String(byCat[c].length), t("tab.skills"))))));
+  const input = el("input", { type: "search", "aria-label": t("skills.filter"), placeholder: t("skills.filter") });
+  const listWrap = el("div", { class: "scroll" });
+  function draw() {
+    const q = (input.value || "").toLowerCase();
+    const rows = inst.skills.filter(s => !q || s.name.toLowerCase().includes(q) || (s.description || "").toLowerCase().includes(q) || (s.category || "").toLowerCase().includes(q));
+    clear(listWrap);
+    listWrap.appendChild(el("table", null, [
+      el("thead", null, el("tr", null, [el("th", null, t("col.skill")), el("th", null, t("col.category")), el("th", null, t("col.description")), el("th", null, "")])),
+      el("tbody", null, rows.map(s => el("tr", {
+        class: "clickable", tabindex: "0", role: "button", "aria-label": s.name,
+        onclick: () => openSkill(s.name),
+        onkeydown: (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openSkill(s.name); } },
+      }, [
+        el("td", null, el("strong", null, s.name)),
+        el("td", null, el("span", { class: "chip cat" }, s.category || "-")),
+        el("td", { class: "truncate" }, s.description || ""),
+        el("td", { class: "num", style: "color:var(--accent);white-space:nowrap" }, t("skill.view")),
+      ]))),
+    ]));
+    if (!rows.length) listWrap.appendChild(el("div", { class: "empty" }, t("empty.generic")));
+  }
+  input.addEventListener("input", draw);
+  const head = el("div", { class: "panel-head" }, [el("h2", null, t("skills.all")), el("div", { class: "filter" }, input)]);
+  root.appendChild(el("div", { class: "panel" }, [head, listWrap])); draw();
+  if (inst.agents.length) root.appendChild(panel(t("skills.agents"), inst.agent_count + " / " + inst.agents_dir,
+    el("div", { class: "scroll" }, el("table", null, [el("tbody", null, inst.agents.map(a => el("tr", null, el("td", null, a))))]))));
+}
+
+function renderHealth() {
+  const root = document.getElementById("tab-health"); clear(root);
+  const inst = DATA.installed, u = DATA.usage, cfg = DATA.config;
+  function row(label, cls, val) { return el("div", { class: "health-row" }, [el("span", { class: "dot " + cls }), el("span", { class: "h-label" }, label), el("span", { class: "h-val" }, val)]); }
+  root.appendChild(panel(t("health.title"), t("health.desc"), el("div", null, [
+    row(t("health.skills"), inst.skill_count > 0 ? "ok" : "no", inst.skill_count + " / " + inst.skills_dir),
+    row(t("health.agents"), inst.agent_count > 0 ? "ok" : "no", inst.agent_count + " / " + inst.agents_dir),
+    row(t("health.config"), cfg.present ? "ok" : "warn", cfg.present ? cfg.path : t("health.config.absent")),
+    row(t("health.data"), u.available ? "ok" : "warn", u.available ? u.transcript_files + " files" : t("na.nodata")),
+  ])));
+  if (cfg.present && cfg.fields && Object.keys(cfg.fields).length) {
+    const secs = Object.keys(cfg.fields);
+    root.appendChild(panel(t("health.config.section"), t("health.config.section.desc"), el("div", null, secs.map(sec => {
+      const kv = cfg.fields[sec]; const keys = Object.keys(kv); if (!keys.length) return null;
+      return el("div", { style: "margin-bottom:12px" }, [el("div", { class: "chip cat", style: "margin-bottom:6px" }, sec),
+        el("div", { class: "scroll" }, el("table", null, el("tbody", null, keys.map(k => el("tr", null, [el("td", { style: "width:230px" }, k), el("td", null, el("span", { class: "pill" }, kv[k] || "-"))])))))]);
+    }))));
+  }
+}
+
+function renderPrivacy() {
+  const root = document.getElementById("tab-privacy"); clear(root);
+  const u = DATA.usage;
+  const out = el("div", { class: "note", style: "margin-top:10px;color:var(--muted);font-size:13px" });
+  const btn = el("button", { class: "action", onclick: async () => {
+    out.textContent = "...";
+    try { const r = await fetch("/api/privacy/clear-derived", { method: "POST" }); const j = await r.json(); out.textContent = t("privacy.clear_result") + (j.projects_dir ? " " + j.projects_dir : ""); }
+    catch (e) { out.textContent = t("toast.load_fail"); }
+  } }, t("privacy.clear"));
+  root.appendChild(panel(t("privacy.title"), "", el("div", null, [
+    el("p", { class: "desc" }, t("privacy.p1")), el("p", { class: "desc" }, t("privacy.p2")), btn, out,
+  ])));
+  root.appendChild(panel(t("privacy.sources"), "", el("div", null, [
+    el("div", { class: "health-row" }, [el("span", { class: "dot ok" }), el("span", { class: "h-label" }, t("privacy.src.transcripts")), el("span", { class: "h-val" }, u.available ? u.transcript_files + " files" : t("na.nodata"))]),
+    el("div", { class: "health-row" }, [el("span", { class: "dot ok" }), el("span", { class: "h-label" }, t("privacy.src.config")), el("span", { class: "h-val" }, DATA.config.present ? "present" : "absent")]),
+  ])));
+}
+
+const RENDERERS = { dashboard: renderDashboard, sessions: renderSessions, analytics: renderAnalytics, optimization: renderOptimization, usage: renderUsage, projects: renderProjects, skills: renderSkills, health: renderHealth, privacy: renderPrivacy };
+
+/* ---------------- session detail modal ---------------- */
+let lastFocus = null;
+function openSession(id) {
+  const s = (DATA.usage.sessions || []).find(x => x.id === id);
+  if (!s) return;
+  const adv = DATA.advisor;
+  const rep = adv && adv.session_reports ? adv.session_reports.find(r => r.session_id === id) : null;
+  const body = document.getElementById("modal-body"); clear(body);
+  document.getElementById("modal-title").textContent = t("detail.title") + " - " + s.project;
+  const e = s.evidence || {};
+  const dl = el("dl", { class: "kv" }, [
+    el("dt", null, t("detail.tokens_total")), el("dd", null, fmtInt(s.work_tokens)),
+    el("dt", null, t("detail.fresh_input")), el("dd", null, fmtInt(s.fresh_in)),
+    el("dt", null, t("detail.cache_read")), el("dd", null, fmtInt(s.cache_read)),
+    el("dt", null, t("detail.cache_creation")), el("dd", null, fmtInt(s.cache_creation)),
+    el("dt", null, t("detail.output")), el("dd", null, fmtInt(s.tokens_out)),
+    el("dt", null, t("detail.messages")), el("dd", null, fmtInt(s.messages)),
+    el("dt", null, t("detail.tool_calls")), el("dd", null, fmtInt(s.tool_calls)),
+    el("dt", null, t("detail.duration")), el("dd", null, fmtDur(s.duration_seconds)),
+    el("dt", null, t("detail.reads")), el("dd", null, fmtInt(e.reads_total) + " (" + fmtInt(e.reads_unique) + ")"),
+    el("dt", null, t("detail.edits")), el("dd", null, fmtInt(e.edits_total)),
+    el("dt", null, t("detail.bash")), el("dd", null, fmtInt(e.bash_total)),
+    el("dt", null, t("detail.score")), el("dd", null, rep ? String(rep.score) : "-"),
+  ]);
+  body.appendChild(el("h3", { style: "font-size:13px;margin-bottom:8px" }, t("detail.summary")));
+  body.appendChild(dl);
+  body.appendChild(el("h3", { style: "font-size:13px;margin:16px 0 8px" }, t("detail.findings")));
+  if (rep && rep.findings.length) rep.findings.forEach(f => body.appendChild(buildFinding(f)));
+  else body.appendChild(el("div", { class: "empty" }, t("detail.no_findings")));
+  const backdrop = document.getElementById("modal-backdrop");
+  lastFocus = document.activeElement;
+  backdrop.classList.add("open");
+  document.getElementById("modal-close").focus();
+}
+function closeModal() {
+  document.getElementById("modal-backdrop").classList.remove("open");
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+function openSkill(name) {
+  const s = (DATA.installed.skills || []).find(x => x.name === name);
+  if (!s) return;
+  const body = document.getElementById("modal-body"); clear(body);
+  document.getElementById("modal-title").textContent = s.name;
+  const meta = el("div", { class: "filter", style: "margin-bottom:14px" }, [
+    el("span", { class: "chip cat" }, s.category || "-"),
+    s.version ? el("span", { class: "pill" }, "v" + s.version) : null,
+  ]);
+  body.appendChild(meta);
+  body.appendChild(el("div", { class: "fblock" }, [
+    el("div", { class: "flabel" }, t("skill.purpose")),
+    el("div", { class: "fbody" }, s.description || t("na")),
+  ]));
+  if (s.depends_on && s.depends_on.length) {
+    body.appendChild(el("div", { class: "fblock" }, [
+      el("div", { class: "flabel" }, t("skill.depends")),
+      el("div", { class: "filter" }, s.depends_on.map(d => el("span", { class: "chip cat" }, d))),
+    ]));
+  } else {
+    body.appendChild(el("div", { class: "fblock" }, [
+      el("div", { class: "flabel" }, t("skill.depends")),
+      el("div", { class: "fbody" }, t("skill.no_deps")),
+    ]));
+  }
+  if (s.outputs && s.outputs.length) {
+    body.appendChild(el("div", { class: "fblock" }, [
+      el("div", { class: "flabel" }, t("skill.outputs")),
+      el("div", { class: "filter" }, s.outputs.map(o => el("span", { class: "chip" }, o))),
+    ]));
+  }
+  lastFocus = document.activeElement;
+  document.getElementById("modal-backdrop").classList.add("open");
+  document.getElementById("modal-close").focus();
+}
+
+/* ---------------- export / report ---------------- */
+function buildReport(scope) {
+  const u = DATA.usage, adv = DATA.advisor, tot = u.totals || {};
+  const period = t("range." + state.range);
+  const rep = {
+    title: t("report.title"), generated: new Date().toLocaleString(LANG),
+    period: period, sources: t("report.sources.text"),
+    usage: {
+      sessions: u.session_count, output: tot.output_tokens, fresh_input: tot.input_tokens,
+      cache_read: tot.cache_read_tokens, cache_creation: tot.cache_creation_tokens,
+      assistant_messages: tot.assistant_messages,
+    },
+    sessions: (u.sessions || []).map(s => ({ project: s.project, started: s.start, messages: s.messages, tokens_in: s.fresh_in, tokens_out: s.tokens_out, tokens_total: s.work_tokens })),
+    advisor: adv && adv.available ? { score: adv.score, method: adv.score_method, patterns: adv.patterns, top: (adv.top_opportunities || []).map(f => ({ category: f.category, severity: f.severity, title: (findingText(f.category) || {}).title })) } : null,
+    limitations: t("report.limitations.text"), privacy: t("report.privacy.text"),
+    scope: scope,
+  };
+  return rep;
+}
+function download(filename, content, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = el("a", { href: url, download: filename });
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+}
+function reportToHTML(rep) {
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  let h = "<!doctype html><html><head><meta charset='utf-8'><title>" + esc(rep.title) + "</title>";
+  h += "<style>body{font-family:system-ui,sans-serif;max-width:820px;margin:24px auto;padding:0 16px;color:#111}h1{font-size:22px}h2{font-size:15px;border-bottom:1px solid #ccc;padding-bottom:4px;margin-top:28px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #ccc;padding:4px 6px;text-align:left}.meta{color:#555;font-size:12px}.sev{font-weight:bold;text-transform:uppercase;font-size:10px}.foot{color:#666;font-size:11px;margin-top:24px;border-top:1px solid #999;padding-top:8px}</style></head><body>";
+  h += "<h1>" + esc(rep.title) + "</h1>";
+  h += "<p class='meta'>" + esc(t("report.generated")) + ": " + esc(rep.generated) + " &middot; " + esc(t("report.period")) + ": " + esc(rep.period) + "</p>";
+  h += "<h2>" + esc(t("report.usage")) + "</h2><table><tbody>";
+  h += "<tr><th>" + esc(t("tile.sessions")) + "</th><td>" + rep.usage.sessions + "</td></tr>";
+  h += "<tr><th>" + esc(t("tile.output")) + "</th><td>" + fmtInt(rep.usage.output) + "</td></tr>";
+  h += "<tr><th>" + esc(t("tile.fresh_input")) + "</th><td>" + fmtInt(rep.usage.fresh_input) + "</td></tr>";
+  h += "<tr><th>" + esc(t("tile.cache_read")) + "</th><td>" + fmtInt(rep.usage.cache_read) + "</td></tr>";
+  h += "<tr><th>" + esc(t("tile.cache_creation")) + "</th><td>" + fmtInt(rep.usage.cache_creation) + "</td></tr>";
+  h += "</tbody></table>";
+  if (rep.advisor) {
+    h += "<h2>" + esc(t("report.optimization")) + "</h2>";
+    h += "<p>" + esc(t("opt.title")) + ": <strong>" + (rep.advisor.score == null ? esc(t("na")) : rep.advisor.score) + "</strong> / 100</p>";
+    h += "<table><thead><tr><th>" + esc(t("col.category")) + "</th><th>" + esc(t("col.severity")) + "</th></tr></thead><tbody>";
+    rep.advisor.top.forEach(f => { h += "<tr><td>" + esc(f.title || f.category) + "</td><td class='sev'>" + esc(t("sev." + f.severity)) + "</td></tr>"; });
+    h += "</tbody></table>";
+    h += "<h2>" + esc(t("report.methodology")) + "</h2><p class='meta'>" + esc(rep.advisor.method) + "</p>";
+  }
+  if (rep.scope !== "optimization") {
+    h += "<h2>" + esc(t("tab.sessions")) + "</h2><table><thead><tr><th>" + esc(t("col.project")) + "</th><th>" + esc(t("col.messages")) + "</th><th>" + esc(t("col.total")) + "</th></tr></thead><tbody>";
+    rep.sessions.slice(0, 60).forEach(s => { h += "<tr><td>" + esc(s.project) + "</td><td>" + fmtInt(s.messages) + "</td><td>" + fmtInt(s.tokens_total) + "</td></tr>"; });
+    h += "</tbody></table>";
+  }
+  h += "<h2>" + esc(t("report.limitations")) + "</h2><p class='meta'>" + esc(rep.limitations) + "</p>";
+  h += "<h2>" + esc(t("report.privacy")) + "</h2><p class='meta'>" + esc(rep.privacy) + "</p>";
+  h += "<p class='foot'>" + esc(t("report.sources")) + ": " + esc(rep.sources) + "</p>";
+  h += "</body></html>";
+  return h;
+}
+function reportToCSV(rep) {
+  const esc = s => '"' + String(s == null ? "" : s).replace(/"/g, '""') + '"';
+  let rows = [["project", "started", "messages", "tokens_in", "tokens_out", "tokens_total"].join(",")];
+  rep.sessions.forEach(s => rows.push([esc(s.project), esc(s.started), s.messages, s.tokens_in, s.tokens_out, s.tokens_total].join(",")));
+  return rows.join("\n");
+}
+function buildPrintReport(rep) {
+  const host = document.getElementById("print-report");
+  host.innerHTML = reportToHTML(rep)
+    .replace(/^[\s\S]*<body>/, "").replace(/<\/body>[\s\S]*$/, "")
+    .replace(/<h2>/g, "<h2>").replace(/class='meta'/g, "class='rmeta'").replace(/class='sev'/g, "class='rsev'").replace(/class='foot'/g, "class='rfoot'");
+}
+function doExport(scope, fmt) {
+  try {
+    const rep = buildReport(scope);
+    const base = "skill-suite-report-" + new Date().toISOString().slice(0, 10);
+    if (fmt === "json") download(base + ".json", JSON.stringify(rep, null, 2), "application/json");
+    else if (fmt === "csv") download(base + ".csv", reportToCSV(rep), "text/csv");
+    else if (fmt === "html") download(base + ".html", reportToHTML(rep), "text/html");
+    else if (fmt === "pdf") { buildPrintReport(rep); setTimeout(() => window.print(), 60); }
+  } catch (e) { showToast(t("toast.export_fail")); }
+}
+function openExport() {
+  const body = document.getElementById("modal-body"); clear(body);
+  document.getElementById("modal-title").textContent = t("export.title");
+  const scopeSel = el("select", null, [
+    el("option", { value: "full" }, t("export.scope.full")),
+    el("option", { value: "optimization" }, t("export.scope.optimization")),
+    el("option", { value: "usage" }, t("export.scope.usage")),
+  ]);
+  const fmts = [["html", t("export.fmt.html")], ["json", t("export.fmt.json")], ["csv", t("export.fmt.csv")], ["pdf", t("export.fmt.pdf")]];
+  const btns = el("div", { class: "filter", style: "margin-top:14px" }, fmts.map(([f, label]) =>
+    el("button", { class: "action" + (f === "pdf" ? " primary" : ""), onclick: () => { doExport(scopeSel.value, f); if (f !== "pdf") closeModal(); } }, label)));
+  body.appendChild(el("div", { class: "filter" }, [el("label", { style: "font-size:13px;color:var(--muted)" }, t("export.scope")), scopeSel]));
+  body.appendChild(btns);
+  body.appendChild(el("p", { class: "desc", style: "margin-top:14px" }, t("export.pdf_hint")));
+  lastFocus = document.activeElement;
+  document.getElementById("modal-backdrop").classList.add("open");
+  document.getElementById("modal-close").focus();
+}
+
+/* ---------------- toast ---------------- */
+let toastTimer = null;
+function showToast(msg) {
+  const el0 = document.getElementById("toast"); el0.textContent = msg; el0.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el0.classList.remove("show"), 5000);
+}
+
+/* ---------------- tabs, theme, lang ---------------- */
+function buildTabs() {
+  const nav = document.getElementById("tabs"); clear(nav);
+  TABS.forEach((id, i) => nav.appendChild(el("button", {
+    role: "tab", id: "tabbtn-" + id, "aria-controls": "tab-" + id, "aria-selected": id === state.tab ? "true" : "false",
+    onclick: () => selectTab(id),
+  }, t("tab." + id))));
+}
+function selectTab(id) {
+  state.tab = id;
+  TABS.forEach(tid => {
+    document.getElementById("tab-" + tid).classList.toggle("active", tid === id);
+    const b = document.getElementById("tabbtn-" + tid); if (b) b.setAttribute("aria-selected", tid === id ? "true" : "false");
+  });
+  if (DATA && RENDERERS[id]) RENDERERS[id]();
+}
+function applyStaticI18n() {
+  document.documentElement.lang = LANG;
+  document.querySelectorAll("[data-i18n]").forEach(n => { n.textContent = t(n.getAttribute("data-i18n")); });
+  document.querySelectorAll("[data-i18n-aria]").forEach(n => { n.setAttribute("aria-label", t(n.getAttribute("data-i18n-aria"))); });
+  document.getElementById("lang-label").textContent = LANG.toUpperCase();
+  if (DATA) document.getElementById("stamp").textContent = t("stamp.updated", { time: fmtDate(DATA.generated_at) });
+}
+function setLang(l) { LANG = l; store("cc_lang", l); applyStaticI18n(); buildTabs(); selectTab(state.tab); }
+function currentTheme() { return document.documentElement.getAttribute("data-theme"); }
+function setTheme(mode) {
+  if (mode) document.documentElement.setAttribute("data-theme", mode);
+  else document.documentElement.removeAttribute("data-theme");
+  store("cc_theme", mode || "");
+}
+function effectiveDark() {
+  const th = currentTheme();
+  if (th === "dark") return true; if (th === "light") return false;
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+function toggleTheme() { setTheme(effectiveDark() ? "light" : "dark"); }
+
+/* ---------------- load ---------------- */
+async function loadData() {
+  buildTabs(); applyStaticI18n();
+  try {
+    const r = await fetch("/api/data");
+    if (!r.ok) throw new Error("http " + r.status);
+    DATA = await r.json();
+    if (DATA.error) throw new Error(DATA.error);
+  } catch (e) {
+    showToast(t("toast.load_fail"));
+    document.getElementById("tab-dashboard").appendChild(el("div", { class: "panel" }, el("div", { class: "empty" }, t("toast.load_fail"))));
+    return;
+  }
+  applyStaticI18n();
+  selectTab(state.tab);
+}
+
+/* ---------------- events ---------------- */
+document.getElementById("btn-theme").addEventListener("click", toggleTheme);
+document.getElementById("btn-lang").addEventListener("click", () => setLang(LANG === "en" ? "fr" : "en"));
+document.getElementById("btn-export").addEventListener("click", openExport);
+document.getElementById("modal-close").addEventListener("click", closeModal);
+document.getElementById("modal-backdrop").addEventListener("click", (e) => { if (e.target.id === "modal-backdrop") closeModal(); });
+// Focus trap: while the dialog is open, keep Tab within it.
+document.getElementById("modal-backdrop").addEventListener("keydown", (e) => {
+  if (e.key !== "Tab") return;
+  const modal = document.getElementById("modal");
+  const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
+  if (document.getElementById("modal-backdrop").classList.contains("open")) return;
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  const tag = (e.target.tagName || "").toLowerCase();
+  if (tag === "input" || tag === "select" || tag === "textarea") return;
+  const idx = TABS.indexOf(state.tab);
+  if (e.key === "ArrowRight" && idx >= 0) { e.preventDefault(); selectTab(TABS[(idx + 1) % TABS.length]); document.getElementById("tabbtn-" + state.tab).focus(); }
+  if (e.key === "ArrowLeft" && idx >= 0) { e.preventDefault(); selectTab(TABS[(idx - 1 + TABS.length) % TABS.length]); document.getElementById("tabbtn-" + state.tab).focus(); }
+});
+
+/* ---------------- init ---------------- */
+(function init() {
+  const savedLang = load("cc_lang"); if (savedLang === "fr" || savedLang === "en") LANG = savedLang;
+  const savedTheme = load("cc_theme"); if (savedTheme === "dark" || savedTheme === "light") document.documentElement.setAttribute("data-theme", savedTheme);
+  loadData();
+})();
+</script>
+</body>
+</html>

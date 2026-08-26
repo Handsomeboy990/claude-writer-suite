@@ -1,0 +1,69 @@
+{
+  "name": "claude-writer-suite",
+  "owner": {
+    "name": "Lauret Chacha",
+    "email": "lauretchacha@gmail.com"
+  },
+  "metadata": {
+    "description": "Modular expertise for an agent: writing, documents, engineering, security, research, career, and opportunity work. Each domain installs on its own.",
+    "version": "2.0.0"
+  },
+  "plugins": [
+    {
+      "name": "writer-suite-writing",
+      "source": "./plugins/writing",
+      "description": "Creative writing: novels, genres, poetry and editing. 42 skills plus the two cross-domain skills, governed by writing-constitution.",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["writing", "fiction", "poetry", "editing", "screenwriting"]
+    },
+    {
+      "name": "writer-suite-documents",
+      "source": "./plugins/documents",
+      "description": "Professional documents delivered to a reader: technical writing, user docs, reports, letters, and PDF production. 7 skills plus the cross-domain pair.",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["documentation", "reports", "pdf", "technical-writing"]
+    },
+    {
+      "name": "writer-suite-engineering",
+      "source": "./plugins/engineering",
+      "description": "Software engineering and delivery: dev, delivery and operations skills plus 16 role agents. Stack and platform agnostic; reads the project it is given.",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["engineering", "code-review", "devops", "testing", "architecture"]
+    },
+    {
+      "name": "writer-suite-security",
+      "source": "./plugins/security",
+      "description": "Defensive security and authorized assurance: threat modeling, security architecture, auth, dependency and header hardening, vulnerability assessment, and gated pentesting.",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["security", "threat-modeling", "audit", "hardening", "pentesting"]
+    },
+    {
+      "name": "writer-suite-research",
+      "source": "./plugins/research",
+      "description": "General-purpose research for a decision: framing, source gathering, verification, competitive analysis, and conclusion-first synthesis.",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["research", "sources", "verification", "analysis", "synthesis"]
+    },
+    {
+      "name": "writer-suite-career",
+      "source": "./plugins/career",
+      "description": "Job search and applications: honest profile, real-source job search, CV and cover letter, company research and interview preparation. Never invents a listing.",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["career", "job-search", "cv", "resume", "interview"]
+    },
+    {
+      "name": "writer-suite-opportunity",
+      "source": "./plugins/opportunity",
+      "description": "Discovering and evaluating opportunities: ideation and idea evaluation, hackathon discovery, strategy and pitching, client and market research.",
+      "version": "2.0.0",
+      "license": "MIT",
+      "keywords": ["ideation", "hackathons", "business", "market-research", "pitch"]
+    }
+  ]
+}
