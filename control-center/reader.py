@@ -407,8 +407,24 @@ def read_transcripts():
     }
 
 
+def _parse_list_field(value):
+    """Parse a metadata list written inline as [a, b, c]."""
+    value = value.strip()
+    if value.startswith("[") and value.endswith("]"):
+        inner = value[1:-1].strip()
+        if not inner:
+            return []
+        return [x.strip() for x in inner.split(",") if x.strip()]
+    return [value] if value else []
+
+
 def read_installed():
-    """What the suite has installed, from the target directories."""
+    """What the suite has installed, from the target directories.
+
+    The full description and the metadata (category, version, dependencies,
+    outputs) are read so the interface can show what a skill is for, not a
+    truncated line.
+    """
     skills = []
     if os.path.isdir(SKILLS_DIR):
         for name in sorted(os.listdir(SKILLS_DIR)):
@@ -417,18 +433,36 @@ def read_installed():
             if os.path.isfile(skill_md):
                 category = ""
                 desc = ""
+                version = ""
+                depends_on = []
+                outputs = []
                 try:
                     with open(skill_md, "r", errors="replace") as fh:
                         for ln in fh:
+                            stripped = ln.strip()
                             if ln.startswith("description:"):
-                                desc = ln.split(":", 1)[1].strip()[:140]
-                            elif ln.strip().startswith("category:"):
-                                category = ln.split(":", 1)[1].strip()
-                            if desc and category:
+                                desc = ln.split(":", 1)[1].strip()
+                            elif stripped.startswith("category:"):
+                                category = stripped.split(":", 1)[1].strip()
+                            elif stripped.startswith("version:"):
+                                version = stripped.split(":", 1)[1].strip()
+                            elif stripped.startswith("depends_on:"):
+                                depends_on = _parse_list_field(stripped.split(":", 1)[1])
+                            elif stripped.startswith("outputs:"):
+                                outputs = _parse_list_field(stripped.split(":", 1)[1])
+                            # The metadata block ends at the closing fence.
+                            elif stripped == "---" and desc:
                                 break
                 except OSError:
                     pass
-                skills.append({"name": name, "category": category, "description": desc})
+                skills.append({
+                    "name": name,
+                    "category": category,
+                    "version": version,
+                    "description": desc,
+                    "depends_on": depends_on,
+                    "outputs": outputs,
+                })
     agents = []
     if os.path.isdir(AGENTS_DIR):
         for name in sorted(os.listdir(AGENTS_DIR)):
