@@ -25,6 +25,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import reader  # noqa: E402  (local, after sys.path setup)
+import advisor  # noqa: E402
 
 # A dedicated, uncommon range, chosen to avoid the usual development ports
 # (3000, 3001, 4200, 5000, 5173, 8000, 8080, 8888, ...). The first free one is
@@ -85,8 +86,16 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/data":
             try:
                 data = reader.collect()
+                data["advisor"] = advisor.analyze(data)
                 self._send(200, json.dumps(data, default=str))
             except Exception as exc:  # noqa: BLE001  report, never crash the server
+                self._send(500, json.dumps({"error": str(exc)}))
+            return
+        if path == "/api/advisor":
+            try:
+                data = reader.collect()
+                self._send(200, json.dumps(advisor.analyze(data), default=str))
+            except Exception as exc:  # noqa: BLE001
                 self._send(500, json.dumps({"error": str(exc)}))
             return
         if path == "/api/health":
