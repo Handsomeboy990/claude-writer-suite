@@ -122,8 +122,8 @@ def read_transcripts():
     tools = Counter()
     skills = Counter()
     models = Counter()
-    per_project = defaultdict(lambda: {"sessions": set(), "tokens_in": 0,
-                                       "fresh_in": 0, "tokens_out": 0, "messages": 0})
+    # per_project is aggregated from the finished sessions after the loop, by
+    # session identity; per_day is aggregated per record here.
     per_day = defaultdict(lambda: {"tokens_in": 0, "fresh_in": 0, "tokens_out": 0,
                                    "messages": 0, "sessions": set()})
 
@@ -155,12 +155,18 @@ def read_transcripts():
                 sid = rec.get("sessionId")
                 ts = _parse_ts(rec.get("timestamp"))
                 day = ts.date().isoformat() if ts else None
-                project = _project_name(rec.get("cwd") or project_dir)
+                rec_cwd = rec.get("cwd")
 
                 if sid and sid not in sessions:
                     sessions[sid] = {
                         "id": sid,
-                        "project": project,
+                        # A session belongs to one project. Its identity is the
+                        # working directory it started in, not the cwd of each
+                        # record: a session that runs "cd" into subfolders would
+                        # otherwise be split across a dozen false projects.
+                        "cwd": rec_cwd,
+                        "dir": project_dir,
+                        "project": None,
                         "branch": rec.get("gitBranch") or "",
                         "first": ts,
                         "last": ts,
@@ -180,12 +186,17 @@ def read_transcripts():
                         "bash_count": 0,
                         "output_tokens_per_msg": [],
                     }
-                if sid and ts:
+                if sid:
                     s = sessions[sid]
-                    if s["first"] is None or ts < s["first"]:
-                        s["first"] = ts
-                    if s["last"] is None or ts > s["last"]:
-                        s["last"] = ts
+                    # Record the first real working directory seen; it names the
+                    # project more reliably than the encoded transcript folder.
+                    if s["cwd"] is None and rec_cwd:
+                        s["cwd"] = rec_cwd
+                    if ts:
+                        if s["first"] is None or ts < s["first"]:
+                            s["first"] = ts
+                        if s["last"] is None or ts > s["last"]:
+                            s["last"] = ts
 
                 if rtype == "user":
                     totals["user_messages"] += 1
@@ -216,12 +227,9 @@ def read_transcripts():
                         sessions[sid]["messages"] += 1
                         if to > 0:
                             sessions[sid]["output_tokens_per_msg"].append(to)
-                    per_project[project]["tokens_in"] += ti + cr + cc
-                    per_project[project]["fresh_in"] += ti
-                    per_project[project]["tokens_out"] += to
-                    per_project[project]["messages"] += 1
-                    if sid:
-                        per_project[project]["sessions"].add(sid)
+                    # Per-project totals are aggregated from the finished
+                    # sessions after the loop, by session identity, so a session
+                    # is not scattered across the folders it visited.
                     if day:
                         per_day[day]["tokens_in"] += ti + cr + cc
                         per_day[day]["fresh_in"] += ti
@@ -256,6 +264,12 @@ def read_transcripts():
     # block carries only real counts; the advisor turns them into findings.
     session_list = []
     for s in sessions.values():
+        # Resolve the project name: the basename of the first real working
+        # directory, falling back to the transcript folder when no cwd was seen.
+        if s["cwd"]:
+            s["project"] = os.path.basename(str(s["cwd"]).rstrip("/")) or "unknown"
+        else:
+            s["project"] = _project_name(s["dir"])
         dur = None
         if s["first"] and s["last"]:
             dur = int((s["last"] - s["first"]).total_seconds())
@@ -315,11 +329,23 @@ def read_transcripts():
         })
     session_list.sort(key=lambda x: x["end"] or "", reverse=True)
 
+    # Aggregate per project from the finished sessions, by the session's own
+    # project identity, so each session counts once toward one project.
+    per_project = {}
+    for s in session_list:
+        p = per_project.setdefault(s["project"], {
+            "sessions": 0, "tokens_in": 0, "fresh_in": 0, "tokens_out": 0,
+            "messages": 0})
+        p["sessions"] += 1
+        p["tokens_in"] += s["tokens_in"]
+        p["fresh_in"] += s["fresh_in"]
+        p["tokens_out"] += s["tokens_out"]
+        p["messages"] += s["messages"]
     projects_out = []
     for name, p in per_project.items():
         projects_out.append({
             "name": name,
-            "sessions": len(p["sessions"]),
+            "sessions": p["sessions"],
             "tokens_in": p["tokens_in"],
             "fresh_in": p["fresh_in"],
             "tokens_out": p["tokens_out"],
