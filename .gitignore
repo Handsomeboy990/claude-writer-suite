@@ -8,6 +8,9 @@ Thumbs.db
 node_modules/
 drafts-prives/
 
+__pycache__/
+*.pyc
+
 test-results/
 playwright-report/
 
