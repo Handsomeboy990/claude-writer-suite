@@ -40,6 +40,24 @@ CONFIG_FILE = os.environ.get(
     "CLAUDE_CONFIG_FILE", os.path.join(HOME, ".claude", "writer-suite.config.yaml")
 )
 
+# An assistant message whose output exceeds this many tokens is counted as a
+# large output. It is a signal to surface, never a judgement: a large output can
+# be exactly what the task required. The threshold is documented so the count is
+# reproducible.
+LARGE_OUTPUT_TOKENS = 4000
+
+
+def _short_path(path):
+    """Shorten an absolute path to its last two segments for display.
+
+    The full path can be sensitive and is long; the tail is enough to identify
+    the file in a finding. No path is followed or opened here.
+    """
+    if not path:
+        return ""
+    parts = [p for p in str(path).split("/") if p]
+    return "/".join(parts[-2:]) if len(parts) > 2 else str(path)
+
 
 def _project_name(raw):
     """A readable project name from the transcript directory or a cwd path."""
@@ -62,6 +80,34 @@ def _parse_ts(ts):
         return None
 
 
+def _bash_signature(command):
+    """A coarse signature of a shell command, so near-identical commands group.
+
+    The first two whitespace-separated tokens (typically the program and its
+    subcommand) identify the shape of the command without capturing its
+    arguments, which is what makes two runs count as a repetition of the same
+    kind of work rather than two unrelated commands.
+    """
+    parts = command.strip().split()
+    if not parts:
+        return "(empty)"
+    sig = parts[0]
+    if len(parts) > 1 and not parts[1].startswith("-"):
+        sig += " " + parts[1]
+    return sig[:40]
+
+
+def _median(values):
+    if not values:
+        return 0
+    s = sorted(values)
+    n = len(s)
+    mid = n // 2
+    if n % 2:
+        return s[mid]
+    return (s[mid - 1] + s[mid]) // 2
+
+
 def read_transcripts():
     """Aggregate the real figures from every transcript. Returns a dict.
 
@@ -77,8 +123,8 @@ def read_transcripts():
     skills = Counter()
     models = Counter()
     per_project = defaultdict(lambda: {"sessions": set(), "tokens_in": 0,
-                                       "tokens_out": 0, "messages": 0})
-    per_day = defaultdict(lambda: {"tokens_in": 0, "tokens_out": 0,
+                                       "fresh_in": 0, "tokens_out": 0, "messages": 0})
+    per_day = defaultdict(lambda: {"tokens_in": 0, "fresh_in": 0, "tokens_out": 0,
                                    "messages": 0, "sessions": set()})
 
     totals = {
@@ -120,9 +166,19 @@ def read_transcripts():
                         "last": ts,
                         "tokens_in": 0,
                         "tokens_out": 0,
+                        "cache_read": 0,
+                        "cache_creation": 0,
                         "messages": 0,
                         "tools": Counter(),
                         "models": Counter(),
+                        # Evidence for the optimization advisor, all from real
+                        # tool-call inputs. No inference is stored here, only
+                        # counts of what actually happened.
+                        "files_read": Counter(),
+                        "files_edited": Counter(),
+                        "bash_signatures": Counter(),
+                        "bash_count": 0,
+                        "output_tokens_per_msg": [],
                     }
                 if sid and ts:
                     s = sessions[sid]
@@ -155,14 +211,20 @@ def read_transcripts():
                     if sid:
                         sessions[sid]["tokens_in"] += ti + cr + cc
                         sessions[sid]["tokens_out"] += to
+                        sessions[sid]["cache_read"] += cr
+                        sessions[sid]["cache_creation"] += cc
                         sessions[sid]["messages"] += 1
+                        if to > 0:
+                            sessions[sid]["output_tokens_per_msg"].append(to)
                     per_project[project]["tokens_in"] += ti + cr + cc
+                    per_project[project]["fresh_in"] += ti
                     per_project[project]["tokens_out"] += to
                     per_project[project]["messages"] += 1
                     if sid:
                         per_project[project]["sessions"].add(sid)
                     if day:
                         per_day[day]["tokens_in"] += ti + cr + cc
+                        per_day[day]["fresh_in"] += ti
                         per_day[day]["tokens_out"] += to
                         per_day[day]["messages"] += 1
                         if sid:
@@ -170,20 +232,45 @@ def read_transcripts():
                     for blk in msg.get("content") or []:
                         if isinstance(blk, dict) and blk.get("type") == "tool_use":
                             tname = blk.get("name") or "?"
+                            inp = blk.get("input") or {}
                             tools[tname] += 1
                             if sid:
-                                sessions[sid]["tools"][tname] += 1
+                                s = sessions[sid]
+                                s["tools"][tname] += 1
+                                # Real file access and command evidence, used by
+                                # the advisor to detect repeated exploration,
+                                # edit churn and command repetition.
+                                if tname in ("Read", "NotebookEdit") and inp.get("file_path"):
+                                    s["files_read"][str(inp["file_path"])] += 1
+                                elif tname in ("Edit", "Write") and inp.get("file_path"):
+                                    s["files_edited"][str(inp["file_path"])] += 1
+                                elif tname == "Bash" and inp.get("command"):
+                                    s["bash_count"] += 1
+                                    s["bash_signatures"][_bash_signature(str(inp["command"]))] += 1
                             if tname == "Skill":
-                                sname = (blk.get("input") or {}).get("skill")
+                                sname = inp.get("skill")
                                 if sname:
                                     skills[str(sname)] += 1
 
-    # Shape sessions for output, newest first by last activity.
+    # Shape sessions for output, newest first by last activity. The evidence
+    # block carries only real counts; the advisor turns them into findings.
     session_list = []
     for s in sessions.values():
         dur = None
         if s["first"] and s["last"]:
             dur = int((s["last"] - s["first"]).total_seconds())
+        total_tok = s["tokens_in"] + s["tokens_out"]
+        fresh_in = s["tokens_in"] - s["cache_read"] - s["cache_creation"]
+        if fresh_in < 0:
+            fresh_in = 0
+        # "Work" tokens: fresh input plus generated output. Cache reads, which
+        # are the same context re-read cheaply each turn and would otherwise
+        # dominate every figure, are excluded so session sizes are comparable.
+        work_tok = fresh_in + s["tokens_out"]
+        reads = s["files_read"]
+        edits = s["files_edited"]
+        bash_sigs = s["bash_signatures"]
+        out_msgs = s["output_tokens_per_msg"]
         session_list.append({
             "id": s["id"],
             "project": s["project"],
@@ -192,10 +279,39 @@ def read_transcripts():
             "end": s["last"].isoformat() if s["last"] else None,
             "duration_seconds": dur,
             "tokens_in": s["tokens_in"],
+            "fresh_in": fresh_in,
             "tokens_out": s["tokens_out"],
+            "tokens_total": total_tok,
+            "work_tokens": work_tok,
+            "cache_read": s["cache_read"],
+            "cache_creation": s["cache_creation"],
             "messages": s["messages"],
+            "tool_calls": sum(s["tools"].values()),
+            "tool_types": len(s["tools"]),
             "top_tools": s["tools"].most_common(5),
             "models": s["models"].most_common(3),
+            "evidence": {
+                "reads_total": sum(reads.values()),
+                "reads_unique": len(reads),
+                "repeated_reads": [
+                    {"file": _short_path(f), "count": c}
+                    for f, c in reads.most_common(5) if c >= 3
+                ],
+                "edits_total": sum(edits.values()),
+                "edits_unique": len(edits),
+                "churned_files": [
+                    {"file": _short_path(f), "count": c}
+                    for f, c in edits.most_common(5) if c >= 4
+                ],
+                "bash_total": s["bash_count"],
+                "repeated_bash": [
+                    {"signature": sig, "count": c}
+                    for sig, c in bash_sigs.most_common(5) if c >= 5
+                ],
+                "output_max": max(out_msgs) if out_msgs else 0,
+                "output_median": _median(out_msgs),
+                "large_outputs": sum(1 for v in out_msgs if v >= LARGE_OUTPUT_TOKENS),
+            },
         })
     session_list.sort(key=lambda x: x["end"] or "", reverse=True)
 
@@ -205,32 +321,63 @@ def read_transcripts():
             "name": name,
             "sessions": len(p["sessions"]),
             "tokens_in": p["tokens_in"],
+            "fresh_in": p["fresh_in"],
             "tokens_out": p["tokens_out"],
             "messages": p["messages"],
         })
-    projects_out.sort(key=lambda x: x["tokens_in"] + x["tokens_out"], reverse=True)
+    projects_out.sort(key=lambda x: x["fresh_in"] + x["tokens_out"], reverse=True)
 
     days_out = []
     for day, d in sorted(per_day.items()):
         days_out.append({
             "date": day,
             "tokens_in": d["tokens_in"],
+            "fresh_in": d["fresh_in"],
             "tokens_out": d["tokens_out"],
             "messages": d["messages"],
             "sessions": len(d["sessions"]),
         })
+
+    # Overview statistics over per-session work tokens (fresh input plus output,
+    # excluding cheap cache re-reads), so the figures are comparable and not
+    # dominated by re-read context.
+    session_totals = [s["work_tokens"] for s in session_list]
+    largest = sorted(session_list, key=lambda x: x["work_tokens"], reverse=True)[:5]
+    smallest = sorted(
+        (s for s in session_list if s["work_tokens"] > 0),
+        key=lambda x: x["work_tokens"])[:5]
+    total_cache_read = totals["cache_read_tokens"]
+    total_cache_creation = totals["cache_creation_tokens"]
+    cache_base = total_cache_read + total_cache_creation
+    overview = {
+        "sessions": len(sessions),
+        "tokens_total": sum(session_totals),
+        "avg_tokens_per_session": (sum(session_totals) // len(session_totals)) if session_totals else 0,
+        "median_tokens_per_session": _median(session_totals),
+        "cache_reuse_ratio": round(total_cache_read / cache_base, 4) if cache_base else None,
+        "largest_sessions": [
+            {"id": s["id"], "project": s["project"], "work_tokens": s["work_tokens"]}
+            for s in largest
+        ],
+        "smallest_sessions": [
+            {"id": s["id"], "project": s["project"], "work_tokens": s["work_tokens"]}
+            for s in smallest
+        ],
+    }
 
     return {
         "available": len(files) > 0,
         "transcript_files": len(files),
         "totals": totals,
         "session_count": len(sessions),
+        "overview": overview,
         "sessions": session_list,
         "tools": tools.most_common(30),
         "skills": skills.most_common(60),
         "models": models.most_common(),
         "projects": projects_out,
         "days": days_out,
+        "large_output_threshold": LARGE_OUTPUT_TOKENS,
     }
 
 
@@ -365,11 +512,27 @@ def print_report():
             for name, c in u["skills"][:20]:
                 print(f"  {name:<28} {c}")
             print(line)
-        print("Projects by token use")
+        print("Projects by work tokens (fresh input plus output)")
         for p in u["projects"][:10]:
-            tot = _fmt(p["tokens_in"] + p["tokens_out"])
+            tot = _fmt(p["fresh_in"] + p["tokens_out"])
             print(f"  {p['name']:<28} {p['sessions']} sessions  {tot} tokens")
         print(line)
+        # Optimization summary. advisor is imported lazily so the reader stays
+        # independent of it; if it is unavailable the report simply omits this.
+        try:
+            import advisor as _advisor
+            adv = _advisor.analyze(data)
+            if adv.get("available"):
+                score = adv.get("score")
+                print("Optimization score    "
+                      + (f"{score} / 100" if score is not None else "not available"))
+                print(f"  findings            {adv.get('findings_total', 0)}"
+                      f" across {adv.get('sessions_analysed', 0)} sessions")
+                for pat in adv.get("patterns", [])[:6]:
+                    print(f"  {pat['category']:<26} {pat['count']}")
+                print(line)
+        except Exception:  # noqa: BLE001  the report is useful without it
+            pass
     print(f"Installed skills      {inst['skill_count']}  in {inst['skills_dir']}")
     print(f"Installed agents      {inst['agent_count']}  in {inst['agents_dir']}")
     if cfg["present"]:
