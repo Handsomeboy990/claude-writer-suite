@@ -899,7 +899,7 @@ function renderAnalytics() {
     el("thead", null, el("tr", null, [el("th", null, t("col.date")), el("th", { class: "num" }, t("col.sessions")), el("th", { class: "num" }, t("col.messages")), el("th", { class: "num" }, t("col.input")), el("th", { class: "num" }, t("col.output"))])),
     el("tbody", null, days.slice().reverse().map(d => el("tr", null, [
       el("td", null, d.date), el("td", { class: "num" }, fmtInt(d.sessions)), el("td", { class: "num" }, fmtInt(d.messages)),
-      el("td", { class: "num" }, fmt(d.tokens_in)), el("td", { class: "num" }, fmt(d.tokens_out)),
+      el("td", { class: "num" }, fmt(d.fresh_in)), el("td", { class: "num" }, fmt(d.tokens_out)),
     ]))),
   ]));
   root.appendChild(panel(t("analytics.table"), "", table));
