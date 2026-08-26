@@ -1,6 +1,6 @@
 # Skills guide
 
-Directory of the 121 skills. One line each: what it does, and when to open it.
+Directory of the 152 skills. One line each: what it does, and when to open it.
 
 Every skill's own `README.md` carries its inputs, outputs, dependencies and
 configuration in four lines. This file is the index; the READMEs are the
@@ -252,17 +252,93 @@ Depend on nothing. Callable from any tree, usable alone.
 Public contracts in `agents.md`. An agent is a role: it names the skills it
 uses and restates none of them.
 
+## security, 10 skills
+
+### secure-development, 8
+
+- `security-core`: constitution. Defensive posture, the authorization boundary,
+  the severity scale, the evidence rule, fix-and-verify. Depends on nothing.
+- `threat-modeling`: assets, adversary, trust boundaries, ranked and decided
+  threats. A model that ends in decisions, not a diagram.
+- `security-architecture`: fail-closed structural decisions before code, each
+  with the downstream constraint it imposes.
+- `authentication-security`: password storage, login, recovery, MFA, token
+  lifecycle. Authentication only, never authorization.
+- `authorization-design`: object-level access, the enforcement choke point,
+  privilege-escalation paths. Closes the most common serious web defect.
+- `session-security`: cookies, fixation, timeout, revocation, CSRF.
+- `dependency-security`: the supply chain, advisories re-ranked by reachability,
+  safe upgrades, typosquatting.
+- `security-headers`: CSP, HSTS, CORS and the browser hardening headers,
+  verified on the live response.
+
+### security-assurance, 2
+
+- `vulnerability-assessment`: a non-intrusive sweep of an owned system, ranked
+  findings, a remediation plan.
+- `authorized-pentesting`: active exploitation to prove impact, strictly inside
+  written authorization. The one gated offensive skill.
+
+## research, 5 skills
+
+- `research-core`: constitution. Question before search, source hierarchy, the
+  consulted-only citation rule, fact versus inference versus opinion. Depends on
+  nothing.
+- `source-research`: build the search, work down to primaries, read and attribute.
+- `source-verification`: trace a claim to origin, test it, catch circular citation.
+- `competitive-analysis`: axes from the decision, evidence matrix, trade-offs.
+- `synthesis-reporting`: conclusion first, confidence per finding, gaps named.
+
+## career, 7 skills
+
+- `career-core`: constitution. Nothing invented about the world, nothing
+  unsupportable claimed about the candidate; reads the `career` config. Depends
+  on nothing.
+- `career-profile`: the honest profile every other career skill reads.
+- `job-search`: real openings from live sources, honest match, real links.
+- `cv-engineering`: a CV that survives a parser and an interview, every line true.
+- `cover-letter`: a specific, honest letter that earns the interview.
+- `interview-preparation`: answers from real experience, drilled with follow-ups.
+- `company-research`: a sourced profile, health, culture and red flags.
+
+## opportunity, 9 skills
+
+### ideation, 3
+
+- `opportunity-core`: constitution. Discover, evaluate, recommend; grounding
+  rule; the binding constraint. Depends on nothing.
+- `ideation-engine`: a diverse, grounded set worth evaluating, not a long list.
+- `idea-evaluation`: converge to a ranked few, each with its riskiest assumption
+  and cheap test.
+
+### hackathons, 3
+
+- `hackathon-discovery`: real events matched, eligibility and deadlines verified.
+- `hackathon-strategy`: read the rubric, scope to finish, demo early, protect the
+  submission.
+- `pitch-and-demo`: a problem-first pitch and a working demo, honest and rehearsed.
+
+### business, 3
+
+- `client-discovery`: the ideal client profile, real signalled prospects, qualified.
+- `lead-research`: a sourced dossier and a grounded, honest outreach draft.
+- `market-research`: bottom-up sizing, a real competitor map, an honest assessment.
+
 ## Skills that work alone
 
-Six depend on nothing and can be copied and used on their own:
+Ten depend on nothing and can be copied and used on their own:
 
 ```
 shared/self-critique
 shared/project-brief
+writing/core/writing-constitution
 documents/documentation/document-core
 engineering/dev-skills/engineering-core
 engineering/devops-skills/devops-core
-writing/core/writing-constitution
+security/secure-development/security-core
+research/research-core
+career/career-core
+opportunity/ideation/opportunity-core
 ```
 
 Every other skill declares its dependencies in `depends_on` and in its README.
@@ -280,5 +356,6 @@ Every other skill declares its dependencies in `depends_on` and in its README.
 | `technical-documentation`, `technical-writing` | `language.documentation` |
 | the `writing/` tree | `language.creative_output` |
 | the `documents/` tree | `language.document_output`, `identity.organization`, `documents.*` |
+| the `career/` tree | `career.*` |
 
 Field reference in `config/README.md`.

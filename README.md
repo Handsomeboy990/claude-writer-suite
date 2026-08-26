@@ -1,9 +1,13 @@
-# Claude Writer Suite
+# Claude Skill Suite
 
-Four expertise systems for an agent, in one repository: **write**,
-**produce documents**, **build software**, and **review your own work**.
+Expertise systems for an agent, in one repository: **write**, **produce
+documents**, **build software**, **secure it**, **research**, **run a job
+search**, **find and evaluate opportunities**, and **review your own work**.
 
-121 skills and 16 agents. Not prompts: numbered protocols, decision criteria,
+The repository is named `claude-writer-suite` for its history; the suite it now
+holds reaches well past writing.
+
+152 skills and 16 agents. Not prompts: numbered protocols, decision criteria,
 scoring grids and review procedures, each with a stated threshold for what
 counts as finished.
 
@@ -15,9 +19,15 @@ claude-writer-suite/
 ├── writing/         42 creative writing skills
 ├── documents/        7 professional document skills
 ├── engineering/     70 software skills and 16 agents
+├── security/        10 defensive security skills
+├── research/         5 general research skills
+├── career/           7 job search and application skills
+├── opportunity/      9 ideation, hackathon and business skills
 ├── config/           user specific values, nothing hardcoded
-├── documentation/    technical documentation of the four trees
-└── tests/            three validation scripts
+├── control-center/   optional local dashboard, zero dependency
+├── plugins/          per-domain plugin bundles, generated from the trees
+├── documentation/    technical documentation of the trees
+└── tests/            four validation scripts
 ```
 
 ## Why it exists
@@ -36,7 +46,7 @@ The repository separates three languages that are routinely confused.
 
 | Layer | What it is | Value |
 |---|---|---|
-| Skill language | the instructions themselves | English, all 121 skills |
+| Skill language | the instructions themselves | English, all 152 skills |
 | System language | paths, identifiers, config keys, commits | English |
 | Output language | what the reader receives | theirs, set per project |
 
@@ -47,7 +57,7 @@ French because the writing tree encodes French craft, and
 document. The French reference material in `writing/resources/` stays French,
 because it is what the skills produce rather than how they are instructed.
 
-## The four trees
+## The trees
 
 ### shared
 
@@ -112,6 +122,75 @@ than assuming its shape.
 
 Index: [engineering/README.md](engineering/README.md).
 
+### security
+
+Defensive security and, under written authorization only, assurance. The agent
+builds a system harder to attack and audits one that exists, ranking every
+finding by reachability and fixing what code can fix.
+
+| Category | Skills | Question it answers |
+|---|---|---|
+| [secure-development](security/secure-development/) | 8 | how a system is built and hardened to resist attack |
+| [security-assurance](security/security-assurance/) | 2 | what is wrong in a system that exists, without breaking it |
+
+Two rules never bend: no offensive action without written, specific, in-scope
+authorization on record, and no audit ever concludes that a system is secure. It
+reports which checks were run, with which results, on which revision. The
+engineering tree's `security-audit` and `security-testing` stay where twelve
+execution plans call them; this tree governs their posture and installs them with
+it.
+
+Index: [security/README.md](security/README.md).
+
+### research
+
+General-purpose research for a decision, distinct from the writing tree's
+`research-director`, which serves fiction. The agent states the question, finds
+and reads the sources, verifies what carries weight, and writes an answer a reader
+can act on and check.
+
+| Category | Skills | Purpose |
+|---|---|---|
+| [research](research/) | 5 | framing, gathering, verification, comparison, synthesis |
+
+A source is cited only if it was actually consulted, and a gap is stated honestly
+rather than filled with a plausible invention.
+
+Index: [research/README.md](research/README.md).
+
+### career
+
+Helping a real person find and win real roles. The agent builds an honest
+profile, finds real openings from live sources, renders a CV and cover letter
+that survive both a parser and an interview, researches the employer, and
+rehearses the conversation.
+
+| Category | Skills | Purpose |
+|---|---|---|
+| [career](career/) | 7 | profile, job search, CV, cover letter, company research, interview prep |
+
+Nothing about the outside world is invented: a listing is traced to a live source
+or withheld. Nothing about the candidate is claimed that they cannot support.
+
+Index: [career/README.md](career/README.md).
+
+### opportunity
+
+Discovering and evaluating opportunities, whatever their shape: ideas, hackathons,
+clients, markets. One method runs through all of it: discover a field, evaluate it
+against reality, recommend a few with reasoning, never dump a hundred.
+
+| Category | Skills | Question it answers |
+|---|---|---|
+| [ideation](opportunity/ideation/) | 3 | which ideas are worth pursuing, and how to test them |
+| [hackathons](opportunity/hackathons/) | 3 | which hackathon to enter and how to win it |
+| [business](opportunity/business/) | 3 | who to sell to, how to reach them, whether the market is real |
+
+Every opportunity is grounded in something verifiable or marked a hypothesis,
+never fabricated. The deliverable is the evaluated few with their next steps.
+
+Index: [opportunity/README.md](opportunity/README.md).
+
 ## Installation
 
 No dependencies. The repository is Markdown and shell.
@@ -127,11 +206,16 @@ what you actually do, and installs only that. A developer is never given a
 novelist's toolkit, and a novelist is never given the engineering tree.
 
 ```
-  1) Creative writing        42 skills   novels, poetry, screenplay, editing
-  2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
-  3) Software engineering    70 skills   plus 16 agents
-  4) Everything             121 skills   plus 16 agents
-  5) Individual skills, chosen by name
+   1) Creative writing        42 skills   novels, poetry, screenplay, editing
+   2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
+   3) Software engineering    70 skills   plus 16 agents
+   4) Cybersecurity           10 skills   threat models, audits, hardening
+   5) Research                 5 skills   sources, verification, synthesis
+   6) Career                   7 skills   job search, CV, interviews
+   7) Opportunity              9 skills   ideation, hackathons, business
+   8) Everything             152 skills   plus 16 agents
+   9) Individual skills, chosen by name
+  10) One or more categories, for example genres only
 
 Choice [1]:
 ```
@@ -150,6 +234,10 @@ bash install.sh --configure
 bash install.sh --writing      42 creative writing skills
 bash install.sh --documents     7 professional document skills
 bash install.sh --dev          70 engineering skills and 16 agents
+bash install.sh --security     10 defensive security skills
+bash install.sh --research      5 general research skills
+bash install.sh --career        7 job search and application skills
+bash install.sh --opportunity   9 ideation, hackathon and business skills
 bash install.sh --all          everything
 bash install.sh --shared        the 2 cross domain skills only
 bash install.sh --agents        the 16 agents only
@@ -187,6 +275,13 @@ bash install.sh --group devops-skills     operations only
 | `dev-skills` | 47 | engineering |
 | `delivery-skills` | 10 | engineering |
 | `devops-skills` | 13 | engineering |
+| `secure-development` | 8 | security |
+| `security-assurance` | 2 | security |
+| `research` | 5 | research |
+| `career` | 7 | career |
+| `ideation` | 3 | opportunity |
+| `hackathons` | 3 | opportunity |
+| `business` | 3 | opportunity |
 | `shared` | 2 | shared |
 
 Everything combines, and the result is deduplicated:
@@ -307,6 +402,13 @@ Field reference: [config/README.md](config/README.md). Installer side:
 | I have a bug | `engineering/dev-skills/debugging` |
 | I have a specification, not a task | `engineering/delivery-skills/delivery-orchestrator` |
 | Something must be deployed | `engineering/devops-skills/devops-core` |
+| I need to threat-model or audit a system | `security/secure-development/security-core` |
+| I have written authorization to test a system | `security/security-assurance/authorized-pentesting` |
+| I need to research a question with real sources | `research/research-core` |
+| I am job hunting | `career/career-core` |
+| I need ideas, and then the good ones | `opportunity/ideation/opportunity-core` |
+| I want to find and win a hackathon | `opportunity/hackathons/hackathon-discovery` |
+| I need to find clients or size a market | `opportunity/business/client-discovery` |
 
 Full directory: [documentation/skills-guide.md](documentation/skills-guide.md).
 
@@ -326,16 +428,21 @@ The README states its dependencies in four lines. `Depends on: nothing` means
 it works alone; copy the directory and use it. A skill that depends on another
 refers to it rather than restating it, so the other one is needed too.
 
-Six skills depend on nothing and work entirely on their own:
+Ten skills depend on nothing and work entirely on their own, one per tree plus
+the operations and shared constitutions:
 `shared/self-critique`, `shared/project-brief`,
+`writing/core/writing-constitution`,
 `documents/documentation/document-core`,
 `engineering/dev-skills/engineering-core`,
 `engineering/devops-skills/devops-core`,
-`writing/core/writing-constitution`.
+`security/secure-development/security-core`,
+`research/research-core`,
+`career/career-core`,
+`opportunity/ideation/opportunity-core`.
 
 ## Agents
 
-Fourteen role definitions, for a runtime that supports subagents.
+Sixteen role definitions, for a runtime that supports subagents.
 
 ```
 Skill          how this kind of work is done correctly
@@ -368,6 +475,10 @@ restates:
 | documents | `documents/documentation/document-core` |
 | engineering | `engineering/dev-skills/engineering-core` |
 | engineering, operations | `engineering/devops-skills/devops-core` |
+| security | `security/secure-development/security-core` |
+| research | `research/research-core` |
+| career | `career/career-core` |
+| opportunity | `opportunity/ideation/opportunity-core` |
 
 `tests/validate-orchestration.sh` verifies that every declared dependency and
 every cross reference resolves, so the declarations are accurate rather than
@@ -394,15 +505,57 @@ Two prohibitions apply to every file in the repository, including this one:
 **no emoji**, **no em dash**. Both are enforced by
 `tests/validate-rules.sh`.
 
+## Plugins
+
+The suite also ships as Claude Code plugins, one per domain, so a user can add a
+marketplace and install only the domains they want.
+
+```
+/plugin marketplace add Handsomeboy990/claude-writer-suite
+/plugin install writer-suite-security
+```
+
+| Plugin | Installs |
+|---|---|
+| `writer-suite-writing` | the writing tree, 42 skills |
+| `writer-suite-documents` | the documents tree, 7 skills |
+| `writer-suite-engineering` | the engineering tree, 70 skills and 16 agents |
+| `writer-suite-security` | the security tree, 10 skills |
+| `writer-suite-research` | the research tree, 5 skills |
+| `writer-suite-career` | the career tree, 7 skills |
+| `writer-suite-opportunity` | the opportunity tree, 9 skills |
+
+The trees are the single source of truth. The plugin bundles under `plugins/`
+are generated from them by `bash plugins/build.sh`, and
+`tests/validate-plugins.sh` verifies they stay in sync. The `install.sh` path
+keeps working unchanged for everyone who prefers it.
+
+## Control Center
+
+An optional local dashboard, zero dependency, that reads the session data,
+skills and configuration already on the machine and shows usage, tokens, models,
+tools, projects and system health.
+
+```bash
+bash install.sh --control-center     # starts a local server, opens the browser
+bash install.sh --report             # the same figures as a terminal report
+```
+
+It is optional: every skill works without it. It binds to `127.0.0.1` only,
+reads local files, and keeps nothing of its own. Every figure is read from the
+real local data; a metric that cannot be established is shown as unavailable,
+never invented. Detail: [control-center/README.md](control-center/README.md).
+
 ## Validation
 
 ```bash
-bash tests/validate-structure.sh      structure and metadata of 121 skills
+bash tests/validate-structure.sh      structure and metadata of 152 skills
 bash tests/validate-rules.sh          emoji, em dash, secrets, hardcoded identity
 bash tests/validate-orchestration.sh  plans, phases, agents, cross references
+bash tests/validate-plugins.sh        plugin bundles in sync with the trees
 ```
 
-All three must pass before any commit. Detail in
+All four must pass before any commit. Detail in
 [tests/README.md](tests/README.md).
 
 ## Documentation
@@ -410,7 +563,7 @@ All three must pass before any commit. Detail in
 | File | Contents |
 |---|---|
 | [documentation/architecture.md](documentation/architecture.md) | organisation, skill isolation, metadata |
-| [documentation/skills-guide.md](documentation/skills-guide.md) | directory of the 121 skills |
+| [documentation/skills-guide.md](documentation/skills-guide.md) | directory of the 152 skills |
 | [documentation/installation.md](documentation/installation.md) | full and per-skill installation |
 | [documentation/configuration.md](documentation/configuration.md) | the configuration contract |
 | [documentation/agents.md](documentation/agents.md) | skill, agent, orchestration |
@@ -443,7 +596,7 @@ opened by a maintainer. Both branches require a pull request, a green
 Adding a skill: create the directory with its four elements, declare the
 metadata, refer to the constitution of its tree without restating it, add at
 least one example and one resource, update the category index and
-`documentation/skills-guide.md`, then run the three scripts.
+`documentation/skills-guide.md`, then run the four scripts.
 
 Full rules: [CONTRIBUTING.md](CONTRIBUTING.md). Branch rules and their setup:
 [documentation/branch-protection.md](documentation/branch-protection.md).

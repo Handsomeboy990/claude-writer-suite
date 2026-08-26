@@ -3,6 +3,69 @@
 Every notable change to this project is recorded here. The format follows
 semantic versioning.
 
+## 2.2.0
+
+Four new domains, an optional local dashboard, and per-domain plugins. The
+suite grows past writing without disturbing what existed: 121 skills to 152,
+four trees to eight, and a second distribution path alongside the installer.
+The product is repositioned as the Claude Skill Suite; the repository keeps its
+name.
+
+### Added
+
+- `security/`, 10 defensive security skills in two categories, governed by
+  `security-core`:
+  - secure-development: `security-core`, `threat-modeling`,
+    `security-architecture`, `authentication-security`, `authorization-design`,
+    `session-security`, `dependency-security`, `security-headers`.
+  - security-assurance: `vulnerability-assessment`, `authorized-pentesting`.
+  - The posture is defensive; offensive technique lives only in
+    `authorized-pentesting`, behind a written-authorization gate that is checked
+    first and never waived by rephrasing. No audit concludes a system is secure.
+  - The engineering tree's `security-audit` and `security-testing` stay where
+    twelve execution plans call them; the security tree governs their posture
+    and installs them with it.
+- `research/`, 5 general research skills governed by `research-core`:
+  `source-research`, `source-verification`, `competitive-analysis`,
+  `synthesis-reporting`. A source is cited only if it was consulted; a gap is
+  stated, not invented. Distinct from the writing tree's `research-director`.
+- `career/`, 7 job search and application skills governed by `career-core`:
+  `career-profile`, `job-search`, `cv-engineering`, `cover-letter`,
+  `interview-preparation`, `company-research`. Nothing about the outside world
+  is invented; nothing about the candidate is claimed that they cannot support.
+  A new `career` configuration section carries the candidate's real situation.
+- `opportunity/`, 9 skills in three categories governed by `opportunity-core`:
+  ideation (`ideation-engine`, `idea-evaluation`), hackathons
+  (`hackathon-discovery`, `hackathon-strategy`, `pitch-and-demo`), business
+  (`client-discovery`, `lead-research`, `market-research`). One method: discover,
+  evaluate, recommend a ranked few. Every opportunity is grounded or marked a
+  hypothesis, never fabricated.
+- `control-center/`, an optional zero-dependency local dashboard: a Python
+  standard-library server and a single self-contained HTML page that read the
+  real local session data, installed skills and configuration and show usage,
+  tokens, models, tools, projects and system health. It binds to loopback only,
+  keeps nothing of its own, and marks any metric it cannot establish as
+  unavailable rather than inventing it. `bash install.sh --control-center`, and
+  `bash install.sh --report` for the same figures in the terminal.
+- Per-domain Claude Code plugins: `.claude-plugin/marketplace.json` and a
+  manifest per domain, with bundles under `plugins/` generated from the trees by
+  `plugins/build.sh`. `/plugin marketplace add Handsomeboy990/claude-writer-suite`
+  then installs only the domains wanted.
+- `tests/validate-plugins.sh`, a fourth validator that keeps the plugin bundles
+  in sync with the canonical trees and checks the manifests.
+
+### Changed
+
+- The installer gained `--security`, `--research`, `--career`, `--opportunity`
+  scopes, `--control-center` and `--report` modes, and a ten-option interactive
+  menu. All scopes combine and deduplicate, and each pulls its cross-tree
+  dependencies and the shared pair, exactly as before.
+- The three existing validators learned the four new trees. Counts updated
+  across `README.md`, `README.fr.md`, `AGENTS.md` and the documentation.
+- Product name presented as Claude Skill Suite in the documentation and plugin
+  manifests. The git remote and directory keep `claude-writer-suite`, so no
+  clone URL, install command or existing link breaks.
+
 ## 2.1.0
 
 Quality engineering as a system rather than a single skill, and the lifecycle
