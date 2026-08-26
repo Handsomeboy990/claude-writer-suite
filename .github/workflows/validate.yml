@@ -34,11 +34,15 @@ jobs:
       - name: Plugin bundles in sync with the trees
         run: bash tests/validate-plugins.sh
 
-      - name: Control Center reader and server parse and run
+      - name: Control Center parses, runs and passes its advisor tests
         run: |
           python3 -c "import ast; ast.parse(open('control-center/reader.py').read())"
           python3 -c "import ast; ast.parse(open('control-center/server.py').read())"
+          python3 -c "import ast; ast.parse(open('control-center/advisor.py').read())"
           python3 control-center/reader.py --json > /dev/null
+          python3 control-center/advisor.py > /dev/null
+          python3 control-center/test_advisor.py
+          python3 tests/check-app-js.py
 
       - name: Shell syntax
         run: |
