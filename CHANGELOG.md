@@ -3,6 +3,64 @@
 Every notable change to this project is recorded here. The format follows
 semantic versioning.
 
+## 2.3.0
+
+Control Center evolution: a Token Optimization Advisor, richer and more honest
+token analytics, session detail, filtering, English and French localization,
+report export, and a UX, theme and accessibility pass. No new dependency; the
+Control Center is still Python standard library and one HTML file.
+
+### Added
+
+- Token Optimization Advisor (`control-center/advisor.py`), a pure, deterministic
+  module that analyses real session evidence and surfaces evidence-based
+  opportunities: repeated file exploration, edit churn, repeated command shapes,
+  low context reuse, several large outputs, an over-broad session, and a project
+  re-explored across sessions. Each finding states what was observed, a
+  recommendation, a concrete example and the potential benefit, with a severity.
+  It never invents a finding: each detection has a documented threshold, and a
+  session with no signal produces none. The optimization score is deterministic
+  and explainable (each session starts at 100, findings subtract a documented
+  severity penalty, the overall score is the mean), and null when there is no
+  data rather than a misleading 100.
+- An Optimization tab with the score ring and its method, recurring patterns, top
+  opportunities diversified across categories, a per-session table, and the
+  methodology with its thresholds.
+- A session detail view: select a session to see its token components, evidence
+  (reads, edits, commands) and its optimization findings.
+- Report export in HTML, JSON, CSV and PDF. PDF uses the browser's own print
+  dialog on a print-styled report, a genuine PDF with no external dependency.
+  Reports state their period, sources, metrics, limitations and a privacy note,
+  and carry aggregate statistics only, never raw transcript content.
+- English and French localization, switched live and remembered per browser,
+  English as the fallback. All user-facing strings, including advisor findings,
+  are translatable; no translated string lives in analysis code.
+- `control-center/test_advisor.py`, deterministic advisor tests with no
+  test-framework dependency, covering empty data, clean sessions, every finding
+  category, the below-threshold no-invention case, the scoring formula, the floor
+  at 0, cross-session logic and determinism.
+- `tests/check-app-js.py`, a page-script syntax check wired into CI, so a syntax
+  error in the inline script cannot ship a blank page.
+- `docs/control-center-evolution.md`, the architecture, data flow, advisor
+  detection table, privacy model and the extension points for future telemetry.
+
+### Changed
+
+- Token analytics are more honest. The four real components (fresh input, cache
+  read, cache creation, output) are shown separately; cache reads, which are the
+  same context re-read cheaply each turn and sum to billions, are no longer folded
+  into a single headline. Session sizes and the overview use work tokens (fresh
+  input plus output), so figures are comparable. Overview adds median, largest and
+  smallest sessions and a cache-reuse ratio.
+- The Sessions tab gained search, project and date-range filters; the terminal
+  `--report` gained an optimization summary and honest project figures.
+- The theme is complete in light and dark with an explicit toggle and system
+  default; localization and theme persist in the browser only.
+- Accessibility: keyboard-operable tabs, rows and dialog, focus management,
+  charts with a visually-hidden table alternative, and reduced-motion support.
+- The CI runs the advisor tests, the page-script syntax check and the advisor
+  CLI alongside the existing checks.
+
 ## 2.2.0
 
 Four new domains, an optional local dashboard, and per-domain plugins. The
