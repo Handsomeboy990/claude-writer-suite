@@ -8,7 +8,11 @@ ERRORS=0
 WARNINGS=0
 
 files() {
-  find "$ROOT" -type f -name '*.md' -not -path '*/.git/*' -not -path '*/dist/*' | sort
+  # plugins/ holds generated copies of the trees, which are already checked at
+  # their canonical location; sweeping the copies too is redundant, exactly as
+  # dist/ is excluded. tests/validate-plugins.sh keeps the copies in sync.
+  find "$ROOT" -type f -name '*.md' \
+    -not -path '*/.git/*' -not -path '*/dist/*' -not -path '*/plugins/*' | sort
 }
 
 report_error() {
@@ -68,6 +72,7 @@ while IFS= read -r file; do
     printf '%s\n' "$hits" | sed 's/^/        /'
   fi
 done < <(find "$ROOT/writing" "$ROOT/documents" "$ROOT/engineering" "$ROOT/shared" \
+  "$ROOT/security" "$ROOT/research" "$ROOT/career" "$ROOT/opportunity" \
   -type f -name '*.md' 2>/dev/null | sort)
 
 # Prose lines only: outside fenced code blocks, where straight quotes are
