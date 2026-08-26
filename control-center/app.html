@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control Center</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --panel-2: #f0f2f5;
+    --border: #e2e5ea;
+    --text: #1a1d23;
+    --muted: #616a76;
+    --accent: #2f6feb;
+    --accent-soft: #dbe7ff;
+    --good: #1f9d6b;
+    --warn: #b8860b;
+    --bad: #c8483a;
+    --bar: #2f6feb;
+    --bar-2: #7aa5f2;
+    --shadow: 0 1px 3px rgba(20, 24, 33, 0.08), 0 1px 2px rgba(20, 24, 33, 0.06);
+    --radius: 10px;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171c;
+      --panel: #1c2027;
+      --panel-2: #232832;
+      --border: #2c313b;
+      --text: #e8eaed;
+      --muted: #9aa4b2;
+      --accent: #5b8cff;
+      --accent-soft: #23324f;
+      --good: #45c08a;
+      --warn: #d6a534;
+      --bad: #e5695b;
+      --bar: #5b8cff;
+      --bar-2: #35507f;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 22px;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  header.top h1 {
+    font-size: 16px; margin: 0; font-weight: 650; letter-spacing: -0.01em;
+  }
+  header.top .sub { color: var(--muted); font-size: 12.5px; }
+  header.top .spacer { flex: 1; }
+  header.top .stamp { color: var(--muted); font-size: 12px; font-family: var(--mono); }
+
+  nav.tabs {
+    display: flex; gap: 4px; flex-wrap: wrap;
+    padding: 8px 18px 0; background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 53px; z-index: 19;
+  }
+  nav.tabs button {
+    appearance: none; border: 0; background: transparent; color: var(--muted);
+    font: inherit; font-size: 13.5px; padding: 8px 12px; cursor: pointer;
+    border-bottom: 2px solid transparent; border-radius: 6px 6px 0 0;
+  }
+  nav.tabs button:hover { color: var(--text); background: var(--panel-2); }
+  nav.tabs button[aria-selected="true"] {
+    color: var(--accent); border-bottom-color: var(--accent); font-weight: 600;
+  }
+  nav.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  main { padding: 22px; max-width: 1180px; margin: 0 auto; }
+  section.tabpanel { display: none; }
+  section.tabpanel.active { display: block; animation: fade 0.2s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    section.tabpanel.active { animation: none; }
+  }
+
+  .grid { display: grid; gap: 14px; }
+  .tiles { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); margin-bottom: 20px; }
+  .tile {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; box-shadow: var(--shadow);
+  }
+  .tile .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tile .value { font-size: 26px; font-weight: 680; margin-top: 6px; letter-spacing: -0.02em; }
+  .tile .value small { font-size: 14px; font-weight: 500; color: var(--muted); }
+  .tile .note { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; box-shadow: var(--shadow); margin-bottom: 18px;
+  }
+  .panel h2 { font-size: 14px; margin: 0 0 4px; font-weight: 640; }
+  .panel .desc { color: var(--muted); font-size: 12.5px; margin: 0 0 14px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; }
+  td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: 0; }
+  .scroll { overflow-x: auto; }
+
+  .bars { display: flex; flex-direction: column; gap: 7px; }
+  .barrow { display: grid; grid-template-columns: 150px 1fr 74px; align-items: center; gap: 10px; font-size: 13px; }
+  .barrow .name { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bartrack { background: var(--panel-2); border-radius: 5px; height: 16px; overflow: hidden; }
+  .barfill { background: var(--bar); height: 100%; border-radius: 5px; min-width: 2px; }
+  .barrow .val { text-align: right; font-family: var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .chip { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .chip.cat { background: var(--panel-2); color: var(--muted); }
+  .pill { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  .empty { color: var(--muted); font-size: 13.5px; padding: 20px; text-align: center; border: 1px dashed var(--border); border-radius: var(--radius); }
+  .unavailable { color: var(--warn); font-weight: 600; }
+
+  .health-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .health-row:last-child { border-bottom: 0; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .dot.ok { background: var(--good); }
+  .dot.no { background: var(--muted); }
+  .health-row .h-label { flex: 1; }
+  .health-row .h-val { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) {
+    .two-col { grid-template-columns: 1fr; }
+    .barrow { grid-template-columns: 110px 1fr 60px; }
+    header.top { padding: 12px 16px; }
+    main { padding: 16px; }
+    nav.tabs { top: 49px; }
+  }
+
+  .filter { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+  .filter input {
+    background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+    border-radius: 7px; padding: 7px 10px; font: inherit; font-size: 13px; min-width: 200px;
+  }
+  .filter input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  button.action {
+    appearance: none; border: 1px solid var(--border); background: var(--panel-2);
+    color: var(--text); font: inherit; font-size: 13px; padding: 8px 14px;
+    border-radius: 8px; cursor: pointer;
+  }
+  button.action:hover { border-color: var(--accent); color: var(--accent); }
+  button.action:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .msg { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+  svg .axis { stroke: var(--border); }
+  svg text { fill: var(--muted); font-size: 10px; font-family: var(--sans); }
+  svg .col { fill: var(--bar); }
+  svg .col2 { fill: var(--bar-2); }
+
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .note-foot { color: var(--muted); font-size: 12px; text-align: center; padding: 20px 0 8px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Claude Skill Suite</h1>
+  <span class="sub">Control Center</span>
+  <span class="spacer"></span>
+  <span class="stamp" id="stamp"></span>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Sections" id="tabs"></nav>
+
+<main>
+  <section class="tabpanel active" id="tab-dashboard" role="tabpanel" aria-label="Dashboard"></section>
+  <section class="tabpanel" id="tab-sessions" role="tabpanel" aria-label="Sessions"></section>
+  <section class="tabpanel" id="tab-usage" role="tabpanel" aria-label="Usage"></section>
+  <section class="tabpanel" id="tab-projects" role="tabpanel" aria-label="Projects"></section>
+  <section class="tabpanel" id="tab-analytics" role="tabpanel" aria-label="Analytics"></section>
+  <section class="tabpanel" id="tab-skills" role="tabpanel" aria-label="Skills"></section>
+  <section class="tabpanel" id="tab-health" role="tabpanel" aria-label="System health"></section>
+  <section class="tabpanel" id="tab-privacy" role="tabpanel" aria-label="Privacy"></section>
+  <p class="note-foot">All figures are read from local files on this machine. Nothing is sent anywhere. Token counts are the real usage figures recorded in your transcripts.</p>
+</main>
+
+<script>
+"use strict";
+
+const TABS = [
+  ["dashboard", "Dashboard"],
+  ["sessions", "Sessions"],
+  ["usage", "Usage"],
+  ["projects", "Projects"],
+  ["analytics", "Analytics"],
+  ["skills", "Skills"],
+  ["health", "System health"],
+  ["privacy", "Privacy"],
+];
+
+let DATA = null;
+
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    if (k === "class") e.className = attrs[k];
+    else if (k === "html") e.innerHTML = attrs[k];
+    else if (k.startsWith("on") && typeof attrs[k] === "function") e.addEventListener(k.slice(2), attrs[k]);
+    else e.setAttribute(k, attrs[k]);
+  }
+  if (children != null) {
+    (Array.isArray(children) ? children : [children]).forEach(c => {
+      if (c == null) return;
+      e.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+  }
+  return e;
+}
+
+function fmt(n) {
+  n = Number(n) || 0;
+  if (n >= 1e9) return (n / 1e9).toFixed(1) + "B";
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + "K";
+  return String(n);
+}
+function fmtDur(s) {
+  if (s == null) return "-";
+  if (s < 60) return s + "s";
+  if (s < 3600) return Math.round(s / 60) + "m";
+  return (s / 3600).toFixed(1) + "h";
+}
+function fmtDate(iso) {
+  if (!iso) return "-";
+  try { return new Date(iso).toLocaleString(); } catch (e) { return iso; }
+}
+function esc(s) { return String(s == null ? "" : s); }
+
+function tile(label, value, small, note) {
+  return el("div", { class: "tile" }, [
+    el("div", { class: "label" }, label),
+    el("div", { class: "value" }, [
+      document.createTextNode(value),
+      small ? el("small", null, " " + small) : null,
+    ]),
+    note ? el("div", { class: "note" }, note) : null,
+  ]);
+}
+
+function barlist(rows) {
+  if (!rows.length) return el("div", { class: "empty" }, "No data.");
+  const max = Math.max.apply(null, rows.map(r => r.value)) || 1;
+  return el("div", { class: "bars" }, rows.map(r => {
+    const pct = Math.max(2, Math.round((r.value / max) * 100));
+    return el("div", { class: "barrow" }, [
+      el("div", { class: "name", title: r.name }, r.name),
+      el("div", { class: "bartrack" }, el("div", { class: "barfill", style: "width:" + pct + "%" })),
+      el("div", { class: "val" }, fmt(r.value)),
+    ]);
+  }));
+}
+
+// A hand-authored SVG grouped bar chart. No chart library.
+function barChart(series, opts) {
+  opts = opts || {};
+  const w = 100, h = 42, pad = 3;
+  const box = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  box.setAttribute("viewBox", "0 0 " + w + " " + h);
+  box.setAttribute("width", "100%");
+  box.setAttribute("preserveAspectRatio", "none");
+  box.setAttribute("role", "img");
+  box.setAttribute("aria-label", opts.label || "bar chart");
+  box.style.height = "150px";
+  if (!series.length) return el("div", { class: "empty" }, "No data.");
+  const max = Math.max.apply(null, series.map(d => Math.max(d.a || 0, d.b || 0))) || 1;
+  const n = series.length;
+  const slot = (w - pad * 2) / n;
+  const bw = Math.min(slot * 0.6, 6);
+  const ns = "http://www.w3.org/2000/svg";
+  series.forEach((d, i) => {
+    const x = pad + i * slot + slot / 2;
+    const ha = ((d.a || 0) / max) * (h - 8);
+    const r1 = document.createElementNS(ns, "rect");
+    r1.setAttribute("x", x - bw / 2); r1.setAttribute("y", h - 4 - ha);
+    r1.setAttribute("width", bw); r1.setAttribute("height", Math.max(0.4, ha));
+    r1.setAttribute("class", "col"); r1.setAttribute("rx", "0.5");
+    const t = document.createElementNS(ns, "title");
+    t.textContent = d.label + ": " + fmt(d.a || 0) + (opts.bLabel ? " / " + fmt(d.b || 0) : "");
+    r1.appendChild(t);
+    box.appendChild(r1);
+  });
+  const base = document.createElementNS(ns, "line");
+  base.setAttribute("x1", pad); base.setAttribute("y1", h - 4);
+  base.setAttribute("x2", w - pad); base.setAttribute("y2", h - 4);
+  base.setAttribute("class", "axis"); base.setAttribute("stroke-width", "0.3");
+  box.appendChild(base);
+  return box;
+}
+
+function panel(title, desc, body) {
+  return el("div", { class: "panel" }, [
+    el("h2", null, title),
+    desc ? el("p", { class: "desc" }, desc) : null,
+    body,
+  ]);
+}
+
+function emptyNote(text) { return el("div", { class: "empty" }, text); }
+
+/* -------- renderers per tab -------- */
+
+function renderDashboard() {
+  const root = document.getElementById("tab-dashboard");
+  root.innerHTML = "";
+  const u = DATA.usage, inst = DATA.installed;
+  const t = u.totals || {};
+  const tiles = el("div", { class: "grid tiles" }, [
+    tile("Sessions", u.available ? String(u.session_count) : "-", null,
+         u.available ? "from local transcripts" : "no session data"),
+    tile("Input tokens", u.available ? fmt(t.input_tokens + t.cache_read_tokens + t.cache_creation_tokens) : "-",
+         null, u.available ? "incl. cache" : "unavailable"),
+    tile("Output tokens", u.available ? fmt(t.output_tokens) : "-", null,
+         u.available ? "real usage" : "unavailable"),
+    tile("Assistant messages", u.available ? fmt(t.assistant_messages) : "-"),
+    tile("Skills installed", String(inst.skill_count), null, "in your skills dir"),
+    tile("Agents installed", String(inst.agent_count)),
+  ]);
+  root.appendChild(tiles);
+
+  if (!u.available) {
+    root.appendChild(panel("No session data yet",
+      "The Control Center found no transcripts to read. This is not an error; the suite works without it. Once you use Claude locally, sessions appear here.",
+      emptyNote("Nothing to show.")));
+    return;
+  }
+
+  const two = el("div", { class: "two-col" }, [
+    panel("Models used", "By number of assistant messages.",
+      barlist((u.models || []).map(m => ({ name: m[0], value: m[1] })))),
+    panel("Top tools", "Tool calls across all sessions.",
+      barlist((u.tools || []).slice(0, 8).map(x => ({ name: x[0], value: x[1] })))),
+  ]);
+  root.appendChild(two);
+
+  root.appendChild(panel("Tokens per day",
+    "Input (incl. cache) per day, from the transcript timestamps.",
+    barChart((u.days || []).map(d => ({ label: d.date, a: d.tokens_in })), { label: "tokens per day" })));
+}
+
+function renderSessions() {
+  const root = document.getElementById("tab-sessions");
+  root.innerHTML = "";
+  const u = DATA.usage;
+  if (!u.available || !u.sessions.length) {
+    root.appendChild(panel("Sessions", "", emptyNote("No sessions recorded locally.")));
+    return;
+  }
+  const input = el("input", { type: "search", placeholder: "Filter by project or branch…", "aria-label": "Filter sessions" });
+  const tblWrap = el("div", { class: "scroll" });
+  function draw(q) {
+    q = (q || "").toLowerCase();
+    const rows = u.sessions.filter(s =>
+      !q || (s.project || "").toLowerCase().includes(q) || (s.branch || "").toLowerCase().includes(q));
+    const table = el("table", null, [
+      el("thead", null, el("tr", null, [
+        el("th", null, "Project"), el("th", null, "Branch"),
+        el("th", null, "Started"), el("th", { class: "num" }, "Duration"),
+        el("th", { class: "num" }, "Msgs"),
+        el("th", { class: "num" }, "In"), el("th", { class: "num" }, "Out"),
+        el("th", null, "Top tools"),
+      ])),
+      el("tbody", null, rows.map(s => el("tr", null, [
+        el("td", null, esc(s.project)),
+        el("td", null, s.branch ? el("span", { class: "pill" }, s.branch) : "-"),
+        el("td", null, fmtDate(s.start)),
+        el("td", { class: "num" }, fmtDur(s.duration_seconds)),
+        el("td", { class: "num" }, String(s.messages)),
+        el("td", { class: "num" }, fmt(s.tokens_in)),
+        el("td", { class: "num" }, fmt(s.tokens_out)),
+        el("td", null, (s.top_tools || []).map(x => x[0] + " " + x[1]).join(", ") || "-"),
+      ]))),
+    ]);
+    tblWrap.innerHTML = "";
+    tblWrap.appendChild(table);
+    if (!rows.length) tblWrap.appendChild(emptyNote("No sessions match the filter."));
+  }
+  input.addEventListener("input", () => draw(input.value));
+  draw("");
+  root.appendChild(panel("Sessions",
+    u.session_count + " sessions, newest first. Durations are the span between the first and last recorded message.",
+    el("div", null, [el("div", { class: "filter" }, input), tblWrap])));
+}
+
+function renderUsage() {
+  const root = document.getElementById("tab-usage");
+  root.innerHTML = "";
+  const u = DATA.usage;
+  if (!u.available) {
+    root.appendChild(panel("Usage", "", emptyNote("No usage data recorded locally.")));
+    return;
+  }
+  root.appendChild(panel("Tool calls", "Every tool the assistant used, across all sessions.",
+    barlist((u.tools || []).slice(0, 20).map(x => ({ name: x[0], value: x[1] })))));
+  const skills = u.skills || [];
+  root.appendChild(panel("Skill invocations",
+    skills.length ? "Skills explicitly invoked through the Skill tool." : "",
+    skills.length
+      ? barlist(skills.map(x => ({ name: x[0], value: x[1] })))
+      : emptyNote("No skill invocations recorded. Skills used implicitly are not counted here; only explicit Skill-tool calls are.")));
+}
+
+function renderProjects() {
+  const root = document.getElementById("tab-projects");
+  root.innerHTML = "";
+  const u = DATA.usage;
+  if (!u.available || !u.projects.length) {
+    root.appendChild(panel("Projects", "", emptyNote("No project activity recorded locally.")));
+    return;
+  }
+  root.appendChild(panel("Token use by project", "Combined input and output tokens per project.",
+    barlist(u.projects.map(p => ({ name: p.name, value: p.tokens_in + p.tokens_out })))));
+  const table = el("div", { class: "scroll" }, el("table", null, [
+    el("thead", null, el("tr", null, [
+      el("th", null, "Project"), el("th", { class: "num" }, "Sessions"),
+      el("th", { class: "num" }, "Messages"),
+      el("th", { class: "num" }, "In"), el("th", { class: "num" }, "Out"),
+    ])),
+    el("tbody", null, u.projects.map(p => el("tr", null, [
+      el("td", null, esc(p.name)),
+      el("td", { class: "num" }, String(p.sessions)),
+      el("td", { class: "num" }, fmt(p.messages)),
+      el("td", { class: "num" }, fmt(p.tokens_in)),
+      el("td", { class: "num" }, fmt(p.tokens_out)),
+    ]))),
+  ]));
+  root.appendChild(panel("All projects", "", table));
+}
+
+function renderAnalytics() {
+  const root = document.getElementById("tab-analytics");
+  root.innerHTML = "";
+  const u = DATA.usage;
+  if (!u.available || !u.days.length) {
+    root.appendChild(panel("Analytics", "", emptyNote("No dated activity recorded locally.")));
+    return;
+  }
+  root.appendChild(panel("Input tokens per day", "From the transcript timestamps.",
+    el("div", null, [
+      barChart(u.days.map(d => ({ label: d.date, a: d.tokens_in })), { label: "input tokens per day" }),
+      el("div", { class: "legend" }, [
+        el("span", null, [el("span", { class: "swatch", style: "background:var(--bar)" }), "input tokens (incl. cache)"]),
+      ]),
+    ])));
+  root.appendChild(panel("Output tokens per day", "",
+    barChart(u.days.map(d => ({ label: d.date, a: d.tokens_out })), { label: "output tokens per day" })));
+  root.appendChild(panel("Messages per day", "",
+    barChart(u.days.map(d => ({ label: d.date, a: d.messages })), { label: "messages per day" })));
+  const table = el("div", { class: "scroll" }, el("table", null, [
+    el("thead", null, el("tr", null, [
+      el("th", null, "Date"), el("th", { class: "num" }, "Sessions"),
+      el("th", { class: "num" }, "Messages"),
+      el("th", { class: "num" }, "In"), el("th", { class: "num" }, "Out"),
+    ])),
+    el("tbody", null, u.days.slice().reverse().map(d => el("tr", null, [
+      el("td", null, d.date),
+      el("td", { class: "num" }, String(d.sessions)),
+      el("td", { class: "num" }, fmt(d.messages)),
+      el("td", { class: "num" }, fmt(d.tokens_in)),
+      el("td", { class: "num" }, fmt(d.tokens_out)),
+    ]))),
+  ]));
+  root.appendChild(panel("Daily table", "", table));
+}
+
+function renderSkills() {
+  const root = document.getElementById("tab-skills");
+  root.innerHTML = "";
+  const inst = DATA.installed;
+  if (!inst.skills.length) {
+    root.appendChild(panel("Installed skills",
+      "The skills directory is empty or not found.",
+      emptyNote("No skills installed. Run install.sh to add some.")));
+    return;
+  }
+  const byCat = {};
+  inst.skills.forEach(s => { (byCat[s.category || "other"] = byCat[s.category || "other"] || []).push(s); });
+  const cats = Object.keys(byCat).sort();
+  const counts = el("div", { class: "grid tiles" }, cats.map(c =>
+    tile(c, String(byCat[c].length), "skills")));
+  root.appendChild(panel("Installed skills by category",
+    inst.skill_count + " skills in " + inst.skills_dir, counts));
+
+  const input = el("input", { type: "search", placeholder: "Filter skills…", "aria-label": "Filter skills" });
+  const listWrap = el("div", { class: "scroll" });
+  function draw(q) {
+    q = (q || "").toLowerCase();
+    const rows = inst.skills.filter(s =>
+      !q || s.name.toLowerCase().includes(q) || (s.description || "").toLowerCase().includes(q)
+      || (s.category || "").toLowerCase().includes(q));
+    const table = el("table", null, [
+      el("thead", null, el("tr", null, [
+        el("th", null, "Skill"), el("th", null, "Category"), el("th", null, "Description"),
+      ])),
+      el("tbody", null, rows.map(s => el("tr", null, [
+        el("td", null, el("strong", null, s.name)),
+        el("td", null, el("span", { class: "chip cat" }, s.category || "-")),
+        el("td", null, esc(s.description)),
+      ]))),
+    ]);
+    listWrap.innerHTML = "";
+    listWrap.appendChild(table);
+    if (!rows.length) listWrap.appendChild(emptyNote("No skills match."));
+  }
+  input.addEventListener("input", () => draw(input.value));
+  draw("");
+  root.appendChild(panel("All installed skills", "",
+    el("div", null, [el("div", { class: "filter" }, input), listWrap])));
+
+  if (inst.agents.length) {
+    root.appendChild(panel("Installed agents", inst.agent_count + " agents in " + inst.agents_dir,
+      el("div", { class: "scroll" }, el("table", null, [
+        el("thead", null, el("tr", null, [el("th", null, "Agent")])),
+        el("tbody", null, inst.agents.map(a => el("tr", null, [el("td", null, a)]))),
+      ]))));
+  }
+}
+
+function renderHealth() {
+  const root = document.getElementById("tab-health");
+  root.innerHTML = "";
+  const inst = DATA.installed, u = DATA.usage, cfg = DATA.config;
+  function row(label, ok, val) {
+    return el("div", { class: "health-row" }, [
+      el("span", { class: "dot " + (ok ? "ok" : "no") }),
+      el("span", { class: "h-label" }, label),
+      el("span", { class: "h-val" }, val),
+    ]);
+  }
+  const rows = [
+    row("Skills installed", inst.skill_count > 0, inst.skill_count + " in " + inst.skills_dir),
+    row("Agents installed", inst.agent_count > 0, inst.agent_count + " in " + inst.agents_dir),
+    row("Configuration written", cfg.present, cfg.present ? cfg.path : "run install.sh --configure"),
+    row("Session data readable", u.available, u.available ? u.transcript_files + " transcript files" : "none found"),
+  ];
+  root.appendChild(panel("System health", "What the Control Center can see on this machine.",
+    el("div", null, rows)));
+
+  if (cfg.present && cfg.fields && Object.keys(cfg.fields).length) {
+    const secs = Object.keys(cfg.fields);
+    const body = el("div", null, secs.map(sec => {
+      const kv = cfg.fields[sec];
+      const keys = Object.keys(kv);
+      if (!keys.length) return null;
+      return el("div", { style: "margin-bottom:12px" }, [
+        el("div", { class: "chip cat", style: "margin-bottom:6px" }, sec),
+        el("div", { class: "scroll" }, el("table", null,
+          el("tbody", null, keys.map(k => el("tr", null, [
+            el("td", { style: "width:220px" }, k),
+            el("td", null, el("span", { class: "pill" }, kv[k] || "(empty)")),
+          ]))))),
+      ]);
+    }));
+    root.appendChild(panel("Configuration",
+      "Read from the configuration file. Secrets are never stored here or shown.", body));
+  }
+}
+
+function renderPrivacy() {
+  const root = document.getElementById("tab-privacy");
+  root.innerHTML = "";
+  const u = DATA.usage;
+  const body = el("div", null, [
+    el("p", { class: "desc" },
+      "The Control Center is local-first. It binds to 127.0.0.1 only, reads your transcripts and configuration live, and keeps no separate store of its own. Nothing it shows leaves this machine, and it saves nothing you did not already have."),
+    el("p", { class: "desc" },
+      "Session history lives in your transcript files under the projects directory. The Control Center only reads them. To clear history, delete those files yourself; the button below explains where they are and confirms the Control Center holds nothing of its own to clear."),
+  ]);
+  const out = el("div", { class: "msg" });
+  const btn = el("button", { class: "action", onclick: async () => {
+    out.textContent = "Checking…";
+    try {
+      const r = await fetch("/api/privacy/clear-derived", { method: "POST" });
+      const j = await r.json();
+      out.textContent = j.message + (j.projects_dir ? " (" + j.projects_dir + ")" : "");
+    } catch (e) {
+      out.textContent = "Could not reach the local server.";
+    }
+  } }, "Clear Control Center analytics");
+  root.appendChild(panel("Privacy", "", el("div", null, [body, btn, out])));
+  root.appendChild(panel("Where the data comes from", "",
+    el("div", null, [
+      el("div", { class: "health-row" }, [el("span", { class: "dot ok" }),
+        el("span", { class: "h-label" }, "Session transcripts (read-only)"),
+        el("span", { class: "h-val" }, u.available ? u.transcript_files + " files" : "none")]),
+      el("div", { class: "health-row" }, [el("span", { class: "dot ok" }),
+        el("span", { class: "h-label" }, "Configuration (read-only, no secrets)"),
+        el("span", { class: "h-val" }, DATA.config.present ? "present" : "absent")]),
+    ])));
+}
+
+const RENDERERS = {
+  dashboard: renderDashboard, sessions: renderSessions, usage: renderUsage,
+  projects: renderProjects, analytics: renderAnalytics, skills: renderSkills,
+  health: renderHealth, privacy: renderPrivacy,
+};
+
+function buildTabs() {
+  const nav = document.getElementById("tabs");
+  TABS.forEach(([id, label], i) => {
+    const b = el("button", {
+      role: "tab", id: "tabbtn-" + id, "aria-controls": "tab-" + id,
+      "aria-selected": i === 0 ? "true" : "false",
+      onclick: () => selectTab(id),
+    }, label);
+    nav.appendChild(b);
+  });
+}
+
+function selectTab(id) {
+  TABS.forEach(([tid]) => {
+    document.getElementById("tab-" + tid).classList.toggle("active", tid === id);
+    const btn = document.getElementById("tabbtn-" + tid);
+    if (btn) btn.setAttribute("aria-selected", tid === id ? "true" : "false");
+  });
+  if (DATA && RENDERERS[id]) RENDERERS[id]();
+}
+
+async function load() {
+  buildTabs();
+  try {
+    const r = await fetch("/api/data");
+    DATA = await r.json();
+  } catch (e) {
+    document.querySelector("main").prepend(
+      el("div", { class: "panel" }, el("div", { class: "empty" },
+        "Could not load local data from the server.")));
+    return;
+  }
+  document.getElementById("stamp").textContent = "updated " + fmtDate(DATA.generated_at);
+  selectTab("dashboard");
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  const idx = TABS.findIndex(([id]) => document.getElementById("tab-" + id).classList.contains("active"));
+  if (e.key === "ArrowRight" && idx >= 0) { e.preventDefault(); selectTab(TABS[(idx + 1) % TABS.length][0]); }
+  if (e.key === "ArrowLeft" && idx >= 0) { e.preventDefault(); selectTab(TABS[(idx - 1 + TABS.length) % TABS.length][0]); }
+});
+
+load();
+</script>
+</body>
+</html>
