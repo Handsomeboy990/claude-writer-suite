@@ -80,19 +80,42 @@ def _parse_ts(ts):
         return None
 
 
+# A token holding one of these carries a value rather than a command shape: an
+# assignment, a connection string, a URL with credentials, a user@host.
+_SIGNATURE_VALUE_CHARS = ("=", ":", "@")
+
+
+def _signature_token_safe(token):
+    """True when a token is a command shape and not a value that may be secret.
+
+    Transcripts record real commands, and a real command carries real secrets:
+    an inline assignment, a database URL with its password, an API token in a
+    query string. A signature is displayed on the dashboard, returned by the
+    JSON endpoint and can reach an exported report, so a token holding a value
+    is dropped rather than shortened. Truncating a secret still emits most of it.
+    """
+    return bool(token) and not any(ch in token for ch in _SIGNATURE_VALUE_CHARS)
+
+
 def _bash_signature(command):
     """A coarse signature of a shell command, so near-identical commands group.
 
-    The first two whitespace-separated tokens (typically the program and its
-    subcommand) identify the shape of the command without capturing its
-    arguments, which is what makes two runs count as a repetition of the same
-    kind of work rather than two unrelated commands.
+    The program and, when it is a plain subcommand, the word after it identify
+    the shape of the command without capturing its arguments, which is what
+    makes two runs count as a repetition of the same kind of work rather than
+    two unrelated commands. Any token that carries a value is left out.
     """
     parts = command.strip().split()
     if not parts:
         return "(empty)"
+    # A leading VAR=value names the environment, not the command that follows.
+    while parts and "=" in parts[0]:
+        parts = parts[1:]
+    if not parts or not _signature_token_safe(parts[0]):
+        return "(redacted)"
     sig = parts[0]
-    if len(parts) > 1 and not parts[1].startswith("-"):
+    if (len(parts) > 1 and not parts[1].startswith("-")
+            and _signature_token_safe(parts[1])):
         sig += " " + parts[1]
     return sig[:40]
 
