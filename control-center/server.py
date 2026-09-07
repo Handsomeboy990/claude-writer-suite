@@ -185,8 +185,13 @@ class Handler(BaseHTTPRequestHandler):
             self._refuse_foreign_host()
             return
         path = self.path.split("?", 1)[0]
-        length = int(self.headers.get("Content-Length") or 0)
-        _ = self.rfile.read(length) if length else b""
+        try:
+            length = int(self.headers.get("Content-Length") or 0)
+        except ValueError:
+            length = 0
+        # Bounded: no endpoint here reads a body, so a declared length beyond
+        # this is discarded rather than allocated.
+        _ = self.rfile.read(min(length, 65536)) if length > 0 else b""
         if path == "/api/privacy/clear-derived":
             # The Control Center holds no separate store to clear: it reads the
             # transcripts live and keeps nothing of its own. Report that
@@ -246,7 +251,14 @@ def main(argv):
     shown = f"[{host}]" if ":" in host else host
     url = f"http://{shown}:{port}/"
 
-    server = ThreadingHTTPServer((host, port), Handler)
+    try:
+        server = ThreadingHTTPServer((host, port), Handler)
+    except OSError as exc:
+        # The probe in find_free_port and this bind are two separate moments;
+        # another process can take the port in between. Report it instead of
+        # ending on a traceback.
+        print(f"Could not bind {host}:{port}: {exc}", file=sys.stderr)
+        return 1
     print("Claude Skill Suite, Control Center")
     print(f"Serving on {url}")
     print("All data is read locally and stays on this machine.")
