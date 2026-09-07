@@ -9,14 +9,20 @@
 #   bash install.sh --writing      creative writing, 42 skills
 #   bash install.sh --documents    professional documents, 7 skills
 #   bash install.sh --dev          software engineering, 70 skills and 16 agents
+#   bash install.sh --security     defensive security, 10 skills
+#   bash install.sh --research     general research, 5 skills
+#   bash install.sh --career       job search and applications, 7 skills
+#   bash install.sh --opportunity  ideation, hackathons, business, 9 skills
 #   bash install.sh --shared       the 2 cross domain skills only
-#   bash install.sh --all          everything, 121 skills and 16 agents
+#   bash install.sh --all          everything, 152 skills and 16 agents
 #   bash install.sh --group a,b    only these categories
 #   bash install.sh --skill a,b    only these skills, with their dependencies
 #   bash install.sh --list         print every installable skill and exit
 #   bash install.sh --agents       the 16 agents only
 #   bash install.sh --no-agents    skills without agents
 #   bash install.sh --configure    ask for the user specific values only
+#   bash install.sh --control-center   start the local Control Center and exit
+#   bash install.sh --report       print a usage report from local session data
 #   bash install.sh --zip          also build one archive per skill in dist/
 #   bash install.sh --remove       uninstall the selected scope
 #   bash install.sh --help         this text
@@ -51,21 +57,30 @@ REPO_URL="${CLAUDE_SUITE_REPO:-https://github.com/Handsomeboy990/claude-writer-s
 WRITING_GROUPS="writing/core writing/genres writing/poetry writing/quality"
 DOCUMENT_GROUPS="documents/documentation documents/administrative documents/publishing"
 ENGINEERING_GROUPS="engineering/dev-skills engineering/delivery-skills engineering/devops-skills"
+SECURITY_GROUPS="security/secure-development security/security-assurance"
+RESEARCH_GROUPS="research"
+CAREER_GROUPS="career"
+OPPORTUNITY_GROUPS="opportunity/ideation opportunity/hackathons opportunity/business"
 SHARED_GROUPS="shared"
 
 MODE="install"
 WANT_WRITING="no"
 WANT_DOCUMENTS="no"
 WANT_ENGINEERING="no"
+WANT_SECURITY="no"
+WANT_RESEARCH="no"
+WANT_CAREER="no"
+WANT_OPPORTUNITY="no"
 WANT_SHARED_ONLY="no"
 SELECTED_SKILLS=""
 SELECTED_GROUPS=""
 SCOPE_GIVEN="no"
 WITH_AGENTS=""
 WITH_SKILLS="yes"
+CC_ARGS=""
 
 usage() {
-  sed -n '2,44p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,47p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 die() { printf '%s\n' "$1" >&2; exit 1; }
@@ -77,12 +92,28 @@ while [ $# -gt 0 ]; do
     --remove)    MODE="remove" ;;
     --zip)       MODE="zip" ;;
     --configure) MODE="configure" ;;
-    --writing)   WANT_WRITING="yes";     SCOPE_GIVEN="yes" ;;
-    --documents) WANT_DOCUMENTS="yes";   SCOPE_GIVEN="yes" ;;
-    --dev)       WANT_ENGINEERING="yes"; SCOPE_GIVEN="yes" ;;
-    --shared)    WANT_SHARED_ONLY="yes"; SCOPE_GIVEN="yes" ;;
+    --control-center|--control) MODE="control-center" ;;
+    --report)    MODE="report" ;;
+    --no-browser) CC_ARGS="$CC_ARGS --no-browser" ;;
+    --port=*)    CC_ARGS="$CC_ARGS --port ${1#*=}" ;;
+    --port)
+      shift
+      [ $# -gt 0 ] || die "--port needs a number."
+      CC_ARGS="$CC_ARGS --port $1"
+      ;;
+    --json)      CC_ARGS="$CC_ARGS --json" ;;
+    --writing)     WANT_WRITING="yes";     SCOPE_GIVEN="yes" ;;
+    --documents)   WANT_DOCUMENTS="yes";   SCOPE_GIVEN="yes" ;;
+    --dev)         WANT_ENGINEERING="yes"; SCOPE_GIVEN="yes" ;;
+    --security)    WANT_SECURITY="yes";    SCOPE_GIVEN="yes" ;;
+    --research)    WANT_RESEARCH="yes";    SCOPE_GIVEN="yes" ;;
+    --career)      WANT_CAREER="yes";      SCOPE_GIVEN="yes" ;;
+    --opportunity) WANT_OPPORTUNITY="yes"; SCOPE_GIVEN="yes" ;;
+    --shared)      WANT_SHARED_ONLY="yes"; SCOPE_GIVEN="yes" ;;
     --all)
       WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes"
+      WANT_SECURITY="yes"; WANT_RESEARCH="yes"; WANT_CAREER="yes"
+      WANT_OPPORTUNITY="yes"
       SCOPE_GIVEN="yes"
       ;;
     --group=*|--groups=*|--category=*)
@@ -178,8 +209,10 @@ See the full list with: bash install.sh --list"
 }
 
 all_groups() {
-  printf '%s %s %s %s' \
-    "$WRITING_GROUPS" "$DOCUMENT_GROUPS" "$ENGINEERING_GROUPS" "$SHARED_GROUPS"
+  printf '%s %s %s %s %s %s %s %s' \
+    "$WRITING_GROUPS" "$DOCUMENT_GROUPS" "$ENGINEERING_GROUPS" \
+    "$SECURITY_GROUPS" "$RESEARCH_GROUPS" "$CAREER_GROUPS" \
+    "$OPPORTUNITY_GROUPS" "$SHARED_GROUPS"
 }
 
 # Absolute path of a skill, whatever tree holds it.
@@ -232,6 +265,10 @@ active_groups() {
   [ "$WANT_WRITING" = "yes" ]     && groups="$groups $WRITING_GROUPS"
   [ "$WANT_DOCUMENTS" = "yes" ]   && groups="$groups $DOCUMENT_GROUPS"
   [ "$WANT_ENGINEERING" = "yes" ] && groups="$groups $ENGINEERING_GROUPS"
+  [ "$WANT_SECURITY" = "yes" ]    && groups="$groups $SECURITY_GROUPS"
+  [ "$WANT_RESEARCH" = "yes" ]    && groups="$groups $RESEARCH_GROUPS"
+  [ "$WANT_CAREER" = "yes" ]      && groups="$groups $CAREER_GROUPS"
+  [ "$WANT_OPPORTUNITY" = "yes" ] && groups="$groups $OPPORTUNITY_GROUPS"
   # The cross domain pair belongs to every scope: every tree calls it.
   [ -n "$groups" ] && groups="$groups $SHARED_GROUPS"
   # deduplicate, since --group shared --writing would list it twice
@@ -267,7 +304,9 @@ selected_skill_dirs() {
 # own, or everything was, so removing one tree never breaks another.
 removing_everything() {
   [ "$WANT_WRITING" = "yes" ] && [ "$WANT_DOCUMENTS" = "yes" ] \
-    && [ "$WANT_ENGINEERING" = "yes" ] && return 0
+    && [ "$WANT_ENGINEERING" = "yes" ] && [ "$WANT_SECURITY" = "yes" ] \
+    && [ "$WANT_RESEARCH" = "yes" ] && [ "$WANT_CAREER" = "yes" ] \
+    && [ "$WANT_OPPORTUNITY" = "yes" ] && return 0
   [ "$WANT_SHARED_ONLY" = "yes" ] && return 0
   return 1
 }
@@ -370,24 +409,34 @@ Pass a scope instead:
 }
 
 interactive_select() {
-  local writing documents engineering total answer picked
+  local writing documents engineering security research career opportunity
+  local total answer picked
 
   open_tty || no_terminal
 
   writing="$(count_in "$WRITING_GROUPS")"
   documents="$(count_in "$DOCUMENT_GROUPS")"
   engineering="$(count_in "$ENGINEERING_GROUPS")"
-  total=$((writing + documents + engineering + $(count_in "$SHARED_GROUPS")))
+  security="$(count_in "$SECURITY_GROUPS")"
+  research="$(count_in "$RESEARCH_GROUPS")"
+  career="$(count_in "$CAREER_GROUPS")"
+  opportunity="$(count_in "$OPPORTUNITY_GROUPS")"
+  total=$((writing + documents + engineering + security + research \
+    + career + opportunity + $(count_in "$SHARED_GROUPS")))
 
   {
-    printf '\nClaude Writer Suite\n\n'
+    printf '\nClaude Skill Suite\n\n'
     printf 'Nothing is installed until you choose. Pick what you actually do.\n\n'
-    printf '  1) Creative writing        %2s skills   novels, poetry, screenplay, editing\n' "$writing"
-    printf '  2) Professional documents  %2s skills   guides, manuals, reports, letters, PDF\n' "$documents"
-    printf '  3) Software engineering    %2s skills   plus 16 agents\n' "$engineering"
-    printf '  4) Everything              %2s skills   plus 16 agents\n' "$total"
-    printf '  5) Individual skills, chosen by name\n'
-    printf '  6) One or more categories, for example genres only\n\n'
+    printf '   1) Creative writing        %2s skills   novels, poetry, screenplay, editing\n' "$writing"
+    printf '   2) Professional documents  %2s skills   guides, manuals, reports, letters, PDF\n' "$documents"
+    printf '   3) Software engineering    %2s skills   plus 16 agents\n' "$engineering"
+    printf '   4) Cybersecurity           %2s skills   threat models, audits, hardening\n' "$security"
+    printf '   5) Research                %2s skills   sources, verification, synthesis\n' "$research"
+    printf '   6) Career                  %2s skills   job search, CV, interviews\n' "$career"
+    printf '   7) Opportunity             %2s skills   ideation, hackathons, business\n' "$opportunity"
+    printf '   8) Everything             %3s skills   plus 16 agents\n' "$total"
+    printf '   9) Individual skills, chosen by name\n'
+    printf '  10) One or more categories, for example genres only\n\n'
     printf 'Every choice also installs the 2 cross domain skills, self-critique and\n'
     printf 'project-brief, because every tree calls them.\n\n'
     printf 'Several numbers may be given, separated by spaces. For example: 1 2\n'
@@ -401,15 +450,23 @@ interactive_select() {
       1) WANT_WRITING="yes" ;;
       2) WANT_DOCUMENTS="yes" ;;
       3) WANT_ENGINEERING="yes" ;;
-      4) WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes" ;;
-      5) select_individual_skills ;;
-      6) select_categories ;;
+      4) WANT_SECURITY="yes" ;;
+      5) WANT_RESEARCH="yes" ;;
+      6) WANT_CAREER="yes" ;;
+      7) WANT_OPPORTUNITY="yes" ;;
+      8) WANT_WRITING="yes"; WANT_DOCUMENTS="yes"; WANT_ENGINEERING="yes"
+         WANT_SECURITY="yes"; WANT_RESEARCH="yes"; WANT_CAREER="yes"
+         WANT_OPPORTUNITY="yes" ;;
+      9) select_individual_skills ;;
+      10) select_categories ;;
       *) die "Not one of the offered choices: $picked" ;;
     esac
   done
 
   if [ "$WANT_WRITING" = "no" ] && [ "$WANT_DOCUMENTS" = "no" ] \
-     && [ "$WANT_ENGINEERING" = "no" ] && [ "$WANT_SHARED_ONLY" = "no" ] \
+     && [ "$WANT_ENGINEERING" = "no" ] && [ "$WANT_SECURITY" = "no" ] \
+     && [ "$WANT_RESEARCH" = "no" ] && [ "$WANT_CAREER" = "no" ] \
+     && [ "$WANT_OPPORTUNITY" = "no" ] && [ "$WANT_SHARED_ONLY" = "no" ] \
      && [ -z "${SELECTED_SKILLS// /}" ] && [ -z "${SELECTED_GROUPS// /}" ]; then
     die "Nothing selected. Nothing installed."
   fi
@@ -950,6 +1007,26 @@ report_configuration_state() {
 # ---------------------------------------------------------------------------
 
 bootstrap
+
+if [ "$MODE" = "control-center" ]; then
+  # The Control Center is optional and self-contained: it reads local session
+  # data and serves a single page. It needs nothing installed to run.
+  command -v python3 >/dev/null \
+    || die "The Control Center needs python3, which was not found on the PATH."
+  [ -f "$ROOT/control-center/server.py" ] \
+    || die "control-center/server.py not found beside the installer."
+  # shellcheck disable=SC2086
+  exec python3 "$ROOT/control-center/server.py" $CC_ARGS
+fi
+
+if [ "$MODE" = "report" ]; then
+  command -v python3 >/dev/null \
+    || die "The usage report needs python3, which was not found on the PATH."
+  [ -f "$ROOT/control-center/reader.py" ] \
+    || die "control-center/reader.py not found beside the installer."
+  # shellcheck disable=SC2086
+  exec python3 "$ROOT/control-center/reader.py" --report $CC_ARGS
+fi
 
 if [ "$MODE" = "list" ]; then
   list_skills

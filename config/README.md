@@ -143,6 +143,33 @@ Accepted values for `page_size`: `A4`, `Letter`.
 
 Accepted values for `date_format`: `iso`, `fr`, `us`.
 
+### career
+
+Read by the `career/` skills before they act. Every field is the candidate's
+real situation. Optional to the suite as a whole, and required before the career
+tree acts: a career skill run against an empty section asks for the fields it
+needs, once and grouped, and never fills them with a plausible default.
+
+| Field | Required | Default | Read by |
+|---|---|---|---|
+| `target_roles` | asked when career is used | empty | `career-profile`, `job-search` |
+| `skills` | asked when career is used | empty | `career-profile`, `cv-engineering` |
+| `location` | asked when career is used | empty | `job-search` |
+| `remote_preference` | asked when career is used | empty | `job-search` |
+| `employment_type` | asked when career is used | empty | `job-search` |
+| `industries` | no | empty | `job-search`, `company-research` |
+| `excluded_employers` | no | empty | `job-search` |
+| `work_authorization` | asked when career is used | empty | `job-search` |
+| `salary_floor` | no | empty | `job-search`, `interview-preparation` |
+
+Two fields are never guessed under any circumstance: `work_authorization`,
+because a wrong assumption wastes real applications on unreachable roles, and
+`salary_floor`, because inventing a number the candidate did not choose can cost
+them an offer. Both are asked or left empty, never assumed.
+
+This section is personal data. It is used for the task and never committed with
+real values, exactly as the rest of this file never holds a secret.
+
 ## How a skill uses it
 
 A skill never restates the configuration. It names the field and states what

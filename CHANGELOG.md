@@ -3,6 +3,127 @@
 Every notable change to this project is recorded here. The format follows
 semantic versioning.
 
+## 2.3.0
+
+Control Center evolution: a Token Optimization Advisor, richer and more honest
+token analytics, session detail, filtering, English and French localization,
+report export, and a UX, theme and accessibility pass. No new dependency; the
+Control Center is still Python standard library and one HTML file.
+
+### Added
+
+- Token Optimization Advisor (`control-center/advisor.py`), a pure, deterministic
+  module that analyses real session evidence and surfaces evidence-based
+  opportunities: repeated file exploration, edit churn, repeated command shapes,
+  low context reuse, several large outputs, an over-broad session, and a project
+  re-explored across sessions. Each finding states what was observed, a
+  recommendation, a concrete example and the potential benefit, with a severity.
+  It never invents a finding: each detection has a documented threshold, and a
+  session with no signal produces none. The optimization score is deterministic
+  and explainable (each session starts at 100, findings subtract a documented
+  severity penalty, the overall score is the mean), and null when there is no
+  data rather than a misleading 100.
+- An Optimization tab with the score ring and its method, recurring patterns, top
+  opportunities diversified across categories, a per-session table, and the
+  methodology with its thresholds.
+- A session detail view: select a session to see its token components, evidence
+  (reads, edits, commands) and its optimization findings.
+- Report export in HTML, JSON, CSV and PDF. PDF uses the browser's own print
+  dialog on a print-styled report, a genuine PDF with no external dependency.
+  Reports state their period, sources, metrics, limitations and a privacy note,
+  and carry aggregate statistics only, never raw transcript content.
+- English and French localization, switched live and remembered per browser,
+  English as the fallback. All user-facing strings, including advisor findings,
+  are translatable; no translated string lives in analysis code.
+- `control-center/test_advisor.py`, deterministic advisor tests with no
+  test-framework dependency, covering empty data, clean sessions, every finding
+  category, the below-threshold no-invention case, the scoring formula, the floor
+  at 0, cross-session logic and determinism.
+- `tests/check-app-js.py`, a page-script syntax check wired into CI, so a syntax
+  error in the inline script cannot ship a blank page.
+- `docs/control-center-evolution.md`, the architecture, data flow, advisor
+  detection table, privacy model and the extension points for future telemetry.
+
+### Changed
+
+- Token analytics are more honest. The four real components (fresh input, cache
+  read, cache creation, output) are shown separately; cache reads, which are the
+  same context re-read cheaply each turn and sum to billions, are no longer folded
+  into a single headline. Session sizes and the overview use work tokens (fresh
+  input plus output), so figures are comparable. Overview adds median, largest and
+  smallest sessions and a cache-reuse ratio.
+- The Sessions tab gained search, project and date-range filters; the terminal
+  `--report` gained an optimization summary and honest project figures.
+- The theme is complete in light and dark with an explicit toggle and system
+  default; localization and theme persist in the browser only.
+- Accessibility: keyboard-operable tabs, rows and dialog, focus management,
+  charts with a visually-hidden table alternative, and reduced-motion support.
+- The CI runs the advisor tests, the page-script syntax check and the advisor
+  CLI alongside the existing checks.
+
+## 2.2.0
+
+Four new domains, an optional local dashboard, and per-domain plugins. The
+suite grows past writing without disturbing what existed: 121 skills to 152,
+four trees to eight, and a second distribution path alongside the installer.
+The product is repositioned as the Claude Skill Suite; the repository keeps its
+name.
+
+### Added
+
+- `security/`, 10 defensive security skills in two categories, governed by
+  `security-core`:
+  - secure-development: `security-core`, `threat-modeling`,
+    `security-architecture`, `authentication-security`, `authorization-design`,
+    `session-security`, `dependency-security`, `security-headers`.
+  - security-assurance: `vulnerability-assessment`, `authorized-pentesting`.
+  - The posture is defensive; offensive technique lives only in
+    `authorized-pentesting`, behind a written-authorization gate that is checked
+    first and never waived by rephrasing. No audit concludes a system is secure.
+  - The engineering tree's `security-audit` and `security-testing` stay where
+    twelve execution plans call them; the security tree governs their posture
+    and installs them with it.
+- `research/`, 5 general research skills governed by `research-core`:
+  `source-research`, `source-verification`, `competitive-analysis`,
+  `synthesis-reporting`. A source is cited only if it was consulted; a gap is
+  stated, not invented. Distinct from the writing tree's `research-director`.
+- `career/`, 7 job search and application skills governed by `career-core`:
+  `career-profile`, `job-search`, `cv-engineering`, `cover-letter`,
+  `interview-preparation`, `company-research`. Nothing about the outside world
+  is invented; nothing about the candidate is claimed that they cannot support.
+  A new `career` configuration section carries the candidate's real situation.
+- `opportunity/`, 9 skills in three categories governed by `opportunity-core`:
+  ideation (`ideation-engine`, `idea-evaluation`), hackathons
+  (`hackathon-discovery`, `hackathon-strategy`, `pitch-and-demo`), business
+  (`client-discovery`, `lead-research`, `market-research`). One method: discover,
+  evaluate, recommend a ranked few. Every opportunity is grounded or marked a
+  hypothesis, never fabricated.
+- `control-center/`, an optional zero-dependency local dashboard: a Python
+  standard-library server and a single self-contained HTML page that read the
+  real local session data, installed skills and configuration and show usage,
+  tokens, models, tools, projects and system health. It binds to loopback only,
+  keeps nothing of its own, and marks any metric it cannot establish as
+  unavailable rather than inventing it. `bash install.sh --control-center`, and
+  `bash install.sh --report` for the same figures in the terminal.
+- Per-domain Claude Code plugins: `.claude-plugin/marketplace.json` and a
+  manifest per domain, with bundles under `plugins/` generated from the trees by
+  `plugins/build.sh`. `/plugin marketplace add Handsomeboy990/claude-writer-suite`
+  then installs only the domains wanted.
+- `tests/validate-plugins.sh`, a fourth validator that keeps the plugin bundles
+  in sync with the canonical trees and checks the manifests.
+
+### Changed
+
+- The installer gained `--security`, `--research`, `--career`, `--opportunity`
+  scopes, `--control-center` and `--report` modes, and a ten-option interactive
+  menu. All scopes combine and deduplicate, and each pulls its cross-tree
+  dependencies and the shared pair, exactly as before.
+- The three existing validators learned the four new trees. Counts updated
+  across `README.md`, `README.fr.md`, `AGENTS.md` and the documentation.
+- Product name presented as Claude Skill Suite in the documentation and plugin
+  manifests. The git remote and directory keep `claude-writer-suite`, so no
+  clone URL, install command or existing link breaks.
+
 ## 2.1.0
 
 Quality engineering as a system rather than a single skill, and the lifecycle

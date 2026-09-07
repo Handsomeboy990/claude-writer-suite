@@ -2,9 +2,11 @@
 
 ## Overview
 
-Claude Writer Suite is a library of 121 skills in ten groups across four trees,
-plus sixteen agents, shared resources, the configuration contract,
-documentation, a demonstration project and validation scripts.
+The Claude Skill Suite is a library of 152 skills in eighteen groups across
+eight trees, plus sixteen agents, shared resources, the configuration contract,
+an optional local dashboard, per-domain plugins, documentation, a demonstration
+project and validation scripts. The repository keeps the name
+`claude-writer-suite` for its history.
 
 ```
 claude-writer-suite/
@@ -32,14 +34,28 @@ claude-writer-suite/
 │   ├── delivery-skills/   10
 │   ├── devops-skills/     13
 │   └── agents/            16 role definitions
+├── security/              10 skills
+│   ├── secure-development/ 8
+│   └── security-assurance/ 2
+├── research/               5 skills
+├── career/                 7 skills
+├── opportunity/            9 skills
+│   ├── ideation/           3
+│   ├── hackathons/         3
+│   └── business/           3
 ├── config/                configuration template and field reference
+├── control-center/        optional local dashboard, zero dependency
+├── plugins/               per-domain plugin bundles, generated from the trees
+├── .claude-plugin/        the plugin marketplace manifest
 ├── documentation/
 └── tests/
 ```
 
-The four trees do not depend on each other. `shared/` is the exception by
-design: it depends on nothing and is called by all three others, which is
-verified by `tests/validate-orchestration.sh` check 13.
+The eight trees do not depend on each other. `shared/` is the exception by
+design: it depends on nothing and is called by all the others, which is verified
+by `tests/validate-orchestration.sh` check 13. Each of the other trees has one
+constitution that depends on nothing, so any tree can be installed and used on
+its own.
 
 ## Trees and their constitutions
 
@@ -120,7 +136,7 @@ Three layers, kept apart.
 
 | Layer | Value |
 |---|---|
-| Skill language | English, all 121 skills and all 16 agents |
+| Skill language | English, all 152 skills and all 16 agents |
 | System language | English: paths, identifiers, config keys, commits, technical documentation |
 | Output language | the recipient's, set per project in the configuration |
 
@@ -202,7 +218,7 @@ prepares and hands over. Everything handed over is written to
 
 ## Tests
 
-`tests/` holds three scripts with no external dependency.
+`tests/` holds four scripts with no external dependency.
 
 - `validate-structure.sh`: the mandatory files and directories of every skill,
   the metadata block, duplicate skill names, the `Protocol` and `Interfaces`
@@ -221,7 +237,7 @@ prepares and hands over. Everything handed over is written to
 Adding a skill: create the directory with its four elements, declare the
 metadata, refer to the constitution of its tree without restating it, add at
 least one example and one resource, update the category index and
-`skills-guide.md`, then run the three scripts.
+`skills-guide.md`, then run the four scripts.
 
 For a skill in `documents/`, `engineering/` or `shared/`, four further
 requirements: a numbered `Protocol` section, an `Interfaces` section, and for

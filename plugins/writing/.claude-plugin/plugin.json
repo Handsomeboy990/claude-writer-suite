@@ -1,0 +1,11 @@
+{
+  "name": "writer-suite-writing",
+  "version": "2.0.0",
+  "description": "Creative writing: novels, genres, poetry and editing. Governed by writing-constitution; every text passes self-critique and a revision skill before it is finished.",
+  "author": {
+    "name": "Lauret Chacha"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Handsomeboy990/claude-writer-suite",
+  "keywords": ["writing","fiction","poetry","editing","screenwriting","claude-skill"]
+}

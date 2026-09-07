@@ -1,0 +1,11 @@
+{
+  "name": "writer-suite-security",
+  "version": "2.0.0",
+  "description": "Defensive security and authorized assurance: threat modeling, security architecture, authentication and authorization, session, dependency and header hardening, vulnerability assessment, and strictly gated pentesting.",
+  "author": {
+    "name": "Lauret Chacha"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/Handsomeboy990/claude-writer-suite",
+  "keywords": ["security","threat-modeling","audit","hardening","pentesting","claude-skill"]
+}

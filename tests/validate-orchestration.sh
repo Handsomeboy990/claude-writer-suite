@@ -20,12 +20,19 @@ ENGINEERING_CATEGORIES="dev-skills delivery-skills devops-skills"
 ALL_GROUPS="writing/core writing/genres writing/poetry writing/quality
 documents/documentation documents/administrative documents/publishing
 engineering/dev-skills engineering/delivery-skills engineering/devops-skills
+security/secure-development security/security-assurance
+research career
+opportunity/ideation opportunity/hackathons opportunity/business
 shared"
 
 # Groups whose SKILL.md carries an Interfaces section.
 PROCEDURAL_GROUPS="documents/documentation documents/administrative
 documents/publishing engineering/dev-skills engineering/delivery-skills
-engineering/devops-skills shared"
+engineering/devops-skills
+security/secure-development security/security-assurance
+research career
+opportunity/ideation opportunity/hackathons opportunity/business
+shared"
 
 ERRORS=0
 

@@ -74,3 +74,28 @@ documents:
   page_size: A4
   # iso -> 2026-08-11, fr -> 11 aout 2026, us -> August 11, 2026
   date_format: iso
+
+# Read by the career/ skills before they act. Every field is the candidate's
+# real situation. A missing field is asked for once, grouped, never invented:
+# a wrong assumption about a real person's location, work authorisation or
+# salary floor produces advice that is confidently useless. This section holds
+# no secret and is never committed with real personal data.
+career:
+  # The roles being pursued, most specific first.
+  target_roles: []
+  # What the candidate can actually do. Honest levels; a claimed skill surfaces
+  # at the interview.
+  skills: []
+  # On-site | hybrid | remote, and where they are.
+  location: ""
+  remote_preference: ""      # on-site | hybrid | remote
+  # full-time | part-time | contract | freelance
+  employment_type: ""
+  # Sectors of interest, and any to avoid.
+  industries: []
+  # Desired employers, and any to exclude (often a current employer).
+  excluded_employers: []
+  # Work authorisation is decision-critical and never assumed.
+  work_authorization: ""
+  # Optional. Stated by the candidate or left empty; never guessed.
+  salary_floor: ""

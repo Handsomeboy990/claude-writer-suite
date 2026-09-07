@@ -18,7 +18,7 @@ could not be run when they are absent rather than implying they passed.
 ## Choosing what to install
 
 The installer never decides for you. With no argument it asks, and it installs
-only what you pick. That is deliberate: the four trees serve different people,
+only what you pick. That is deliberate: the eight trees serve different people,
 and a developer has no use for a prosody skill.
 
 ```bash
@@ -28,11 +28,16 @@ bash install.sh
 ```
 
 ```
-  1) Creative writing        42 skills   novels, poetry, screenplay, editing
-  2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
-  3) Software engineering    70 skills   plus 16 agents
-  4) Everything             121 skills   plus 16 agents
-  5) Individual skills, chosen by name
+   1) Creative writing        42 skills   novels, poetry, screenplay, editing
+   2) Professional documents   7 skills   guides, manuals, reports, letters, PDF
+   3) Software engineering    70 skills   plus 16 agents
+   4) Cybersecurity           10 skills   threat models, audits, hardening
+   5) Research                 5 skills   sources, verification, synthesis
+   6) Career                   7 skills   job search, CV, interviews
+   7) Opportunity              9 skills   ideation, hackathons, business
+   8) Everything             152 skills   plus 16 agents
+   9) Individual skills, chosen by name
+  10) One or more categories, for example genres only
 
 Choice [1]:
 ```
@@ -50,6 +55,10 @@ everything.
 bash install.sh --writing      42 creative writing skills
 bash install.sh --documents     7 professional document skills
 bash install.sh --dev          70 engineering skills and 16 agents
+bash install.sh --security     10 defensive security skills
+bash install.sh --research      5 general research skills
+bash install.sh --career        7 job search and application skills
+bash install.sh --opportunity   9 ideation, hackathon and business skills
 bash install.sh --all          everything
 bash install.sh --shared        the 2 cross domain skills only
 bash install.sh --agents        the 16 agents only
@@ -94,6 +103,13 @@ bash install.sh --group devops-skills     operations only
 | `dev-skills` | 47 | engineering |
 | `delivery-skills` | 10 | engineering |
 | `devops-skills` | 13 | engineering |
+| `secure-development` | 8 | security |
+| `security-assurance` | 2 | security |
+| `research` | 5 | research |
+| `career` | 7 | career |
+| `ideation` | 3 | opportunity |
+| `hackathons` | 3 | opportunity |
+| `business` | 3 | opportunity |
 | `shared` | 2 | shared |
 
 Everything combines, and the result is deduplicated:
@@ -255,7 +271,7 @@ can be removed deliberately.
 ## Verifying the installation
 
 ```bash
-ls ~/.claude/skills | wc -l      # 44 writing, 9 documents, 72 dev, 121 all
+ls ~/.claude/skills | wc -l      # 44 writing, 9 documents, 72 dev, 152 all
 ls ~/.claude/agents | wc -l      # 16, with the engineering tree
 cat ~/.claude/writer-suite.config.yaml
 ```

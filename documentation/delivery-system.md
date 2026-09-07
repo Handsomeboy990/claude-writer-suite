@@ -119,7 +119,7 @@ ones, which is exactly what the gate exists to prevent.
 
 ## 8. The agents
 
-Fourteen roles, defined in `engineering/agents/`. An agent is thin by design:
+Sixteen roles, defined in `engineering/agents/`. An agent is thin by design:
 the expertise lives in the skills, the agent decides which apply, executes
 within its boundary, and hands off through a durable artefact.
 
@@ -206,7 +206,7 @@ Rule: parallelise across a contract, never across an unknown.
 ## 10. Validation
 
 ```bash
-bash tests/validate-structure.sh      structure and metadata of the 121 skills
+bash tests/validate-structure.sh      structure and metadata of the 152 skills
 bash tests/validate-rules.sh          the repository-wide prohibitions
 bash tests/validate-orchestration.sh  thirteen coherence checks
 ```
@@ -243,7 +243,7 @@ Adding a delivery or operations skill:
 5. add it to at least one execution plan or delivery phase, or check 7 reports
    it as an orphan;
 6. update its category index, `skills-guide.md` and this file;
-7. run the three validation scripts.
+7. run the four validation scripts.
 
 Adding an agent: the file in `engineering/agents/`, the eight mandatory
 sections, an entry in `engineering/agents/README.md`, and its name added to
