@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Claude Writer Suite installer.
+# Craft Suite installer.
 #
 # With no argument it asks what you want, so nothing is installed by default.
 # A novelist is never given the engineering tree, and a developer is never
@@ -42,16 +42,44 @@
 #
 #   CLAUDE_SKILLS_DIR   default ~/.claude/skills
 #   CLAUDE_AGENTS_DIR   default ~/.claude/agents
-#   CLAUDE_CONFIG_FILE  default ~/.claude/writer-suite.config.yaml
+#   CLAUDE_CONFIG_FILE  default ~/.claude/craft.config.yaml
 #   CLAUDE_SUITE_REPO   clone source when the script runs on its own
-#   CLAUDE_SUITE_CACHE  where that clone lands, default ~/.cache/claude-writer-suite
+#   CLAUDE_SUITE_CACHE  where that clone lands, default ~/.cache/craft-suite
 set -u
 
 ROOT="$(cd "$(dirname "$0")" 2>/dev/null && pwd || printf '')"
 TARGET="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 AGENT_TARGET="${CLAUDE_AGENTS_DIR:-$HOME/.claude/agents}"
-CONFIG_FILE="${CLAUDE_CONFIG_FILE:-$HOME/.claude/writer-suite.config.yaml}"
-REPO_URL="${CLAUDE_SUITE_REPO:-https://github.com/Handsomeboy990/claude-writer-suite.git}"
+CONFIG_FILE="${CLAUDE_CONFIG_FILE:-$HOME/.claude/craft.config.yaml}"
+REPO_URL="${CLAUDE_SUITE_REPO:-https://github.com/Handsomeboy990/craft-suite.git}"
+
+# The suite was called writer-suite until 3.0.0. An existing install keeps its
+# answers in the old filenames, so move them once rather than asking again.
+# Only when the user has not pointed CLAUDE_CONFIG_FILE somewhere of their own,
+# and only when the new name is genuinely absent: never overwrite a real file.
+migrate_legacy_config() {
+  [ -n "${CLAUDE_CONFIG_FILE:-}" ] && return 0
+  case " $* " in *" -h "*|*" --help "*) return 0 ;; esac
+  local dir legacy legacy_tasks tasks
+  dir="$(dirname "$CONFIG_FILE")"
+  legacy="$dir/writer-suite.config.yaml"
+  legacy_tasks="$dir/writer-suite-manual-tasks.md"
+  tasks="$dir/craft-manual-tasks.md"
+
+  if [ -f "$legacy" ] && [ ! -e "$CONFIG_FILE" ]; then
+    mv "$legacy" "$CONFIG_FILE" || return 0
+    sed -i.bak 's|Claude Writer Suite configuration|Craft Suite configuration|; s|writer-suite\.config|craft.config|g; s|writer-suite-manual-tasks|craft-manual-tasks|g' "$CONFIG_FILE" 2>/dev/null || true
+    rm -f "$CONFIG_FILE.bak"
+    printf 'Moved your configuration to %s (the suite is now craft-suite).\n' "$CONFIG_FILE"
+  fi
+
+  if [ -f "$legacy_tasks" ] && [ ! -e "$tasks" ]; then
+    mv "$legacy_tasks" "$tasks" || return 0
+    printf 'Moved your manual task list to %s.\n' "$tasks"
+  fi
+}
+
+migrate_legacy_config "$@"
 
 # A skill group is a repository relative path holding skill directories.
 WRITING_GROUPS="writing/core writing/genres writing/poetry writing/quality"
@@ -166,7 +194,7 @@ bootstrap() {
   [ -n "$ROOT" ] && [ -d "$ROOT/shared" ] && return 0
   command -v git >/dev/null 2>&1 \
     || die "No skills next to this script, and git is not available to fetch them."
-  cache="${CLAUDE_SUITE_CACHE:-$HOME/.cache/claude-writer-suite}"
+  cache="${CLAUDE_SUITE_CACHE:-$HOME/.cache/craft-suite}"
   if [ -d "$cache/.git" ]; then
     git -C "$cache" pull --ff-only -q 2>/dev/null || true
   else
@@ -425,7 +453,7 @@ interactive_select() {
     + career + opportunity + $(count_in "$SHARED_GROUPS")))
 
   {
-    printf '\nClaude Skill Suite\n\n'
+    printf '\nCraft Suite\n\n'
     printf 'Nothing is installed until you choose. Pick what you actually do.\n\n'
     printf '   1) Creative writing        %2s skills   novels, poetry, screenplay, editing\n' "$writing"
     printf '   2) Professional documents  %2s skills   guides, manuals, reports, letters, PDF\n' "$documents"
@@ -648,12 +676,12 @@ choose() {
 configure() {
   if [ ! -t 0 ]; then
     printf 'Configuration needs a terminal.\n'
-    printf 'Non interactive alternative: copy config/writer-suite.config.example.yaml\n'
+    printf 'Non interactive alternative: copy config/craft.config.example.yaml\n'
     printf 'to %s and edit it.\n' "$CONFIG_FILE"
     exit 1
   fi
 
-  printf 'Claude Writer Suite configuration\n'
+  printf 'Craft Suite configuration\n'
   printf 'File: %s\n\n' "$CONFIG_FILE"
   printf 'Every question has a recommended answer, already selected.\n'
   printf 'Press enter to accept it. Values in brackets are what is stored now.\n'
@@ -768,7 +796,7 @@ configure() {
 
   mkdir -p "$(dirname "$CONFIG_FILE")"
   {
-    printf '# Claude Writer Suite configuration\n'
+    printf '# Craft Suite configuration\n'
     printf '# Written by install.sh --configure. Never store a secret here.\n'
     printf '# Field reference: config/README.md\n\n'
     printf 'identity:\n'
@@ -814,7 +842,7 @@ configure() {
 # perform. This file is that list, with the commands, so nothing is silently
 # left undone.
 write_manual_tasks() {
-  local file="${CLAUDE_MANUAL_TASKS_FILE:-$(dirname "$CONFIG_FILE")/writer-suite-manual-tasks.md}"
+  local file="${CLAUDE_MANUAL_TASKS_FILE:-$(dirname "$CONFIG_FILE")/craft-manual-tasks.md}"
   local branch commits push prs tags deploys dbops deps protected count=0
   branch="$(value_of git default_branch)";      [ -n "$branch" ] || branch=main
   commits="$(value_of delegation commits)"

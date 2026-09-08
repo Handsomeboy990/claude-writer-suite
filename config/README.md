@@ -10,8 +10,8 @@ file, outside the repository, written once.
 
 | Item | Value |
 |---|---|
-| Template | `config/writer-suite.config.example.yaml` |
-| Default location | `~/.claude/writer-suite.config.yaml` |
+| Template | `config/craft.config.example.yaml` |
+| Default location | `~/.claude/craft.config.yaml` |
 | Override | `CLAUDE_CONFIG_FILE` |
 | Format | YAML |
 | Written by | `bash install.sh --configure`, or by hand |
@@ -62,7 +62,7 @@ Any value other than a plain `yes` moves that step to your manual task list.
 The agent stops at the boundary, hands you what it prepared, and names the
 step rather than performing it.
 
-The installer writes that list as `writer-suite-manual-tasks.md`, next to the
+The installer writes that list as `craft-manual-tasks.md`, next to the
 configuration file, with the exact command for each step you kept. Re-running
 `--configure` rewrites it.
 
@@ -193,7 +193,7 @@ Three behaviours, and only three:
 
 ```bash
 bash install.sh --configure          # re-runs the prompts, keeps current values as defaults
-$EDITOR ~/.claude/writer-suite.config.yaml
+$EDITOR ~/.claude/craft.config.yaml
 ```
 
 Re-running `--configure` is not destructive: every prompt is pre-filled with

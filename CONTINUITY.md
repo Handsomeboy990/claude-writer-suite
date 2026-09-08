@@ -1,4 +1,4 @@
-# Continuity, 2026-08-26
+# Continuity, 2026-09-08
 
 State of the repository for whoever takes it over, human or agent. Written to
 `engineering/dev-skills/project-continuity/resources/continuity-template.md`.
@@ -22,7 +22,7 @@ Session 4, this one:
 - `config/`: the configuration contract, template and field reference.
 - `install.sh`: rewritten. `--documents`, `--shared`, `--configure`,
   `--help`, recommendation-first numbered prompts, validation, and generation
-  of `writer-suite-manual-tasks.md`.
+  of `craft-manual-tasks.md`.
 - `delegation` section: eight fields deciding what the agent does and what it
   hands over. `git-workflow` section 2 carries the contract.
 - All 42 writing skills rewritten in English, `SKILL.md` and `README.md`.
@@ -105,8 +105,24 @@ Session 6, domain expansion, plugins and the Control Center:
   deduplicating as before.
 - `career` configuration section added to the template and `config/README.md`.
 - Counts updated everywhere: 152 skills, 16 agents, eight trees, four
-  validators. Product repositioned as the Claude Skill Suite; the repository
-  keeps the name `claude-writer-suite`.
+  validators. Product repositioned as the Craft Suite; the repository
+  kept the name `claude-writer-suite` at that point.
+
+Session 7, the rename and the front page, version 3.0.0:
+
+- The suite is Craft Suite and the repository is `craft-suite`. GitHub
+  redirects the old URL. The seven plugins go from `writer-suite-<domain>` to
+  `craft-<domain>`, the configuration from `~/.claude/writer-suite.config.yaml`
+  to `~/.claude/craft.config.yaml`, and the manual task list to
+  `craft-manual-tasks.md`. Every manifest is at 3.0.0.
+- `install.sh` migrates an existing configuration and manual task list on its
+  next run, once, only when the new name is absent and only when the config
+  path has not been overridden. Skipped for `--help`.
+- The root READMEs become short entry points, 137 and 139 lines against 630.
+  The previous long form is preserved unchanged at `documentation/overview.md`
+  and `documentation/overview.fr.md`, relative links rewritten for the depth.
+- GitHub repository description and twelve topics set, for discovery.
+- No skill content changed.
 
 ## Current state
 

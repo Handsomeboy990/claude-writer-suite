@@ -12,8 +12,8 @@ one is missing.
 
 | Item | Value |
 |---|---|
-| Template | `config/writer-suite.config.example.yaml` |
-| Default location | `~/.claude/writer-suite.config.yaml` |
+| Template | `config/craft.config.example.yaml` |
+| Default location | `~/.claude/craft.config.yaml` |
 | Override | `CLAUDE_CONFIG_FILE` |
 | Written by | `bash install.sh --configure` |
 | Permissions | 600, set by the installer |
@@ -121,7 +121,7 @@ strings.
 
 ```bash
 bash install.sh --configure
-$EDITOR ~/.claude/writer-suite.config.yaml
+$EDITOR ~/.claude/craft.config.yaml
 ```
 
 Both are supported. The file is plain YAML with two levels and no

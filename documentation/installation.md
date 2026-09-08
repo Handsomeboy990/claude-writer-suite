@@ -22,8 +22,8 @@ only what you pick. That is deliberate: the eight trees serve different people,
 and a developer has no use for a prosody skill.
 
 ```bash
-git clone <repository-url> claude-writer-suite
-cd claude-writer-suite
+git clone <repository-url> craft-suite
+cd craft-suite
 bash install.sh
 ```
 
@@ -174,7 +174,7 @@ curl -fsSL <raw-url>/install.sh | bash -s -- --writing
 ```
 
 When the script finds no skills beside it, it clones the repository into
-`~/.cache/claude-writer-suite` and works from there. Subsequent runs pull
+`~/.cache/craft-suite` and works from there. Subsequent runs pull
 rather than re-clone.
 
 Under `curl | bash` the script's own stdin is the pipe, so it opens the
@@ -184,7 +184,7 @@ refuses rather than choosing for you.
 | Variable | Effect |
 |---|---|
 | `CLAUDE_SUITE_REPO` | clone source, when the script runs on its own |
-| `CLAUDE_SUITE_CACHE` | where that clone lands, default `~/.cache/claude-writer-suite` |
+| `CLAUDE_SUITE_CACHE` | where that clone lands, default `~/.cache/craft-suite` |
 
 A private repository cannot be fetched this way without credentials. Clone it
 yourself and run `install.sh` from inside it.
@@ -203,11 +203,13 @@ that does not pass it.
 ## Archives
 
 ```bash
-bash install.sh --zip
+bash install.sh --all --zip
 ```
 
-Builds one archive per skill in `dist/`, for a runtime that imports skills
-individually. `dist/` is not tracked in version control.
+`--zip` is a modifier, not a scope: it builds one archive per skill installed
+by the scope it accompanies, into `dist/`, for a runtime that imports skills
+individually. On its own it has nothing to build and prints the help.
+`dist/` is not tracked in version control.
 
 ## Targets
 
@@ -215,7 +217,7 @@ individually. `dist/` is not tracked in version control.
 |---|---|---|
 | `CLAUDE_SKILLS_DIR` | `~/.claude/skills` | one directory per skill |
 | `CLAUDE_AGENTS_DIR` | `~/.claude/agents` | one file per agent |
-| `CLAUDE_CONFIG_FILE` | `~/.claude/writer-suite.config.yaml` | the user configuration |
+| `CLAUDE_CONFIG_FILE` | `~/.claude/craft.config.yaml` | the user configuration |
 
 ```bash
 CLAUDE_SKILLS_DIR=/opt/skills bash install.sh --dev
@@ -273,7 +275,7 @@ can be removed deliberately.
 ```bash
 ls ~/.claude/skills | wc -l      # 44 writing, 9 documents, 72 dev, 152 all
 ls ~/.claude/agents | wc -l      # 16, with the engineering tree
-cat ~/.claude/writer-suite.config.yaml
+cat ~/.claude/craft.config.yaml
 ```
 
 Each scope count includes the two cross domain skills.

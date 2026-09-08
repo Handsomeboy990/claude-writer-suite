@@ -1,11 +1,11 @@
 {
-  "name": "writer-suite-documents",
-  "version": "2.0.0",
+  "name": "craft-documents",
+  "version": "3.0.0",
   "description": "Professional documents delivered to a reader: technical writing, user documentation, reports, formal letters, and verified PDF production. Governed by document-core.",
   "author": {
     "name": "Lauret Chacha"
   },
   "license": "MIT",
-  "repository": "https://github.com/Handsomeboy990/claude-writer-suite",
+  "repository": "https://github.com/Handsomeboy990/craft-suite",
   "keywords": ["documentation","reports","pdf","technical-writing","claude-skill"]
 }

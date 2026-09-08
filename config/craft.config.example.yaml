@@ -1,11 +1,11 @@
-# Claude Writer Suite configuration
+# Craft Suite configuration
 #
 # Copy to the location the agent reads, then edit, or let the installer write
 # it for you:
 #
 #   bash install.sh --configure
 #
-# Default location: ~/.claude/writer-suite.config.yaml
+# Default location: ~/.claude/craft.config.yaml
 # Override with:    CLAUDE_CONFIG_FILE
 #
 # This file must never contain a secret. No token, no password, no private
@@ -25,7 +25,7 @@ identity:
 
 # What the agent is allowed to do on its own. Every value other than a plain
 # yes moves that step to your manual task list, written next to this file as
-# writer-suite-manual-tasks.md. The agent stops at the boundary, hands you
+# craft-manual-tasks.md. The agent stops at the boundary, hands you
 # what it prepared, and names the step instead of performing it.
 delegation:
   commits: yes              # yes | stage-only | no

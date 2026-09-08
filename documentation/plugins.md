@@ -7,7 +7,7 @@ Claude Code capabilities through a marketplace and want only some domains.
 ## Adding the marketplace
 
 ```
-/plugin marketplace add Handsomeboy990/claude-writer-suite
+/plugin marketplace add Handsomeboy990/craft-suite
 ```
 
 This reads `.claude-plugin/marketplace.json` at the repository root, which lists
@@ -17,18 +17,18 @@ one plugin per domain.
 
 | Plugin | Installs | Skills |
 |---|---|---|
-| `writer-suite-writing` | the writing tree | 42 plus the shared pair |
-| `writer-suite-documents` | the documents tree | 7 plus the shared pair |
-| `writer-suite-engineering` | the engineering tree and its agents | 70 plus 16 agents |
-| `writer-suite-security` | the security tree | 10 plus dependencies |
-| `writer-suite-research` | the research tree | 5 plus the shared pair |
-| `writer-suite-career` | the career tree | 7 plus the shared pair |
-| `writer-suite-opportunity` | the opportunity tree | 9 plus the shared pair |
+| `craft-writing` | the writing tree | 42 plus the shared pair |
+| `craft-documents` | the documents tree | 7 plus the shared pair |
+| `craft-engineering` | the engineering tree and its agents | 70 plus 16 agents |
+| `craft-security` | the security tree | 10 plus dependencies |
+| `craft-research` | the research tree | 5 plus the shared pair |
+| `craft-career` | the career tree | 7 plus the shared pair |
+| `craft-opportunity` | the opportunity tree | 9 plus the shared pair |
 
 Install one:
 
 ```
-/plugin install writer-suite-security
+/plugin install craft-security
 ```
 
 Each plugin is self-contained. It carries the domain's skills, the two cross
