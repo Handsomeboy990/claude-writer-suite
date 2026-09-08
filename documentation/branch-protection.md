@@ -104,7 +104,7 @@ JSON
 
 for branch in main dev; do
   gh api -X PUT \
-    "repos/Handsomeboy990/claude-writer-suite/branches/$branch/protection" \
+    "repos/Handsomeboy990/craft-suite/branches/$branch/protection" \
     -H "Accept: application/vnd.github+json" \
     --input /tmp/protection.json
 done
@@ -120,7 +120,7 @@ first, let one pull request run the workflow, then add the check.
 Verify, per branch:
 
 ```bash
-gh api repos/Handsomeboy990/claude-writer-suite/branches/main/protection --jq '
+gh api repos/Handsomeboy990/craft-suite/branches/main/protection --jq '
   "approvals            : \(.required_pull_request_reviews.required_approving_review_count)",
   "code owner review    : \(.required_pull_request_reviews.require_code_owner_reviews)",
   "required check       : \(.required_status_checks.contexts | join(", "))",
@@ -183,7 +183,7 @@ second reviewer, then turn it on:
 
 ```bash
 gh api -X POST \
-  repos/Handsomeboy990/claude-writer-suite/branches/main/protection/enforce_admins
+  repos/Handsomeboy990/craft-suite/branches/main/protection/enforce_admins
 ```
 
 If you want the branch closed even to yourself before then, the honest option

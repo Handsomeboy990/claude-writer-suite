@@ -22,7 +22,7 @@ Session 4, this one:
 - `config/`: the configuration contract, template and field reference.
 - `install.sh`: rewritten. `--documents`, `--shared`, `--configure`,
   `--help`, recommendation-first numbered prompts, validation, and generation
-  of `writer-suite-manual-tasks.md`.
+  of `craft-manual-tasks.md`.
 - `delegation` section: eight fields deciding what the agent does and what it
   hands over. `git-workflow` section 2 carries the contract.
 - All 42 writing skills rewritten in English, `SKILL.md` and `README.md`.
@@ -105,8 +105,8 @@ Session 6, domain expansion, plugins and the Control Center:
   deduplicating as before.
 - `career` configuration section added to the template and `config/README.md`.
 - Counts updated everywhere: 152 skills, 16 agents, eight trees, four
-  validators. Product repositioned as the Claude Skill Suite; the repository
-  keeps the name `claude-writer-suite`.
+  validators. Product repositioned as the Craft Suite; the repository
+  keeps the name `craft-suite`.
 
 ## Current state
 

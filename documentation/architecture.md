@@ -2,16 +2,16 @@
 
 ## Overview
 
-The Claude Skill Suite is a library of 152 skills in eighteen groups across
+The Craft Suite is a library of 152 skills in eighteen groups across
 eight trees, plus sixteen agents, shared resources, the configuration contract,
 an optional local dashboard, per-domain plugins, documentation, a demonstration
-project and validation scripts. The repository keeps the name
-`claude-writer-suite` for its history.
+project and validation scripts. The repository was called
+`claude-writer-suite` until 3.0.0.
 
 ```
-claude-writer-suite/
-├── README.md              entry point, English
-├── README.fr.md           entry point, French
+craft-suite/
+├── README.md              short entry point, English
+├── README.fr.md           short entry point, French
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
 ├── CONTINUITY.md
@@ -47,7 +47,7 @@ claude-writer-suite/
 ├── control-center/        optional local dashboard, zero dependency
 ├── plugins/               per-domain plugin bundles, generated from the trees
 ├── .claude-plugin/        the plugin marketplace manifest
-├── documentation/
+├── documentation/         overview.md holds the long form of the README
 └── tests/
 ```
 
@@ -206,7 +206,7 @@ never copies their content.
 ## Configuration
 
 `config/` holds the template and the field reference. Values live outside the
-repository, at `~/.claude/writer-suite.config.yaml` by default.
+repository, at `~/.claude/craft.config.yaml` by default.
 
 Skills name the fields they read and state what happens when one is missing.
 No skill embeds a value. Identity fields have no default and never will: a
@@ -214,7 +214,7 @@ skill that cannot resolve them stops and names the missing field.
 
 The `delegation` section decides which actions the agent performs and which it
 prepares and hands over. Everything handed over is written to
-`writer-suite-manual-tasks.md` next to the configuration.
+`craft-manual-tasks.md` next to the configuration.
 
 ## Tests
 

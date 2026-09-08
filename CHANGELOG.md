@@ -3,6 +3,45 @@
 Every notable change to this project is recorded here. The format follows
 semantic versioning.
 
+## 3.0.0
+
+The suite is renamed Craft Suite. The writing tree stopped being the whole of it
+several versions ago, and the old name kept saying otherwise on every install
+command, every plugin identifier and the front page. The README is also split:
+a short entry point at the root, the long form moved under `documentation/`.
+
+### Changed
+
+- **Breaking.** The repository is `craft-suite`. GitHub redirects the old URL,
+  so an existing clone keeps working, but the marketplace command is now
+  `/plugin marketplace add Handsomeboy990/craft-suite`.
+- **Breaking.** The seven plugins are renamed from `writer-suite-<domain>` to
+  `craft-<domain>`. A plugin installed under the old identifier is not upgraded
+  in place: remove it and install the new one.
+- **Breaking.** The configuration file moves from `~/.claude/writer-suite.config.yaml`
+  to `~/.claude/craft.config.yaml`, and the manual task list from
+  `writer-suite-manual-tasks.md` to `craft-manual-tasks.md`. `install.sh` moves
+  both on its next run, so an existing install keeps its answers and is not
+  asked again. It only moves a file when the new name is absent, and does
+  nothing when `CLAUDE_CONFIG_FILE` points somewhere of your own.
+- The template is `config/craft.config.example.yaml`.
+- The cache used by the piped installer is `~/.cache/craft-suite`.
+- `README.md` and `README.fr.md` are now short entry points: what the suite is,
+  how to install it, the seven plugins, what "finished" means, and where to go
+  next. The previous long form is preserved unchanged at
+  `documentation/overview.md` and `documentation/overview.fr.md`, with its
+  relative links rewritten for the new depth.
+- The Control Center window title reads Craft Suite.
+
+### Not changed
+
+- No skill content changed. The 152 skills and 16 agents are byte identical
+  apart from the two files that named the configuration.
+- The installer flags, the scoping behaviour and the four validators are
+  unchanged.
+- Historical entries below keep the old name, because that is what they
+  describe.
+
 ## 2.3.0
 
 Control Center evolution: a Token Optimization Advisor, richer and more honest

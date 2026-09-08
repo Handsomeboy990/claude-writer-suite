@@ -92,7 +92,7 @@ configuration: commits, branches, push, pull requests, release tags,
 deployments, database operations, dependency changes.
 
 Anything the user keeps is handed over rather than performed, with its
-command, and listed in `writer-suite-manual-tasks.md` next to the
+command, and listed in `craft-manual-tasks.md` next to the
 configuration file. `git-workflow` section 2 carries the contract.
 
 Two rules are never delegated: a destructive operation is counted and

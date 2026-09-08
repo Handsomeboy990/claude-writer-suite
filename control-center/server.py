@@ -259,7 +259,7 @@ def main(argv):
         # ending on a traceback.
         print(f"Could not bind {host}:{port}: {exc}", file=sys.stderr)
         return 1
-    print("Claude Skill Suite, Control Center")
+    print("Craft Suite, Control Center")
     print(f"Serving on {url}")
     print("All data is read locally and stays on this machine.")
     print("Press Ctrl-C to stop.")
