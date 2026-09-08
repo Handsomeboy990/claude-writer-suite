@@ -73,7 +73,7 @@ having answered a real request.
 The `delegation` section of the configuration sits on top of all three. A user
 who kept deployments does not receive a deployment at phase 10; they receive
 the artefact, the migrations and the variable list, plus the step named in
-`writer-suite-manual-tasks.md`.
+`craft-manual-tasks.md`.
 
 ## 5. The two structural rules
 

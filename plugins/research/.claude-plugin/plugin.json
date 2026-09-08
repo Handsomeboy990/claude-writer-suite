@@ -1,11 +1,11 @@
 {
-  "name": "writer-suite-research",
-  "version": "2.0.0",
+  "name": "craft-research",
+  "version": "3.0.0",
   "description": "General-purpose research for a decision: question framing, source gathering and verification, competitive analysis, and conclusion-first synthesis. A source is cited only if it was consulted.",
   "author": {
     "name": "Lauret Chacha"
   },
   "license": "MIT",
-  "repository": "https://github.com/Handsomeboy990/claude-writer-suite",
+  "repository": "https://github.com/Handsomeboy990/craft-suite",
   "keywords": ["research","sources","verification","analysis","synthesis","claude-skill"]
 }

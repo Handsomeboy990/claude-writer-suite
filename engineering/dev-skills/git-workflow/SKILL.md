@@ -79,7 +79,7 @@ other than `none` means the pull request path, always.
 When a step is not yours, say so in one line, state exactly what is waiting,
 and give the command. Do not perform it anyway because it would be faster, and
 do not stay silent about it: a step nobody was told about is a step nobody
-does. The full list lives in `writer-suite-manual-tasks.md` next to the
+does. The full list lives in `craft-manual-tasks.md` next to the
 configuration file.
 
 Missing configuration is not permission. If the file has no `delegation`

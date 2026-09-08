@@ -7,6 +7,7 @@ Written in English, the system language.
 
 | File | Contents |
 |---|---|
+| `overview.md`, `overview.fr.md` | the whole suite tree by tree, the long form of the README |
 | `architecture.md` | repository organisation, skill isolation, metadata, dependency graph, how to extend |
 | `skills-guide.md` | directory of the 152 skills, inputs, outputs, table of choice by situation |
 | `installation.md` | full installation, per-tree installation, installing a single skill |
@@ -38,7 +39,7 @@ own `README.md` at the tree and category level, next to the skills.
 
 | Location | Contents |
 |---|---|
-| `README.md`, `README.fr.md` | the two entry points, English and French |
+| `README.md`, `README.fr.md` | the two short entry points at the repository root |
 | `config/README.md` | field reference for the configuration file |
 | `CONTINUITY.md` | state of the repository for whoever takes over |
 | `CONTRIBUTING.md` | contribution rules and the checklist before a pull request |

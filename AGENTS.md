@@ -13,8 +13,9 @@ are ignored. See `Why this file exists` at the end.
 
 ## What this repository is
 
-Claude Skill Suite: 152 skills and 16 agents, in eight trees. The repository is
-named `claude-writer-suite` for its history; the suite reaches past writing.
+Craft Suite: 152 skills and 16 agents, in eight trees. Named
+`claude-writer-suite` until 3.0.0, when the writing tree stopped being the
+whole of it.
 
 | Tree | Contents | Constitution |
 |---|---|---|
