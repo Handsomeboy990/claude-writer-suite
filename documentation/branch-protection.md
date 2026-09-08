@@ -86,7 +86,7 @@ cat > /tmp/protection.json <<'JSON'
 {
   "required_status_checks": {
     "strict": true,
-    "contexts": ["structure, rules, orchestration"]
+    "contexts": ["structure, rules, orchestration, plugins"]
   },
   "enforce_admins": false,
   "required_pull_request_reviews": {
@@ -95,7 +95,7 @@ cat > /tmp/protection.json <<'JSON'
     "required_approving_review_count": 1
   },
   "restrictions": null,
-  "required_linear_history": true,
+  "required_linear_history": false,
   "allow_force_pushes": false,
   "allow_deletions": false,
   "required_conversation_resolution": true
@@ -104,7 +104,7 @@ JSON
 
 for branch in main dev; do
   gh api -X PUT \
-    "repos/Handsomeboy990/claude-writer-suite/branches/$branch/protection" \
+    "repos/Handsomeboy990/craft-suite/branches/$branch/protection" \
     -H "Accept: application/vnd.github+json" \
     --input /tmp/protection.json
 done
@@ -120,7 +120,7 @@ first, let one pull request run the workflow, then add the check.
 Verify, per branch:
 
 ```bash
-gh api repos/Handsomeboy990/claude-writer-suite/branches/main/protection --jq '
+gh api repos/Handsomeboy990/craft-suite/branches/main/protection --jq '
   "approvals            : \(.required_pull_request_reviews.required_approving_review_count)",
   "code owner review    : \(.required_pull_request_reviews.require_code_owner_reviews)",
   "required check       : \(.required_status_checks.contexts | join(", "))",
@@ -142,13 +142,34 @@ For each of `main` and `dev`:
 | Dismiss stale approvals when new commits are pushed | on |
 | Require review from Code Owners | on |
 | Require status checks to pass | on |
-| Required check | `structure, rules, orchestration` |
+| Required check | `structure, rules, orchestration, plugins` |
 | Require branches to be up to date before merging | on |
 | Require conversation resolution before merging | on |
-| Require linear history | on |
+| Require linear history | off, deliberately |
 | Allow force pushes | off |
 | Allow deletions | off |
 | Do not allow bypassing the above settings | see below |
+
+### Why linear history is off
+
+It was on until 3.0.0, and it quietly broke every release.
+
+`main` receives squash merges from `dev`. A squash creates a commit with one
+parent and no link to the commits it flattened, so git never records a common
+ancestor between the two branches. The merge base stays at the original fork
+point forever. Every release pull request then reopens conflicts on every file
+that both branches have touched since, on files where neither side made a real
+change. The 3.0.0 rename hit 22 of them at once.
+
+The fix is to merge `main` back into `dev` once, with a real merge commit, so
+the shared ancestor is on the record. `Require linear history` forbids exactly
+that: it prevents a merge commit from landing on a protected branch, leaving
+only squash and rebase, both of which discard the second parent that carries
+the ancestry.
+
+So the rule is off on both branches, and release merges are merge commits. The
+history gains merge nodes, which is what a release branch is supposed to look
+like, and conflict replay stops.
 
 ### The one setting to think about
 
@@ -170,7 +191,7 @@ violated and accepts the push anyway:
 ```
 remote: Bypassed rule violations for refs/heads/main:
 remote: - Changes must be made through a pull request.
-remote: - Required status check "structure, rules, orchestration" is expected.
+remote: - Required status check "structure, rules, orchestration, plugins" is expected.
 ```
 
 That is the intended configuration here: contributors go through a pull
@@ -183,7 +204,7 @@ second reviewer, then turn it on:
 
 ```bash
 gh api -X POST \
-  repos/Handsomeboy990/claude-writer-suite/branches/main/protection/enforce_admins
+  repos/Handsomeboy990/craft-suite/branches/main/protection/enforce_admins
 ```
 
 If you want the branch closed even to yourself before then, the honest option
@@ -224,7 +245,7 @@ attempting a direct push to each.
 | Approvals required | 1 | 1 |
 | Code owner review required | yes | yes |
 | Stale approvals dismissed | yes | yes |
-| Required check | `structure, rules, orchestration` | same |
+| Required check | `structure, rules, orchestration, plugins` | same |
 | Branch must be up to date | yes | yes |
 | Conversations resolved | yes | yes |
 | Linear history | yes | yes |

@@ -117,7 +117,7 @@ for f in writing/README.md documents/README.md engineering/README.md \
          shared/README.md config/README.md \
          security/README.md research/README.md career/README.md \
          opportunity/README.md \
-         config/writer-suite.config.example.yaml; do
+         config/craft.config.example.yaml; do
   [ -f "$ROOT/$f" ] || fail "missing index or template: $f"
 done
 for group in $ALL_GROUPS; do

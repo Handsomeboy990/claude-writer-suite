@@ -37,7 +37,7 @@ AGENTS_DIR = os.environ.get(
     "CLAUDE_AGENTS_DIR", os.path.join(HOME, ".claude", "agents")
 )
 CONFIG_FILE = os.environ.get(
-    "CLAUDE_CONFIG_FILE", os.path.join(HOME, ".claude", "writer-suite.config.yaml")
+    "CLAUDE_CONFIG_FILE", os.path.join(HOME, ".claude", "craft.config.yaml")
 )
 
 # An assistant message whose output exceeds this many tokens is counted as a
@@ -565,7 +565,7 @@ def print_report():
     inst = data["installed"]
     cfg = data["config"]
     line = "-" * 60
-    print("Claude Skill Suite, usage report")
+    print("Craft Suite, usage report")
     print(f"Generated {data['generated_at']}")
     print(line)
     if not u["available"]:
