@@ -32,7 +32,8 @@ is Markdown and shell.
 ```bash
 git clone https://github.com/Handsomeboy990/craft-suite.git
 cd craft-suite
-bash install.sh
+bash install.sh              # a menu, pick the trees you want
+bash install.sh --all        # or take all 152 and the 16 agents
 bash install.sh --configure
 ```
 
@@ -45,7 +46,7 @@ Scoped installs: `--writing`, `--documents`, `--dev`, `--security`,
 
 ## The seven plugins
 
-| Plugin | What the agent becomes | Skills |
+| Plugin | What the agent becomes | Domain skills |
 |---|---|---|
 | `craft-writing` | novelist, screenwriter, editor, critic, proofreader | 42 |
 | `craft-documents` | technical writer, report author, PDF producer | 7 |

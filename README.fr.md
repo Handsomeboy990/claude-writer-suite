@@ -33,7 +33,8 @@ Markdown et du shell.
 ```bash
 git clone https://github.com/Handsomeboy990/craft-suite.git
 cd craft-suite
-bash install.sh
+bash install.sh              # un menu, choisissez vos arbres
+bash install.sh --all        # ou prenez les 152 et les 16 agents
 bash install.sh --configure
 ```
 
@@ -46,7 +47,7 @@ Installations ciblées : `--writing`, `--documents`, `--dev`, `--security`,
 
 ## Les sept plugins
 
-| Plugin | Ce que devient l'agent | Skills |
+| Plugin | Ce que devient l'agent | Skills du domaine |
 |---|---|---|
 | `craft-writing` | romancier, scénariste, éditeur, critique, correcteur | 42 |
 | `craft-documents` | rédacteur technique, auteur de rapports, producteur de PDF | 7 |
