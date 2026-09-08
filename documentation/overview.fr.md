@@ -249,7 +249,7 @@ bash install.sh --all          tout
 bash install.sh --shared        les 2 skills transversaux seulement
 bash install.sh --agents        les 16 agents seulement
 bash install.sh --no-agents     les skills sans les agents
-bash install.sh --zip           construit aussi une archive par skill dans dist/
+bash install.sh --all --zip     construit aussi une archive par skill dans dist/
 bash install.sh --remove        désinstalle la portée choisie
 ```
 

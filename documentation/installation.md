@@ -203,11 +203,13 @@ that does not pass it.
 ## Archives
 
 ```bash
-bash install.sh --zip
+bash install.sh --all --zip
 ```
 
-Builds one archive per skill in `dist/`, for a runtime that imports skills
-individually. `dist/` is not tracked in version control.
+`--zip` is a modifier, not a scope: it builds one archive per skill installed
+by the scope it accompanies, into `dist/`, for a runtime that imports skills
+individually. On its own it has nothing to build and prints the help.
+`dist/` is not tracked in version control.
 
 ## Targets
 

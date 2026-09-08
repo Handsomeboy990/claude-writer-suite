@@ -242,7 +242,7 @@ bash install.sh --all          everything
 bash install.sh --shared        the 2 cross domain skills only
 bash install.sh --agents        the 16 agents only
 bash install.sh --no-agents     skills without agents
-bash install.sh --zip           also build one archive per skill in dist/
+bash install.sh --all --zip     also build one archive per skill in dist/
 bash install.sh --remove        uninstall the selected scope
 ```
 
